@@ -1,0 +1,3 @@
+vendor_connect_users_homepage:
+    path:     /
+    defaults: { _controller: VendorConnectUsersBundle:Default:index }
