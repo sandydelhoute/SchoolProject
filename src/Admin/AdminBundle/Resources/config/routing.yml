@@ -1,3 +1,4 @@
 admin_admin_homepage:
     path:     /
+    host: admin.teamroquette.tk
     defaults: { _controller: AdminAdminBundle:Default:index }

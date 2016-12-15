@@ -5,5 +5,4 @@ vendor_connect_users:
 
 admin_users:
     resource: "@AdminAdminBundle/Resources/config/routing.yml"
-    host: admin.teamroquette.tk
     prefix:   /
