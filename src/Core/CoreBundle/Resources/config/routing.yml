@@ -1,0 +1,6 @@
+homepage:
+    path:     /
+    defaults: { _controller: CoreCoreBundle:Core:accueil }
+contactpage:
+    path:     /contact
+    defaults: { _controller: CoreCoreBundle:Core:contact }

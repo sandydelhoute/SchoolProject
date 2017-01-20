@@ -1,0 +1,60 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+{{ parent() }}
+
+<link rel="stylesheet" type="text/css" href="{{ asset('css/header.css') }}"/>
+
+<link rel="stylesheet" type="text/css" href="{{ asset('css/carrousel.css') }}"/>
+
+
+<link rel="stylesheet" type="text/css" href="{{ asset('css/recherchecp.css') }}"/>
+
+{% endblock stylesheets %}
+
+
+{% block javascripts %}
+<script src="{{ asset('js/monjs.js') }}"></script>
+{% endblock javascripts %}
+
+ {% block body %}
+<div class="container-fluid">
+
+{% block header %}
+{% include ':template:header.html.twig' %}
+{% endblock header %}
+</div>
+<div class="container">
+
+<div class="row">
+{% block recherche %}
+
+{% include ':template:recherchecp.html.twig' %}
+{% endblock recherche %}
+</div>
+<div class="row">
+<div class="col-md-6">
+{{ render(controller('VendorConnectUsersBundle:Users:connexion')) }}
+</div>
+</div>
+<div class="row">
+<div class="col-hidden-xs col-md-6">
+{% block carrousel %}
+{% include ':template:carrousel.html.twig' %}
+{% endblock carrousel %}
+</div>
+</div>
+
+
+<div class="row">
+<div class="col-xs-22 col-md-6">
+{% block produit %}
+{% include ':template:produit.html.twig' %}
+{% endblock %}
+</div>
+</div>
+
+
+
+
+{% endblock body %} 

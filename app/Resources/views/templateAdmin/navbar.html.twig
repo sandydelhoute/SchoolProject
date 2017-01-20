@@ -1,0 +1,35 @@
+
+{% block menu %}
+<div role="tabpanel">
+	<!-- Nav tabs -->
+	<ul class="nav nav-tabs" role="tablist">
+		<li role="presentation" 
+
+		{% if users is defined %} class="active" 
+		{% endif %}>
+			<a href="{{ path ('admin_utilisateurs') }}" aria-controls="utilisateurs" role="tab" data-toggle="tab">Utilisateurs</a>
+		</li>
+		
+		<li role="presentation">
+			<a href="{{ path ('admin_menu') }}" aria-controls="menu" role="tab" data-toggle="tab">Menu</a>
+		</li>
+	
+		
+		<li role="presentation">
+		<a href="{{ path ('admin_produits') }}" aria-controls="produits" role="tab" data-toggle="tab">	Produits</a>
+		</li>
+		
+		<li role="presentation"{% if relais is defined  %} class="active" 
+		{% endif %}>
+		<a href="{{ path ('admin_relais') }}" aria-controls="relais" role="tab" data-toggle="tab">
+		Relais </a>
+		</li>
+		
+		<li role="presentation" >
+		
+			<a href="{{ path ('admin_vehicules') }}" aria-controls="vehicules" role="tab" data-toggle="tab">Véhicules</a>
+		</li>
+		
+	</ul>
+</div>
+{% endblock menu %}

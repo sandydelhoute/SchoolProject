@@ -1,3 +1,20 @@
-vendor_connect_users_homepage:
-    path:     /
-    defaults: { _controller: VendorConnectUsersBundle:Default:index }
+page_moncompte:
+    path:     /compte
+    defaults: { _controller: VendorConnectUsersBundle:Users:index }
+
+page_moncompte_inscription:
+    path:     /inscription
+    defaults: { _controller: VendorConnectUsersBundle:Users:inscription }
+
+page_moncompte_connexion:
+    path:     /connexion
+    defaults: { _controller: VendorConnectUsersBundle:Users:connexion }
+page_moncompte_deconnection:
+    path:     /deconnexion
+    defaults: { _controller: VendorConnectUsersBundle:Users:deconnexion }
+# page_moncompte_password_error:
+#     path:     /connexionPasswordError
+#     defaults: { _controller: VendorConnectUsersBundle:Users:connexionPasswordError }
+# page_moncompte_compte_error:
+#     path:     /connexionCompteError
+#     defaults: { _controller: VendorConnectUsersBundle:Users:connexionCompteError }

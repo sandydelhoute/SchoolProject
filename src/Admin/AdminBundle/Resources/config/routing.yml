@@ -1,4 +1,23 @@
-admin_admin_homepage:
-    path:     /
-    host: admin.teamroquette.tk
-    defaults: { _controller: AdminAdminBundle:Default:index }
+admin_homepage:
+    path:    /
+    defaults:    {_controller: AdminAdminBundle:Core:index}
+
+admin_utilisateurs:
+    path:    /users
+    defaults:     {_controller: AdminAdminBundle:Core:users}
+
+admin_produits:
+    path:    /product
+    defaults:    {_controller: AdminAdminBundle:Core:product}
+
+admin_menu:
+    path:    /menu
+    defaults:    {_controller: AdminAdminBundle:Core:menu}
+
+admin_vehicules:
+    path:    /vehicules
+    defaults:    {_controller: AdminAdminBundle:Core:vehicules}
+
+admin_relais:
+    path: /relais
+    defaults: {_controller: AdminAdminBundle:Core:relais}

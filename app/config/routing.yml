@@ -1,8 +1,12 @@
+core_core:
+    host:  "www.mealandbox.fr"
+    resource: "@CoreCoreBundle/Resources/config/routing.yml"
+    prefix:   /
+
 vendor_connect_users:
     resource: "@VendorConnectUsersBundle/Resources/config/routing.yml"
-    prefix:   /
-
-
-admin_users:
-    resource: "@AdminAdminBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /compte
+admin_admin:
+  host:  "admin.mealandbox.fr"
+  resource: "@AdminAdminBundle/Resources/config/routing.yml"
+  prefix:   /
