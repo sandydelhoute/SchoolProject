@@ -27,31 +27,39 @@ class CoreController extends Controller
     $form->handleRequest($request);  
     if ($form->isSubmitted()) {
 
-return $this->render('AdminAdminBundle:Default:accueil.html.twig',$user);
+
+
+$em=$this->getDoctrine()->getManager()->getRepository('VendorConnectUsersBundle:Users');
+//$arrayusers=$em->findOneby($users);
+
+$arrayusers=array("a" => "orange", "b" => "banana", "c" => "apple");
+return $this->render('AdminAdminBundle:Default:accueil.html.twig',array('users'=>true,'arrayusers'=>$arrayusers));
     }
     else
+    {
         return $this->render('AdminAdminBundle:Default:login.html.twig', array('form' => $form->createView()));
+    }
     }
 
 
  	public function usersAction()
     {
-return $this->render('AdminAdminBundle:Default:accueil.html.twig',$users);
+return $this->render('AdminAdminBundle:Default:accueil.html.twig',array('users'=>true));
     } 
 
 
     public function productAction()
     {
-return $this->render('AdminAdminBundle:Default:accueil.html.twig',$product);
+return $this->render('AdminAdminBundle:Default:accueil.html.twig',array('users'=>true));
     }
 
     public function menuAction()
     {
-return $this->render('AdminAdminBundle:Default:accueil.html.twig');
+return $this->render('AdminAdminBundle:Default:accueil.html.twig',array('users'=>true));
     }
     public function vehiculeAction()
     {
-return $this->render('AdminAdminBundle:Default:accueil.html.twig');
+return $this->render('AdminAdminBundle:Default:accueil.html.twig',array('users'=>true));
     }
 
  public function relaisAction()

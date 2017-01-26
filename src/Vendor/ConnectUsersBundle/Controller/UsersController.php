@@ -23,18 +23,13 @@ class UsersController extends Controller
     {
         $session=$request->getSession();
         $users=new Users();
-        $users->setEmail('s.delhoute@sfr.fr');
-        $users->setPassword('toto');
-        $form = $this->createFormBuilder()
+        $form = $this->createFormBuilder($users)
             ->add('email', TextType::class)
             ->add('password', PasswordType::class)
             ->add('save', SubmitType::class, array('label' => 'Create Task'))
             ->getForm();
 
-        $form->handleRequest($request);
-            var_dump($form->isSubmitted());
-            var_dump($form->isValid());
-
+    $form->handleRequest($request);  
     if ($form->isSubmitted()) {
         
             //$users->getData();
