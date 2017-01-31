@@ -21,7 +21,23 @@ class UsersController extends Controller
     }
     public function connexionAction(Request $request)
     {
-        $session=$request->getSession();
+
+$authenticationUtils = $this->get('security.authentication_utils');
+
+    // get the login error if there is one
+    $error = $authenticationUtils->getLastAuthenticationError();
+
+    // last username entered by the user
+    $lastUsername = $authenticationUtils->getLastUsername();
+
+    return $this->render('VendorConnectUsersBundle:Default:connectold.html.twig', array(
+        'last_username' => $lastUsername,
+        'error'         => $error,
+    ));
+}
+
+
+        /*$session=$request->getSession();
         $users=new Users();
         $form = $this->createFormBuilder($users)
             ->add('email', TextType::class)
@@ -63,12 +79,12 @@ class UsersController extends Controller
             //            }
 
     //return $this->render('VendorConnectUsersBundle:Default:inscription.html.twig');
-    return $this->redirectToRoute('contactpage');
+    return $this->redirectToRoute('homepage');*/
 
 
 
             
-        }
+       /* }
                 // if(!$session->has('users'))
                     //    {
         return $this->render('VendorConnectUsersBundle:Default:connexion.html.twig', array('form' => $form->createView()));
@@ -82,7 +98,7 @@ class UsersController extends Controller
             
 
 
-    }
+    }*/
     public function deconnexionAction(Request $request)
     {        
             $session = $request->getSession()->remove('users');

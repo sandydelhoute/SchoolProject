@@ -8,8 +8,8 @@ class CoreController extends Controller
 {
      public function accueilAction()
     {
-        return $this->render('CoreCoreBundle:Default:accueil.html.twig');
 
+        return $this->render('CoreCoreBundle:Default:accueil.html.twig');
     }
      public function compteerrorAction()
     {

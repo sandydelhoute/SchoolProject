@@ -12,9 +12,5 @@ page_moncompte_connexion:
 page_moncompte_deconnection:
     path:     /deconnexion
     defaults: { _controller: VendorConnectUsersBundle:Users:deconnexion }
-# page_moncompte_password_error:
-#     path:     /connexionPasswordError
-#     defaults: { _controller: VendorConnectUsersBundle:Users:connexionPasswordError }
-# page_moncompte_compte_error:
-#     path:     /connexionCompteError
-#     defaults: { _controller: VendorConnectUsersBundle:Users:connexionCompteError }
+login_check:
+    path:   /login_check

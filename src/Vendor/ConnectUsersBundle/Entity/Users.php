@@ -4,6 +4,7 @@ namespace Vendor\ConnectUsersBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * Users
@@ -11,8 +12,42 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="users")
  * @ORM\Entity(repositoryClass="Vendor\ConnectUsersBundle\Repository\UsersRepository")
  */
-class Users
+class Users implements UserInterface, \Serializable
 {
+
+
+    public function getRoles(){
+        return array('ROLE_USER');
+     }
+    public function getSalt(){
+        return null;
+     }
+    
+    public function getUsername(){
+            return $this->email;
+     }
+    public function eraseCredentials(){}
+        // serialize 
+    public function serialize()
+    {
+        return serialize(array(
+            $this->id,
+            $this->email,
+            $this->name,
+            $this->firstname
+        ));
+    }
+
+    // unserialize
+    public function unserialize($serialized)
+    {
+        list (
+            $this->id,
+            $this->email,
+            $this->name,
+            $this->firsname
+        ) = unserialize($serialized);
+    }
     /**
      * @var bigint
      *

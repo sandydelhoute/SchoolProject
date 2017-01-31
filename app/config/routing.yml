@@ -10,3 +10,4 @@ admin_admin:
   host:  "admin.mealandbox.fr"
   resource: "@AdminAdminBundle/Resources/config/routing.yml"
   prefix:   /
+

@@ -4,3 +4,6 @@ homepage:
 contactpage:
     path:     /contact
     defaults: { _controller: CoreCoreBundle:Core:contact }
+commandepage:
+    path:     /commande
+    defaults: { _controller: CoreCoreBundle:Core:contact }
