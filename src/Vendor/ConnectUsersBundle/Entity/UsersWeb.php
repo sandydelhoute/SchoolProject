@@ -11,25 +11,18 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="users_web")
  * @ORM\Entity(repositoryClass="Vendor\ConnectUsersBundle\Repository\UsersWebRepository")
  */
-class UsersWeb
+class UsersWeb extends Users
 {
-    /*
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
 
+    public function __construct(){
 
-    /**
-     * @var bigint
-     * @ORM\Id
-     * @ORM\OneToOne(targetEntity="Vendor\ConnectUsersBundle\Entity\Users")
-     * @ORM\JoinColumn(name="id", referencedColumnName="id", nullable=false)
-     */
+        $this->cashBalance=0;
+        $this->rewardPoints=0;
+    }
+
+ 
+   
     
-    private $id;
 
     /**
      * @var float
@@ -103,5 +96,8 @@ class UsersWeb
     {
         return $this->rewardPoints;
     }
+
+   
+
 }
 

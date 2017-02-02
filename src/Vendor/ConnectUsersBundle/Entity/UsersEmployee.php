@@ -11,27 +11,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="users_employee")
  * @ORM\Entity(repositoryClass="Vendor\ConnectUsersBundle\Repository\UsersEmployeeRepository")
  */
-class UsersEmployee
+class UsersEmployee extends Users
 {
-
-    /*
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-
-
-
-    /**
-     * @var bigint
-     * @ORM\Id
-     * @ORM\OneToOne(targetEntity="Vendor\ConnectUsersBundle\Entity\Users")
-     * @ORM\JoinColumn(name="id", referencedColumnName="id", nullable=false)
-     */
-    private $id;
-
 
 
     /**

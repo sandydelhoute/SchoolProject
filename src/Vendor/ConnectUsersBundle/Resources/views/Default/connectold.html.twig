@@ -1,4 +1,4 @@
- {# src/OC/UserBundle/Resources/views/Security/login.html.twig #}
+ {# src/Vendor/ConnectUsersBundle/Resources/views/Default/connectionold.html.twig #}
 
 {% extends "::base.html.twig" %}
 
@@ -6,7 +6,7 @@
 
   {# S'il y a une erreur, on l'affiche dans un joli cadre #}
   {% if error %}
-    <div class="alert alert-danger">{{ error.message }}</div>
+    <div class="alert alert-danger">{{ error.message| replace({"Bad credentials." : "Invalid username or password."}) }}</div>
   {% endif %}
 
   {# Le formulaire, avec URL de soumission vers la route « login_check » comme on l'a vu #}
@@ -17,7 +17,10 @@
     <label for="password">Mot de passe :</label>
     <input type="password" id="password" name="_password" />
     <br />
-    <input type="submit" value="Connexion" />
+    <input type="checkbox" id="remember_me" name="_remember_me" checked />
+    <label for="remember_me">Remenber</label>
+    </br>
+    <input class="btn btn-primary" type="submit" value="Connexion" />
   </form>
     <a href="{{ path('page_moncompte_deconnection') }}"><div class='btn btn-primary' value="deconnection" />deconnexion</div></a>
 

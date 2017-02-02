@@ -3,32 +3,39 @@
 security:
 
     encoders:
-        Symfony\Component\Security\Core\User\User: plaintext
-        Vendor\ConnectUsersBundle\Entity\Users: plaintext
-        #Vendor\ConnectUsersBundle\Entity\Users: plaintext
-
-
+        Symfony\Component\Security\Core\User\User: sha1
+        Vendor\ConnectUsersBundle\Entity\UsersWeb:
+            algorithm: sha1
+            iterations: 1
+            encode_as_base64: false
+        Vendor\ConnectUsersBundle\Entity\UsersEmployee:
+            algorithm: sha1
+            iterations: 1
+            encode_as_base64: false
+        
     role_hierarchy:
             ROLE_ADMIN:       ROLE_USER
             ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
-    # http://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
     providers:
-        main:
+        core:
             entity:
-                    class:    Vendor\ConnectUsersBundle\Entity\Users
+                    class:    Vendor\ConnectUsersBundle\Entity\UsersWeb
+                    property: email
+        admin:
+            entity:
+                    class:    Vendor\ConnectUsersBundle\Entity\UsersEmployee
                     property: email
 
     firewalls:
-        # disables authentication for assets and the profiler, adapt it according to your needs
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
             
-
-        main:
+        core:
+            host: ^www\.mealandbox\.fr$
+            pattern: ^/
             anonymous: true
-            pattern:   ^/
-            provider:  main
+            provider:  core
             form_login:
                login_path: /compte/connexion
                check_path: /compte/login_check
@@ -37,11 +44,28 @@ security:
             logout:
                 path:   /compte/deconnexion
                 target: /
-
-
+            remember_me:
+                secret:   '%secret%'
+                lifetime: 604800 # 1 week in seconds
+                path:     /
+                httponly: true
+        
+        admin:
+            host: ^admin\.mealandbox\.fr$
+            pattern: ^/
+            anonymous: true
+            provider:  admin
+            form_login:
+               login_path: /compte/connexion
+               check_path: /compte/login_check
+               default_target_path: /contact
+               failure_path: /
+            logout:
+                path:   /compte/deconnexion
+                target: /
     access_control:
                - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-               - { path: ^/Commande, roles: ROLE_USERS }
+               - { path: ^/*, roles: ROLE_USERS }
             # activate different ways to authenticate
 
             # http_basic: ~

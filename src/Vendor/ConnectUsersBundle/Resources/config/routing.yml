@@ -11,6 +11,5 @@ page_moncompte_connexion:
     defaults: { _controller: VendorConnectUsersBundle:Users:connexion }
 page_moncompte_deconnection:
     path:     /deconnexion
-    defaults: { _controller: VendorConnectUsersBundle:Users:deconnexion }
 login_check:
     path:   /login_check

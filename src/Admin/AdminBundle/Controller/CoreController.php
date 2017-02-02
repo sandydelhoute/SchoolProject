@@ -16,29 +16,8 @@ class CoreController extends Controller
 
     public function indexAction(Request $request)
     {
-        $session=$request->getSession();
-        $users=new Users();
-        $form = $this->createFormBuilder($users)
-            ->add('email', TextType::class)
-            ->add('password', PasswordType::class)
-            ->add('save', SubmitType::class, array('label' => 'Create Task'))
-            ->getForm();
-
-    $form->handleRequest($request);  
-    if ($form->isSubmitted()) {
-
-
-
-$em=$this->getDoctrine()->getManager()->getRepository('VendorConnectUsersBundle:Users');
-//$arrayusers=$em->findOneby($users);
-
-$arrayusers=array("a" => "orange", "b" => "banana", "c" => "apple");
-return $this->render('AdminAdminBundle:Default:accueil.html.twig',array('users'=>true,'arrayusers'=>$arrayusers));
-    }
-    else
-    {
-        return $this->render('AdminAdminBundle:Default:login.html.twig', array('form' => $form->createView()));
-    }
+    
+        return $this->render('AdminAdminBundle:Default:login.html.twig');
     }
 
 
