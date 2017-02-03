@@ -50,11 +50,6 @@ $authenticationUtils = $this->get('security.authentication_utils');
     // last username entered by the user
     $lastUsername = $authenticationUtils->getLastUsername();
 
-    return $this->render('VendorConnectUsersBundle:Default:connectionUsersEMployee.html.twig', array(
-
-    // last username entered by the user
-    $lastUsername = $authenticationUtils->getLastUsername();
-
     return $this->render('VendorConnectUsersBundle:Default:connectionUsersEmployee.html.twig', array(
 
         'last_username' => $lastUsername,
