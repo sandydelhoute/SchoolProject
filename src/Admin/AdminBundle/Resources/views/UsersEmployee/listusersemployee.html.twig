@@ -18,14 +18,15 @@
 {% endblock %}
 </div>
 <div class="col-xs-12">
-                   <!--  <h1>Welcome To Dashboard Panel :)</h1>
+                  <h1>Welcome To Dashboard Panel :)</h1>
                     <p>
                         this  is test text.this  is test text.this  is test text.this  is test text.
                         this  is test text.this  is test text.this  is test text.this  is test text.
                         this  is test text.this  is test text.this  is test text.this  is test text.
                         this  is test text.this  is test text.this  is test text.this  is test text.
                         this  is test text.this  is test text.
-                    </p> -->
+                    </p> 
+{{ render(controller('VendorConnectUsersBundle:UsersEmployee:listUsersEmployee',{'page':page })) }}
 
 </div>
 </div>

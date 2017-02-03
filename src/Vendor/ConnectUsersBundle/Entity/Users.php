@@ -18,6 +18,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
+    
     private $id;
 
     /**

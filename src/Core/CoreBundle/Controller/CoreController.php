@@ -11,16 +11,7 @@ class CoreController extends Controller
 
         return $this->render('CoreCoreBundle:Default:accueil.html.twig');
     }
-     public function compteerrorAction()
-    {
-        return $this->render('CoreCoreBundle:Default:accueil.html.twig');
-
-    }
-     public function passworderrorAction()
-    {
-        return $this->render('CoreCoreBundle:Default:accueil.html.twig',array('compte'=>"error"));
-
-    }
+    
 
      public function contactAction()
     {
