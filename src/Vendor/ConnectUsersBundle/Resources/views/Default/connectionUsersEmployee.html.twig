@@ -1,0 +1,71 @@
+ {# src/Vendor/ConnectUsersBundle/Resources/views/Default/connectionold.html.twig #}
+
+{% extends "::base.html.twig" %}
+
+{% block body %}
+
+  {# S'il y a une erreur, on l'affiche dans un joli cadre #}
+  {% if error %}
+    <div class="alert alert-danger"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+{{ error.message| replace({"Bad credentials." : "Invalid username or password."}) }}</div>
+  {% endif %}
+
+  <form action="{{ path('login_check') }}" method="post">
+
+
+
+  <div class="form-group">
+  <label for="email" class="cols-sm-2 control-label">Your Email</label>
+        <div class="cols-sm-10">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></span>
+                    <input type="text" id="email" class="form-control" name="_username" value="{{ last_username }}"  placeholder="Enter your Email"/>
+                </div>
+        </div>
+  </div>
+
+  <div class="form-group">
+        <label for="password" class="cols-sm-2 control-label">Passsword</label>
+        <div class="cols-sm-10">
+              <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                  <input type="password" class="form-control" id="password" name="_password"  placeholder="Enter your Email"/>
+              </div>
+        </div>
+  </div>
+
+<div class="form-group">
+  <div class="cols-sm-12">
+            <div class="input-group">
+                  <div class="col-sm-2">
+                      <input type="checkbox" id="remember_me" name="_remember_me" checked />
+                  </div>
+                  <div class="col-sm-4">
+                      <label for="remember_me" class="cols-sm-2 control-label">Remember</label>
+                  </div>
+                  <div class="col-sm-6">
+                  <a href="{{ path('page_moncompte_resetpassword') }}"><span>reset password</span></a>
+                  </div>
+            </div>
+      
+      </div>
+
+    <div class="cols-sm-6">
+          <div class="input-group">
+  </div>
+    </div>
+</div>
+  
+    <input class="btn btn-primary" type="submit" value="Connexion" />
+  </form>
+<div class="form-group">
+    <div class="cols-sm-10">
+          <div class="input-group">
+                  <a href="{{ path('page_moncompte_deconnection') }}"><div class='btn btn-primary' value="deconnection" />deconnexion</div></a>
+          </div>
+    </div>
+</div>
+
+
+
+{% endblock %}

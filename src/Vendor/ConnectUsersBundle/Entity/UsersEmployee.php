@@ -15,10 +15,25 @@ class UsersEmployee extends Users
 {
 
 
+
+
     /**
-     * @var \DateTime
+      *
+      * @ORM\ManyToOne(targetEntity="Status")
+      * @ORM\JoinColumn(name="status", referencedColumnName="id")
+      */
+    private $status;
+
+
+
+
+
+    /**
+     * @var \Date
      *
-     * @ORM\Column(name="birthdate", type="datetime")
+     * @ORM\Column(name="birthdate", type="date")
+     * @Assert\NotBlank()
+     * @Assert\Date()
      */
     private $birthdate;
 
@@ -87,5 +102,31 @@ class UsersEmployee extends Users
     {
         return $this->numbersocial;
     }
-}
+ /*   public function getRoles(){
+        return $this->array($status);
+     }
+*/
+    /**
+     * Set status
+     *
+     * @param \Vendor\ConnectUsersBundle\Entity\Status $status
+     *
+     * @return UsersEmployee
+     */
+    public function setStatus(\Vendor\ConnectUsersBundle\Entity\Status $status = null)
+    {
+        $this->status = $status;
 
+        return $this;
+    }
+
+    /**
+     * Get status
+     *
+     * @return \Vendor\ConnectUsersBundle\Entity\Status
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+}
