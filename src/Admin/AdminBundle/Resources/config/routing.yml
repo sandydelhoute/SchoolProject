@@ -3,8 +3,12 @@ admin_homepage:
     defaults:    {_controller: AdminAdminBundle:Core:index}
 
 admin_utilisateurs:
-    path:    /users
-    defaults:     {_controller: AdminAdminBundle:Core:users}
+    path:    /users/{page}
+    defaults:     {_controller: AdminAdminBundle:UsersEmployee:index}
+
+admin_utilisateurs_add:
+    path:    /users/add/
+    defaults:     {_controller: AdminAdminBundle:UsersEmployee:addUsers}
 
 admin_produits:
     path:    /product

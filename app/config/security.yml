@@ -14,7 +14,6 @@ security:
             encode_as_base64: false
         
     role_hierarchy:
-            ROLE_ADMIN:       ROLE_USER
             ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
     providers:
         core:
@@ -37,7 +36,7 @@ security:
             anonymous: true
             provider:  core
             form_login:
-               login_path: /compte/connexion
+               login_path: /compte/connexionweb
                check_path: /compte/login_check
                default_target_path: /contact
                failure_path: /
@@ -56,16 +55,16 @@ security:
             anonymous: true
             provider:  admin
             form_login:
-               login_path: /compte/connexion
+               login_path: /compte/connexionadmin
                check_path: /compte/login_check
-               default_target_path: /contact
+               default_target_path: /
                failure_path: /
             logout:
                 path:   /compte/deconnexion
                 target: /
     access_control:
                - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-               - { path: ^/*, roles: ROLE_USERS }
+               - { path: ^/*, roles: IS_AUTHENTICATED_ANONYMOUSLY }
             # activate different ways to authenticate
 
             # http_basic: ~

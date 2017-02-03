@@ -16,6 +16,7 @@ class CoreController extends Controller
 
     public function indexAction(Request $request)
     {
+<<<<<<< HEAD
 
 
         /*  $user = $this->get('security.context')->getToken()->getUser();
@@ -35,26 +36,26 @@ if ($securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED'))
     {
 return $this->render('AdminAdminBundle:Default:accueil.html.twig',array('users'=>true));
     } 
+=======
+>>>>>>> origin
 
+$securityContext = $this->container->get('security.authorization_checker');
+if ($securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')) 
+            return $this->render('AdminAdminBundle:Default:accueil.html.twig');
+        else
+           return $this->render('AdminAdminBundle:Default:login.html.twig');
 
-    public function productAction()
-    {
-return $this->render('AdminAdminBundle:Default:accueil.html.twig',array('users'=>true));
     }
 
-    public function menuAction()
-    {
-return $this->render('AdminAdminBundle:Default:accueil.html.twig',array('users'=>true));
-    }
-    public function vehiculeAction()
-    {
-return $this->render('AdminAdminBundle:Default:accueil.html.twig',array('users'=>true));
-    }
+//     public function menuAction()
+//     {
+// return $this->render('AdminAdminBundle:Default:accueil.html.twig',array('users'=>true));
+//     }
+//     public function vehiculeAction()
+//     {
+// return $this->render('AdminAdminBundle:Default:accueil.html.twig',array('users'=>true));
+//     }
 
- public function relaisAction()
-    {
-return $this->render('AdminAdminBundle:Default:accueil.html.twig',array('relais'=>true));
-    }
 
 
 

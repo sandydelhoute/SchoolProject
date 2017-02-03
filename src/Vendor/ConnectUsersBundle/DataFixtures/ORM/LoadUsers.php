@@ -25,21 +25,28 @@ $users->setName('sandy');
 $users->setFirstname('delhoute');
 $users->setEmail('sdelhoute@gmail.com');
 $users->setPassword(hash('sha1','123456'));
+
+for($i=0;$i<20;$i++)
+{
+
 $usersemployee = new usersemployee();
 $usersemployee->setName('fabien');
 $usersemployee->setFirstname('coo');
-$usersemployee->setEmail('fabien.coo@mealandbox.fr');
+$usersemployee->setEmail("fabien".$i."@mealandbox.fr");
 $usersemployee->setPassword(hash('sha1','0123456'));
 $usersemployee->setBirthdate(new DateTime('02/31/2011'));
 $usersemployee->setNumbersocial('188115912345678');
 $usersemployee->setStatus($status->getId());
 
+$manager->persist($usersemployee);
+
+
+}
+
 
 
 $manager->persist($status);
 $manager->persist($users);
-$manager->persist($usersemployee);
-
 $manager->flush();
 
 

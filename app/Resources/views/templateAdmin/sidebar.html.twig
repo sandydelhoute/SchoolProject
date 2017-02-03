@@ -7,11 +7,16 @@
 
       <ul id="menu-content" class="menu-content collapse out">
         <li>
+<<<<<<< HEAD
           <a href="#">
+=======
+          <a href="{{ path('admin_homepage') }}">
+>>>>>>> origin
             <i class="fa fa-home fa-lg"></i> home
           </a>
         </li>
 
+<<<<<<< HEAD
         <li  data-toggle="collapse" data-target="#employee" class="collapsed active">
           <a href="#"><i class="fa fa-users fa-lg"></i> Employee<span class="arrow"></span></a>
         </li>
@@ -23,6 +28,14 @@
            <li><a href="#"><i class="fa fa-pencil" aria-hidden="true"></i>
              edit </a></li>
 
+=======
+        <li  class="collapsed active">
+          <a href="{{ path('admin_utilisateurs',{ 'page':1}) }}"><i class="fa fa-users fa-lg"></i> Employee</a><span data-toggle="collapse" data-target="#employee" class="arrow"></span>
+        </li>
+        <ul class="sub-menu collapse" id="employee">
+          <li class="active"><a href="{{ path('admin_utilisateurs_add') }}"><i class="fa fa-plus" aria-hidden="true"></i>add
+          </a></li>
+>>>>>>> origin
            </ul>
 
 
@@ -103,6 +116,14 @@
                         <i class="fa fa-user fa-lg"></i> Profile
                       </a>
                     </li>
+<<<<<<< HEAD
+=======
+                    <li>
+                                    <a href="{{ path('page_moncompte_deconnection') }}"><i class="fa fa-user-times fa-lg" aria-hidden="true"></i>
+disconnect</a>
+                          
+                    </li>
+>>>>>>> origin
                   </ul>
                 </div>
               </div>
