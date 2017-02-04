@@ -19,10 +19,4 @@ page_moncompte_deconnection:
 login_check:
     path:   /login_check
 
-page_moncompte_listemployee:
-    path:     /listUsersEmployee/{page}
-    defaults: { _controller: VendorConnectUsersBundle:UsersEmployee:listUsersEmployee }
 
-page_moncompte_addemployee:
-    path:     /addUsersEmployee
-    defaults: { _controller: VendorConnectUsersBundle:UsersEmployee:addUsersEmployee }    

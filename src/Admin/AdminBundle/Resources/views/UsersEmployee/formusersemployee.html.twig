@@ -18,16 +18,33 @@
 {% endblock %}
 </div>
 <div class="col-xs-12">
-                   <!--  <h1>Welcome To Dashboard Panel :)</h1>
+	<div class="row">
+                  <h1>Welcome To Dashboard Panel :)</h1>
                     <p>
                         this  is test text.this  is test text.this  is test text.this  is test text.
                         this  is test text.this  is test text.this  is test text.this  is test text.
                         this  is test text.this  is test text.this  is test text.this  is test text.
                         this  is test text.this  is test text.this  is test text.this  is test text.
                         this  is test text.this  is test text.
-                    </p> -->
-{{ render(controller('VendorConnectUsersBundle:UsersEmployee:addUsersEmployee')) }}
-
+                    </p>
+</div>
+<div class="row">
+{% for flash_message in app.session.flashBag.get('registred') %}
+    <div class="label label-success">
+        {{ flash_message }}
+    </div>
+{% endfor %}
+{% for flash_message in app.session.flashBag.get('error') %}
+    <div class="label label-danger">
+        {{ flash_message }}
+    </div>
+{% endfor %}
+</div>
+<div class="row">
+{{ form_start(form) }}
+{{ form_widget(form) }}
+{{ form_end(form) }}
+</div>
 </div>
 </div>
 {% endblock body %}

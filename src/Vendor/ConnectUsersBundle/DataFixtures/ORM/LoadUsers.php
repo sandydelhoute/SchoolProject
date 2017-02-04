@@ -18,17 +18,22 @@ class Loadusers implements FixtureInterface
 public Function load(ObjectManager $manager){
 
 
-$status=new status();
-$status->setName("Super_Admin");
+
 $users = new Usersweb();
 $users->setName('sandy');
 $users->setFirstname('delhoute');
 $users->setEmail('sdelhoute@gmail.com');
 $users->setPassword(hash('sha1','123456'));
 
-for($i=0;$i<20;$i++)
+for($i=0;$i<5;$i++)
 {
-
+$users = new Usersweb();
+$users->setName('sandy');
+$users->setFirstname('delhoute');
+$users->setEmail('sdelhoute'.$i.'@gmail.com');
+$users->setPassword(hash('sha1','123456'));
+$status=new status();
+$status->setName("Super_Admin".$i);
 $usersemployee = new usersemployee();
 $usersemployee->setName('fabien');
 $usersemployee->setFirstname('coo');
@@ -36,17 +41,15 @@ $usersemployee->setEmail("fabien".$i."@mealandbox.fr");
 $usersemployee->setPassword(hash('sha1','0123456'));
 $usersemployee->setBirthdate(new DateTime('02/31/2011'));
 $usersemployee->setNumbersocial('188115912345678');
-$usersemployee->setStatus($status->getId());
-
+$usersemployee->setStatus($status);
 $manager->persist($usersemployee);
-
-
+$manager->persist($status);
+$manager->persist($users);
 }
 
 
 
-$manager->persist($status);
-$manager->persist($users);
+
 $manager->flush();
 
 

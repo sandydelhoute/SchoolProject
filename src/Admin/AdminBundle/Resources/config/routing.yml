@@ -1,27 +1,31 @@
 admin_homepage:
     path:    /
-    defaults:    {_controller: AdminAdminBundle:Core:index}
+    defaults: { _controller: AdminAdminBundle:Core:index }
 
 admin_utilisateurs:
     path:    /users/{page}
-    defaults:     {_controller: AdminAdminBundle:UsersEmployee:index}
+    defaults: { _controller: AdminAdminBundle:UsersEmployee:index }
 
 admin_utilisateurs_add:
     path:    /users/add/
-    defaults:     {_controller: AdminAdminBundle:UsersEmployee:addUsers}
+    defaults: { _controller: AdminAdminBundle:UsersEmployee:addUsers }
+
+admin_utilisateurs_edit:
+    path:    /users/edit/{email}
+    defaults: { _controller: AdminAdminBundle:UsersEmployee:editUsers }
 
 admin_produits:
     path:    /product
-    defaults:    {_controller: AdminAdminBundle:Core:product}
+    defaults: { _controller: AdminAdminBundle:Core:product }
 
 admin_menu:
     path:    /menu
-    defaults:    {_controller: AdminAdminBundle:Core:menu}
+    defaults: { _controller: AdminAdminBundle:Core:menu }
 
 admin_vehicules:
     path:    /vehicules
-    defaults:    {_controller: AdminAdminBundle:Core:vehicules}
+    defaults: { _controller: AdminAdminBundle:Core:vehicules }
 
 admin_relais:
-    path: /relais
-    defaults: {_controller: AdminAdminBundle:Core:relais}
+    path:    /relais
+    defaults: { _controller: AdminAdminBundle:Core:relais }
