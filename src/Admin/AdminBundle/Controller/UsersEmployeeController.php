@@ -59,8 +59,8 @@ $nbArticlesParPage=6;
             ->add('password', TextType::class)
             ->add('birthdate', DateType::class)
             ->add('numbersocial', TextType::class)   
-            ->add('status',EntityType::class, array(
-                        'class'    => 'VendorConnectUsersBundle:Status',
+            ->add('roles',EntityType::class, array(
+                        'class'    => 'VendorConnectUsersBundle:Role',
                         'choice_label' => 'name',
                         ))
             ->add('save', SubmitType::class, array('label' => 'Save'))
@@ -71,13 +71,27 @@ $nbArticlesParPage=6;
 
     if ($form->isSubmitted() && $form->isValid()) {
     $em = $this->getDoctrine()->getManager();
-    $repository=$em->getRepository('VendorConnectUsersBundle:UsersEmployee');
-    $repository->findByEmail($usersemployee->getEmail());
-    if(!$repository)
+    $usersexist=$em->getRepository('VendorConnectUsersBundle:UsersEmployee')
+    ->findOneByEmail($usersemployee->getEmail());
+    if(is_null($usersexist))
     {
+
     $em->persist($usersemployee);
     $em->flush();
     $this->addFlash('registred', 'Oui oui, ilest bien enregistrée !');
+    /*$message = \Swift_Message::newInstance()
+        ->setSubject('Hello Email')
+        ->setFrom('admin@mealandbox.fr')
+        ->setTo($usersemployee->getEmail())
+        ->setBody(
+            $this->renderView(
+                // app/Resources/views/Emails/registration.html.twig
+                'Emails/registration.html.twig',
+                array('name' => $name)
+            ),
+            'text/html'
+        );
+    $this->get('mailer')->send($message);*/
     }
     else
     {
@@ -105,8 +119,8 @@ $nbArticlesParPage=6;
             ->add('email', TextType::class)
             ->add('birthdate', DateType::class)
             ->add('numbersocial', TextType::class)   
-            ->add('status',EntityType::class, array(
-                        'class'    => 'VendorConnectUsersBundle:Status',
+            ->add('roles',EntityType::class, array(
+                        'class'    => 'VendorConnectUsersBundle:Role',
                         'choice_label' => 'name',
                         ))
             ->add('save', SubmitType::class, array('label' => 'Save'))
@@ -127,5 +141,17 @@ $nbArticlesParPage=6;
         return $this->render('AdminAdminBundle:UsersEmployee:formusersemployee.html.twig',array('form' => $form->createView()));
     }
 
+  public function deleteUsersAction($email)
+    {
+         $em = $this->getDoctrine()->getManager();
+        $usersemployee = $em->getRepository('VendorConnectUsersBundle:UsersEmployee')
+            ->findOneByEmail($email);
+        $em->remove($usersemployee);
+        $em->flush();
+        $this->addFlash('delete', 'utilisateurs bien surpprimé !');
+        return $this->redirectToRoute('admin_utilisateurs',array('page'=>1));
+
+          
+    }
 
 }

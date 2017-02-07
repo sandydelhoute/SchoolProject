@@ -18,14 +18,27 @@
 {% endblock %}
 </div>
 <div class="col-xs-12">
+<div class="row">
                   <h1>Welcome To Dashboard Panel :)</h1>
-                    <p>
+</div>
+<div class="row">
+
+                            <p>
                         this  is test text.this  is test text.this  is test text.this  is test text.
                         this  is test text.this  is test text.this  is test text.this  is test text.
                         this  is test text.this  is test text.this  is test text.this  is test text.
                         this  is test text.this  is test text.this  is test text.this  is test text.
                         this  is test text.this  is test text.
                     </p> 
+
+</div>
+{% for flash_message in app.session.flashBag.get('delete') %}
+    <div class="row">
+    <div class="label label-success">
+        {{ flash_message }}
+    </div>
+</div>
+{% endfor %}     
     <table id="example" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
         <thead>
             <tr>
@@ -50,11 +63,11 @@
             	{{ user.email }}
             	</td>
             	<td>
-            	{{ user.status.name }}
+            	{{ user.roles[0] }} 
                 </td>
             	<td>
             	<ul>
-				<a href="#"><li><i class="fa fa-trash-o" aria-hidden="true"></i>
+				<a href="{{ path('admin_utilisateurs_delete',{'email':user.email}) }}"><li><i class="fa fa-trash-o" aria-hidden="true"></i>
                delete</li></a>
                <a href="{{ path('admin_utilisateurs_edit',{'email':user.email}) }} "><li><i class="fa fa-pencil" aria-hidden="true"></i> 
                edit</li></a>

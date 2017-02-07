@@ -14,6 +14,10 @@ admin_utilisateurs_edit:
     path:    /users/edit/{email}
     defaults: { _controller: AdminAdminBundle:UsersEmployee:editUsers }
 
+admin_utilisateurs_delete:
+    path:    /users/delete/{email}
+    defaults: { _controller: AdminAdminBundle:UsersEmployee:deleteUsers }
+
 admin_produits:
     path:    /product
     defaults: { _controller: AdminAdminBundle:Core:product }
