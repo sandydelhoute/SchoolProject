@@ -10,6 +10,20 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
  abstract class Users implements UserInterface, \Serializable
 {
+/**
+     * @Assert\NotBlank()
+     * @Assert\Length(max=4096)
+     */
+    private $plainPassword;
+    public function getPlainPassword()
+    {
+        return $this->plainPassword;
+    }
+
+    public function setPlainPassword($password)
+    {
+        $this->plainPassword = $password;
+    }
 
     /**
      * @var bigint
@@ -155,9 +169,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
     {
         return $this->password;
     }
- public function getRoles(){
-        return array('ROLE_USER');
-     }
+ 
     public function getSalt(){
         return null;
      }

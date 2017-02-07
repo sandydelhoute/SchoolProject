@@ -51,16 +51,19 @@ $nbArticlesParPage=6;
 
 	public function addUsersAction(Request $request)
     {
-            $usersemployee = new usersemployee();
-            $form = $this->createFormBuilder($usersemployee)
+            $usersEmployee = new usersemployee();
+            $form = $this->createFormBuilder($usersEmployee)
             ->add('name', TextType::class)
             ->add('firstname', TextType::class)
             ->add('email', TextType::class)
-            ->add('password', TextType::class)
+            ->add('plainPassword', RepeatedType::class, array(
+                'type' => PasswordType::class,
+                'first_options'  => array('label' => 'Password'),
+                'second_options' => array('label' => 'Repeat Password'),
             ->add('birthdate', DateType::class)
             ->add('numbersocial', TextType::class)   
-            ->add('roles',EntityType::class, array(
-                        'class'    => 'VendorConnectUsersBundle:Role',
+            ->add('status',EntityType::class, array(
+                        'class'    => 'VendorConnectUsersBundle:Status',
                         'choice_label' => 'name',
                         ))
             ->add('save', SubmitType::class, array('label' => 'Save'))
@@ -75,8 +78,10 @@ $nbArticlesParPage=6;
     ->findOneByEmail($usersemployee->getEmail());
     if(is_null($usersexist))
     {
-
-    $em->persist($usersemployee);
+     $password = $this->get('security.password_encoder')
+                ->encodePassword($usersEmployee,$usersEmployee->getPlainPassword());
+    $usersEmployee->setPassword($password);
+    $em->persist($usersEmployee);
     $em->flush();
     $this->addFlash('registred', 'Oui oui, ilest bien enregistrée !');
     /*$message = \Swift_Message::newInstance()
@@ -119,8 +124,8 @@ $nbArticlesParPage=6;
             ->add('email', TextType::class)
             ->add('birthdate', DateType::class)
             ->add('numbersocial', TextType::class)   
-            ->add('roles',EntityType::class, array(
-                        'class'    => 'VendorConnectUsersBundle:Role',
+            ->add('status',EntityType::class, array(
+                        'class'    => 'VendorConnectUsersBundle:Status',
                         'choice_label' => 'name',
                         ))
             ->add('save', SubmitType::class, array('label' => 'Save'))

@@ -5,13 +5,13 @@ security:
     encoders:
         Symfony\Component\Security\Core\User\User: sha1
         Vendor\ConnectUsersBundle\Entity\UsersWeb:
-            algorithm: sha1
-            iterations: 1
-            encode_as_base64: false
+            algorithm: sha512
+            iterations: 9616
+            encode_as_base64: true
         Vendor\ConnectUsersBundle\Entity\UsersEmployee:
-            algorithm: sha1
-            iterations: 1
-            encode_as_base64: false
+            algorithm: sha512
+            iterations: 9616
+            encode_as_base64: true
         
     role_hierarchy:
             ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
@@ -29,7 +29,9 @@ security:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
-            
+        login:
+            pattern: ^/compte/connexionweb$
+            security: false   
         core:
             host: ^www\.mealandbox\.fr$
             pattern: ^/

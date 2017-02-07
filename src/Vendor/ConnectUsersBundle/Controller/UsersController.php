@@ -11,6 +11,10 @@ use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+
 
 
 class UsersController extends Controller
@@ -22,52 +26,100 @@ class UsersController extends Controller
         return $this->render('VendorConnectUsersBundle:Default:compte.html.twig');
 
     }
+
+
     public function connexionwebAction(Request $request)
     {
 
-$authenticationUtils = $this->get('security.authentication_utils');
+        $authenticationUtils = $this->get('security.authentication_utils');
 
     // get the login error if there is one
-    $error = $authenticationUtils->getLastAuthenticationError();
+        $error = $authenticationUtils->getLastAuthenticationError();
 
     // last username entered by the user
-    $lastUsername = $authenticationUtils->getLastUsername();
+        $lastUsername = $authenticationUtils->getLastUsername();
 
-    return $this->render('VendorConnectUsersBundle:Default:connectionUsersWeb.html.twig', array(
-        'last_username' => $lastUsername,
-        'error'         => $error,
-    ));
-}
- public function connexionadminAction(Request $request)
-    {
-
-$authenticationUtils = $this->get('security.authentication_utils');
-
-    // get the login error if there is one
-    $error = $authenticationUtils->getLastAuthenticationError();
-
-
-    // last username entered by the user
-    $lastUsername = $authenticationUtils->getLastUsername();
-
-    return $this->render('VendorConnectUsersBundle:Default:connectionUsersEmployee.html.twig', array(
-
-        'last_username' => $lastUsername,
-        'error'         => $error,
-    ));
-}
-
-     public function inscriptionAction()
-    {
-        return $this->render('VendorConnectUsersBundle:Default:inscription.html.twig');
-
+        return $this->render('VendorConnectUsersBundle:Default:connectionUsersWeb.html.twig', array(
+            'last_username' => $lastUsername,
+            'error'         => $error,
+            ));
     }
-    public function resetPasswordAction(){
+    public function connexionadminAction(Request $request)
+    {
 
-    $em = $this->getDoctrine()->getManager();
-     $entity = $em->getRepository('LizeoUserBundle:User')->find($id);
+        $authenticationUtils = $this->get('security.authentication_utils');
 
-        if (!$entity) {
+    // get the login error if there is one
+        $error = $authenticationUtils->getLastAuthenticationError();
+
+
+    // last username entered by the user
+        $lastUsername = $authenticationUtils->getLastUsername();
+
+        return $this->render('VendorConnectUsersBundle:Default:connectionUsersEmployee.html.twig', array(
+
+            'last_username' => $lastUsername,
+            'error'         => $error,
+            ));
+    }
+
+
+    public function inscriptionAction(Request $request)
+    {
+         // 1) build the form
+        $usersWeb = new UsersWeb();
+        $form = $this->createFormBuilder($usersWeb)
+            ->add('email', EmailType::class)
+            ->add('name', TextType::class)
+            ->add('firstname', TextType::class)
+            ->add('plainPassword', RepeatedType::class, array(
+                'type' => PasswordType::class,
+                'first_options'  => array('label' => 'Password'),
+                'second_options' => array('label' => 'Repeat Password'),
+            ))
+            ->add('termsAccepted', CheckboxType::class, array(
+                'mapped' => false,
+                /*'constraints' => new IsTrue(),*/
+            ))
+            ->add('save', SubmitType::class, array('label' => 'Save'))
+            ->getForm();
+
+        // 2) handle the submit (will only happen on POST)
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            // 3) Encode the password (you could also do this via Doctrine listener)
+            $password = $this->get('security.password_encoder')
+                ->encodePassword($usersWeb,$usersWeb->getPlainPassword());
+            $usersWeb->setPassword($password);
+
+            // 4) save the User!
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($usersWeb);
+            $em->flush();
+
+            // ... do any other work - like sending them an email, etc
+            // maybe set a "flash" success message for the user
+
+            return $this->redirectToRoute('homepage');
+        }
+
+        return $this->render(
+            'VendorConnectUsersBundle:Default:inscription2.html.twig',
+            array('form' => $form->createView())
+        );
+    }
+    
+
+
+
+
+    public function resetPasswordAction($email){
+
+        $em = $this->getDoctrine()->getManager();
+        $users = $em->getRepository('LizeoUserBundle:User')->findOneByEmail($email);
+        $token->$this->get('security.context')->getToken();
+        /*if (!$entity) {
             throw $this->createNotFoundException('Unable to find User entity.');
         }
 
@@ -90,10 +142,9 @@ $authenticationUtils = $this->get('security.authentication_utils');
         return array(
             'entity'      => $entity,
             'form'   => $form->createView(),
-        );
+            );*/
+
+        }
+
 
     }
-
-
-    
-}

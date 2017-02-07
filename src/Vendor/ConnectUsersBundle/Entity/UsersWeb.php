@@ -97,7 +97,9 @@ class UsersWeb extends Users
         return $this->rewardPoints;
     }
 
-   
+   public function getRoles(){
+        return array('ROLE_USER');
+     }
 
 }
 
