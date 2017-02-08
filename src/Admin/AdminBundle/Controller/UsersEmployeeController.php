@@ -59,7 +59,7 @@ $nbArticlesParPage=6;
             ->add('plainPassword', RepeatedType::class, array(
                 'type' => PasswordType::class,
                 'first_options'  => array('label' => 'Password'),
-                'second_options' => array('label' => 'Repeat Password'),
+                'second_options' => array('label' => 'Repeat Password'),  ))
             ->add('birthdate', DateType::class)
             ->add('numbersocial', TextType::class)   
             ->add('status',EntityType::class, array(

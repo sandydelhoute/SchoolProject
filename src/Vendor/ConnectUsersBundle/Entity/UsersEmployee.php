@@ -16,9 +16,14 @@ class UsersEmployee extends Users
 
     private $roles=array();
 
+    public function seRoles($role){
+        return $this->roles=array($role);
+     }
 
     public function getRoles(){
-        return array('ROLE_USER');
+        
+      
+        return array('ROLE_'.$this->status->getName());
      }
 
 

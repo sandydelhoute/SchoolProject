@@ -112,37 +112,28 @@ class UsersController extends Controller
     
 
 
-
+// /compte/resetpassword/sandy@mail.com
 
     public function resetPasswordAction($email){
 
         $em = $this->getDoctrine()->getManager();
-        $users = $em->getRepository('LizeoUserBundle:User')->findOneByEmail($email);
-        $token->$this->get('security.context')->getToken();
-        /*if (!$entity) {
-            throw $this->createNotFoundException('Unable to find User entity.');
-        }
+        $users = $em->getRepository('VendorConnectUsersBundle:UsersWeb')->findOneByEmail($email);
+        //$token=$this->get('security.context')->getToken();
+        $message = \Swift_Message::newInstance()
+        ->setSubject('Hello Email')
+        ->setFrom('s.delhoute@sfr.fr')
+        ->setTo('s.delhoute@sfr.fr')
+        ->setBody(
+            $this->renderView(
+                'VendorConnectUsersBundle:Email:registration.html.twig',
+                array('email' => $users->getEmail(),'name' => $users->getName())
+            ),
+            'text/html'
+        );
+    $this->get('mailer')->send($message);
 
-        $formFactory = $this->container->get('fos_user.change_password.form.factory');
-
-        $form = $formFactory->createForm();
-        $form->remove('current_password');
-        $form->setData($entity);
-
-        if ($request->isMethod('POST')) {
-            $form->bind($request);
-            if ($form->isValid()) {
-                $userManager = $this->container->get('fos_user.user_manager');
-                $userManager->updateUser($entity);
-
-                return $this->redirect($this->generateUrl('admin_user'));
-            }
-        }
-
-        return array(
-            'entity'      => $entity,
-            'form'   => $form->createView(),
-            );*/
+       
+            return $this->redirectToRoute('homepage');
 
         }
 

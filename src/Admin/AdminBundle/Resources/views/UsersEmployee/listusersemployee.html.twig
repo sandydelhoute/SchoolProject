@@ -63,7 +63,7 @@
             	{{ user.email }}
             	</td>
             	<td>
-            	{{ user.roles[0] }} 
+            	{{ user.status.name}}              
                 </td>
             	<td>
             	<ul>
@@ -76,8 +76,13 @@
             	</td>
             </tr>
         {% endfor %}
+
         </tbody>
         </table>
+        <div class="tot">
+  {{ dump(app.user.roles) }}
+
+        </div>
  {% if pagination.nbPages > 0 %}
     <ul class="pagination">
         {% if pagination.page > 3 %}

@@ -6,7 +6,7 @@ parameters:
     database_user: root
     database_password: 
     mailer_transport: smtp
-    mailer_host: 127.0.0.1
-    mailer_user: null
-    mailer_password: null
+    mailer_host: smtp.sfr.fr
+    mailer_user: s.delhoute@sfr.fr
+    mailer_password: Spectrum59390
     secret: 9c6ce9a68e980e2ef09405bb89a67aebf9e3b8bc

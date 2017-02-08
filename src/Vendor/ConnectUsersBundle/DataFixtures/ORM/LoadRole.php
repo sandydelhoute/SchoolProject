@@ -18,16 +18,16 @@ class LoadRole extends AbstractFixture implements OrderedFixtureInterface
 public Function load(ObjectManager $manager){
 
 $status=new Status();
-$status->setName("SuperAdmin");
+$status->setName("SUPERADMIN");
 $status1=new Status();
-$status1->setName("Admin");
+$status1->setName("ADMIN");
 $status2=new Status();
-$status2->setName("Livreur");
+$status2->setName("LIVREUR");
 $manager->persist($status);
 $manager->persist($status1);
 $manager->persist($status2);
 $manager->flush();
-$this->addReference('status', $status);
+$this->addReference('status', $status1);
 }
     public function getOrder()
     {

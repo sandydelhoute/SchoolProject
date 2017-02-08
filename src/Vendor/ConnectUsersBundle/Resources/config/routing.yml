@@ -6,8 +6,9 @@ page_moncompte_inscription:
     path:     /inscription
     defaults: { _controller: VendorConnectUsersBundle:Users:inscription }
 page_moncompte_resetpassword:
-    path:     /resetPassword
+    path:     /resetpassword/{email}
     defaults: { _controller: VendorConnectUsersBundle:Users:resetPassword }
+
 page_moncompte_connexionweb:
     path:     /connexionweb
     defaults: { _controller: VendorConnectUsersBundle:Users:connexionWeb }
@@ -18,5 +19,3 @@ page_moncompte_deconnection:
     path:     /deconnexion
 login_check:
     path:   /login_check
-
-
