@@ -60,7 +60,7 @@ class UsersEmployeeController extends Controller
 	public function addUsersAction(Request $request)
     {
 
-            $plainPassword = random_bytes(10);
+            //$plainPassword = random_bytes(10);
             $usersEmployee = new usersemployee();
 
     /* On crée le FormBuilder grâce au service form factory */
@@ -69,10 +69,10 @@ class UsersEmployeeController extends Controller
             ->add('name', TextType::class)
             ->add('firstname', TextType::class)
             ->add('email', TextType::class)
-            /*->add('plainPassword', RepeatedType::class, array(
+            ->add('plainPassword', RepeatedType::class, array(
                 'type' => PasswordType::class,
                 'first_options'  => array('label' => 'Password'),
-                'second_options' => array('label' => 'Repeat Password'),  ))*/
+                'second_options' => array('label' => 'Repeat Password'),  ))
             ->add('birthdate', DateType::class)
             ->add('numbersocial', TextType::class)   
             ->add('status',EntityType::class, array(
@@ -90,7 +90,7 @@ class UsersEmployeeController extends Controller
     ->findOneByEmail($usersEmployee->getEmail());
     if(is_null($usersexist))
     {
-     $password = $this->get('security.password_encoder')
+    $password = $this->get('security.password_encoder')
                 ->encodePassword($usersEmployee,$usersEmployee->getPlainPassword());
     $usersEmployee->setPassword($password);
     $em->persist($usersEmployee);
@@ -138,10 +138,6 @@ class UsersEmployeeController extends Controller
            
             ->add('plainPassword',PasswordType::class, 
                 array('label' => 'Password','attr'=>array('placeholder' => '*******'),'disabled' => 'disabled'))
-             /*->add('plainPassword', RepeatedType::class, array(
-                'type' => PasswordType::class,
-                'first_options'  => array('label' => 'Password'),
-                'second_options' => array('label' => 'Repeat Password'),  ))*/
             ->add('birthdate', DateType::class)
             ->add('numbersocial', TextType::class)   
             ->add('status',EntityType::class, array(
@@ -155,7 +151,6 @@ class UsersEmployeeController extends Controller
 
 
     if ($form->isSubmitted() && $form->isValid()) {
-    $usersEmployee->setPassword($password);
     $em->persist($usersEmployee);
     $em->flush();
 

@@ -6,7 +6,7 @@ parameters:
     database_user: root
     database_password: null
     mailer_transport: smtp
-    mailer_host: smtp.sfr.fr
-    mailer_user: s.delhoute@sfr.fr
-    mailer_password: Spectrum59390
+    mailer_host: smtp.gmail.com
+    mailer_user: mealandbox@gmail.com
+    mailer_password: EfficomCRW
     secret: 9c6ce9a68e980e2ef09405bb89a67aebf9e3b8bc
