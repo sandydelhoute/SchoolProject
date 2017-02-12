@@ -15,6 +15,7 @@ security:
         
     role_hierarchy:
             ROLE_LIVREUR: [ROLE_LIVREUR]
+            ROLE_ADMIN: [ROLE_ADMIN]
             ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
     providers:
         core:
@@ -66,8 +67,8 @@ security:
                 path:   /compte/deconnexion
                 target: /
     access_control:
-               - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-               - { path: ^/*, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+               - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY, host: ^admin\.mealandbox\.fr$  }            
+               - { path: ^/*, roles: ROLE_ADMIN, host: ^admin\.mealandbox\.fr$ }
             # activate different ways to authenticate
 
             # http_basic: ~

@@ -14,11 +14,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class UsersEmployee extends Users
 {
 
-    private $roles=array();
-
-    public function seRoles($role){
-        return $this->roles=array($role);
-     }
+   
 
     public function getRoles(){
         

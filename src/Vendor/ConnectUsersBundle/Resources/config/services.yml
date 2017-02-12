@@ -2,3 +2,8 @@ services:
 #    vendor_connect_users.example:
 #        class: Vendor\ConnectUsersBundle\Example
 #        arguments: ["@service_id", "plain_value", "%parameter%"]
+    # app.form.type.useremployee:
+    #     class: VendorConnectUSersBundle\Form\UserEmployeType
+    #     arguments: []
+    #     tags:
+    #         - { name: form.type }

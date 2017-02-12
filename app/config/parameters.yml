@@ -4,7 +4,7 @@ parameters:
     database_port: null
     database_name: symfony
     database_user: root
-    database_password: 
+    database_password: null
     mailer_transport: smtp
     mailer_host: smtp.sfr.fr
     mailer_user: s.delhoute@sfr.fr
