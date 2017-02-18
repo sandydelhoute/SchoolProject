@@ -96,19 +96,20 @@ class UsersEmployeeController extends Controller
     $em->persist($usersEmployee);
     $em->flush();
     $this->addFlash('registred', 'Oui oui, ilest bien enregistrée !');
-    /*$message = \Swift_Message::newInstance()
+    $message = \Swift_Message::newInstance()
         ->setSubject('Hello Email')
-        ->setFrom('admin@mealandbox.fr')
-        ->setTo($usersemployee->getEmail())
+        ->setFrom('mealandbox@gmail.com')
+        ->setTo('s.delhoute@sfr.fr')
+        //->setTo($usersemployee->getEmail())
         ->setBody(
             $this->renderView(
-                // app/Resources/views/Emails/registration.html.twig
-                'Emails/registration.html.twig',
-                array('name' => $name)
-            ),
+                 ':Email:registration.html.twig'
+                // 'Emails/registration.html.twig',
+                // array('name' => "guillaume")
+                 ),
             'text/html'
         );
-    $this->get('mailer')->send($message);*/
+    $this->get('mailer')->send($message);
     }
     else
     {

@@ -1,16 +1,16 @@
 <?php
 
-namespace Adress\AdressBundle\Entity;
+namespace Core\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * City
+ * fournisseurs
  *
- * @ORM\Table(name="city")
- * @ORM\Entity(repositoryClass="Adress\AdressBundle\Repository\CityRepository")
+ * @ORM\Table(name="fournisseurs")
+ * @ORM\Entity(repositoryClass="Core\CoreBundle\Repository\fournisseursRepository")
  */
-class City
+class fournisseurs
 {
     /**
      * @var int
@@ -28,13 +28,6 @@ class City
      */
     private $name;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="zip", type="string", length=255)
-     */
-    private $zip;
-
 
     /**
      * Get id
@@ -51,7 +44,7 @@ class City
      *
      * @param string $name
      *
-     * @return City
+     * @return fournisseurs
      */
     public function setName($name)
     {
@@ -68,30 +61,6 @@ class City
     public function getName()
     {
         return $this->name;
-    }
-
-    /**
-     * Set zip
-     *
-     * @param string $zip
-     *
-     * @return City
-     */
-    public function setZip($zip)
-    {
-        $this->zip = $zip;
-
-        return $this;
-    }
-
-    /**
-     * Get zip
-     *
-     * @return string
-     */
-    public function getZip()
-    {
-        return $this->zip;
     }
 }
 

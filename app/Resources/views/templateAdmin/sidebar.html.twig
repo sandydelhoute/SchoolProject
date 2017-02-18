@@ -25,17 +25,13 @@
            </ul>
 
 
-           <li data-toggle="collapse" data-target="#product" class="collapsed">
-            <a href="#"><i class="fa fa-cutlery" aria-hidden="true"></i> Product
-             <span class="arrow"></span></a>
+           <li  {% if 'admin_produits' in app.request.attributes.get('_route') %}class="active"{% endif %}>
+            <a href="{{ path('admin_produits',{ 'page':1}) }}"><i class="fa fa-cutlery" aria-hidden="true"></i> Product</a>
+             <span  data-toggle="collapse" data-target="#product" class="arrow"></span>
            </li>  
            <ul class="sub-menu collapse" id="product">
             <li class="active"><a href="#"><i class="fa fa-plus" aria-hidden="true"></i>add
             </a></li>
-            <li><a href="#"><i class="fa fa-trash-o" aria-hidden="true"></i>
-             delete</a></li>
-             <li><a href="#"><i class="fa fa-pencil" aria-hidden="true"></i>
-               edit </a></li>
              </ul>
 
 

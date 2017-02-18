@@ -19,8 +19,20 @@ admin_utilisateurs_delete:
     defaults: { _controller: AdminAdminBundle:UsersEmployee:deleteUsers }
 
 admin_produits:
-    path:    /product
-    defaults: { _controller: AdminAdminBundle:Core:product }
+    path:    /product/{page}
+    defaults: { _controller: AdminAdminBundle:Product:index }
+
+admin_produits_add:
+    path:    /product/{page}
+    defaults: { _controller: AdminAdminBundle:Product:index }
+
+admin_produits_edit:
+    path:    /product/delete/{id}
+    defaults: { _controller: AdminAdminBundle:Product:index }
+
+admin_produits_delete:
+    path:    /product/delete/{id}
+    defaults: { _controller: AdminAdminBundle:Product:index }
 
 admin_menu:
     path:    /menu
