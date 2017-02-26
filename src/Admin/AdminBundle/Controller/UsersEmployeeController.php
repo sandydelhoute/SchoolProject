@@ -23,7 +23,7 @@ class UsersEmployeeController extends Controller
 {
 
 
-    public function indexAction(Request $request,$page)
+    public function indexAction(Request $request,$page,$filter = null)
     {
     
      //$nbArticlesParPage = $this->container->getParameter('front_nb_articles_par_page');
@@ -33,7 +33,7 @@ class UsersEmployeeController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $listusersemployee = $em->getRepository('VendorConnectUsersBundle:UsersEmployee')
-            ->findAllPagineEtTrie($page, $nbArticlesParPage);
+            ->findAllPagineEtTrie($page, $nbArticlesParPage,$filter);
 
         $pagination = array(
             'page' => $page,
@@ -60,30 +60,12 @@ class UsersEmployeeController extends Controller
 	public function addUsersAction(Request $request)
     {
 
-            //$plainPassword = random_bytes(10);
-            $usersEmployee = new usersemployee();
+    //$plainPassword = random_bytes(10);
+    $usersEmployee = new usersemployee();
 
     /* On crée le FormBuilder grâce au service form factory */
-    /* $form = $this->createForm(UsersEmployeeType::class,$usersEmployee) */
-            $form = $this->createFormBuilder($usersEmployee)
-            ->add('name', TextType::class)
-            ->add('firstname', TextType::class)
-            ->add('email', TextType::class)
-            ->add('plainPassword', RepeatedType::class, array(
-                'type' => PasswordType::class,
-                'first_options'  => array('label' => 'Password'),
-                'second_options' => array('label' => 'Repeat Password'),  ))
-            ->add('birthdate', DateType::class)
-            ->add('numbersocial', TextType::class)   
-            ->add('status',EntityType::class, array(
-                        'class'    => 'VendorConnectUsersBundle:Status',
-                        'choice_label' => 'name',
-                        ))
-            ->add('save', SubmitType::class, array('label' => 'Save'))
-            ->getForm();
-   
-        $form->handleRequest($request);
-
+    $form = $this->createForm(UsersEmployeeType::class,$usersEmployee);
+    $form->handleRequest($request);
     if ($form->isSubmitted() && $form->isValid()) {
     $em = $this->getDoctrine()->getManager();
     $usersexist=$em->getRepository('VendorConnectUsersBundle:UsersEmployee')
@@ -128,11 +110,11 @@ class UsersEmployeeController extends Controller
 
     public function editUsersAction(Request $request,$email)
     {
-		 $em = $this->getDoctrine()->getManager();
+		$em = $this->getDoctrine()->getManager();
         $usersEmployee = $em->getRepository('VendorConnectUsersBundle:UsersEmployee')
-            ->findOneByEmail($email);
-             $form = $this->createFormBuilder($usersEmployee)
-             ->remove('password')
+        ->findOneByEmail($email);
+        $form = $this->createFormBuilder($usersEmployee)
+            ->remove('password')
             ->add('name', TextType::class)
             ->add('firstname', TextType::class)
             ->add('email', TextType::class)

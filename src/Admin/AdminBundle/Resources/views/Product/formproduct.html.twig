@@ -4,6 +4,10 @@
 {{ parent() }}
 <link rel="stylesheet" type="text/css" href="{{ asset('css/sidebar.css') }}"/>
 {% endblock stylesheets %}
+{% block javascripts %}
+{{ parent() }}
+<script src="{{ asset('js/addimage.js') }}"/>
+{% endblock javascripts %}
 {% block body %}
 
 
@@ -42,6 +46,10 @@
 </div>
 <div class="row">
 {{ form_start(form) }}
+
+<div id="add_image" class="btn btn-default">
+<i class="fa fa-plus-circle" aria-hidden="true"></i>
+Ajouter une photo</div>
 {{ form_widget(form) }}
 {{ form_end(form) }}
 </div>

@@ -5,12 +5,12 @@ namespace Core\CoreBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Allergene
+ * Images
  *
- * @ORM\Table(name="allergene")
- * @ORM\Entity(repositoryClass="Core\CoreBundle\Repository\AllergeneRepository")
+ * @ORM\Table(name="images")
+ * @ORM\Entity(repositoryClass="Core\CoreBundle\Repository\imagesRepository")
  */
-class Allergene
+class Images
 {
     /**
      * @var int
@@ -24,16 +24,24 @@ class Allergene
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=255, unique=true)
+     * @ORM\Column(name="path", type="string", length=255)
      */
-    private $name;
+    private $path;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="text",nullable = true)
+     * @ORM\Column(name="name", type="string", length=255, unique=true)
      */
-    private $description;
+    private $name;
+
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="alt", type="string", length=255, unique=true)
+     */
+    private $alt;
 
 
     /**
@@ -47,11 +55,35 @@ class Allergene
     }
 
     /**
+     * Set path
+     *
+     * @param string $path
+     *
+     * @return images
+     */
+    public function setPath($path)
+    {
+        $this->path = $path;
+
+        return $this;
+    }
+
+    /**
+     * Get path
+     *
+     * @return string
+     */
+    public function getPath()
+    {
+        return $this->path;
+    }
+
+    /**
      * Set name
      *
      * @param string $name
      *
-     * @return Allergene
+     * @return images
      */
     public function setName($name)
     {
@@ -70,27 +102,28 @@ class Allergene
         return $this->name;
     }
 
+
     /**
-     * Set description
+     * Set alt
      *
-     * @param string $description
+     * @param string $alt
      *
-     * @return Allergene
+     * @return images
      */
-    public function setDescription($description)
+    public function setAlt($alt)
     {
-        $this->description = $description;
+        $this->alt = $alt;
 
         return $this;
     }
 
     /**
-     * Get description
+     * Get name
      *
      * @return string
      */
-    public function getDescription()
+    public function getAlt()
     {
-        return $this->description;
+        return $this->alt;
     }
 }

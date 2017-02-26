@@ -5,12 +5,12 @@ namespace Core\CoreBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Images
+ * fournisseurs
  *
- * @ORM\Table(name="images")
- * @ORM\Entity(repositoryClass="Core\CoreBundle\Repository\imagesRepository")
+ * @ORM\Table(name="fournisseurs")
+ * @ORM\Entity(repositoryClass="Core\CoreBundle\Repository\fournisseursRepository")
  */
-class Images
+class Fournisseurs
 {
     /**
      * @var int
@@ -24,14 +24,7 @@ class Images
     /**
      * @var string
      *
-     * @ORM\Column(name="path", type="string", length=255)
-     */
-    private $path;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="name", type="string", length=255, unique=true)
+     * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
 
@@ -47,35 +40,11 @@ class Images
     }
 
     /**
-     * Set path
-     *
-     * @param string $path
-     *
-     * @return images
-     */
-    public function setPath($path)
-    {
-        $this->path = $path;
-
-        return $this;
-    }
-
-    /**
-     * Get path
-     *
-     * @return string
-     */
-    public function getPath()
-    {
-        return $this->path;
-    }
-
-    /**
      * Set name
      *
      * @param string $name
      *
-     * @return images
+     * @return fournisseurs
      */
     public function setName($name)
     {
@@ -94,4 +63,3 @@ class Images
         return $this->name;
     }
 }
-

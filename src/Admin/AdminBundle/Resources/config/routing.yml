@@ -2,10 +2,14 @@ admin_homepage:
     path:    /
     defaults: { _controller: AdminAdminBundle:Core:index }
 
-admin_utilisateurs:
-    path:    /users/{page}
-    defaults: { _controller: AdminAdminBundle:UsersEmployee:index }
 
+# --------------------Users-------------------- #
+admin_utilisateurs:
+    path:    /users/{page}/{filter}
+    defaults: { _controller: AdminAdminBundle:UsersEmployee:index, filter: null }
+    requirements:
+        page:   \d{1}
+        filter: firstnameup|firstnamedown|lastnameup|lastnamedown|statutup|statutdown|emailup|emaildown
 admin_utilisateurs_add:
     path:    /users/add/
     defaults: { _controller: AdminAdminBundle:UsersEmployee:addUsers }
@@ -18,30 +22,55 @@ admin_utilisateurs_delete:
     path:    /users/delete/{email}
     defaults: { _controller: AdminAdminBundle:UsersEmployee:deleteUsers }
 
+
+# --------------------Produit-------------------- #
 admin_produits:
     path:    /product/{page}
-    defaults: { _controller: AdminAdminBundle:Product:index }
-
+    defaults: { _controller: AdminAdminBundle:Product:index}
+   
 admin_produits_add:
-    path:    /product/{page}
-    defaults: { _controller: AdminAdminBundle:Product:index }
+    path:    /product/add/
+    defaults: { _controller: AdminAdminBundle:Product:addProduct }
 
 admin_produits_edit:
-    path:    /product/delete/{id}
-    defaults: { _controller: AdminAdminBundle:Product:index }
+    path:    /product/edit/{id}
+    defaults: { _controller: AdminAdminBundle:Product:editProduct }
 
 admin_produits_delete:
     path:    /product/delete/{id}
-    defaults: { _controller: AdminAdminBundle:Product:index }
+    defaults: { _controller: AdminAdminBundle:Product:deleteProduct }
 
+# --------------------Categorie-------------------- #
+admin_categorie:
+    path:    /categorie/{page}/{filter}
+    defaults: { _controller: AdminAdminBundle:Categorie:index ,filter: null }
+   
+admin_categorie_add:
+    path:    /categorie/add/
+    defaults: { _controller: AdminAdminBundle:Categorie:addCategorie }
+
+admin_categorie_edit:
+    path:    /categorie/edit/{id}
+    defaults: { _controller: AdminAdminBundle:Categorie:editCategorie }
+
+admin_categorie_delete:
+    path:    /categorie/delete/{id}
+    defaults: { _controller: AdminAdminBundle:Categorie:deleteCategorie }
+
+
+# --------------------Menu-------------------- #
 admin_menu:
     path:    /menu
     defaults: { _controller: AdminAdminBundle:Core:menu }
 
+
+# --------------------Vehicule-------------------- #
 admin_vehicules:
     path:    /vehicules
     defaults: { _controller: AdminAdminBundle:Core:vehicules }
 
+
+# --------------------Relais-------------------- #
 admin_relais:
     path:    /relais
     defaults: { _controller: AdminAdminBundle:Core:relais }

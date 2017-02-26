@@ -1,4 +1,8 @@
 <?php
+
+namespace Vendor\ConnectUsersBundle\Form;
+
+
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -30,6 +34,7 @@ class UsersEmployeeType extends AbstractType
                         'class'    => 'VendorConnectUsersBundle:Status',
                         'choice_label' => 'name',
                         ))
+            ->add('save', SubmitType::class, array('label' => 'Save'));
     }
      /**
      * @param OptionsResolver $resolver
@@ -42,6 +47,6 @@ class UsersEmployeeType extends AbstractType
     }
 public function getName()
   {
-    return 'oc_platformbundle_advert';
+    return 'vendor_connectusersbundle_usersemployee';
   }
 }

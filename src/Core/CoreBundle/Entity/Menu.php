@@ -12,6 +12,22 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Menu
 {
+
+
+
+    /**
+     * @var ArrayCollection images $images
+     * Owning Side
+     *
+     * @ORM\ManyToMany(targetEntity="images", inversedBy="menu", cascade={"persist", "merge"})
+     * @ORM\JoinTable(name="images_menu",
+     *   joinColumns={@ORM\JoinColumn(name="id_menu", referencedColumnName="id")},
+     *   inverseJoinColumns={@ORM\JoinColumn(name="id_images", referencedColumnName="id")}
+     * )
+     */
+    private $images;
+
+
     /**
      * @var int
      *
@@ -185,5 +201,46 @@ class Menu
     public function getComposition()
     {
         return $this->composition;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->images = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add image
+     *
+     * @param \Core\CoreBundle\Entity\images $image
+     *
+     * @return Menu
+     */
+    public function addImage(\Core\CoreBundle\Entity\images $image)
+    {
+        $this->images[] = $image;
+
+        return $this;
+    }
+
+    /**
+     * Remove image
+     *
+     * @param \Core\CoreBundle\Entity\images $image
+     */
+    public function removeImage(\Core\CoreBundle\Entity\images $image)
+    {
+        $this->images->removeElement($image);
+    }
+
+    /**
+     * Get images
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getImages()
+    {
+        return $this->images;
     }
 }

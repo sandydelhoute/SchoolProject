@@ -12,6 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Categorie
 {
+   
     /**
      * @var int
      *
@@ -28,11 +29,12 @@ class Categorie
      */
     private $name;
 
+    
     /**
-     * @var int
-     *
-     * @ORM\Column(name="parents", type="bigint")
-     */
+      *
+      * @ORM\ManyToOne(targetEntity="categorie")
+      * @ORM\JoinColumn(name="parents", referencedColumnName="id", nullable=true)
+      */
     private $parents;
 
 
@@ -93,5 +95,50 @@ class Categorie
     {
         return $this->parents;
     }
-}
 
+
+
+
+    /**
+     * Add Product
+     *
+     * @param Product $product
+     */
+    public function addProduct(Product $product)
+    {
+        // Si l'objet fait déjà partie de la collection on ne l'ajoute pas
+        if (!$this->products->contains($product)) {
+            $this->products->add($product);
+        }
+    }
+    /**
+     * Add Collection Product
+     *
+     * @param Products $products
+     */
+    public function setProducts($products)
+    {
+        if ($products instanceof ArrayCollection || is_array($products)) {
+            foreach ($product as $products) {
+                $this->addProduit($product);
+            }
+        } elseif ($products instanceof Images) {
+            $this->addProduit($products);
+        } else {
+            throw new Exception("$items must be an instance of Produit or ArrayCollection");
+        }
+    }
+    /**
+     * Get ArrayCollection
+     *
+     * @return ArrayCollection $produits
+     */
+    public function getImages()
+    {
+        return $this->images;
+    }
+
+
+
+
+}

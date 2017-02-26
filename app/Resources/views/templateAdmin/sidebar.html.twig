@@ -16,7 +16,7 @@
 
 
         <li  {% if 'admin_utilisateurs' in app.request.attributes.get('_route') %}class="active"{% endif %}>
-          <a href="{{ path('admin_utilisateurs',{ 'page':1}) }}"><i class="fa fa-users fa-lg"></i> Employee</a><span data-toggle="collapse" data-target="#employee" class="arrow"></span>
+          <a href="{{ path('admin_utilisateurs',{ 'page':1 }) }}"><i class="fa fa-users fa-lg"></i> Employee</a><span data-toggle="collapse" data-target="#employee" class="arrow"></span>
         </li>
         <ul class="sub-menu collapse" id="employee">
           <li class="active"><a href="{{ path('admin_utilisateurs_add') }}"><i class="fa fa-plus" aria-hidden="true"></i>add
@@ -26,20 +26,20 @@
 
 
            <li  {% if 'admin_produits' in app.request.attributes.get('_route') %}class="active"{% endif %}>
-            <a href="{{ path('admin_produits',{ 'page':1}) }}"><i class="fa fa-cutlery" aria-hidden="true"></i> Product</a>
+            <a href="{{ path('admin_produits',{ 'page':1 }) }}"><i class="fa fa-cutlery" aria-hidden="true"></i> Product</a>
              <span  data-toggle="collapse" data-target="#product" class="arrow"></span>
            </li>  
            <ul class="sub-menu collapse" id="product">
-            <li class="active"><a href="#"><i class="fa fa-plus" aria-hidden="true"></i>add
+            <li class="active"><a href="{{ path('admin_produits_add') }}"><i class="fa fa-plus" aria-hidden="true"></i>add
             </a></li>
              </ul>
 
 
-          <li>
-             <a href="#"><i class="fa fa-tags fa-lg"></i>Category</a><span data-toggle="collapse" data-target="#category" class="arrow"></span>
+          <li {% if 'admin_categorie' in app.request.attributes.get('_route') %}class="active"{% endif %}>
+             <a href="{{ path('admin_categorie',{ 'page':1 }) }}"><i class="fa fa-tags fa-lg"></i>Category</a><span data-toggle="collapse" data-target="#category" class="arrow"></span>
            </li>  
            <ul class="sub-menu collapse" id="category">
-            <li class="active"><a href="#"><i class="fa fa-plus" aria-hidden="true"></i>add
+            <li class="active"><a href="{{ path('admin_categorie_add') }}"><i class="fa fa-plus" aria-hidden="true"></i>add
             </a></li>
           </ul>
 
