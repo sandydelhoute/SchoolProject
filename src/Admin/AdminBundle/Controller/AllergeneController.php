@@ -7,10 +7,10 @@ use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Core\Util\SecureRandom;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-use Core\CoreBundle\Entity\Categorie;
-use Core\CoreBundle\Form\CategorieType;
+use Core\CoreBundle\Entity\Allergene;
+use Core\CoreBundle\Form\AllergeneType;
 
-class CategorieController extends Controller
+class AllergeneController extends Controller
 {
 
 public function indexAction(Request $request,$page,$filter=null)
@@ -21,7 +21,7 @@ public function indexAction(Request $request,$page,$filter=null)
 
         $em = $this->getDoctrine()->getManager();
 
-        $listCategorie = $em->getRepository('CoreCoreBundle:Categorie')
+        $listAllergene = $em->getRepository('CoreCoreBundle:Allergene')
             ->findAllPagineEtTrie($page, $nbArticlesParPage,$filter);
 
         $pagination = array(
@@ -32,17 +32,17 @@ public function indexAction(Request $request,$page,$filter=null)
         );
 
          $contenu=array(         
-            'listCategorie' => $listCategorie,
+            'listCategorie' => $listAllergene,
             'pagination' => $pagination
         );
 
-        return $this->render('AdminAdminBundle:Categorie:listcategorie.html.twig',array('listCategorie'=>$contenu['listCategorie'],'pagination'=>$contenu['pagination']));
+        return $this->render('AdminAdminBundle:Allergene:listallergene.html.twig',array('listAllergene'=>$contenu['listAllergene'],'pagination'=>$contenu['pagination']));
       
 }
-public function addCategorieAction(Request $request)
+public function addAllergeneAction(Request $request)
 {
-	$categorie = new Categorie();
-    $form = $this->createForm(CategorieType::class,$categorie);
+	$allergene = new Allergene();
+    $form = $this->createForm(AllergeneType::class,$allergene);
 
    
     $form->handleRequest($request);
@@ -50,11 +50,11 @@ public function addCategorieAction(Request $request)
     {
 
 	    $em = $this->getDoctrine()->getManager();
-	    $categorieExist=$em->getRepository('CoreCoreBundle:Categorie')
-	    ->findOneByName($catgorie->getName());
-	    if(is_null($categorieExist))
+	    $allergeneExist=$em->getRepository('CoreCoreBundle:Categorie')
+	    ->findOneByName($allergene->getName());
+	    if(is_null($allergeneExist))
 	    {
-	    $em->persist($catgorie);
+	    $em->persist($allergene);
 	    $em->flush();
 	     $this->addFlash('registred', 'Oui oui, ilest bien enregistrée !');
 	     }
@@ -62,10 +62,10 @@ public function addCategorieAction(Request $request)
 	     {
 	     $this->addFlash('error', 'le nom existe déja');   
 	    }
-	    return $this->redirectToRoute('admin_produits_add');
+	    return $this->redirectToRoute('admin_allergene_add');
 
     }
 
-        return $this->render('AdminAdminBundle:Categorie:formcategorie.html.twig',array('form' => $form->createView()));
+        return $this->render('AdminAdminBundle:Allergene:formallergene.html.twig',array('form' => $form->createView()));
 	}
 }

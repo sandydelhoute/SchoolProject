@@ -19,6 +19,8 @@ class Categorie
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\ManyToOne(targetEntity="Core\CoreBundle\Entity\Categorie", inversedBy="parents")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $id;
 
@@ -32,8 +34,7 @@ class Categorie
     
     /**
       *
-      * @ORM\ManyToOne(targetEntity="categorie")
-      * @ORM\JoinColumn(name="parents", referencedColumnName="id", nullable=true)
+      * @ORM\OneToMany(targetEntity="Core\CoreBundle\Entity\categorie", mappedBy="id")
       */
     private $parents;
 

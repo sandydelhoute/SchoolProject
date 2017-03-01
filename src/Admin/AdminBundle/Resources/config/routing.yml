@@ -58,7 +58,30 @@ admin_categorie_delete:
     defaults: { _controller: AdminAdminBundle:Categorie:deleteCategorie }
 
 
+
+
+
+
+# --------------------Allergene-------------------- #
+admin_allergene:
+    path:    /allergene/{page}/{filter}
+    defaults: { _controller: AdminAdminBundle:Allergene:index ,filter: null }
+   
+admin_allergene_add:
+    path:    /allergene/add/
+    defaults: { _controller: AdminAdminBundle:Allergene:addAllergene }
+
+admin_allergene_edit:
+    path:    /allergene/edit/{id}
+    defaults: { _controller: AdminAdminBundle:Allergene:editAllergene }
+
+admin_allergene_delete:
+    path:    /allergene/delete/{id}
+    defaults: { _controller: AdminAdminBundle:Allergene:deleteAllergene }
+
 # --------------------Menu-------------------- #
+
+
 admin_menu:
     path:    /menu
     defaults: { _controller: AdminAdminBundle:Core:menu }
