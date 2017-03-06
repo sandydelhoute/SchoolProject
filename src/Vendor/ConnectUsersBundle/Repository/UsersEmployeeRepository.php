@@ -21,7 +21,7 @@ use Symfony\Bridge\Doctrine\Security\User\UserLoaderInterface;
 class UsersEmployeeRepository extends \Doctrine\ORM\EntityRepository 
 {
 
-	 public function findAllPagineEtTrie($page, $nbMaxParPage)
+	 public function findAllPagineEtTrie($page, $nbMaxParPage,$filter=null)
     {
         if (!is_numeric($page)) {
             throw new InvalidArgumentException(

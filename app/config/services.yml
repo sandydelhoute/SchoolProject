@@ -7,9 +7,9 @@ services:
 #    service_name:
 #        class: AppBundle\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
-     Validedate:  
+    Validedate:  
          class: Vendor\ConnectUsersBundle\Validator\Constraints\Date
          properties:
            birthdate:
             - NotBlank: ~
-        
+

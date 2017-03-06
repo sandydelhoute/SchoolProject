@@ -4,6 +4,7 @@ namespace Vendor\ConnectUsersBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use JsonSerializable;
 
 /**
  * UsersEmployee
@@ -51,15 +52,7 @@ class UsersEmployee extends Users
     private $numbersocial;
 
 
-    /**
-     * Get id
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
+    
 
     /**
      * Set birthdate
@@ -135,4 +128,7 @@ class UsersEmployee extends Users
     {
         return $this->status;
     }
+
+
+
 }

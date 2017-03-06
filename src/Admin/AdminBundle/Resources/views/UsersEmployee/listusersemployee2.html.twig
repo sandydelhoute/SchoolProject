@@ -7,11 +7,14 @@
 {% block body %}
 
 
-
 {% block navabar %}
 {% include ':templateAdmin:sidebar.html.twig' %}
 {% endblock %}
-<div class="col-sm-9">
-{% include 'AdminAdminBundle:Default:tablecategorie.html.twig' %}
-</div>
+{% block tableusers %}
+{% include 'AdminAdminBundle:Default:tableusers.html.twig' %}
+{% endblock %}
 {% endblock body %}
+{% block javascripts %}
+{{ parent() }}
+<script src="{{ asset('js/ajaxusersemployee.js') }}"/>
+{% endblock %}

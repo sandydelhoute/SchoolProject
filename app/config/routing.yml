@@ -11,7 +11,8 @@ admin_admin:
   resource: "@AdminAdminBundle/Resources/config/routing.yml"
   prefix:   /
 
-
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
 # hwi_oauth_redirect:
 #     resource: "@HWIOAuthBundle/Resources/config/routing/redirect.xml"
 #     prefix:   /connect

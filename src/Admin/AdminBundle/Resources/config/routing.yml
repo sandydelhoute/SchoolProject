@@ -5,11 +5,16 @@ admin_homepage:
 
 # --------------------Users-------------------- #
 admin_utilisateurs:
-    path:    /users/{page}/{filter}
-    defaults: { _controller: AdminAdminBundle:UsersEmployee:index, filter: null }
+    path:    /users
+    defaults: { _controller: AdminAdminBundle:UsersEmployee:index}
+  
+admin_utilisateurs_filter:
+    path:    /users2/{page}/{filter}
+    defaults: { _controller: AdminAdminBundle:UsersEmployee:filter, filter: null }
     requirements:
         page:   \d{1}
         filter: firstnameup|firstnamedown|lastnameup|lastnamedown|statutup|statutdown|emailup|emaildown
+       # methods: POST
 admin_utilisateurs_add:
     path:    /users/add/
     defaults: { _controller: AdminAdminBundle:UsersEmployee:addUsers }

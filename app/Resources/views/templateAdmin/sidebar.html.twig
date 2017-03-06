@@ -1,67 +1,81 @@
 <div class="col-sm-3">
-  <div class="nav-side-menu">
-    <div class="brand"><img class="img-responsives" src="img/logo/logo.png" ></img></div>
-    <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
+<div class="nav-side-menu">
+  <div class="brand"><img class="img-responsives" src="/img/logo/logo.png" ></img></div>
+  <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
 
-    <div class="menu-list">
+  <div class="menu-list">
 
-      <ul id="menu-content" class="menu-content collapse out">
-        <li>
+    <ul id="menu-content" class="menu-content collapse out">
+      <li>
 
-          <a href="{{ path('admin_homepage') }}">
+        <a href="{{ path('admin_homepage') }}">
 
-            <i class="fa fa-home fa-lg"></i> home
-          </a>
-        </li>
-
-
-        <li  {% if 'admin_utilisateurs' in app.request.attributes.get('_route') %}class="active"{% endif %}>
-          <a href="{{ path('admin_utilisateurs',{ 'page':1 }) }}"><i class="fa fa-users fa-lg"></i> Employee</a><span data-toggle="collapse" data-target="#employee" class="arrow"></span>
-        </li>
-        <ul class="sub-menu collapse" id="employee">
-          <li class="active"><a href="{{ path('admin_utilisateurs_add') }}"><i class="fa fa-plus" aria-hidden="true"></i>add
-          </a></li>
-
-        </ul>
+          <i class="fa fa-home fa-lg"></i> home
+        </a>
+      </li>
 
 
-        <li  {% if 'admin_produits' in app.request.attributes.get('_route') %}class="active"{% endif %}>
-          <a href="{{ path('admin_produits',{ 'page':1 }) }}"><i class="fa fa-cutlery" aria-hidden="true"></i> Product</a>
-          <span  data-toggle="collapse" data-target="#product" class="arrow"></span>
-        </li>  
-        <ul class="sub-menu collapse" id="product">
-          <li class="active"><a href="{{ path('admin_produits_add') }}"><i class="fa fa-plus" aria-hidden="true"></i>add
-          </a></li>
-        </ul>
+      <li  {% if 'admin_utilisateurs' in app.request.attributes.get('_route') %}class="active"{% endif %}>
+        <a href="{{ path('admin_utilisateurs') }}"><i class="fa fa-users fa-lg"></i> Employee</a><span data-toggle="collapse" data-target="#employee" class="arrow"></span>
+      </li>
+      <ul class="sub-menu collapse" id="employee">
+        <li class="active"><a href="{{ path('admin_utilisateurs_add') }}"><i class="fa fa-plus" aria-hidden="true"></i>add
+        </a></li>
 
-        <li {% if 'admin_menu' in app.request.attributes.get('_route') %}class="active"{% endif %}>
-         <a href="{{ path('admin_categorie',{ 'page':1 }) }}"><i class="fa fa-map-o"aria-hidden="true"></i>Menu</a><span data-toggle="collapse" data-target="#menu" class="arrow"></span>
-       </li>  
-       <ul class="sub-menu collapse" id="menu">
-        <li class="active"><a href="{{ path('admin_categorie_add') }}"><i class="fa fa-plus" aria-hidden="true"></i>add
+      </ul>
+
+
+      <li  {% if 'admin_produits' in app.request.attributes.get('_route') %}class="active"{% endif %}>
+        <a href="{{ path('admin_produits',{ 'page':1 }) }}"><i class="fa fa-cutlery" aria-hidden="true"></i> Product</a>
+        <span  data-toggle="collapse" data-target="#product" class="arrow"></span>
+      </li>  
+      <ul class="sub-menu collapse" id="product">
+        <li class="active"><a href="{{ path('admin_produits_add') }}"><i class="fa fa-plus" aria-hidden="true"></i>add
         </a></li>
       </ul>
 
-      <li {% if 'admin_allergene' in app.request.attributes.get('_route') %}class="active"{% endif %}>
-       <a href="{{ path('admin_allergene',{ 'page':1 }) }}"><i class="fa fa-eyedropper"aria-hidden="true"></i>Allergene</a><span data-toggle="collapse" data-target="#allergene" class="arrow"></span>
+      <li {% if 'admin_menu' in app.request.attributes.get('_route') %}class="active"{% endif %}>
+       <a href="{{ path('admin_categorie',{ 'page':1 }) }}"><i class="fa fa-map-o"aria-hidden="true"></i>Menu</a><span data-toggle="collapse" data-target="#menu" class="arrow"></span>
      </li>  
-     <ul class="sub-menu collapse" id="allergene">
-      <li class="active"><a href="{{ path('admin_allergene_add') }}"><i class="fa fa-plus" aria-hidden="true"></i>add
+     <ul class="sub-menu collapse" id="menu">
+      <li class="active"><a href="{{ path('admin_categorie_add') }}"><i class="fa fa-plus" aria-hidden="true"></i>add
       </a></li>
     </ul>
 
-    <li {% if 'admin_categorie' in app.request.attributes.get('_route') %}class="active"{% endif %}>
-     <a href="{{ path('admin_categorie',{ 'page':1 }) }}"><i class="fa fa-tags fa-lg"></i>Category</a><span data-toggle="collapse" data-target="#category" class="arrow"></span>
+    <li {% if 'admin_allergene' in app.request.attributes.get('_route') %}class="active"{% endif %}>
+     <a href="{{ path('admin_allergene',{ 'page':1 }) }}"><i class="fa fa-eyedropper"aria-hidden="true"></i>Allergene</a><span data-toggle="collapse" data-target="#allergene" class="arrow"></span>
    </li>  
-   <ul class="sub-menu collapse" id="category">
-    <li class="active"><a href="{{ path('admin_categorie_add') }}"><i class="fa fa-plus" aria-hidden="true"></i>add
+   <ul class="sub-menu collapse" id="allergene">
+    <li class="active"><a href="{{ path('admin_allergene_add') }}"><i class="fa fa-plus" aria-hidden="true"></i>add
     </a></li>
   </ul>
 
-  <li data-toggle="collapse" data-target="#vehicule" class="collapsed">
-    <a href="#"><i class="fa fa-car fa-lg"></i> Vehicule <span class="arrow"></span></a>
-  </li>
-  <ul class="sub-menu collapse" id="vehicule">
+  <li {% if 'admin_categorie' in app.request.attributes.get('_route') %}class="active"{% endif %}>
+   <a href="{{ path('admin_categorie',{ 'page':1 }) }}"><i class="fa fa-tags fa-lg"></i>Category</a><span data-toggle="collapse" data-target="#category" class="arrow"></span>
+ </li>  
+ <ul class="sub-menu collapse" id="category">
+  <li class="active"><a href="{{ path('admin_categorie_add') }}"><i class="fa fa-plus" aria-hidden="true"></i>add
+  </a></li>
+</ul>
+
+<li data-toggle="collapse" data-target="#vehicule" class="collapsed">
+  <a href="#"><i class="fa fa-car fa-lg"></i> Vehicule <span class="arrow"></span></a>
+</li>
+<ul class="sub-menu collapse" id="vehicule">
+  <li class="active"><a href="#"><i class="fa fa-plus" aria-hidden="true"></i>add
+  </a></li>
+  <li><a href="#"><i class="fa fa-trash-o" aria-hidden="true"></i>
+   delete</a></li>
+   <li><a href="#"><i class="fa fa-pencil" aria-hidden="true"></i>
+     edit </a></li>
+   </ul>
+
+   <li data-toggle="collapse" data-target="#relay" class="collapsed">
+    <a href="#"><i class="fa fa-inbox fa-lg" aria-hidden="true"></i>
+     Relay
+     <span class="arrow"></span></a>
+   </li>  
+   <ul class="sub-menu collapse" id="relay">
     <li class="active"><a href="#"><i class="fa fa-plus" aria-hidden="true"></i>add
     </a></li>
     <li><a href="#"><i class="fa fa-trash-o" aria-hidden="true"></i>
@@ -69,13 +83,11 @@
      <li><a href="#"><i class="fa fa-pencil" aria-hidden="true"></i>
        edit </a></li>
      </ul>
-
-     <li data-toggle="collapse" data-target="#relay" class="collapsed">
-      <a href="#"><i class="fa fa-inbox fa-lg" aria-hidden="true"></i>
-       Relay
+     <li data-toggle="collapse" data-target="#new" class="collapsed">
+      <a href="#"><i class="fa fa-newspaper-o fa-lg" aria-hidden="true"></i> News
        <span class="arrow"></span></a>
      </li>  
-     <ul class="sub-menu collapse" id="relay">
+     <ul class="sub-menu collapse" id="new">
       <li class="active"><a href="#"><i class="fa fa-plus" aria-hidden="true"></i>add
       </a></li>
       <li><a href="#"><i class="fa fa-trash-o" aria-hidden="true"></i>
@@ -83,11 +95,8 @@
        <li><a href="#"><i class="fa fa-pencil" aria-hidden="true"></i>
          edit </a></li>
        </ul>
-       <li data-toggle="collapse" data-target="#new" class="collapsed">
-        <a href="#"><i class="fa fa-newspaper-o fa-lg" aria-hidden="true"></i> News
-         <span class="arrow"></span></a>
-       </li>  
-       <ul class="sub-menu collapse" id="new">
+
+       <ul class="sub-menu collapse" id="relay">
         <li class="active"><a href="#"><i class="fa fa-plus" aria-hidden="true"></i>add
         </a></li>
         <li><a href="#"><i class="fa fa-trash-o" aria-hidden="true"></i>
@@ -96,38 +105,29 @@
            edit </a></li>
          </ul>
 
-         <ul class="sub-menu collapse" id="relay">
-          <li class="active"><a href="#"><i class="fa fa-plus" aria-hidden="true"></i>add
-          </a></li>
-          <li><a href="#"><i class="fa fa-trash-o" aria-hidden="true"></i>
-           delete</a></li>
-           <li><a href="#"><i class="fa fa-pencil" aria-hidden="true"></i>
-             edit </a></li>
-           </ul>
+         <li data-toggle="collapse" data-target="#Parameters" class="collapsed">
+          <a href="#"><i class="fa fa-cogs fa-lg" aria-hidden="true"></i>
+          Parameters
+          <span class="arrow"></span></a>
+        </li>  
+        <ul class="sub-menu collapse" id="Parameters">
+          <li><a href="#"><i class="fa fa-pencil" aria-hidden="true"></i>
+           edit </a></li>
+         </ul>
 
-           <li data-toggle="collapse" data-target="#Parameters" class="collapsed">
-            <a href="#"><i class="fa fa-cogs fa-lg" aria-hidden="true"></i>
-            </i> Parameters
-            <span class="arrow"></span></a>
-          </li>  
-          <ul class="sub-menu collapse" id="Parameters">
-            <li><a href="#"><i class="fa fa-pencil" aria-hidden="true"></i>
-             edit </a></li>
-           </ul>
+         <ul>
+         <li>
+          <a href="#">
+            <i class="fa fa-user fa-lg"></i> Profile
+          </a>
+        </li>
 
+        <li>
+          <a href="{{ path('page_moncompte_deconnection') }}"><i class="fa fa-user-times fa-lg" aria-hidden="true"></i>
+            disconnect</a>
 
-           <li>
-            <a href="#">
-              <i class="fa fa-user fa-lg"></i> Profile
-            </a>
           </li>
-
-          <li>
-            <a href="{{ path('page_moncompte_deconnection') }}"><i class="fa fa-user-times fa-lg" aria-hidden="true"></i>
-              disconnect</a>
-
-            </li>
-          </ul>
-        </div>
+        </ul>
       </div>
     </div>
+</div>

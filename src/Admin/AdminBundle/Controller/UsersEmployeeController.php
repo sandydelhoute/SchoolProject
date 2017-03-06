@@ -5,25 +5,17 @@ namespace Admin\AdminBundle\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\PasswordType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
-use Symfony\Component\Form\Extension\Core\Type\SelectType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Vendor\ConnectUsersBundle\Entity\UsersEmployee;
 use Vendor\ConnectUsersBundle\Form\UsersEmployeeType;
 use Symfony\Component\Security\Core\Util\SecureRandom;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class UsersEmployeeController extends Controller
 {
 
 
-    public function indexAction(Request $request,$page,$filter = null)
+   /* public function indexAction(Request $request,$page,$filter = null)
     {
     
      //$nbArticlesParPage = $this->container->getParameter('front_nb_articles_par_page');
@@ -50,7 +42,57 @@ class UsersEmployeeController extends Controller
         return $this->render('AdminAdminBundle:UsersEmployee:listusersemployee.html.twig',array('listusersemployee'=>$contenu['listusersemployee'],'pagination'=>$contenu['pagination']));
       
 
+    }*/
+
+
+     public function indexAction(Request $request)
+    { 
+        return $this->render('AdminAdminBundle:UsersEmployee:listusersemployee2.html.twig');
     }
+
+
+
+    public function filterAction($page,$filter = null)
+    {
+    
+
+     //$nbArticlesParPage = $this->container->getParameter('front_nb_articles_par_page');
+
+        $nbArticlesParPage=10;
+
+        $em = $this->getDoctrine()->getManager();
+
+      $listusersemployee = $em->getRepository('VendorConnectUsersBundle:UsersEmployee')
+            ->findAll();
+      $serializer = $this->get('serializer');
+     $serializedUsers = array();
+        foreach ($listusersemployee as $user) {
+        $serializedUsers[] = $serializer->normalize($user, 'json');
+    }
+        $pagination = array(
+            'page' => $page,
+            'nbPages' => ceil(count($listusersemployee) / $nbArticlesParPage),
+        );
+
+         $contenu=array(         
+            'listusersemployee' => $listusersemployee,
+            'pagination' => $pagination
+        );
+      /*  $serializer = $this->get('serializer');
+        $json = $serializer->serialize(
+            $listusersemployee,
+            'json'
+        );*/
+
+        $response = new JsonResponse(array(
+       'data' => $serializedUsers
+    ));
+
+        return     $response ;
+    }
+
+
+
 
 
 
