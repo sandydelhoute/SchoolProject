@@ -1,5 +1,4 @@
 $(document).ready(function(){
-	
 var container=$('#product_images');
 var index=container.find(':input').length;
 

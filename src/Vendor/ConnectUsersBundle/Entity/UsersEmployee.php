@@ -47,9 +47,11 @@ class UsersEmployee extends Users
     /**
      * @var string
      *
-     * @ORM\Column(name="numbersocial", type="string", length=255)
+     * @ORM\Column(name="hiredate", type="date")
+     * @Assert\NotBlank()
+     * @Assert\Date()
      */
-    private $numbersocial;
+    private $hiredate;
 
 
     
@@ -85,9 +87,9 @@ class UsersEmployee extends Users
      *
      * @return UsersEmployee
      */
-    public function setNumbersocial($numbersocial)
+    public function setHiredate($hiredate)
     {
-        $this->numbersocial = $numbersocial;
+        $this->hiredate = $hiredate;
 
         return $this;
     }
@@ -97,14 +99,12 @@ class UsersEmployee extends Users
      *
      * @return string
      */
-    public function getNumbersocial()
+    public function getHiredate()
     {
-        return $this->numbersocial;
+        return $this->hiredate;
     }
- /*   public function getRoles(){
-        return $this->array($status);
-     }
-*/
+
+
     /**
      * Set status
      *

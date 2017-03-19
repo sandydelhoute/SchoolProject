@@ -1,58 +1,69 @@
-{% extends '::base.html.twig' %}
-
-{% block stylesheets %}
-{{ parent() }}
-<link rel="stylesheet" type="text/css" href="{{ asset('css/sidebar.css') }}"/>
-{% endblock stylesheets %}
-{% block javascripts %}
-{{ parent() }}
-<script src="{{ asset('js/addimage.js') }}"/>
-{% endblock javascripts %}
-{% block body %}
-
-
-
-{% block navabar %}
-{% include ':templateAdmin:sidebar.html.twig' %}
-{% endblock %}
-<div class="col-sm-9">
-<div class="row">
-{% block search %}
-{% include ':templateAdmin:search.html.twig' %}
-{% endblock %}
-</div>
-<div class="col-xs-12">
-	<div class="row">
-                  <h1>Welcome To Dashboard Panel :)</h1>
-                    <p>
-                        this  is test text.this  is test text.this  is test text.this  is test text.
-                        this  is test text.this  is test text.this  is test text.this  is test text.
-                        this  is test text.this  is test text.this  is test text.this  is test text.
-                        this  is test text.this  is test text.this  is test text.this  is test text.
-                        this  is test text.this  is test text.
-                    </p>
-</div>
-<div class="row">
-{% for flash_message in app.session.flashBag.get('registred') %}
-    <div class="label label-success">
-        {{ flash_message }}
-    </div>
-{% endfor %}
-{% for flash_message in app.session.flashBag.get('error') %}
-    <div class="label label-danger">
-        {{ flash_message }}
-    </div>
-{% endfor %}
-</div>
-<div class="row">
 {{ form_start(form) }}
+{{ form_errors(form) }}
 
-<div id="add_image" class="btn btn-default">
-<i class="fa fa-plus-circle" aria-hidden="true"></i>
-Ajouter une photo</div>
-{{ form_widget(form) }}
+<div class="input-group">
+	{{ form_label(form.name) }}
+	{{ form_errors(form.name) }}
+	{{ form_widget(form.name) }}
+</div>
+
+<div class="input-group">
+	{{ form_label(form.description) }}
+	{{ form_errors(form.description) }}
+	{{ form_widget(form.description) }}
+</div>
+
+<div class="input-group">
+	{{ form_label(form.composition) }}
+	{{ form_errors(form.composition) }}
+	{{ form_widget(form.composition) }}
+</div>
+
+<div class="input-group">
+	{{ form_label(form.prix) }}
+	{{ form_errors(form.prix) }}
+	{{ form_widget(form.prix) }}
+</div>
+
+<div class="input-group">
+	{{ form_label(form.active) }}
+	{{ form_errors(form.active) }}
+	{{ form_widget(form.active) }}
+</div>
+<div class="input-group">
+	{{ form_label(form.images) }}
+	{{ form_errors(form.images) }}
+	{{ form_widget(form.images) }}
+	<div id="containeraddimage"></div>
+	<div id="add_image" class="btn btn-default">
+		<i class="fa fa-plus-circle" aria-hidden="true"></i>
+			Ajouter une photo
+	</div>
+</div>
+<div class="input-group">
+	{{ form_label(form.allergenes) }}
+	{{ form_errors(form.allergenes) }}
+	{{ form_widget(form.allergenes) }}
+	<div id="containeraddallergene"></div>
+	<div id="add_allergene" class="btn btn-default">
+		<i class="fa fa-plus-circle" aria-hidden="true"></i>
+				Ajouter un allergene
+	</div>
+</div>
+
+<div class="input-group">
+	{{ form_label(form.categories) }}
+	{{ form_errors(form.categories) }}
+	{{ form_widget(form.categories) }}
+	<div id="containeraddcategorie"></div>
+	<div id="add_categorie" class="btn btn-default">
+		<i class="fa fa-plus-circle" aria-hidden="true"></i>
+				Ajouter une categorie
+	</div>
+</div>
+
+<div >
+	{{ form_widget(form.save) }}
+</div>
+
 {{ form_end(form) }}
-</div>
-</div>
-</div>
-{% endblock body %}

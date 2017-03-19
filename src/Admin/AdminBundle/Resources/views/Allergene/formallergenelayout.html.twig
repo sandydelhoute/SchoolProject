@@ -9,21 +9,26 @@
 {% block navabar %}
 {% include 'AdminAdminBundle:Default:sidebar.html.twig' %}
 {% endblock navabar %}
+
 <div class="col-sm-9">
 <div class="col-xs-12">
 <div class="row">
-	    <div class="col-xs-12 text-center">
-
-                  <h1>Liste des Allergenes</h1>
-        </div>
+                  <h1>Ajouter des allergenes </h1>              
 </div>
 <div class="row">
-{% block search %}
-{% include 'AdminAdminBundle:Default:search.html.twig' %}
-{% endblock %}
+{% for flash_message in app.session.flashBag.get('registred') %}
+    <div class="label label-success">
+        {{ flash_message }}
+    </div>
+{% endfor %}
+{% for flash_message in app.session.flashBag.get('error') %}
+    <div class="label label-danger">
+        {{ flash_message }}
+    </div>
+{% endfor %}
 </div>
 <div class="row">
-{% include 'AdminAdminBundle:Allergene:tableallergene.html.twig' %}
+{% include 'AdminAdminBundle:Allergene:formallergene.html.twig' %}
 </div>
 </div>
 </div>

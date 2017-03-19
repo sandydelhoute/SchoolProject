@@ -21,8 +21,8 @@ $this->addReference('categorieParent',$categorie);
 $categorie1=new Categorie();
 $categorie1->setName("Viande");
 $categorie1->setParents($this->getReference('categorieParent'));
-$manager->persist($categorie);
 $manager->persist($categorie1);
+$manager->persist($categorie);
 $manager->flush();
 }
     public function getOrder()

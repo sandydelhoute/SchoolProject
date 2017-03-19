@@ -17,11 +17,13 @@ class CategorieType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
             $builder
-      		->add('categorie',EntityType::class, array(
+          ->add('name',TextType::class)
+      		->add('parents',EntityType::class, array(
                         'class'    => 'CoreCoreBundle:Categorie',
                         'choice_label' => 'name',
-                        ));
-            
+                        ))
+          ->add('save', SubmitType::class, array('label' => 'Save'));
+
     }
      /**
      * @param OptionsResolver $resolver

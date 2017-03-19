@@ -16,26 +16,15 @@ class CoreController extends Controller
 
     public function indexAction(Request $request)
     {
-
-
-$securityContext = $this->container->get('security.authorization_checker');
-if ($securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')) 
+        $securityContext = $this->container->get('security.authorization_checker');
+        if ($securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')) 
             return $this->render('AdminAdminBundle:Default:accueil.html.twig');
         else
            return $this->render('AdminAdminBundle:Default:login.html.twig');
-
     }
 
-//     public function menuAction()
-//     {
-// return $this->render('AdminAdminBundle:Default:accueil.html.twig',array('users'=>true));
-//     }
-//     public function vehiculeAction()
-//     {
-// return $this->render('AdminAdminBundle:Default:accueil.html.twig',array('users'=>true));
-//     }
-
-
-
-
+       public function compteAction(Request $request)
+    { 
+        return $this->render('AdminAdminBundle:Default:compte.html.twig');
+    }
 }

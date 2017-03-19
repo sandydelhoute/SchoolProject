@@ -37,31 +37,19 @@
 <div class="form-group">
   <div class="cols-sm-12">
             <div class="input-group">
-
-                  
-                  <a href="{{ path('page_moncompte_resetpassword',{'email':"sandy@mail.com"}) }}"><span>reset password</span></a>
-                  
-
-            </div>
-      
+                <button class="btn btn-primary" data-toggle="collapse" data-target="#formresetpassword" class="arrow" >mot de passe oublié?</button>
+             
+            <div id="formresetpassword" class="collapse">
+              <div class="row">
+                <label for="emailforresetpass">Email</label>
+                <input id="emailforresetpass" type="email"  placeholder="email@email.email">
+                <button class="btn btn-primary">envoye</button>
+              </div>
+          </div>
       </div>
-
-    <div class="cols-sm-6">
-          <div class="input-group">
   </div>
-    </div>
 </div>
   
     <input class="btn btn-primary" type="submit" value="Connexion" />
   </form>
-<div class="form-group">
-    <div class="cols-sm-10">
-          <div class="input-group">
-                  <a href="{{ path('page_moncompte_deconnection') }}"><div class='btn btn-primary' value="deconnection" />deconnexion</div></a>
-          </div>
-    </div>
-</div>
-
-
-
 {% endblock %}

@@ -18,7 +18,7 @@ use Core\CoreBundle\Form\CategorieType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
-class ProductType extends AbstractType
+class MenuType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -30,31 +30,32 @@ class ProductType extends AbstractType
             ->add('active', ChoiceType::class,array('choices'  => array(
         		'Yes' => true,
         		'No' => false
-   		         )))
+   		)))
             ->add('images',CollectionType::class,array(
             	"entry_type"=>ImagesType::class,
       				'allow_add' => true,
-      				'allow_delete' => true,
+      				'allow_delete' => false,
       				'prototype'=>true
             	))
-              
-            ->add('categories', EntityType::class, array(
+        
+            ->add('categorie', EntityType::class, array(
               'class' => 'CoreCoreBundle:Categorie',          
               'multiple' => true,
-              'expanded' => true,
-              ))
-            ->add('allergenes', EntityType::class, array(
-              'class' => 'CoreCoreBundle:Allergene',          
-              'multiple' => true,
               'expanded' => true
+
               ))
-           
-            
+         /*  ->add('Product', EntityType::class, array(
+              'class' => 'CoreCoreBundle:Product',          
+              'multiple' => true,
+
+              ))*/
+            ->add('images', EntityType::class, array(
+              'class' => 'CoreCoreBundle:Images',          
+              'multiple' => true,
+              ))
+
             ->add('save', SubmitType::class, array('label' => 'Save'));
-
-    
-
-}
+    }
      /**
      * @param OptionsResolver $resolver
      */

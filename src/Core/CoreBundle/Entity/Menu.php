@@ -3,7 +3,7 @@
 namespace Core\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use Doctrine\Common\Collections\ArrayCollection;
 /**
  * Menu
  *
@@ -12,8 +12,29 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Menu
 {
+    /**
+     * Constructor
+     */
+  public function __construct()
+    {
+        $this->images = new ArrayCollection();
+        $this->categories = new ArrayCollection();
+        $this->products = new ArrayCollection();
+
+    }
 
 
+    /**
+     * @var ArrayCollection product $products
+     * Owning Side
+     *
+     * @ORM\ManyToMany(targetEntity="product", inversedBy="menu", cascade={"persist", "merge"})
+     * @ORM\JoinTable(name="menu_produit",
+     *   joinColumns={@ORM\JoinColumn(name="id_menu", referencedColumnName="id")},
+     *   inverseJoinColumns={@ORM\JoinColumn(name="id_produit", referencedColumnName="id")}
+     * )
+     */
+    private $products;
 
     /**
      * @var ArrayCollection images $images
@@ -202,13 +223,8 @@ class Menu
     {
         return $this->composition;
     }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->images = new \Doctrine\Common\Collections\ArrayCollection();
-    }
+    
+   
 
     /**
      * Add image
@@ -242,5 +258,40 @@ class Menu
     public function getImages()
     {
         return $this->images;
+    }
+
+    
+    /**
+     * Add product
+     *
+     * @param \Core\CoreBundle\Entity\product $product
+     *
+     * @return Menu
+     */
+    public function addProduct(\Core\CoreBundle\Entity\product $product)
+    {
+        $this->products[] = $product;
+
+        return $this;
+    }
+
+    /**
+     * Remove product
+     *
+     * @param \Core\CoreBundle\Entity\product $product
+     */
+    public function removeProduct(\Core\CoreBundle\Entity\product $product)
+    {
+        $this->products->removeElement($product);
+    }
+
+    /**
+     * Get products
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getProducts()
+    {
+        return $this->products;
     }
 }

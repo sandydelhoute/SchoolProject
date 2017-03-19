@@ -12,15 +12,16 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Categorie
 {
-   
+   public function __toString() {
+    return $this->name;
+}
     /**
      * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
-     * @ORM\ManyToOne(targetEntity="Core\CoreBundle\Entity\Categorie", inversedBy="parents")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\OneToMany(targetEntity="Categorie", mappedBy="parent")
      */
     private $id;
 
@@ -33,9 +34,9 @@ class Categorie
 
     
     /**
-      *
-      * @ORM\OneToMany(targetEntity="Core\CoreBundle\Entity\categorie", mappedBy="id")
-      */
+     * @ORM\ManyToOne(targetEntity="Categorie", inversedBy="id")
+     * @ORM\JoinColumn(nullable=true,onDelete="CASCADE")
+     */
     private $parents;
 
 

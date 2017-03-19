@@ -26,7 +26,7 @@
 
 
       <li  {% if 'admin_produits' in app.request.attributes.get('_route') %}class="active"{% endif %}>
-        <a href="{{ path('admin_produits',{ 'page':1 }) }}"><i class="fa fa-cutlery" aria-hidden="true"></i> Product</a>
+        <a href="{{ path('admin_produits') }}"><i class="fa fa-cutlery" aria-hidden="true"></i> Product</a>
         <span  data-toggle="collapse" data-target="#product" class="arrow"></span>
       </li>  
       <ul class="sub-menu collapse" id="product">
@@ -35,15 +35,15 @@
       </ul>
 
       <li {% if 'admin_menu' in app.request.attributes.get('_route') %}class="active"{% endif %}>
-       <a href="{{ path('admin_categorie',{ 'page':1 }) }}"><i class="fa fa-map-o"aria-hidden="true"></i>Menu</a><span data-toggle="collapse" data-target="#menu" class="arrow"></span>
+       <a href="{{ path('admin_menu') }}"><i class="fa fa-map-o"aria-hidden="true"></i>Menu</a><span data-toggle="collapse" data-target="#menu" class="arrow"></span>
      </li>  
      <ul class="sub-menu collapse" id="menu">
-      <li class="active"><a href="{{ path('admin_categorie_add') }}"><i class="fa fa-plus" aria-hidden="true"></i>add
+      <li class="active"><a href="{{ path('admin_menu_add') }}"><i class="fa fa-plus" aria-hidden="true"></i>add
       </a></li>
     </ul>
 
     <li {% if 'admin_allergene' in app.request.attributes.get('_route') %}class="active"{% endif %}>
-     <a href="{{ path('admin_allergene',{ 'page':1 }) }}"><i class="fa fa-eyedropper"aria-hidden="true"></i>Allergene</a><span data-toggle="collapse" data-target="#allergene" class="arrow"></span>
+     <a href="{{ path('admin_allergene') }}"><i class="fa fa-eyedropper"aria-hidden="true"></i>Allergene</a><span data-toggle="collapse" data-target="#allergene" class="arrow"></span>
    </li>  
    <ul class="sub-menu collapse" id="allergene">
     <li class="active"><a href="{{ path('admin_allergene_add') }}"><i class="fa fa-plus" aria-hidden="true"></i>add
@@ -51,7 +51,7 @@
   </ul>
 
   <li {% if 'admin_categorie' in app.request.attributes.get('_route') %}class="active"{% endif %}>
-   <a href="{{ path('admin_categorie',{ 'page':1 }) }}"><i class="fa fa-tags fa-lg"></i>Category</a><span data-toggle="collapse" data-target="#category" class="arrow"></span>
+   <a href="{{ path('admin_categorie') }}"><i class="fa fa-tags fa-lg"></i>Category</a><span data-toggle="collapse" data-target="#category" class="arrow"></span>
  </li>  
  <ul class="sub-menu collapse" id="category">
   <li class="active"><a href="{{ path('admin_categorie_add') }}"><i class="fa fa-plus" aria-hidden="true"></i>add
@@ -117,7 +117,7 @@
 
          <ul>
          <li>
-          <a href="#">
+          <a href="{{ path('admin_comptecurrentusers') }}">
             <i class="fa fa-user fa-lg"></i> Profile
           </a>
         </li>

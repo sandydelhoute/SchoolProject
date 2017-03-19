@@ -8,13 +8,13 @@
 
 
 {% block navabar %}
-{% include ':templateAdmin:sidebar.html.twig' %}
+{% include 'AdminAdminBundle:Default:sidebar.html.twig' %}
 {% endblock %}
 {% block tableusers %}
-{% include 'AdminAdminBundle:Default:tableusers.html.twig' %}
+{% include 'AdminAdminBundle:UsersEmployee:tableusers.html.twig' %}
 {% endblock %}
 {% endblock body %}
 {% block javascripts %}
 {{ parent() }}
-<script src="{{ asset('js/ajaxusersemployee.js') }}"/>
+<script src="{{ asset('js/Admin/Product/listproduct.js') }}"/>
 {% endblock %}

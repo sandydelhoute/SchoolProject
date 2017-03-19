@@ -10,35 +10,10 @@ use Core\CoreBundle\Form\ProductType;
 
 class ProductController extends Controller
 {
-  public function indexAction(Request $request,$page)
-    {
- //$nbArticlesParPage = $this->container->getParameter('front_nb_articles_par_page');
-
-        $nbArticlesParPage=10;
-
-        $em = $this->getDoctrine()->getManager();
-
-       $listProduct = $em->getRepository('CoreCoreBundle:Product')
-            ->findAllPagineEtTrie($page, $nbArticlesParPage);
-
-        $pagination = array(
-            'page' => $page,
-            'nbPages' => ceil(count($listProduct) / $nbArticlesParPage),
-            'nomRoute' => 'admin_product',
-            'paramsRoute' => array()
-        );
-
-         $contenu=array(         
-            'listProduct' => $listProduct,
-            'pagination' => $pagination
-        );
-		    $listProduct = $em->getRepository('CoreCoreBundle:Product')
-            ->findAll();
-
-        return $this->render('AdminAdminBundle:Product:listproduct.html.twig',array('listproduct'=>$contenu['listProduct'],'pagination'=>$contenu['pagination']));
-      
- 			
-      }
+    public function indexAction(Request $request)
+    { 
+        return $this->render('AdminAdminBundle:Product:listproduct.html.twig');
+    }
        
     public function addProductAction(Request $request){
     
@@ -83,7 +58,7 @@ class ProductController extends Controller
 
     }
 
-        return $this->render('AdminAdminBundle:Product:formproduct.html.twig',array('form' => $form->createView()));
+        return $this->render('AdminAdminBundle:Product:formproductlayout.html.twig',array('form' => $form->createView()));
     }
 
 

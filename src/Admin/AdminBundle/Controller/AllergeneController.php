@@ -13,31 +13,9 @@ use Core\CoreBundle\Form\AllergeneType;
 class AllergeneController extends Controller
 {
 
-public function indexAction(Request $request,$page,$filter=null)
-{
-//$nbArticlesParPage = $this->container->getParameter('front_nb_articles_par_page');
-
-        $nbArticlesParPage=10;
-
-        $em = $this->getDoctrine()->getManager();
-
-        $listAllergene = $em->getRepository('CoreCoreBundle:Allergene')
-            ->findAllPagineEtTrie($page, $nbArticlesParPage,$filter);
-
-        $pagination = array(
-            'page' => $page,
-            'nbPages' => ceil(count($listCategorie) / $nbArticlesParPage),
-            'nomRoute' => 'admin_utilisateurs',
-            'paramsRoute' => array()
-        );
-
-         $contenu=array(         
-            'listCategorie' => $listAllergene,
-            'pagination' => $pagination
-        );
-
-        return $this->render('AdminAdminBundle:Allergene:listallergene.html.twig',array('listAllergene'=>$contenu['listAllergene'],'pagination'=>$contenu['pagination']));
-      
+public function indexAction(Request $request){
+        return $this->render('AdminAdminBundle:Allergene:listallergene.html.twig');
+    
 }
 public function addAllergeneAction(Request $request)
 {
@@ -50,7 +28,7 @@ public function addAllergeneAction(Request $request)
     {
 
 	    $em = $this->getDoctrine()->getManager();
-	    $allergeneExist=$em->getRepository('CoreCoreBundle:Categorie')
+	    $allergeneExist=$em->getRepository('CoreCoreBundle:Allergene')
 	    ->findOneByName($allergene->getName());
 	    if(is_null($allergeneExist))
 	    {
@@ -66,6 +44,6 @@ public function addAllergeneAction(Request $request)
 
     }
 
-        return $this->render('AdminAdminBundle:Allergene:formallergene.html.twig',array('form' => $form->createView()));
+        return $this->render('AdminAdminBundle:Allergene:formallergenelayout.html.twig',array('form' => $form->createView()));
 	}
 }

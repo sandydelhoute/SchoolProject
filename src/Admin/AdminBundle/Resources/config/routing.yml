@@ -2,35 +2,42 @@ admin_homepage:
     path:    /
     defaults: { _controller: AdminAdminBundle:Core:index }
 
+admin_comptecurrentusers:
+    path:    /profile
+    defaults: { _controller: AdminAdminBundle:Core:compte }
 
 # --------------------Users-------------------- #
 admin_utilisateurs:
     path:    /users
     defaults: { _controller: AdminAdminBundle:UsersEmployee:index}
-  
-admin_utilisateurs_filter:
-    path:    /users2/{page}/{filter}
-    defaults: { _controller: AdminAdminBundle:UsersEmployee:filter, filter: null }
-    requirements:
-        page:   \d{1}
-        filter: firstnameup|firstnamedown|lastnameup|lastnamedown|statutup|statutdown|emailup|emaildown
-       # methods: POST
+
 admin_utilisateurs_add:
-    path:    /users/add/
-    defaults: { _controller: AdminAdminBundle:UsersEmployee:addUsers }
+    path:    /users/add
+    defaults: { _controller: AdminAdminBundle:UsersEmployee:add }
 
 admin_utilisateurs_edit:
     path:    /users/edit/{email}
-    defaults: { _controller: AdminAdminBundle:UsersEmployee:editUsers }
+    defaults: { _controller: AdminAdminBundle:UsersEmployee:edit }
 
 admin_utilisateurs_delete:
     path:    /users/delete/{email}
-    defaults: { _controller: AdminAdminBundle:UsersEmployee:deleteUsers }
+    defaults: { _controller: AdminAdminBundle:UsersEmployee:delete }
 
+admin_utilisateurs_filter:
+    path:    /users/order
+    defaults: { _controller: AdminAdminBundle:UsersEmployee:orderBy}
+    requirements:
+       methods: POST
+
+admin_utilisateurs_search:
+    path:    /users/search
+    defaults: { _controller: AdminAdminBundle:UsersEmployee:search}
+    requirements:
+       methods: POST
 
 # --------------------Produit-------------------- #
 admin_produits:
-    path:    /product/{page}
+    path:    /product/
     defaults: { _controller: AdminAdminBundle:Product:index}
    
 admin_produits_add:
@@ -47,8 +54,8 @@ admin_produits_delete:
 
 # --------------------Categorie-------------------- #
 admin_categorie:
-    path:    /categorie/{page}/{filter}
-    defaults: { _controller: AdminAdminBundle:Categorie:index ,filter: null }
+    path:    /categorie/
+    defaults: { _controller: AdminAdminBundle:Categorie:index }
    
 admin_categorie_add:
     path:    /categorie/add/
@@ -64,13 +71,10 @@ admin_categorie_delete:
 
 
 
-
-
-
 # --------------------Allergene-------------------- #
 admin_allergene:
-    path:    /allergene/{page}/{filter}
-    defaults: { _controller: AdminAdminBundle:Allergene:index ,filter: null }
+    path:    /allergene/
+    defaults: { _controller: AdminAdminBundle:Allergene:index  }
    
 admin_allergene_add:
     path:    /allergene/add/
@@ -89,8 +93,19 @@ admin_allergene_delete:
 
 admin_menu:
     path:    /menu
-    defaults: { _controller: AdminAdminBundle:Core:menu }
+    defaults: { _controller: AdminAdminBundle:Menu:index }
 
+admin_menu_add:
+    path:    /menu/add/
+    defaults: { _controller: AdminAdminBundle:Menu:addMenu }
+
+admin_menu_edit:
+    path:    /menu/edit/{id}
+    defaults: { _controller: AdminAdminBundle:Menu:editMenu }
+
+admin_menu_delete:
+    path:    /menu/delete/{id}
+    defaults: { _controller: AdminAdminBundle:Menu:deleteMenu }
 
 # --------------------Vehicule-------------------- #
 admin_vehicules:
@@ -102,3 +117,4 @@ admin_vehicules:
 admin_relais:
     path:    /relais
     defaults: { _controller: AdminAdminBundle:Core:relais }
+

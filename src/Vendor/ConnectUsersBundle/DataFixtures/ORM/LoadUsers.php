@@ -48,7 +48,7 @@ $usersemployee->setFirstname('coo');
 $usersemployee->setEmail("mail".$i."@mealandbox.fr");
 $usersemployee->setPassword($password1);
 $usersemployee->setBirthdate(new DateTime('02/31/2011'));
-$usersemployee->setNumbersocial('188115912345678');
+$usersemployee->setHiredate(new DateTime());
 $usersemployee->setStatus($this->getReference('status'));
 $manager->persist($usersemployee);
 $manager->persist($users);

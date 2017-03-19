@@ -34,7 +34,7 @@ class Product
 
 
   /**
-     * @var ArrayCollection allergene $allergenes
+     * @var ArrayCollection allergenes $allergenes
      * Owning Side
      *
      * @ORM\ManyToMany(targetEntity="Core\CoreBundle\Entity\Allergene", inversedBy="product", cascade={"persist", "merge"})

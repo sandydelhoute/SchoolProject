@@ -29,7 +29,7 @@ class UsersEmployeeType extends AbstractType
                 'first_options'  => array('label' => 'Password'),
                 'second_options' => array('label' => 'Repeat Password'),  ))
             ->add('birthdate', DateType::class)
-            ->add('numbersocial', TextType::class)   
+            ->add('hiredate',DateType::class)
             ->add('status',EntityType::class, array(
                         'class'    => 'VendorConnectUsersBundle:Status',
                         'choice_label' => 'name',

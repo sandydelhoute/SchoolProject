@@ -1,0 +1,42 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+{{ parent() }}
+<link rel="stylesheet" type="text/css" href="{{ asset('css/sidebar.css') }}"/>
+{% endblock stylesheets %}
+
+{% block body %}
+{% block navabar %}
+{% include 'AdminAdminBundle:Default:sidebar.html.twig' %}
+{% endblock navabar %}
+
+<div class="col-sm-9">
+<div class="col-xs-12">
+	<div class="row">
+                  <h1>Ajouter Vos Produit</h1>
+</div>
+<div class="row">
+{% for flash_message in app.session.flashBag.get('registred') %}
+    <div class="label label-success">
+        {{ flash_message }}
+    </div>
+{% endfor %}
+{% for flash_message in app.session.flashBag.get('error') %}
+    <div class="label label-danger">
+        {{ flash_message }}
+    </div>
+{% endfor %}
+</div>
+{% block form %}
+{% include 'AdminAdminBundle:Product:formproduct.html.twig' %}
+{% endblock form %}
+</div>
+</div>
+{% endblock body %}
+
+{% block javascripts %}
+{{ parent() }}
+<script src="{{ asset('js/Admin/Product/addallergene.js') }}"></script>
+<script src="{{ asset('js/Admin/Product/addcategorie.js') }}"></script>
+<script src="{{ asset('js/Admin/Product/addimage.js') }}"></script>
+{% endblock javascripts %}

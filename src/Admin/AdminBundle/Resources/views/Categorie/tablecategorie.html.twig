@@ -6,7 +6,7 @@
 </div>
 <div class="row">
 {% block search %}
-{% include ':templateAdmin:search.html.twig' %}
+{% include 'AdminAdminBundle:Default:search.html.twig' %}
 {% endblock %}
 </div>
 {% for flash_message in app.session.flashBag.get('delete') %}
@@ -54,32 +54,7 @@
                                 action
                             </th>
                         </tr>
-                    </thead>
-        {% for categorie in listCategorie %}
-		    <tr>
-		        <td>
-		        {{ categorie.id }}
-		        </td>
-		        <td>
-		        {{ categorie.name }}
-		        </td>
-		        <td>
-			{# 	{% if categorie.parents.id is empty and categorie.parents.id is defined %}	
-		        	toto
-		        {% endif %} #}
-		        {% dump(categorie.parents) %}
-		        </td>
-		        <td>
-		        <ul>
-				<a href="{{ path('admin_categorie_delete',{'id':categorie.id}) }}">
-					<li><i class="fa fa-trash-o" aria-hidden="true"></i>delete</li>
-				</a>
-		        <a href="{{ path('admin_categorie_edit',{'id':categorie.id}) }} ">
-		        	<li><i class="fa fa-pencil" aria-hidden="true"></i>edit</li></a>
-		        </ul>
-		        </td>
-		    </tr>
-		{% endfor %}
+       
 
                </table>
         </div>
