@@ -20,13 +20,15 @@ page_moncompte_connexionemployee:
 page_moncompte_employee:
     path:     /compte/Employee
     defaults: { _controller: VendorConnectUsersBundle:Employee:index }
-
-
+page_moncompte_resetpassword:
+    path:     /admin/resetpassword
+    defaults: { _controller: VendorConnectUsersBundle:Employee:resetPassword }
+page_moncompte_resetpassword:
+    path:     /resetpassword
+    defaults: { _controller: VendorConnectUsersBundle:Users:resetPassword }
 # --------------------General Users-------------------- #
 page_moncompte_deconnection:
     path:     /deconnexion
 login_check:
     path:   /login_check
-page_moncompte_resetpassword:
-    path:     /resetpassword
-    defaults: { _controller: VendorConnectUsersBundle:AllUsers:resetPassword }
+

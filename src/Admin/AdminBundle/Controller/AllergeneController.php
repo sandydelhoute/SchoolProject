@@ -22,7 +22,6 @@ public function addAllergeneAction(Request $request)
 	$allergene = new Allergene();
     $form = $this->createForm(AllergeneType::class,$allergene);
 
-   
     $form->handleRequest($request);
     if ($form->isSubmitted() && $form->isValid())
     {

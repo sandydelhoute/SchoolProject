@@ -91,7 +91,28 @@ class UsersController extends Controller
         );
     }
     
+ public function resetPasswordAction($email){
 
+        $em = $this->getDoctrine()->getManager();
+        $users = $em->getRepository('VendorConnectUsersBundle:UsersWeb')->findOneByEmail($email);
+        //$token=$this->get('security.context')->getToken();
+        $message = \Swift_Message::newInstance()
+        ->setSubject('Hello Email')
+        ->setFrom('s.delhoute@sfr.fr')
+        ->setTo('s.delhoute@sfr.fr')
+        ->setBody(
+            $this->renderView(
+                'VendorConnectUsersBundle:Email:registration.html.twig',
+                array('email' => $users->getEmail(),'name' => $users->getName())
+            ),
+            'text/html'
+        );
+    $this->get('mailer')->send($message);
+
+       
+            return $this->redirectToRoute('homepage');
+
+        }
 
 
 }
