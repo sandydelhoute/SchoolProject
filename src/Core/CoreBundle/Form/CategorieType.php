@@ -21,6 +21,11 @@ class CategorieType extends AbstractType
       		->add('parents',EntityType::class, array(
                         'class'    => 'CoreCoreBundle:Categorie',
                         'choice_label' => 'name',
+                        'expanded'=>false,
+                        'multiple'=>false,
+                        'empty_data'  => null,
+                        'required'      => false,
+
                         ))
           ->add('save', SubmitType::class, array('label' => 'Save'));
 
