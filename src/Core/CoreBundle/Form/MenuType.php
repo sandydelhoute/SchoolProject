@@ -38,23 +38,18 @@ class MenuType extends AbstractType
       				'prototype'=>true
             	))
         
-            ->add('categorie', EntityType::class, array(
+            ->add('categories', EntityType::class, array(
               'class' => 'CoreCoreBundle:Categorie',          
               'multiple' => true,
               'expanded' => true
 
               ))
-         /*  ->add('Product', EntityType::class, array(
+           ->add('products', EntityType::class, array(
               'class' => 'CoreCoreBundle:Product',          
               'multiple' => true,
-
-              ))*/
-            ->add('images', EntityType::class, array(
-              'class' => 'CoreCoreBundle:Images',          
-              'multiple' => true,
+              'expanded' => true
               ))
-
-            ->add('save', SubmitType::class, array('label' => 'Save'));
+          ->add('save', SubmitType::class, array('label' => 'Save'));
     }
      /**
      * @param OptionsResolver $resolver
@@ -62,11 +57,11 @@ class MenuType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Core\CoreBundle\Entity\Product',
+            'data_class' => 'Core\CoreBundle\Entity\Menu',
         ));
     }
 public function getName()
   {
-    return 'core_corebundle_product';
+    return 'core_corebundle_menu';
   }
 }

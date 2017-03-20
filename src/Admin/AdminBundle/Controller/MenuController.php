@@ -95,7 +95,7 @@ class MenuController extends Controller
 
     }
 
-        return $this->render('AdminAdminBundle:Menu:formmenu.html.twig',array('form' => $form->createView()));
+        return $this->render('AdminAdminBundle:Menu:formmenulayout.html.twig',array('form' => $form->createView()));
     }
 
 
