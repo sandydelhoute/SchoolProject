@@ -116,5 +116,9 @@ admin_vehicules:
 # --------------------Relais-------------------- #
 admin_relais:
     path:    /relais
-    defaults: { _controller: AdminAdminBundle:Core:relais }
+    defaults: { _controller: AdminAdminBundle:Relais:index }
+
+admin_relais_add:
+    path:    /relais/add
+    defaults: { _controller: AdminAdminBundle:Relais:addRelais }
 
