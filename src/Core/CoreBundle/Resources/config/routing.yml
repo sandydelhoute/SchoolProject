@@ -7,3 +7,6 @@ contactpage:
 commandepage:
     path:     /commande
     defaults: { _controller: CoreCoreBundle:Core:contact }
+testheader:
+    path:     /testheader
+    defaults: { _controller: CoreCoreBundle:Core:testheader }

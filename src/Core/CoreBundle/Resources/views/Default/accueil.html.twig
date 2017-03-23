@@ -18,38 +18,25 @@
 {% endblock javascripts %}
 
  {% block body %}
+
+ <h1>Florentin</h1>
 <div class="container-fluid">
+  <h1>Hello World</h1>
+  <h1>Fry Kelevra</h1>
 
 {% block header %}
-{% include ':template:header.html.twig' %}
+{% include 'CoreCoreBundle:Default:header.html.twig' %}
 {% endblock header %}
 </div>
 <div class="container">
 
-<div class="row">
-{% block recherche %}
 
-{% include ':template:recherchecp.html.twig' %}
-{% endblock recherche %}
-</div>
-<div class="row">
-<div class="col-md-6">
-{{ render(controller('VendorConnectUsersBundle:Employee:connexionWeb')) }}
-</div>
-</div>
-<div class="row">
-<div class="col-hidden-xs col-md-6">
-{% block carrousel %}
-{% include ':template:carrousel.html.twig' %}
-{% endblock carrousel %}
-</div>
-</div>
 
 
 <div class="row">
 <div class="col-xs-22 col-md-6">
 {% block produit %}
-{% include ':template:produit.html.twig' %}
+{% include 'CoreCoreBundle:Produit:produit.html.twig' %}
 {% endblock %}
 </div>
 </div>
@@ -57,4 +44,4 @@
 
 
 
-{% endblock body %} 
+{% endblock body %}

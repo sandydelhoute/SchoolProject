@@ -18,7 +18,7 @@ class AppKernel extends Kernel
             new Vendor\ConnectUsersBundle\VendorConnectUsersBundle(),
             new Admin\AdminBundle\AdminAdminBundle(),
             new Core\CoreBundle\CoreCoreBundle(),
-
+           new FOS\JsRoutingBundle\FOSJsRoutingBundle()
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
@@ -27,7 +27,7 @@ class AppKernel extends Kernel
             $bundles[] = new Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
             $bundles[] = new Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle();
             $bundles[] = new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle();
-            $bundles[] = new FOS\JsRoutingBundle\FOSJsRoutingBundle();
+
 
             //$bundles[] = new HWI\Bundle\OAuthBundle\HWIOAuthBundle();
         }
