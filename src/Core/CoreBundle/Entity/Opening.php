@@ -7,10 +7,10 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Time
  *
- * @ORM\Table(name="time")
- * @ORM\Entity(repositoryClass="Core\CoreBundle\Repository\TimeRepository")
+ * @ORM\Table(name="opening")
+ * @ORM\Entity(repositoryClass="Core\CoreBundle\Repository\OpeningRepository")
  */
-class Time
+class Opening
 {
     /**
      * @var int
@@ -24,33 +24,33 @@ class Time
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="dayopen", type="date")
+     * @ORM\Column(type="string", columnDefinition="ENUM('Monday', 'Thuesday')") 
      */
     private $dayopen;
 
     /**
-     * @var \DateTime
+     * @var \Time
      *
      * @ORM\Column(name="timeopen", type="time")
      */
     private $timeopen;
 
     /**
-     * @var \DateTime
+     * @var \Time
      *
      * @ORM\Column(name="timeclose", type="time")
      */
     private $timeclose;
 
     /**
-     * @var string
+     * @var \Time
      *
-     * @ORM\Column(name="timedelivry", type="string", length=255)
+     * @ORM\Column(name="timedelivry", type="time")
      */
     private $timedelivry;
 
     /**
-     * @var \DateTime
+     * @var \Time
      *
      * @ORM\Column(name="timelimitshop", type="time")
      */

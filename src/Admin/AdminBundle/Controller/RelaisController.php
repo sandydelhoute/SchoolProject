@@ -6,6 +6,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Core\CoreBundle\Entity\Relais;
+use Core\CoreBundle\Entity\Opening;
+use Core\CoreBundle\Form\OpeningType;
 use Core\CoreBundle\Form\RelaisType;
 
 class RelaisController extends Controller
@@ -25,7 +27,8 @@ return $this->render('AdminAdminBundle:Default:accueil.html.twig',array('relais'
     $formaddrelais = $this->createForm(RelaisType::class,$relais);
     $formaddrelais->handleRequest($request);
 
-    $formaddhoraire = $this->createForm(RelaisType::class,$relais);
+    $opening=new Opening();
+    $formaddhoraire = $this->createForm(OpeningType::class,$opening);
     $formaddhoraire->handleRequest($request);
 
     if ($formaddrelais->isSubmitted() && $formaddrelais->isValid()) {
