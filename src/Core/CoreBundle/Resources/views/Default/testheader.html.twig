@@ -3,25 +3,19 @@
 {% block stylesheets %}
 {{ parent() }}
 
-<link rel="stylesheet" type="text/css" href="{{ asset('css/header.css') }}"/>
-
-<link rel="stylesheet" type="text/css" href="{{ asset('css/carrousel.css') }}"/>
-
-
-<link rel="stylesheet" type="text/css" href="{{ asset('css/recherchecp.css') }}"/>
+<link rel="stylesheet" type="text/css" href="{{ asset('css/main.css') }}"/>
 
 {% endblock stylesheets %}
 
 {% block body %}
-<div class="container-fluid">
 
 {% block header %}
-{% include 'CoreCoreBundle:Default:header.html.twig' %}
+  {% include 'CoreCoreBundle:Default:header.html.twig' %}
 {% endblock header %}
-</div>
 
 {% endblock body %}
 
 {% block javascripts %}
 <script src="{{ asset('js/monjs.js') }}"></script>
 {% endblock javascripts %}
+ 

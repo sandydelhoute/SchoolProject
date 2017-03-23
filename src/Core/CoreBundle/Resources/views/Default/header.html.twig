@@ -1,10 +1,54 @@
-<div class="container">
-<div class="row">
-<ul class="menu">
-<a href="{{ path ('homepage') }}"><li>Accueil</li></a>
-<a href="{{ path ('commandepage') }}"><li>Nos Produits</li></a>
-<a href="{{ path ('contactpage') }}"><li>Nos actualités</li></a>
-<a href="{{ path ('contactpage') }}"><li>Contact</li></a>
-</ul>
-</div>
+<div class="container-fluid">
+    <div class="row">
+        <header>
+            <nav class="navbar navbar-default  color-black background-yellow uppercase row" role="navigation">
+
+                <div class="navbar-header background-yellow">
+                    <button type="button" class="navbar-toggle collapsed background-yellow" data-toggle="collapse" data-target="#header" aria-expanded="false">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                </div>
+
+                <div class="collapse navbar-collapse color-black background-yellow" id="header">
+
+                    <ul class="navmenu nav">
+                        <div class="btn background-green color-white">
+                            <i class="fa fa-map-marker fa-2x" aria-hidden="true"></i>
+                            <div class="containertext">
+                                mon</br>
+                            point relais
+                        </div>
+                    </div>
+
+                    <li class="active">
+                        <a href="#">Accueil</a>
+                    </li>
+                    <li>
+                        <a href="#">Nos produits</a>
+                    </li>
+                    <div class='logo'>
+                        <img class='img-responsives' src="{{ asset('img/logo/logo.png') }}">
+                    </div>
+                    <li>
+                        <a href="#">Actualités</a>
+                    </li>
+                    <li>
+                        <a href="#">Contact</a>
+                    </li>
+                    <div class="btn background-green color-white">
+                        <i class="fa fa-user fa-2x" aria-hidden="true"></i>
+                        <div class="containertext">
+                            mon compte
+                        </div>
+                    </div>
+
+                </ul>
+            </div>
+        </nav>
+
+    </header>
+  </div>
 </div>
