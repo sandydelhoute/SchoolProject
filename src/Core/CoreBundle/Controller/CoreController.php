@@ -11,11 +11,18 @@ class CoreController extends Controller
 
         return $this->render('CoreCoreBundle:Default:accueil.html.twig');
     }
-    
+
 
      public function contactAction()
     {
         return $this->render('CoreCoreBundle:Default:contact.html.twig');
 
     }
+
+
+    public function testheaderAction()
+   {
+       return $this->render('CoreCoreBundle:Default:testheader.html.twig');
+
+   }
 }
