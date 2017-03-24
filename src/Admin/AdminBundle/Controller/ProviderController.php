@@ -6,7 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Core\CoreBundle\Entity\Fournisseurs;
 use Core\CoreBundle\Form\FournisseursType;
 
-class FournisseursController extends Controller
+class ProviderController extends Controller
 {
 
 
@@ -17,7 +17,7 @@ return $this->render('AdminAdminBundle:Default:accueil.html.twig',array('relais'
 
 
 
-    public function addFournisseursAction(Request $request){
+    public function addProviderAction(Request $request){
     
     $fournisseurs = new Fournisseurs();
     $formaddfournisseurs = $this->createForm(FournisseursType::class,$fournisseurs);

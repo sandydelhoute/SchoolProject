@@ -73,20 +73,20 @@ admin_categorie_delete:
 
 # --------------------Fournisseurs-------------------- #
 admin_fournisseurs:
-    path:    /fournisseurs
-    defaults: { _controller: AdminAdminBundle:Fournisseurs:index }
+    path:    /provider
+    defaults: { _controller: AdminAdminBundle:Provider:index }
    
 admin_fournisseurs_add:
-    path:    /fournisseurs/add
-    defaults: { _controller: AdminAdminBundle:Fournisseurs:addFournisseurs }
+    path:    /provider/add
+    defaults: { _controller: AdminAdminBundle:Provider:addProvider }
 
 admin_fournisseurs_edit:
-    path:    /fournisseurs/edit/{id}
-    defaults: { _controller: AdminAdminBundle:Fournisseurs:editFournisseurs }
+    path:    /provider/edit/{id}
+    defaults: { _controller: AdminAdminBundle:Provider:editProvider }
 
 admin_fournisseurs_delete:
-    path:    /fournisseurs/delete/{id}
-    defaults: { _controller: AdminAdminBundle:Fournisseurs:deleteFournisseurs }
+    path:    /provider/delete/{id}
+    defaults: { _controller: AdminAdminBundle:Provider:deleteProvider }
 
 
 

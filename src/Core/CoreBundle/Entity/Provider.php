@@ -7,10 +7,10 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * fournisseurs
  *
- * @ORM\Table(name="fournisseurs")
- * @ORM\Entity(repositoryClass="Core\CoreBundle\Repository\fournisseursRepository")
+ * @ORM\Table(name="provider")
+ * @ORM\Entity(repositoryClass="Core\CoreBundle\Repository\providerRepository")
  */
-class Fournisseurs
+class Provider
 {
     /**
      * @var int
@@ -18,7 +18,7 @@ class Fournisseurs
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
-     * @ORM\OneToMany(targetEntity="Product", mappedBy="fournisseurs")
+     * @ORM\OneToMany(targetEntity="Product", mappedBy="provider")
      */
     private $id;
 

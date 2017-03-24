@@ -18,7 +18,7 @@ class Product
         $this->images = new ArrayCollection();
         $this->categories = new ArrayCollection();
         $this->allergenes = new ArrayCollection();
-        $this->fournisseurs= new ArrayCollection();
+        $this->providers= new ArrayCollection();
 
     }
   /**
@@ -62,11 +62,11 @@ class Product
 
 
     /** 
-     * @ORM\ManyToOne(targetEntity="Fournisseurs", inversedBy="id")
-     * @ORM\JoinColumn(name="product_fournisseurs", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Provider", inversedBy="id")
+     * @ORM\JoinColumn(name="product_provider", referencedColumnName="id")
      */
 
-    private $fournisseurs;
+    private $providers;
 
     /**
      * @var int
@@ -365,36 +365,36 @@ class Product
     }
 
     /**
-     * Add fournisseur
+     * Add provider
      *
-     * @param \Core\CoreBundle\Entity\Fournisseurs $fournisseur
+     * @param \Core\CoreBundle\Entity\Provider $provider
      *
      * @return Product
      */
-    public function addFournisseur(\Core\CoreBundle\Entity\Fournisseurs $fournisseur)
+    public function addProvider(\Core\CoreBundle\Entity\Provider $provider)
     {
-        $this->fournisseurs[] = $fournisseur;
+        $this->providers[] = $provider;
 
         return $this;
     }
 
     /**
-     * Remove fournisseur
+     * Remove provider
      *
-     * @param \Core\CoreBundle\Entity\Fournisseurs $fournisseur
+     * @param \Core\CoreBundle\Entity\Provider $provider
      */
-    public function removeFournisseur(\Core\CoreBundle\Entity\Fournisseurs $fournisseur)
+    public function removeProvider(\Core\CoreBundle\Entity\Provider $provider)
     {
-        $this->fournisseurs->removeElement($fournisseur);
+        $this->providers->removeElement($provider);
     }
 
     /**
-     * Get fournisseurs
+     * Get providers
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getFournisseurs()
+    public function getProviders()
     {
-        return $this->fournisseurs;
+        return $this->providers;
     }
 }

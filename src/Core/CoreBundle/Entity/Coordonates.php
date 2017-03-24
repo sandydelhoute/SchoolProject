@@ -7,10 +7,10 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Coordonee
  *
- * @ORM\Table(name="coordonne")
- * @ORM\Entity(repositoryClass="Core\CoreBundle\Repository\CoordonneRepository")
+ * @ORM\Table(name="coordonates")
+ * @ORM\Entity(repositoryClass="Core\CoreBundle\Repository\CoordonatesRepository")
  */
-class Coordonne
+class Coordonates
 {
     /**
      * @var int

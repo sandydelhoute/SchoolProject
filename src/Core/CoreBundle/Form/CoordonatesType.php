@@ -12,7 +12,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
-class CoordonneType extends AbstractType
+class CoordonatesType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -36,11 +36,11 @@ class CoordonneType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Core\CoreBundle\Entity\Coordonne',
+            'data_class' => 'Core\CoreBundle\Entity\Coordonates',
         ));
     }
 	public function getName()
 	  {
-	    return 'core_corebundle_coordonne';
+	    return 'core_corebundle_coordonates';
 	  }
 }
