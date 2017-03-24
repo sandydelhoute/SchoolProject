@@ -47,7 +47,7 @@ return $this->render('AdminAdminBundle:Default:accueil.html.twig',array('relais'
      {
      $this->addFlash('error', 'le nom existe déja');   
     }
-    return $this->redirectToRoute('admin_produits_add');
+    return $this->redirectToRoute('admin_relais_add');
 
     }
     return $this->render('AdminAdminBundle:Relais:formrelaislayout.html.twig',array('formaddrelais'=>$formaddrelais->createView(),'formaddhoraire'=>$formaddhoraire->createView()));

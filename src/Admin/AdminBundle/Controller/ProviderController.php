@@ -3,8 +3,8 @@ namespace Admin\AdminBundle\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Core\CoreBundle\Entity\Fournisseurs;
-use Core\CoreBundle\Form\FournisseursType;
+use Core\CoreBundle\Entity\Provider;
+use Core\CoreBundle\Form\ProviderType;
 
 class ProviderController extends Controller
 {
@@ -19,18 +19,18 @@ return $this->render('AdminAdminBundle:Default:accueil.html.twig',array('relais'
 
     public function addProviderAction(Request $request){
     
-    $fournisseurs = new Fournisseurs();
-    $formaddfournisseurs = $this->createForm(FournisseursType::class,$fournisseurs);
-    $formaddfournisseurs->handleRequest($request);
+    $provider = new Provider();
+    $formAddProvider = $this->createForm(ProviderType::class,$provider);
+    $formAddProvider->handleRequest($request);
 
-    if ($formaddfournisseurs->isSubmitted() && $formaddfournisseurs->isValid()) {
+    if ($formAddProvider->isSubmitted() && $formAddProvider->isValid()) {
 
     $em = $this->getDoctrine()->getManager();
-    $fournisseursexist=$em->getRepository('CoreCoreBundle:Fournisseurs')
-    ->findOneByName($fournisseurs->getName());
-    if(is_null($fournisseursexist))
+    $providerExist=$em->getRepository('CoreCoreBundle:Provider')
+    ->findOneByName($provider->getName());
+    if(is_null($providerExist))
     {
-    $em->persist($fournisseurs);
+    $em->persist($provider);
     $em->flush();
      $this->addFlash('registred', 'Le fournisseur est bien enregistrée !');
      }
@@ -41,6 +41,6 @@ return $this->render('AdminAdminBundle:Default:accueil.html.twig',array('relais'
     return $this->redirectToRoute('admin_fournisseurs_add');
 
     }
-    return $this->render('AdminAdminBundle:Fournisseurs:formfournisseurslayout.html.twig',array('formaddfournisseurs'=>$formaddfournisseurs->createView()));
+    return $this->render('AdminAdminBundle:Provider:formproviderlayout.html.twig',array('formAddProvider'=>$formAddProvider->createView()));
 	}
 }

@@ -19,7 +19,7 @@ class RelaisType extends AbstractType
     {
             $builder
             ->add('name', TextType::class)
-          
+            ->add('phone', TextType::class)
           	->add('save', SubmitType::class, array('label' => 'Save'));
     }
 

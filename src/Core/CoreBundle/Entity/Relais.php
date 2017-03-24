@@ -12,6 +12,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Relais
 {
+public function __toString() {
+    return $this->name;
+}
     /**
      * @var int
      *

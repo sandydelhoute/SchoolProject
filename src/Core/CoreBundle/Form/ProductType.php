@@ -23,14 +23,22 @@ class ProductType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
             $builder
-            ->add('name', TextType::class)
+            ->add('name', TextType::class,array(
+                  'label'=>"Entrer le nom du produits"
+            ))
             ->add('description', TextareaType::class)
-            ->add('composition', TextType::class)
+            ->add('composition', TextareaType::class)
             ->add('prix', MoneyType::class)
             ->add('active', ChoiceType::class,array('choices'  => array(
-        		'Yes' => true,
-        		'No' => false
-   		         )))
+        		'Oui' => true,
+        		'Non' => false
+   		         ),'label'=>"le produit est-il déjâ en ventes?"))
+
+          ->add('providers',EntityType::class,array(
+              'class' => 'CoreCoreBundle:Provider',          
+              'label'=>"selectionner le fourniseur du produit"
+              ))
+
             ->add('images',CollectionType::class,array(
             	"entry_type"=>ImagesType::class,
       				'allow_add' => true,
@@ -42,11 +50,13 @@ class ProductType extends AbstractType
               'class' => 'CoreCoreBundle:Categorie',          
               'multiple' => true,
               'expanded' => true,
+              'label'=>"Selectionner la ou les categories"
               ))
             ->add('allergenes', EntityType::class, array(
               'class' => 'CoreCoreBundle:Allergene',          
               'multiple' => true,
-              'expanded' => true
+              'expanded' => true,
+              'label'=>"Selectionner les allergenes"
               ))
            
             

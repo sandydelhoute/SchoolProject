@@ -8,10 +8,18 @@ use Doctrine\ORM\Mapping as ORM;
  * fournisseurs
  *
  * @ORM\Table(name="provider")
- * @ORM\Entity(repositoryClass="Core\CoreBundle\Repository\providerRepository")
+ * @ORM\Entity(repositoryClass="Core\CoreBundle\Repository\ProviderRepository")
  */
 class Provider
 {
+
+
+
+public function __toString() {
+    return $this->name;
+}
+
+
     /**
      * @var int
      *

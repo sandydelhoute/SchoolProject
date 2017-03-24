@@ -204,34 +204,26 @@ class Opening
         return $this->timelimitshop;
     }
 
+  
+
     /**
-     * Add relai
+     * Set relais
      *
      * @param \Core\CoreBundle\Entity\Relais $relais
      *
      * @return Opening
      */
-    public function addRelai(\Core\CoreBundle\Entity\Relais $relais)
+    public function setRelais(\Core\CoreBundle\Entity\Relais $relais = null)
     {
-        $this->relais[] = $relais;
+        $this->relais = $relais;
 
         return $this;
     }
 
     /**
-     * Remove relai
-     *
-     * @param \Core\CoreBundle\Entity\Relais $relais
-     */
-    public function removeRelai(\Core\CoreBundle\Entity\Relais $relais)
-    {
-        $this->relais->removeElement($relais);
-    }
-
-    /**
      * Get relais
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return \Core\CoreBundle\Entity\Relais
      */
     public function getRelais()
     {

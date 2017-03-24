@@ -18,7 +18,7 @@ class Product
         $this->images = new ArrayCollection();
         $this->categories = new ArrayCollection();
         $this->allergenes = new ArrayCollection();
-        $this->providers= new ArrayCollection();
+        //$this->providers = new ArrayCollection();
 
     }
   /**
@@ -364,34 +364,25 @@ class Product
         return $this->allergenes;
     }
 
+
     /**
-     * Add provider
+     * Set providers
      *
-     * @param \Core\CoreBundle\Entity\Provider $provider
+     * @param \Core\CoreBundle\Entity\Provider $providers
      *
      * @return Product
      */
-    public function addProvider(\Core\CoreBundle\Entity\Provider $provider)
+    public function setProviders(\Core\CoreBundle\Entity\Provider $providers = null)
     {
-        $this->providers[] = $provider;
+        $this->providers = $providers;
 
         return $this;
     }
 
     /**
-     * Remove provider
-     *
-     * @param \Core\CoreBundle\Entity\Provider $provider
-     */
-    public function removeProvider(\Core\CoreBundle\Entity\Provider $provider)
-    {
-        $this->providers->removeElement($provider);
-    }
-
-    /**
      * Get providers
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return \Core\CoreBundle\Entity\Provider
      */
     public function getProviders()
     {

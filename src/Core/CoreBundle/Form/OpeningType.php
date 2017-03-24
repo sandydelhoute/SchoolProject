@@ -19,7 +19,7 @@ class OpeningType extends AbstractType
   {
     $builder
     ->add('relais',EntityType::class,array(
-          'class' => 'CoreCoreBundle:Product',          
+          'class' => 'CoreCoreBundle:Relais',          
               'multiple' => false,
               'expanded' => false,
               'label'=>"selectionner le relais"
