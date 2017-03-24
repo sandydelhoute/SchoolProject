@@ -4,6 +4,7 @@ namespace Core\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+use Doctrine\Common\Collections\ArrayCollection;
 /**
  * Time
  *
@@ -12,6 +13,13 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Opening
 {
+
+  public function __construct() {
+    $this->relais = new ArrayCollection();
+}
+
+
+
     /**
      * @var int
      *
@@ -55,6 +63,15 @@ class Opening
      * @ORM\Column(name="timelimitshop", type="time")
      */
     private $timelimitshop;
+
+
+    /**
+     * @var \Relais
+     *
+     * @ORM\ManyToOne(targetEntity="Relais", inversedBy="id")
+     * @ORM\JoinColumn(onDelete="CASCADE")
+     */
+    private $relais;
 
 
     /**
@@ -186,5 +203,38 @@ class Opening
     {
         return $this->timelimitshop;
     }
-}
 
+    /**
+     * Add relai
+     *
+     * @param \Core\CoreBundle\Entity\Relais $relais
+     *
+     * @return Opening
+     */
+    public function addRelai(\Core\CoreBundle\Entity\Relais $relais)
+    {
+        $this->relais[] = $relais;
+
+        return $this;
+    }
+
+    /**
+     * Remove relai
+     *
+     * @param \Core\CoreBundle\Entity\Relais $relais
+     */
+    public function removeRelai(\Core\CoreBundle\Entity\Relais $relais)
+    {
+        $this->relais->removeElement($relais);
+    }
+
+    /**
+     * Get relais
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getRelais()
+    {
+        return $this->relais;
+    }
+}

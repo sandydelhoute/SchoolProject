@@ -18,7 +18,7 @@ class Coordonne
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
-     * @ORM\OneToMany(targetEntity="Relais", mappedBy="adresse")
+     * @ORM\OneToMany(targetEntity="Relais", mappedBy="coodonnes")
      */
      
     private $id;
