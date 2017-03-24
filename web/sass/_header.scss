@@ -5,22 +5,14 @@
         top: 25px;
         border-radius: 50%;
         background: white;
-        @media screen and (max-width: 1024px){
-            display: none;
-        }
     }
-    .navmenu
-    {
-        display: flex !important;
+    .navmenu{
+        display: flex;
+        flex-direction: row;
         justify-content: center;
         align-items: center;
         height: 100px;
         width: 100%;
-        @media screen and (max-width:1024px){
-            flex-direction: column;
-            height:auto;
-            padding:30px 30px;
-        }
         li{
             width: 150px;
             text-align: center;
@@ -32,10 +24,10 @@
             }
             a:hover{
                 background-color:inherit ;
-                color:white !important;
+                color:white;
             }
             &:hover{
-                color:white !important;
+                color:white;
             }
         }
 
