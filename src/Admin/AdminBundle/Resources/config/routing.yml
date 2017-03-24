@@ -37,11 +37,11 @@ admin_utilisateurs_search:
 
 # --------------------Produit-------------------- #
 admin_produits:
-    path:    /product/
+    path:    /product
     defaults: { _controller: AdminAdminBundle:Product:index}
    
 admin_produits_add:
-    path:    /product/add/
+    path:    /product/add
     defaults: { _controller: AdminAdminBundle:Product:addProduct }
 
 admin_produits_edit:
@@ -54,11 +54,11 @@ admin_produits_delete:
 
 # --------------------Categorie-------------------- #
 admin_categorie:
-    path:    /categorie/
+    path:    /categorie
     defaults: { _controller: AdminAdminBundle:Categorie:index }
    
 admin_categorie_add:
-    path:    /categorie/add/
+    path:    /categorie/add
     defaults: { _controller: AdminAdminBundle:Categorie:addCategorie }
 
 admin_categorie_edit:
@@ -71,13 +71,34 @@ admin_categorie_delete:
 
 
 
+# --------------------Fournisseurs-------------------- #
+admin_fournisseurs:
+    path:    /fournisseurs
+    defaults: { _controller: AdminAdminBundle:Fournisseurs:index }
+   
+admin_fournisseurs_add:
+    path:    /fournisseurs/add
+    defaults: { _controller: AdminAdminBundle:Fournisseurs:addFournisseurs }
+
+admin_fournisseurs_edit:
+    path:    /fournisseurs/edit/{id}
+    defaults: { _controller: AdminAdminBundle:Fournisseurs:editFournisseurs }
+
+admin_fournisseurs_delete:
+    path:    /fournisseurs/delete/{id}
+    defaults: { _controller: AdminAdminBundle:Fournisseurs:deleteFournisseurs }
+
+
+
+
+
 # --------------------Allergene-------------------- #
 admin_allergene:
-    path:    /allergene/
+    path:    /allergene
     defaults: { _controller: AdminAdminBundle:Allergene:index  }
    
 admin_allergene_add:
-    path:    /allergene/add/
+    path:    /allergene/add
     defaults: { _controller: AdminAdminBundle:Allergene:addAllergene }
 
 admin_allergene_edit:
@@ -96,7 +117,7 @@ admin_menu:
     defaults: { _controller: AdminAdminBundle:Menu:index }
 
 admin_menu_add:
-    path:    /menu/add/
+    path:    /menu/add
     defaults: { _controller: AdminAdminBundle:Menu:addMenu }
 
 admin_menu_edit:

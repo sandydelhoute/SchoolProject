@@ -1,0 +1,14 @@
+{{ form_start(formaddfournisseurs) }}
+{{ form_errors(formaddfournisseurs) }}
+
+<div class="input-group">
+	{{ form_label(formaddfournisseurs.name) }}
+	{{ form_errors(formaddfournisseurs.name) }}
+	{{ form_widget(formaddfournisseurs.name) }}
+</div>
+
+<div>
+	{{ form_widget(formaddfournisseurs.save) }}
+</div>
+
+{{ form_end(formaddfournisseurs) }}

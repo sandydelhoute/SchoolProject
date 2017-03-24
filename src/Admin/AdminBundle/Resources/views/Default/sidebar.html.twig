@@ -25,6 +25,18 @@
       </ul>
 
 
+
+      <li  {% if 'admin_fournisseur' in app.request.attributes.get('_route') %}class="active"{% endif %}>
+        <a href="{{ path('admin_fournisseurs') }}"><i class="fa fa-truck fa-lg" aria-hidden="true"></i>
+ Fournisseurs</a><span data-toggle="collapse" data-target="#fournisseurs" class="arrow"></span>
+      </li>
+      <ul class="sub-menu collapse" id="fournisseurs">
+        <li class="active"><a href="{{ path('admin_fournisseurs_add') }}"><i class="fa fa-plus" aria-hidden="true"></i>add
+        </a></li>
+
+      </ul>
+
+
       <li  {% if 'admin_produits' in app.request.attributes.get('_route') %}class="active"{% endif %}>
         <a href="{{ path('admin_produits') }}"><i class="fa fa-cutlery" aria-hidden="true"></i> Product</a>
         <span  data-toggle="collapse" data-target="#product" class="arrow"></span>

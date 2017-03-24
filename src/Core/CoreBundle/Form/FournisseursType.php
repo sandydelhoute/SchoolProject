@@ -13,7 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
-class RelaisType extends AbstractType
+class FournisseursType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -30,11 +30,11 @@ class RelaisType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Core\CoreBundle\Entity\Relais',
+            'data_class' => 'Core\CoreBundle\Entity\Fournisseurs',
         ));
     }
 public function getName()
   {
-    return 'core_corebundle_relais';
+    return 'core_corebundle_fournisseurs';
   }
 }

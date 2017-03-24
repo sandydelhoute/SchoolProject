@@ -7,14 +7,15 @@ use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Core\CoreBundle\Entity\Relais;
 use Core\CoreBundle\Entity\Opening;
-use Core\CoreBundle\Form\OpeningType;
 use Core\CoreBundle\Form\RelaisType;
+use Core\CoreBundle\Form\OpeningType;
+
 
 class RelaisController extends Controller
 {
 
 
- public function relaisAction()
+ public function indexAction()
     {
 return $this->render('AdminAdminBundle:Default:accueil.html.twig',array('relais'=>true));
     }

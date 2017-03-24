@@ -18,6 +18,7 @@ class Product
         $this->images = new ArrayCollection();
         $this->categories = new ArrayCollection();
         $this->allergenes = new ArrayCollection();
+        $this->fournisseurs= new ArrayCollection();
 
     }
   /**
@@ -59,6 +60,13 @@ class Product
     private $images;
 
 
+
+    /** 
+     * @ORM\ManyToOne(targetEntity="Fournisseurs", inversedBy="id")
+     * @ORM\JoinColumn(name="product_fournisseurs", referencedColumnName="id")
+     */
+
+    private $fournisseurs;
 
     /**
      * @var int
@@ -354,5 +362,39 @@ class Product
     public function getAllergenes()
     {
         return $this->allergenes;
+    }
+
+    /**
+     * Add fournisseur
+     *
+     * @param \Core\CoreBundle\Entity\Fournisseurs $fournisseur
+     *
+     * @return Product
+     */
+    public function addFournisseur(\Core\CoreBundle\Entity\Fournisseurs $fournisseur)
+    {
+        $this->fournisseurs[] = $fournisseur;
+
+        return $this;
+    }
+
+    /**
+     * Remove fournisseur
+     *
+     * @param \Core\CoreBundle\Entity\Fournisseurs $fournisseur
+     */
+    public function removeFournisseur(\Core\CoreBundle\Entity\Fournisseurs $fournisseur)
+    {
+        $this->fournisseurs->removeElement($fournisseur);
+    }
+
+    /**
+     * Get fournisseurs
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getFournisseurs()
+    {
+        return $this->fournisseurs;
     }
 }
