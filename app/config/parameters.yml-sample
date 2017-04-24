@@ -8,5 +8,5 @@ parameters:
     mailer_transport: smtp
     mailer_host: smtp.gmail.com
     mailer_user: mealandbox@gmail.com
-    mailer_password: EfficomCRW
+    mailer_password: *******
     secret: d07195c9b25a688ef8b45f30eda8cd4d0d1caacb
