@@ -10,7 +10,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
  abstract class Users implements UserInterface, \Serializable
 {
-/**
+    /**
      * @Assert\NotBlank()
      * @Assert\Length(max=4096)
      */
@@ -25,12 +25,34 @@ use Symfony\Component\Security\Core\User\UserInterface;
         $this->plainPassword = $password;
     }
 
+      /**
+     * @var string
+     *
+     * @ORM\Column(name="tokenresetpass", type="string", length=255,nullable=true)
+     */
+    private $tokenResetPass;
+
+    /**
+     * @var DateTime
+     * @Assert\DateTime()
+     * @ORM\Column(name="limitedateresetpass", type="datetime",nullable=true)
+     */
+    private $limiteDateResetPass;
+
+
+
+
+
+
+
+
     /**
      * @var bigint
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\OneToMany(targetEntity="PasswordReset", mappedBy="users")
      */
     
     private $id;
@@ -63,6 +85,8 @@ use Symfony\Component\Security\Core\User\UserInterface;
      */
     private $password;
 
+
+   
 
     /**
      * Get id
@@ -198,9 +222,51 @@ use Symfony\Component\Security\Core\User\UserInterface;
             $this->firsname
         ) = unserialize($serialized);
     }
+  /**
+     * Set tokenResetPass
+     *
+     * @param string $tokenResetPass
+     *
+     * @return PasswordReset
+     */
+    public function setTokenResetPass($tokenResetPass)
+    {
+        $this->tokenResetPass = $tokenResetPass;
 
+        return $this;
+    }
 
+    /**
+     * Get tokenResetPass
+     *
+     * @return string
+     */
+    public function getTokenResetPass()
+    {
+        return $this->tokenResetPass;
+    }
 
+    /**
+     * Set limiteDateResetPass
+     *
+     * @param \DateTime $limiteDateResetPass
+     *
+     * @return U
+     */
+    public function setLimiteDateResetPass($limiteDateResetPass)
+    {
+        $this->limiteDateResetPass = $limiteDateResetPass;
 
+        return $this;
+    }
+
+    /**
+     * Get limiteDateResetPass
+     *
+     * @return \DateTime
+     */
+    public function getLimiteDateResetPass()
+    {
+        return $this->limiteDateResetPass;
+    }
 }
-

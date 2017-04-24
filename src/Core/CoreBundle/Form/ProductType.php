@@ -43,7 +43,8 @@ class ProductType extends AbstractType
             	"entry_type"=>ImagesType::class,
       				'allow_add' => true,
       				'allow_delete' => true,
-      				'prototype'=>true
+      				'prototype'=>true,
+              'by_reference'=>true
             	))
               
             ->add('categories', EntityType::class, array(

@@ -1,24 +1,28 @@
 
-function CallAjaxOrder()
+function CallAjax(html)
 {
-	
-  var spinner="<div class='fa  fa-refresh fa-spin fa-5x'></div>";
-  this.callAjax=function(data,route,render){
+	this.html=html;
+	//console.log(this.html);
+ 	this.callAjax=function(route,selector){
+ 		console.log(selector);
   	$.ajax({
 	    type:"GET",
-	    data: data
 	    url: route,
 	    beforeSend:function(){
-	      $('.listResponse').append(spinner);
+
 	    },
-	    sucessSend:function(){},
-	    error : function(erreur){console.log(erreur);},
+	    sucessSend:function(){
+	    			console.log("error");
+		},
+	    error : function(erreur){
+	    },
 	    complete : function(data,statut)
 		    {
-		      data.responseJSON.data;
-		      $(".fa-refresh").remove();
-		      render;
-
+		    		data.responseJSON.data.map(function(obj){
+		    		console.log(obj);
+		    		//selector.after(html);
+		    		});
+		    		
 		    }
 	      
 	  	});

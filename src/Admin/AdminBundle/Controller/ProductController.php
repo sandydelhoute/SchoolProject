@@ -29,7 +29,6 @@ class ProductController extends Controller
     ->findOneByName($product->getName());
     if(is_null($productexist))
     {
-    $arrayImg=$product->getImages();
     $fs = new Filesystem();
     $dirProductParent=$this->getParameter('img_product_directory');
     $dirProduct=$dirProductParent.'/'.$product->getName();
@@ -37,13 +36,10 @@ class ProductController extends Controller
     $fs->mkdir($dirProductParent);
     if(!$fs->exists($dirProduct))
     $fs->mkdir($dirProduct);
-
-    foreach ($arrayImg as $image) {
-    // echo "<pre>";
-    // var_dump($form['path']);
-    // echo "</pre>";
-    // exit();
-    $form->get('file')->getData()->move($dirProduct,$value->getName().$form['file']->guessExtension());
+    //$file= $form['file'];
+    foreach ($product->getImages() as $key=>$image) {
+        var_dump($image);
+    $image->file->move($dirProduct,$value->getName().$form['file']->guessExtension());
     $image->setPath($dirProduct);
     }
     $em->persist($product);

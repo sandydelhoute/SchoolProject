@@ -30,7 +30,7 @@ class Opening
     private $id;
 
     /**
-     * @var \DateTime
+     * @var \String
      *
      * @ORM\Column(type="string", columnDefinition="ENUM('Monday', 'Thuesday')") 
      */

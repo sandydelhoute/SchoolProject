@@ -25,6 +25,7 @@ return false;
 
 
 $('#add_image').click(function(e){
+	console.log("je suis dans le click");
 	addImage(container);
 	e.preventDefault();
 	return false;

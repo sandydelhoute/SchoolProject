@@ -1,11 +1,28 @@
 $(document).ready(function(){
-var routeOrder="/users/order/";
-var routeSearch="/users/search/";
 var champ="firstname";
-var order="asc";
-var render='';//resultHtml();
-var tableControl= new TableControl(routeOrder,routeSearch,champ,order,render);
+var order="";
+var routeOrder=Routing.generate('admin_utilisateurs_filter',{ champ: "firstname", order: "asc" });
+var routeSearch=Routing.generate('admin_utilisateurs_search',{ serach: "" });
+
+var obj={};
+var html="<tr><td>";
+html += obj.firstname;
+html += "</td><td>";
+html += obj.name;
+html += "</td><td>";
+html += obj.username;
+html += "</td><td>";
+html += obj.roles;
+html += "</td><td>";
+html += "<ul><li><a href=''><i class='fa fa-trash-o' aria-hidden='true'></i>delete</a></li>";
+html += "<li><a href=''><i class='fa fa-pencil' aria-hidden='true'></i>edit</a></li></ul>";
+html += "</td></tr>";
+var tableControl = new TableControl(routeOrder,routeSearch,html);
 tableControl.eventclick();
+});
+
+
+/*
 function resultHtml(data){
 
 	result='';
@@ -35,5 +52,5 @@ function resultHtml(data){
 			});
 			return result;
 }	
+*/
 
-});

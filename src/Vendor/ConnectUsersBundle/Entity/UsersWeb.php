@@ -20,10 +20,6 @@ class UsersWeb extends Users
         $this->rewardPoints=0;
     }
 
- 
-   
-    
-
     /**
      * @var float
      *
@@ -102,4 +98,3 @@ class UsersWeb extends Users
      }
 
 }
-

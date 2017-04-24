@@ -18,7 +18,7 @@ class Product
         $this->images = new ArrayCollection();
         $this->categories = new ArrayCollection();
         $this->allergenes = new ArrayCollection();
-        //$this->providers = new ArrayCollection();
+        $this->providers = new ArrayCollection();
 
     }
   /**

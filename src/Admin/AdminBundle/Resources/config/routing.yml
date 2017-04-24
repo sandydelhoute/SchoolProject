@@ -18,22 +18,24 @@ admin_utilisateurs_add:
 admin_utilisateurs_edit:
     path:    /users/edit/{email}
     defaults: { _controller: AdminAdminBundle:UsersEmployee:edit }
-
+    
 admin_utilisateurs_delete:
     path:    /users/delete/{email}
     defaults: { _controller: AdminAdminBundle:UsersEmployee:delete }
-
+    
 admin_utilisateurs_filter:
     path:    /users/order
     defaults: { _controller: AdminAdminBundle:UsersEmployee:orderBy}
-    requirements:
-       methods: POST
+    options:
+        expose: true
+    # requirements:
+    #    methods: POST
 
 admin_utilisateurs_search:
     path:    /users/search
     defaults: { _controller: AdminAdminBundle:UsersEmployee:search}
-    requirements:
-       methods: POST
+    options:
+        expose: true
 
 # --------------------Produit-------------------- #
 admin_produits:

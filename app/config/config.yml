@@ -67,10 +67,11 @@ doctrine:
 
 # Swiftmailer Configuration
 swiftmailer:
-    transport: "%mailer_transport%"
-    host:      "%mailer_host%"
-    username:  "%mailer_user%"
-    password:  "%mailer_password%"
+    transport: '%mailer_transport%'
+    host:      '%mailer_host%'
+    username:  '%mailer_user%'
+    password:  '%mailer_password%'
+    port:     '%mailer_port%'
     spool:     { type: memory }
 # app/config/config.yml
 # hwi_oauth:
@@ -81,3 +82,5 @@ swiftmailer:
 #             client_secret:       <client_secret>
 #             options:
 #                 csrf: true
+fos_js_routing: 
+    routes_to_expose: [page_moncompte_resetpassword,admin_utilisateurs_filter]

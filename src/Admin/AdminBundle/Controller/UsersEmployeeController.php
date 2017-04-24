@@ -163,4 +163,10 @@ public function deleteAction($email)
 
 }
 
+public function resetPasswordAction(Request $request)
+{
+
+
+}
+
 }

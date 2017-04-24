@@ -3,6 +3,7 @@ core_core:
     resource: "@CoreCoreBundle/Resources/config/routing.yml"
     prefix:   /
 
+
 vendor_connect_users:
     resource: "@VendorConnectUsersBundle/Resources/config/routing.yml"
     prefix:   /compte

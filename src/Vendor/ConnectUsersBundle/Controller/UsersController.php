@@ -4,68 +4,112 @@ namespace Vendor\ConnectUsersBundle\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Vendor\ConnectUsersBundle\Entity\Users;
 use Vendor\ConnectUsersBundle\Entity\UsersEmployee;
 use Vendor\ConnectUsersBundle\Entity\UsersWeb;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\PasswordType;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-
-
-
+use \DateTime;
+use \DateInterval;
+use Vendor\ConnectUsersBundle\Form\RegistrationUsersWebType;
+use Symfony\Component\HttpFoundation\JsonResponse;
 class UsersController extends Controller
 {
-    public function indexAction()
-    {   
 
-        $user = $this->get('security.context')->getToken()->getUser();
-        return $this->render('VendorConnectUsersBundle:Default:compte.html.twig');
 
+
+
+
+
+
+  public function requestResetPasswordAction($email){
+
+    $em = $this->getDoctrine()->getManager();
+    $usersexist = $em->getRepository('VendorConnectUsersBundle:UsersEmployee')->findOneByEmail($email);
+    if(is_null($usersexist))
+    {
+       $usersexist = $em->getRepository('VendorConnectUsersBundle:UsersWeb')->findOneByEmail($email);  
+   }
+
+   if(!is_null($usersexist))
+   { 
+    $token= hash("sha512", uniqid());
+    $limiteDate=new DateTime();
+    $limiteDate->add(new DateInterval('P1D'));
+    $usersexist->setTokenResetPass($token);
+    $usersexist->setLimiteDateResetPass($limiteDate);
+
+    $url = $this->container->get('router')->generate(
+    'homepage'/*,
+    array('slug' => 'homepage')*/
+    );
+   
+
+    $message = \Swift_Message::newInstance()
+        ->setSubject('Hello Email')
+        ->setFrom('s.delhoute@sfr.fr')
+        ->setTo('s.delhoute@sfr.fr')
+        ->setBody(
+          $this->renderView(
+            ':Email:resetpassword.html.twig',
+            array('email' => "toto",'name' => "totos",'action_url'=>"tot",'operating_system'=>"mealandbox",'browser_name'=>"tttt",'support_url'=>$url)
+            ),
+        'text/html'
+        );  
+    $this->get('mailer')->send($message);
+    $em->persist($usersexist);
+    $em->flush(); 
+    }
+    else
+    {
+        $response = new JsonResponse(array(
+           'response' => false
+           ));
+        return     $response ;
     }
 
+    $response = new JsonResponse(array(
+       'response' => true
+       ));
 
-    public function connectionAction(Request $request)
+    return     $response ;
+}
+public function resetPasswordAction($token,Request $request){
+
+    $em = $this->getDoctrine()->getManager();
+    $usersexist = $em->getRepository('VendorConnectUsersBundle:UsersEmployee')->findOneByTokenResetPass($token);
+    if(is_null($usersexist))
     {
-
-        $authenticationUtils = $this->get('security.authentication_utils');
-
-    // get the login error if there is one
-        $error = $authenticationUtils->getLastAuthenticationError();
-
-    // last username entered by the user
-        $lastUsername = $authenticationUtils->getLastUsername();
-
-        return $this->render('VendorConnectUsersBundle:Default:connectionUsersWeb.html.twig', array(
-            'last_username' => $lastUsername,
-            'error'         => $error,
-            ));
+        $usersexist = $em->getRepository('VendorConnectUsersBundle:UsersWeb')->findOneByTokenResetPass($token);
     }
 
-    public function inscriptionAction(Request $request)
+   if(!is_null($usersexist))
     {
-         // 1) build the form
+      if( $usersexist->getLimiteDateResetPass()<new DateTime())
+      { 
+        if($class==="Vendor\ConnectUsersBundle\Entity\UsersEmployee")
+        {
+          return $this->redirectToRoute('admin_homepage');
+        }
+        else
+        {
+          return $this->redirectToRoute('homepage');
+        }
+      }
+      else
+      {
+        return $this->redirectToRoute('homepage');
+      }
+    }
+    else
+    {
+    return $this->redirectToRoute('homepage');
+    }
+
+}
+
+  public function inscriptionAction(Request $request)
+  {
         $usersWeb = new UsersWeb();
-        $form = $this->createFormBuilder($usersWeb)
-            ->add('email', EmailType::class)
-            ->add('name', TextType::class)
-            ->add('firstname', TextType::class)
-            ->add('plainPassword', RepeatedType::class, array(
-                'type' => PasswordType::class,
-                'first_options'  => array('label' => 'Password'),
-                'second_options' => array('label' => 'Repeat Password'),
-            ))
-            ->add('termsAccepted', CheckboxType::class, array(
-                'mapped' => false,
-                /*'constraints' => new IsTrue(),*/
-            ))
-            ->add('save', SubmitType::class, array('label' => 'Save'))
-            ->getForm();
-
-        // 2) handle the submit (will only happen on POST)
+        $form = $this->createForm(RegistrationUsersWebType::class,$usersWeb);
+     
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
 
@@ -84,35 +128,10 @@ class UsersController extends Controller
 
             return $this->redirectToRoute('homepage');
         }
-
+    
         return $this->render(
             'VendorConnectUsersBundle:Default:inscription2.html.twig',
             array('form' => $form->createView())
-        );
-    }
-    
- public function resetPasswordAction($email){
-
-        $em = $this->getDoctrine()->getManager();
-        $users = $em->getRepository('VendorConnectUsersBundle:UsersWeb')->findOneByEmail($email);
-        //$token=$this->get('security.context')->getToken();
-        $message = \Swift_Message::newInstance()
-        ->setSubject('Hello Email')
-        ->setFrom('s.delhoute@sfr.fr')
-        ->setTo('s.delhoute@sfr.fr')
-        ->setBody(
-            $this->renderView(
-                'VendorConnectUsersBundle:Email:registration.html.twig',
-                array('email' => $users->getEmail(),'name' => $users->getName())
-            ),
-            'text/html'
-        );
-    $this->get('mailer')->send($message);
-
-       
-            return $this->redirectToRoute('homepage');
-
-        }
-
-
+       );
+     }
 }

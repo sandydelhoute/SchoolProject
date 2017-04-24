@@ -129,6 +129,4 @@ class UsersEmployee extends Users
         return $this->status;
     }
 
-
-
 }

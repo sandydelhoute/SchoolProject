@@ -3,6 +3,7 @@
 namespace Core\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Images
@@ -34,6 +35,15 @@ class Images
      * @ORM\Column(name="name", type="string", length=255, unique=true)
      */
     private $name;
+
+
+     /**
+     * 
+     *
+     * @Assert\NotBlank(message="Please, upload the product brochure as a PDF file.")
+     * @Assert\File( mimeTypes = {"application/png", "application/jpg", "application/jpeg","application/svg"})
+     */
+    private $file;
 
 
     /**
@@ -125,5 +135,29 @@ class Images
     public function getAlt()
     {
         return $this->alt;
+    }
+
+    /**
+     * Set file
+     *
+     * @param string $file
+     *
+     * @return Images
+     */
+    public function setFile($file)
+    {
+        $this->file = $file;
+
+        return $this;
+    }
+
+    /**
+     * Get file
+     *
+     * @return string
+     */
+    public function getFile()
+    {
+        return $this->file;
     }
 }

@@ -1,12 +1,15 @@
-function TableControl(routeOrder,routeSearch,defaultData,render){
+function TableControl(routeOrder,routeSearch,html){
 	var champ=null,order=null,search=null;
-	var ajax= new CallAjaxOrder(render);
 	this.routeOrder=routeOrder;
 	this.routeSearch=routeSearch;
-	this.render=render;
-	this.data=defaultData;
-	
+	this.html=html;
+	this.selector=$(".table");
+	this.objAjax= new CallAjax(html);
+	this.objAjax.callAjax(routeOrder,this.selector);
+	console.log("je suis dans le construc");
+
 	this.eventclick = function(){
+		console.log("je suis dans le evenclick");
 		eventClickDesc();
 		eventClickAsc();
 		eventClickSearch();
@@ -19,9 +22,10 @@ function TableControl(routeOrder,routeSearch,defaultData,render){
 		   	var order = "desc";
 		    $(this).removeClass('fa-sort-desc').addClass('fa-sort-asc');
 			var data="champ="+champ+"&order="+order;
-		    ajax.callAjax(data,route,render);
+
+
+		    this.objAjax.callAjax(routeOrder,selector);
 		  });
-		//return liste;
 	}
 	
 	var eventClickAsc = function(){
@@ -29,16 +33,13 @@ function TableControl(routeOrder,routeSearch,defaultData,render){
 			      champ = $(this).parent().find('label').html();
 			      order = "asc";
 			      $(this).removeClass('fa-sort-asc').addClass('fa-sort-desc');
-		      //var liste = ajax.callAjaxOrder( filter ,routeOrder);
 			  });
-			  		//return liste;
-
 	}
 	var eventClickSearch = function(){
 		$('.search-btn').on('click',function(){
 			    var search = $('.search-input').val();
 			  	var data="search="+search;
-		    ajax.callAjax(data,route,render);
+		    this.ajax.callAjax(routeSearch,selector);
 			  });
 	}
 

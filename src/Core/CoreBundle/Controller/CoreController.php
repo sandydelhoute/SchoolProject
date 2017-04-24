@@ -25,4 +25,7 @@ class CoreController extends Controller
        return $this->render('CoreCoreBundle:Default:testheader.html.twig');
 
    }
+
+
+   
 }

@@ -15,3 +15,9 @@
 	</div>
 </div>
 {% endblock body %}
+{% block javascripts %}
+{{ parent() }}
+<script src="{{ asset('js/Admin/Default/ajax.js') }}"></script>
+<script src="{{ asset('js/Admin/Default/passwordreset.js') }}"></script>
+
+{% endblock %}
