@@ -1,12 +1,51 @@
+#home
 homepage:
     path:     /
     defaults: { _controller: CoreCoreBundle:Core:accueil }
+#cgv
+cgvpage:
+    path:     /conditions-generales-de-vente
+    defaults: { _controller: CoreCoreBundle:Core:cgv }
+#mension
+mentionspage:
+    path:     /mentions-legales
+    defaults: { _controller: CoreCoreBundle:Core:mentions }
+
+#passwordreset
+resetpasswordpage:
+    path:     /resetpassword/{token}
+    defaults: { _controller: CoreCoreBundle:Core:resetPassword }
+
+
+#contact
 contactpage:
     path:     /contact
-    defaults: { _controller: CoreCoreBundle:Core:contact }
+    defaults: { _controller: CoreCoreBundle:Contact:contact }
+# commande
 commandepage:
     path:     /commande
     defaults: { _controller: CoreCoreBundle:Core:contact }
-testheader:
-    path:     /testheader
-    defaults: { _controller: CoreCoreBundle:Core:testheader }
+
+# produit
+productpage:
+    path:     /produits
+    defaults: { _controller: CoreCoreBundle:Product:products }
+
+productdetailpage:
+    path:     /produits/{id}
+    defaults: { _controller: CoreCoreBundle:Product:products }
+    options:
+        expose: true
+productfilterpage:
+    path:     /produits/filter/{allergene}/{priceMin}/{priceMax}
+    defaults: { _controller: CoreCoreBundle:Product:productsFilter }
+    options:
+        expose: true
+# actuality
+actualitypage:
+    path:     /actualites
+    defaults: { _controller: CoreCoreBundle:Actuality:actuality }
+#login 
+loginpage:
+    path:     /login
+    defaults: { _controller: CoreCoreBundle:Users:login }

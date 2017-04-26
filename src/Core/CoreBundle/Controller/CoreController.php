@@ -9,23 +9,24 @@ class CoreController extends Controller
      public function accueilAction()
     {
 
-        return $this->render('CoreCoreBundle:Default:accueil.html.twig');
+        return $this->render('CoreCoreBundle:Accueil:accueillayout.html.twig');
     }
-
-
-     public function contactAction()
+     public function cgvAction()
     {
-        return $this->render('CoreCoreBundle:Default:contact.html.twig');
 
+        return $this->render('CoreCoreBundle:Cgv:cgvlayout.html.twig');
     }
 
+     public function mentionsAction()
+    {
 
-    public function testheaderAction()
-   {
-       return $this->render('CoreCoreBundle:Default:testheader.html.twig');
+        return $this->render('CoreCoreBundle:Mentions:mentionslayout.html.twig');
+    }
+     public function resetPasswordAction()
+    {
 
-   }
-
-
+        return $this->render('CoreCoreBundle:ResetPassword:resetpasswordlayout.html.twig');
+    }
+    
    
 }
