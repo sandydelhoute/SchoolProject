@@ -1,8 +1,5 @@
 
-
-{% extends "::base.html.twig" %}
-
-{% block body %}
+{% block connection %}
 
   {# S'il y a une erreur, on l'affiche dans un joli cadre #}
   {% if error %}
@@ -51,4 +48,4 @@
       </div>
   </div>
 </div>
-{% endblock %}
+{% endblock  connection %}

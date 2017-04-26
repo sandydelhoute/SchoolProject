@@ -18,18 +18,20 @@ admin_utilisateurs_add:
 admin_utilisateurs_edit:
     path:    /users/edit/{email}
     defaults: { _controller: AdminAdminBundle:UsersEmployee:edit }
-    
+    options:
+        expose: true
+
 admin_utilisateurs_delete:
     path:    /users/delete/{email}
     defaults: { _controller: AdminAdminBundle:UsersEmployee:delete }
-    
+    options:
+        expose: true
+
 admin_utilisateurs_filter:
-    path:    /users/order
+    path:    /users/{page}/{nbMaxParPage}/{champ}/{order}
     defaults: { _controller: AdminAdminBundle:UsersEmployee:orderBy}
     options:
         expose: true
-    # requirements:
-    #    methods: POST
 
 admin_utilisateurs_search:
     path:    /users/search

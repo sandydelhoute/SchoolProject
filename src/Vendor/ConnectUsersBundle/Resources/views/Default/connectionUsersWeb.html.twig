@@ -1,66 +1,30 @@
- {# src/Vendor/ConnectUsersBundle/Resources/views/Default/connectionold.html.twig #}
-
-{% extends "::base.html.twig" %}
-
-{% block body %}
-
-  {# S'il y a une erreur, on l'affiche dans un joli cadre #}
-  {% if error %}
-    <div class="alert alert-danger"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-{{ error.message| replace({"Bad credentials." : "Invalid username or password."}) }}</div>
-  {% endif %}
-
-  <form action="{{ path('login_check') }}" method="post">
-
-
-
-  <div class="form-group">
-  <label for="email" class="cols-sm-2 control-label">Your Email</label>
-        <div class="cols-sm-10">
-                <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></span>
-                    <input type="text" id="email" class="form-control" name="_username" value="{{ last_username }}"  placeholder="Enter your Email"/>
-                </div>
+<div class="col-md-6 inscription">
+  <h2>Déjà client ?</h2>
+  <p>Connectez-vous sur votre espace personnel afin de retrouver toutes les informations relatives à votre compte.</p>
+  <form  action="{{ path('login_check') }}" method="post">
+    <div class="form-group">
+      <label for="mail-connexion">E-mail</label>
+      <div class="input-group">
+        <div class="input-group-addon"><i class="fa fa-envelope" aria-hidden="true"></i>
         </div>
-  </div>
-
-  <div class="form-group">
-        <label for="password" class="cols-sm-2 control-label">Passsword</label>
-        <div class="cols-sm-10">
-              <div class="input-group">
-                  <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-                  <input type="password" class="form-control" id="password" name="_password"  placeholder="Enter your Email"/>
-              </div>
-        </div>
-  </div>
-
-<div class="form-group">
-  <div class="cols-sm-12">
-            <div class="input-group">
-                  <div class="col-sm-2">
-                      <input type="checkbox" id="remember_me" name="_remember_me" checked />
-                  </div>
-                  <div class="col-sm-4">
-                      <label for="remember_me" class="cols-sm-2 control-label">Remember</label>
-                  </div>
-                  <div class="col-sm-6">
-                  <a href="{{ path('page_moncompte_resetpassword',{'email':"sdelhoute2@mail.com"}) }}"><span>reset password</span></a>
-                  </div>
-            </div>
-      
+        <input type="email" class="form-control"  name="_username" value="{{ last_username }}" id="mail-connexion" placeholder="Email">
       </div>
-</div>
-  
-    <input class="btn btn-primary" type="submit" value="Connexion" />
-  </form>
-<div class="form-group">
-    <div class="cols-sm-10">
-          <div class="input-group">
-                  <a href="{{ path('page_moncompte_deconnection') }}"><div class='btn btn-primary' value="deconnection" />deconnexion</div></a>
-          </div>
     </div>
+    <div class="form-group">
+      <label for="password-connexion">Mot de passe</label>
+      <div class="input-group">
+        <div class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i>
+        </div>
+        <input type="password" name="_password"  class="form-control" id="password-connexion" placeholder="Mot de passe">
+      </div>
+      <a href="#" class="legende-input">Mot de passe oubié ?</a>
+    </div>
+    <div class="checkbox">
+      <label>
+        <input type="checkbox" value="">
+        Rester connecté
+      </label>
+    </div>
+    <button type="submit" class="btn btn-green">Me connecter</button>
+  </form>
 </div>
-
-
-
-{% endblock %}

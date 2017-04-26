@@ -36,11 +36,11 @@ class ProductController extends Controller
     $fs->mkdir($dirProductParent);
     if(!$fs->exists($dirProduct))
     $fs->mkdir($dirProduct);
-    //$file= $form['file'];
-    foreach ($product->getImages() as $key=>$image) {
-        var_dump($image);
-    $image->file->move($dirProduct,$value->getName().$form['file']->guessExtension());
-    $image->setPath($dirProduct);
+
+    foreach ($product->getImages() as $image) {
+    $image->setPath('img/product/'.$product->getName().'/'.$image->getFile()->getClientOriginalName());
+    $image->getFile()->move($dirProduct,$image->getFile()->getClientOriginalName());
+
     }
     $em->persist($product);
     $em->flush();

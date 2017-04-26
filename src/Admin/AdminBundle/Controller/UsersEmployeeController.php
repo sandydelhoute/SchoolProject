@@ -20,13 +20,13 @@ public function indexAction(Request $request)
 }
 
 
-public function orderByAction()
+public function orderByAction($page,$nbMaxParPage,$champ,$order)
 {
 
  $em = $this->getDoctrine()->getManager();
 
- $listusersemployee = $em->getRepository('VendorConnectUsersBundle:UsersEmployee')
- ->findAll();
+  $listusersemployee = $em->getRepository('VendorConnectUsersBundle:UsersEmployee')
+  ->findAllPagineEtTrie($page, $nbMaxParPage,$champ,$order);
 
  $serializer = $this->get('serializer');
  $json = $serializer->serialize(
@@ -34,11 +34,11 @@ public function orderByAction()
     'json'
     );
 
- $response = new JsonResponse(array(
-     'data' => $json
-     ));
+ $response = new JsonResponse(
+      array('data'=>$json,'page'=>$page,'nbMaxParPage'=>$nbMaxParPage,'nbPage'=>ceil(count($listusersemployee)/$nbMaxParPage),'champ'=>$champ,'order'=>$order)
+     );
+ return $response ;
 
- return     $response ;
 }
 
 public function searchAction()

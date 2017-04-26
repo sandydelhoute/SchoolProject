@@ -40,12 +40,6 @@ use Symfony\Component\Security\Core\User\UserInterface;
     private $limiteDateResetPass;
 
 
-
-
-
-
-
-
     /**
      * @var bigint
      *

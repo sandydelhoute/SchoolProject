@@ -1,0 +1,28 @@
+.search{
+	background-image: url('/img/search/meal3.jpg'),url('/img/search/meal4.jpg');
+	background-position: -100%,200%;
+	background-size: 75% 100%,75% 100%;
+	background-repeat: no-repeat;
+	min-height: 300px;
+	display: flex;
+	justify-content: center;
+	align-items: flex-end;
+	margin:10px 0;
+	@media (max-width: $medium){
+		background-image:none;
+		min-height: auto;
+	}
+	.relais{
+		background-color:white;
+		padding: 20px 50px;
+		width: 50%;
+		border-bottom: 1px solid rgba(0,0,0,0.1);
+		@media (max-width: $medium){
+			width: 100%;
+		}
+
+		.input-group{
+			margin-top:50px;
+		}
+	}
+}

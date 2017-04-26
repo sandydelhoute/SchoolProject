@@ -1,31 +1,25 @@
 
-function CallAjax(html)
+function CallAjax(selector=null)
 {
-	this.html=html;
-	//console.log(this.html);
- 	this.callAjax=function(route,selector){
- 		console.log(selector);
-  	$.ajax({
+	this.selector=selector;
+	this.spinner="<div class='fa  fa-refresh fa-spin fa-5x'></div>";
+
+ 	this.callAjax=function(route){
+  	return $.ajax({
 	    type:"GET",
 	    url: route,
-	    beforeSend:function(){
-
+	    before:function(){
+	    	this.selector.append(this.spinner);
 	    },
-	    sucessSend:function(){
-	    			console.log("error");
-		},
+	    sucess:function(data,statut){
+
+  					},
 	    error : function(erreur){
 	    },
 	    complete : function(data,statut)
 		    {
-		    		data.responseJSON.data.map(function(obj){
-		    		console.log(obj);
-		    		//selector.after(html);
-		    		});
-		    		
-		    }
-	      
-	  	});
-	}
+	  		}
+		});
+  	}
 
 }

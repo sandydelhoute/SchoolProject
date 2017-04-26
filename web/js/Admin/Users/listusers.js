@@ -1,56 +1,40 @@
 $(document).ready(function(){
-var champ="firstname";
-var order="";
-var routeOrder=Routing.generate('admin_utilisateurs_filter',{ champ: "firstname", order: "asc" });
-var routeSearch=Routing.generate('admin_utilisateurs_search',{ serach: "" });
+	var selector=$(".table tr");
+	var routeOrder='admin_utilisateurs_filter';
+	var defaultOrder={ champ: "firstname", order: "asc" };
+	var routeSearch='admin_utilisateurs_search';
+	var render=function(data){
 
-var obj={};
-var html="<tr><td>";
-html += obj.firstname;
-html += "</td><td>";
-html += obj.name;
-html += "</td><td>";
-html += obj.username;
-html += "</td><td>";
-html += obj.roles;
-html += "</td><td>";
-html += "<ul><li><a href=''><i class='fa fa-trash-o' aria-hidden='true'></i>delete</a></li>";
-html += "<li><a href=''><i class='fa fa-pencil' aria-hidden='true'></i>edit</a></li></ul>";
-html += "</td></tr>";
-var tableControl = new TableControl(routeOrder,routeSearch,html);
-tableControl.eventclick();
-});
-
-
-/*
-function resultHtml(data){
-
-	result='';
-	var beginLiner="<tr><td>";
-	var endLiner="</tr></td>";
-	var beginTd="<td>";
-	var endTd="</td>";
-	var actionDelete="<ul><li><a href=''><i class='fa fa-trash-o' aria-hidden='true'></i>delete</a></li>";
-	var actionEdit="<li><a href=''><i class='fa fa-pencil' aria-hidden='true'></i>edit</a></li></ul>";
-	$.each(data,function(index,obj)
-			{
-			result+=beginLiner;
-			result+=obj.firstname;
-			result+=endTd;
-			result+=beginTd;
-			result+=obj.name;
-			result+=endTd;
-			result+=beginTd;
-			result+=obj.username;
-			result+=endTd;
-			result+=beginTd;
-			result+=obj.roles;
-			result+=beginTd;
-			result+=actionDelete+actionEdit;
-			result+=endTd;
-			result+=endLiner;
+		data.done(function(data){
+			$.each($.parseJSON(data.data), function(key,obj){
+				var html="<tr><td>";
+				html += obj.firstname;
+				html += "</td><td>";
+				html += obj.name;
+				html += "</td><td>";
+				html += obj.username;
+				html += "</td><td>";
+				html += obj.roles;
+				html += "</td><td>";
+				html += "<ul><li><a href='"+Routing.generate('admin_utilisateurs_delete',{ email: obj.username })+"'><i class='fa fa-trash-o' aria-hidden='true'></i>delete</a></li>";
+				html += "<li><a href='"+Routing.generate('admin_utilisateurs_edit',{ email: obj.username })+"'><i class='fa fa-pencil' aria-hidden='true'></i>edit</a></li></ul>";
+				html += "</td></tr>";
+				selector.after(html);
 			});
-			return result;
-}	
-*/
+			$('.pagination').html('');
+			for(var i=1;i<=data.nbPage;i++)
+			{
+				$('.pagination').append("<li><a href='"+Routing.generate(routeOrder,{page:i,nbMaxParPage:data.nbMaxParPage,champ:data.champ,order:data.order})+"'>"+i+"</a></li>");
+			}
+		})
 
+
+	}
+	var tableControl = new TableControl(routeOrder,routeSearch,defaultOrder,selector,render);
+	tableControl.init();
+
+	$('.pagination a').on('click',function(e){
+		e.preventdefault();
+
+	})
+});

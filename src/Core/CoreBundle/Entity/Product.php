@@ -388,4 +388,7 @@ class Product
     {
         return $this->providers;
     }
+    public function toString(){
+        
+    }
 }

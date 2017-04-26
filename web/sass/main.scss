@@ -1,3 +1,48 @@
+$black: #2b2b2b;
+$white: #f2f2f2;
+$green: #02b253;
+$yellow: #ffbe3b;
+
+* {
+  box-sizing: border-box;
+}
+@import url( 'https://fonts.googleapis.com/css?family=Open+Sans:400,600,700');
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  overflow-x: hidden;
+}
+
+h1,h2,h3{
+  font-weight: 700;
+}
+
+.btn {
+  font-size: 0.8vw;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 50px;
+  font-weight: bold;
+  transition: 0.125s ease-in-out all;
+}
+
+.btn-green {
+  background: $green;
+  color: $white;
+}
+
+.btn-black {
+  background: $black;
+  color: $white;
+}
+
+.btn-blackborder {
+  border: $black 1px solid;
+}
+
+
+
 /* COOULEURS, BACKGROUND, PARAMETRES GENERAUX */
 @import 'parameters';
 
@@ -6,3 +51,12 @@
 
 /* MEDIA QUERIES */
 @import 'mediaqueries';
+
+/* import footer */
+@import 'footer';
+
+/* import produitsliste */
+@import 'produitsliste';
+
+/* import search */
+@import 'search';

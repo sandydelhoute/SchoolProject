@@ -2,14 +2,7 @@
 
 {% block stylesheets %}
 {{ parent() }}
-
-{# <link rel="stylesheet" type="text/css" href="{{ asset('css/header.css') }}"/> #}
-
 <link rel="stylesheet" type="text/css" href="{{ asset('css/main.css') }}"/>
-
-<link rel="stylesheet" type="text/css" href="{{ asset('css/carrousel.css') }}"/>
-
-<link rel="stylesheet" type="text/css" href="{{ asset('css/recherchecp.css') }}"/>
 
 {% endblock stylesheets %}
 
@@ -22,26 +15,23 @@
 {% endblock javascripts %}
 
 {% block body %}
-
-    <h1>Florentin</h1>
-
+    
     <div class="container-fluid">
-        <h1>Hello World</h1>
-        <h1>Fry Kelevra</h1>
-        <h2>NUL ! T'as mis 3 h1 !</h2>
-
         {% block header %}
         {% include 'CoreCoreBundle:Default:header.html.twig' %}
         {% endblock header %}
     </div>
     <div class="container">
-
-    <div class="row">
-        <div class="col-xs-22 col-md-6">
-            {% block produit %}
-                {% include 'CoreCoreBundle:Produit:produit.html.twig' %}
-            {% endblock %}
-        </div>
+    {% block login %}
+            {{ render(controller('VendorConnectUsersBundle:Users:connection')) }}
+    {% endblock login %}
+    {% block inscription %}
+            {{ render(controller('VendorConnectUsersBundle:Users:inscription')) }}
+    {% endblock inscription %}
     </div>
-
+    <div class="container-fluid">
+      	{% block footer %}
+        {% include 'CoreCoreBundle:Default:footer.html.twig' %}
+        {% endblock footer %}
+     </div>
 {% endblock body %}

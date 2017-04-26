@@ -22,18 +22,19 @@ class RegistrationUsersWebType extends AbstractType
 public function buildForm(FormBuilderInterface $builder, array $options)
 {
   			$builder
-  			->add('email', EmailType::class)
-            ->add('name', TextType::class)
-            ->add('firstname', TextType::class)
+  			    // ->add('provider', TexTType::class,array('label'=>'Société'))
+            ->add('email', EmailType::class)
+            ->add('name', TextType::class,array('label'=>"Prénom"))
+            ->add('firstname', TextType::class,array('label'=>"Nom"))
             ->add('plainPassword', RepeatedType::class, array(
                 'type' => PasswordType::class,
-                'first_options'  => array('label' => 'Password'),
-                'second_options' => array('label' => 'Repeat Password'),
+                'first_options'  => array('label' => 'Mot de passe'),
+                'second_options' => array('label' => 'Confirmation du mot de passe'),
             ))
             ->add('termsAccepted', CheckboxType::class, array(
-                'mapped' => false,
+                'mapped' => false
             ))
-            ->add('save', SubmitType::class, array('label' => 'Save'));
+            ->add('save', SubmitType::class, array('label' => 'M\'inscire','attr' => array('class' => 'btn-green'),));
 }
 /**
  * @param OptionsResolver $resolver
@@ -46,6 +47,6 @@ public function configureOptions(OptionsResolver $resolver)
 }
 public function getName()
   {
-    return 'vendor_connectusersbundle_usersweb';
+    return 'vendor_registerusersbundle_usersweb';
   }
 }

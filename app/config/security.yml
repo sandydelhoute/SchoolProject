@@ -14,6 +14,7 @@ security:
             encode_as_base64: true
         
     role_hierarchy:
+            ROLE_USER: [ROLE_USER]
             ROLE_LIVREUR: [ROLE_LIVREUR]
             ROLE_ADMIN: [ROLE_ADMIN]
             ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
@@ -41,7 +42,7 @@ security:
             form_login:
                login_path: /compte/connexionweb
                check_path: /compte/login_check
-               default_target_path: /contact
+               default_target_path: /
                failure_path: /
             logout:
                 path:   /compte/deconnexion

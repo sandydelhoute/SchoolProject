@@ -1,54 +1,106 @@
-<div class="container-fluid">
-    <div class="row">
-        <header>
-            <nav class="navbar navbar-default  color-black background-yellow uppercase row" role="navigation">
+  <header>
+    <nav class="navbar navbar-default  color-black background-yellow uppercase row" role="navigation">
 
-                <div class="navbar-header background-yellow">
-                    <button type="button" class="navbar-toggle collapsed background-yellow" data-toggle="collapse" data-target="#header" aria-expanded="false">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
+        <div class="navbar-header">
 
+            <button type="button" class="navbar-toggle collapsed background-yellow navbar-left" data-toggle="collapse" data-target="#header" aria-expanded="false">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            <a class="navbar-brand" href="#">
+              <img alt="Brand" src="img/logo/logo-brand.png">
+          </a>
+          {% if is_granted('ROLE_USER') %}
+
+              <div class="navbar-right">
+                  <div class="btn btn-white">
+                      <i class="fa fa-user fa-2x" aria-hidden="true"></i><br>
+                      <div class="containertext">
+                          Compte
+                      </div>
+                  </div>
+
+                  <div class="btn btn-white">
+                      <i class="fa fa-shopping-cart fa-2x" aria-hidden="true"></i><br>
+                      <div class="containertext">
+                          Panier
+                      </div>
+                  </div>
+
+              </div>
+            {% else %}
+                 <div class="btn btn-green display-desktop">
+                      <div class="containertext">
+                        Connexion
+                      </div>
+                  </div>
+          {% endif %}
+      </div>
+
+      <div class="collapse navbar-collapse color-black" id="header">
+
+        <ul class="navmenu nav navbar-nav navbar-left">
+            {% if is_granted('ROLE_USER') %}
+            <div class="btn btn-green">
+                <i class="fa fa-map-marker fa-2x" aria-hidden="true"></i>
+                <div class="containertext">
+                    Villeneuve d'Ascq
                 </div>
-
-                <div class="collapse navbar-collapse color-black background-yellow" id="header">
-
-                    <ul class="navmenu nav">
-                        <div class="btn background-green color-white">
-                            <i class="fa fa-map-marker fa-2x" aria-hidden="true"></i>
-                            <div class="containertext">
-                                mon</br>
-                            point relais
-                        </div>
-                    </div>
-
-                    <li class="active">
-                        <a href="#">Accueil</a>
-                    </li>
-                    <li>
-                        <a href="#">Nos produits</a>
-                    </li>
-                    <div class='logo'>
-                        <img class='img-responsives' src="{{ asset('img/logo/logo.png') }}">
-                    </div>
-                    <li>
-                        <a href="#">Actualités</a>
-                    </li>
-                    <li>
-                        <a href="#">Contact</a>
-                    </li>
-                    <div class="btn background-green color-white">
-                        <i class="fa fa-user fa-2x" aria-hidden="true"></i>
-                        <div class="containertext">
-                            mon compte
-                        </div>
-                    </div>
-
-                </ul>
             </div>
-        </nav>
-
-    </header>
-  </div>
+            <div class="btn btn-blackborder">
+                <p class="txtborder">Points de fidélité</p>
+                <div class="containertext">
+                  {{ app.user.rewardPoints }}
+                </div>
+            </div>
+            {% else %}
+            <div class="btn btn-green">
+                <i class="fa fa-map-marker fa-2x" aria-hidden="true"></i>
+                <div class="containertext">
+                  choissiez votre</br> point relais
+                </div>
+            </div>
+            {% endif %}
+      <li class="active">
+        <a href="{{ path('homepage') }}">Accueil</a>
+    </li>
+    <li>
+        <a href="{{ path('productpage') }}">Nos produits</a>
+    </li>
+    <div class="logo">
+        <img class="img-responsive" src="img/logo/logo.png">
+    </div>
+    <li>
+        <a href="{{ path('actualitypage') }}">Actualités</a>
+    </li>
+    <li>
+        <a href="{{ path('contactpage') }}">Contact</a>
+    </li>
+    {% if is_granted('ROLE_USER') %}
+    <div class="btn btn-black">
+        2 <i class="fa fa-shopping-cart fa-2x" aria-hidden="true"></i>
+        <div class="containertext">
+            Panier
+        </div>
+    </div>
+    <div class="btn btn-green">
+        <i class="fa fa-user fa-2x" aria-hidden="true"></i>
+        <div class="containertext">
+            Mon compte
+        </div>
+    </div>
+    {% else %}
+    <div class="btn btn-green">
+        <i class="fa fa-user fa-2x" aria-hidden="true"></i>
+        <div class="containertext">
+            Connexion
+        </div>
+    </div>
+    {% endif %}
+</ul>
 </div>
+</nav>
+
+</header>

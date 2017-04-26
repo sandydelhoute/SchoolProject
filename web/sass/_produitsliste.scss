@@ -1,0 +1,85 @@
+
+.produits {
+    background-color: #f2f2f2;
+    margin-bottom: 30px;
+    padding: 0 0 10px 0;
+    height: auto;
+    position: relative;
+    transition: 0.25s all linear;
+
+    &:hover {
+        -moz-box-shadow: 0px 0px 5px 0px #2b2b2b;
+        -webkit-box-shadow: 0px 0px 5px 0px #2b2b2b;
+        -o-box-shadow: 0px 0px 5px 0px #2b2b2b;
+        box-shadow: 0px 0px 5px 0px #2b2b2b;
+        filter: progid:DXImageTransform.Microsoft.Shadow(color=#2b2b2b, Direction=NaN, Strength=5);
+    }
+    .img-zoom {
+        overflow: hidden;
+        position: relative;
+
+        &:nth-child(even){
+            .detail{
+                cursor:pointer;
+                background-image:url('/img/sprites_icons.png');
+                background-position-x: -565px;
+                background-position-y: -286px;
+            }
+        }
+        &:nth-child(odd){
+            .detail{
+                cursor:pointer;
+                background-image:url('/img/sprites_icons.png');
+                background-position-x: -665px;
+                background-position-y: -288px;
+            }
+        }
+        .detail{
+            height:50px;width:100px;
+            position: absolute;
+            bottom: 0;
+            right: 0;
+        }
+        img {
+        width: 100%;
+        height: auto;
+        filter: grayscale(0) blur(0px);
+        transition: all 0.5s ease;
+        }
+        &:hover img {
+        opacity: 0.85;
+        transform: scale(1.25);
+    }
+    }
+
+    h2 {
+        padding: 0 15px;
+        font-weight: 600;
+        text-align: center;
+    }
+
+    h3 {
+        color: #c9302c;
+        font-size: 36px;
+        font-weight: 600;
+    }
+
+    h3 small {
+        color: #c9302c;
+        font-weight: 600;
+    }
+
+    .btn {
+        margin-bottom: 15px;
+    }
+
+    .btn-perso {
+        background-color: #ffbe3b;
+        color: #fff;
+    }
+
+    .btn-perso:hover {
+        background-color: #dba331;
+        color: #fff;
+    }
+}
