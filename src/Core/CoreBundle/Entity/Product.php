@@ -92,11 +92,19 @@ class Product
     private $description;
 
     /**
-     * @var float
+     * @var int
      *
-     * @ORM\Column(name="prix", type="float")
+     * @ORM\Column(name="prixentier", type="integer")
      */
-    private $prix;
+    private $prixEntier;
+
+
+     /**
+     * @var int
+     *
+     * @ORM\Column(name="prixcentime", type="integer")
+     */
+    private $prixCentime;
 
     /**
      * @var string
@@ -225,28 +233,55 @@ class Product
     }
 
     /**
-     * Set prix
+     * Set prixEntier
      *
-     * @param float $prix
+     * @param int $prixEntier
      *
      * @return Product
      */
-    public function setPrix($prix)
+    public function setPrixEntier($prixEntier)
     {
-        $this->prix = $prix;
+        $this->prixEntier = $prixEntier;
 
         return $this;
     }
 
     /**
-     * Get prix
+     * Get prixEntier
      *
-     * @return float
+     * @return int
      */
-    public function getPrix()
+    public function getPrixEntier()
     {
-        return $this->prix;
+        return $this->prixEntier;
     }
+
+
+      /**
+     * Set prixCentime
+     *
+     * @param int $prixCentime
+     *
+     * @return Product
+     */
+    public function setPrixCentime($prixCentime)
+    {
+        $this->prixCentime = $prixCentime;
+
+        return $this;
+    }
+
+    /**
+     * Get prixCentime
+     *
+     * @return int
+     */
+    public function getPrixCentime()
+    {
+        return $this->prixCentime;
+    }
+
+
 
     /**
      * Set composition

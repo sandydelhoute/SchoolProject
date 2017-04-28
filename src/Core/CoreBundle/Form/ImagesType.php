@@ -17,7 +17,6 @@ class ImagesType extends AbstractType
     {
             $builder
             ->add('file',FileType::class,array('multiple'=>false,'label'=>'Fichier'))
-            ->add('name', TextType::class,array('mapped'=>false,'label'=>'Nom du fichier image'))
             ->add('alt', TextType::class);
     }
      /**

@@ -1,0 +1,207 @@
+<div class="col-xs-12 col-md-8">
+  <div class="panel-group" id="tunnel">
+    <div class="panel panel-default">
+      <a data-toggle="collapse" data-parent="#tunnel" href="#livraison">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <div class="etapes">
+              Etape 1 - Livraison
+              <i class="fa fa-angle-down arrow" aria-hidden="true"></i>
+            </div>
+          </h4>
+        </div>
+      </a>
+      <div id="livraison" class="panel-collapse collapse">
+        <div class="panel-body">
+          <div class="col-xs-12 col-md-6">
+            <div class="bold">
+              Adresse de livraison
+            </div>
+            GROSBILL Lille<br />
+            Avenue Clément Alder <br />
+            59118 Wambrechies <br /><br />
+            <a href="#">Modifier</a>
+          </div>
+          <div class="col-xs-12 col-md-6">
+            <div class="bold">
+              Adresse de facturation
+            </div>
+            Efficom<br />
+            146 Rue nationale <br />
+            59000 Lille <br /><br />
+            <a href="#">Modifier</a>
+          </div>
+          <div class="col-xs-12 commanderetrait">
+            <div class="bold">
+              Heure de retrait de commande
+            </div>
+            26/01/2017 - 12H30<br /><br />
+            <a href="#">Modifier</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel panel-default">
+      <a data-toggle="collapse" data-parent="#tunnel" href="#paiement">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <div class="etapes">
+              Etape 2 - Paiement
+              <i class="fa fa-angle-down arrow" aria-hidden="true"></i>
+            </div>
+          </h4>
+        </div>
+      </a>
+      <div id="paiement" class="panel-collapse collapse">
+        <div class="panel-body">
+          <div class="panel with-nav-tabs panel-default">
+            <div class="panel-heading">
+              <ul class="nav nav-tabs">
+                <li class="active col-xs-6 col-md-3 text-center tab">
+                  <a href="#cartecb" data-toggle="tab">
+                    <img class="img-responsive" src="{{ asset('img/tunnelCommande/cartecb.png') }}" alt="">
+                  </a>
+                </li>
+                <li class="col-xs-6 col-md-3 text-center tab">
+                  <a href="#paypal" data-toggle="tab">
+                    <img class="img-responsive" src="{{ asset('img/tunnelCommande/paypal.png') }}" alt="">
+                  </a>
+                </li>
+                <li class="col-xs-6 col-md-3 text-center tab">
+                  <a href="#applepay" data-toggle="tab">
+                    <img class="img-responsive" src="{{ asset('img/tunnelCommande/applepay.png') }}" alt="">
+                  </a>
+                </li>
+                <li class="col-xs-6 col-md-3 text-center tab">
+                  <a href="#porte-feuille" data-toggle="tab">
+                    <img class="img-responsive" src="{{ asset('img/tunnelCommande/wallet.png') }}" alt="">
+                  </a>
+                </li>
+              </ul>
+
+            </div>
+            <div class="panel-body">
+              <div class="tab-content">
+                <div class="tab-pane fade in active" id="cartecb">
+                  <div class="bold col-xs12 col-md-6">
+                    Nom du titulaire de la carte
+                    <input type="nomcb" class="form-control paiement" id="nomcb" placeholder="Nom Prénom">
+                  </div>
+                  <div class="bold col-xs-12 col-md-6">
+                    Numéro Carte
+                    <input type="numerocb" class="form-control paiement" id="numerocb" placeholder="Numéro de la carte">
+                  </div>
+                  <div class="clear-both"></div>
+                  <div class="bold">
+                    <div class="col-lg-12">
+                      Date d'expiration
+                    </div>
+                    <div class="col-xs-12 col-md-6 moiscb">
+                     <select class="form-control">
+                       <option>Mois</option>
+                       <option>1</option>
+                       <option>2</option>
+                       <option>3</option>
+                       <option>4</option>
+                       <option>5</option>
+                       <option>6</option>
+                       <option>7</option>
+                       <option>8</option>
+                       <option>9</option>
+                       <option>10</option>
+                       <option>11</option>
+                       <option>12</option>
+                     </select>
+                   </div>
+                   <div class="col-xs-12 col-md-6 moiscb">
+                     <select class="form-control">
+                       <option>Année</option>
+                       <option>2017</option>
+                       <option>2018</option>
+                       <option>2019</option>
+                       <option>2020</option>
+                       <option>2021</option>
+                       <option>2022</option>
+                     </select>
+                   </div>
+                 </div>
+                 <div class="clear-both"></div>
+                 <div class="bold col-xs-12 col-md-6">
+                  Code de Sécurité
+                  <input type="cryptogramme" class="form-control paiement" id="cryptogramme" placeholder="">
+                </div>
+                <div class="col-xs-12 col-md-6 div-bouton-validation">
+                  <button type="button" class="btn btn-green bouton-paiement">Valider</button>
+                </div>
+
+
+              </div>
+              <!--PAYPAL-->
+              <div class="tab-pane fade" id="paypal">
+                <div class="">
+                  Vous autorisez Meal and Box à vous débiter automatiquement lors de votre commande. <br />
+                  Cliquez sur le bouton ci-dessous pour vous connecter et payer avec votre compte Paypal. <br />
+                  Pour consulter les Conditions générales d'utilisation et les modalités d'annulation, <a href="#">cliquez ici</a>.
+                </div>
+                <div class="col-lg-12 paypal-bouton">
+                  <button type="button" class="btn btn-green bouton-paypal">Continuer</button>
+                </div>
+              </div>
+
+              <!--ApplePay-->
+              <div class="tab-pane fade" id="applepay">
+                Si vous êtes équipés d'un appareil compatible avec la fonctionnalité "Apple Pay"
+                cliquez sur le bouton ci-dessous.
+                <div class="col-lg-12 paypal-bouton">
+                  <button type="button" class="btn btn-green bouton-paypal">Continuer</button>
+                </div>
+              </div>
+
+              <div class="tab-pane fade" id="porte-feuille">
+                <div class="">
+                  <br />
+                  Solde avant commande : 15€ <br /> <br />
+                  Solde aprés commande : 4€
+                </div>
+                <div class="col-lg-12">
+                  <button type="button" class="btn btn-green btn-perso">Continuer</button>
+                  <button type="button" class="btn btn-primary btn-perso">Reapprovisionnement</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel panel-default">
+    <a data-toggle="collapse" data-parent="#tunnel" href="#resume">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <div class="etapes">
+            Etape 3 - Confirmation
+            <i class="fa fa-angle-down arrow" aria-hidden="true"></i>
+          </div>
+        </h4>
+      </div>
+    </a>
+    <div id="resume" class="panel-collapse collapse">
+     <div class="panel-body">
+       Votre commande n°<b>218484</b> d'une valeur de <b>11€</b> a bien été prise en compte. <br/>
+       Vous recevrez dans les 5 minutes qui suivent un mail de confirmation.<br/>
+       Grâce à votre commande, vous avez accumulé <b>12</b> points de fidélité pour un total de <b>75</b>.<br/>
+       Merci d'avoir commandé chez Meal & Box, nous vous souhaitons un bon appétit
+       <div class="col-lg-12 paypal-bouton">
+        <button type="button" class="btn btn-green btn-fin-validation">Valider</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+
+
+</div>

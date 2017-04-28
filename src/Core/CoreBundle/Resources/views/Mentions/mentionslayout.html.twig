@@ -13,13 +13,9 @@
         {% endblock header %}
     </div>
     <div class="container">
-        {% block filter %}
-        {% include 'CoreCoreBundle:Products:filter.html.twig' %}
-        {% endblock filter %}
-        {% block listProduct %}
-            <div class="col-xs-12 col-md-9" id="listProduct">
-            </div>
-        {% endblock listProduct%}
+        {% block mentions %}
+            {% include 'CoreCoreBundle:Mentions:mentions.html.twig' %}
+        {% endblock mentions%}
     </div>
     <div class="container-fluid">
         {% block footer %}
@@ -30,10 +26,3 @@
 
 
 {% endblock body %}
-{% block javascripts %}
-{{ parent() }}
-<script src="{{ asset('js/Admin/Default/ajax.js') }}"></script>
-<script src="{{ asset('js/Front/Product/filter.js') }}"></script>
-<script src="{{ asset('js/Front/Product/product.js') }}"></script>
-
-{% endblock %}

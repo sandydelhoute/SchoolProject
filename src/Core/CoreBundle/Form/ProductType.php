@@ -9,7 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
-use Symfony\Component\Form\Extension\Core\Type\MoneyType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Core\CoreBundle\Form\ImagesType;
@@ -28,7 +28,8 @@ class ProductType extends AbstractType
             ))
             ->add('description', TextareaType::class)
             ->add('composition', TextareaType::class)
-            ->add('prix', MoneyType::class)
+            ->add('prixEntier', IntegerType::class)
+            ->add('prixCentime', IntegerType::class)
             ->add('active', ChoiceType::class,array('choices'  => array(
         		'Oui' => true,
         		'Non' => false

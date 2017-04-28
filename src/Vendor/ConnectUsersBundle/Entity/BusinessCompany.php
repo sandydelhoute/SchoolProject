@@ -3,6 +3,7 @@
 namespace Vendor\ConnectUsersBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * BusinessCompany
@@ -21,7 +22,14 @@ class BusinessCompany
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-
+    /**
+     * @ORM\OneToMany(targetEntity="UsersWeb", mappedBy="id")
+     */
+    private $usersWeb;
+    
+    public function __construct() {
+        $this->usersWeb = new ArrayCollection();
+    }
     /**
      * @var string
      *

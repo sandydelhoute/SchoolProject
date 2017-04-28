@@ -1,105 +1,108 @@
-  <header>
-    <nav class="navbar navbar-default  color-black background-yellow uppercase row" role="navigation">
+<header>
+  <nav class="navbar navbar-default  color-black background-yellow uppercase row" role="navigation">
 
-        <div class="navbar-header">
-
-            <button type="button" class="navbar-toggle collapsed background-yellow navbar-left" data-toggle="collapse" data-target="#header" aria-expanded="false">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-
-            <a class="navbar-brand" href="#">
-              <img alt="Brand" src="img/logo/logo-brand.png">
-          </a>
-          {% if is_granted('ROLE_USER') %}
-
-              <div class="navbar-right">
-                  <div class="btn btn-white">
-                      <i class="fa fa-user fa-2x" aria-hidden="true"></i><br>
-                      <div class="containertext">
-                          Compte
-                      </div>
-                  </div>
-
-                  <div class="btn btn-white">
-                      <i class="fa fa-shopping-cart fa-2x" aria-hidden="true"></i><br>
-                      <div class="containertext">
-                          Panier
-                      </div>
-                  </div>
-
-              </div>
-            {% else %}
-                 <div class="btn btn-green display-desktop">
-                      <div class="containertext">
-                        Connexion
-                      </div>
-                  </div>
-          {% endif %}
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed navbar-left" data-toggle="collapse" data-target="#header" aria-expanded="false">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">
+        meal & box
+      </a>
+      <div>
+        <div class="btn btn-white" type="button" data-toggle="collapse" data-target="#account" aria-expanded="false">
+          <i aria-hidden="true" class="fa fa-user fa-2x"></i><br>
+        </div>
+        <div class="btn btn-white">
+          <i class="fa fa-shopping-cart fa-2x" aria-hidden="true"></i><br>
+        </div>
       </div>
+    </div>
 
-      <div class="collapse navbar-collapse color-black" id="header">
+    <div class="collapse navbar-collapse color-black" id="account">
+      <ul class="navmenu nav navbar-nav navbar-left">
+        <li {% if not is_granted('ROLE_USER') %} class="nodisplay" {% endif %}>
+          <a href="#">Gérer mon compte</a>
+        </li>
+        <li class="{% if is_granted('ROLE_USER') %} nodisplay {% endif %}">
+          <a href="#"><i class="fa fa-check" aria-hidden="true"></i>&nbsp;&nbsp;Connexion</a>
+        </li>
+        <li class="background-red color-white{% if not is_granted('ROLE_USER') %} nodisplay {% endif %}">
+          <a href="{{ path('disconnect') }}" class="deco"><i class="fa fa-times" aria-hidden="true"></i>&nbsp;&nbsp;Déconnexion</a>
+        </li>
+      </ul>
+    </div>
 
-        <ul class="navmenu nav navbar-nav navbar-left">
-            {% if is_granted('ROLE_USER') %}
-            <div class="btn btn-green">
-                <i class="fa fa-map-marker fa-2x" aria-hidden="true"></i>
-                <div class="containertext">
-                    Villeneuve d'Ascq
-                </div>
+    <div class="collapse navbar-collapse color-black" id="header">
+      <ul class="navmenu nav navbar-nav navbar-left">
+        {% if  is_granted('ROLE_USER') %}
+
+          <div class="btn btn-green">
+            <i class="fa fa-map-marker fa-2x" aria-hidden="true"></i>
+            <div class="containertext">
+              Villeneuve d'Ascq
             </div>
-            <div class="btn btn-blackborder">
-                <p class="txtborder">Points de fidélité</p>
-                <div class="containertext">
-                  {{ app.user.rewardPoints }}
-                </div>
+          </div>
+          <div class="btn btn-blackborder">
+            <p class="txtborder">Points de fidélité</p>
+            <div class="containertext">
+              {# {{ app.user.rewardPoints }} #}
+              22<span class="abreviation">Pts</span>
             </div>
-            {% else %}
-            <div class="btn btn-green">
-                <i class="fa fa-map-marker fa-2x" aria-hidden="true"></i>
-                <div class="containertext">
-                  choissiez votre</br> point relais
-                </div>
-            </div>
-            {% endif %}
-      <li class="active">
+          </div>
+        {% else %}
+         <div class="btn btn-green">
+          <i class="fa fa-map-marker fa-2x" aria-hidden="true"></i>
+          <div class="containertext">
+            choissiez votre</br> point relais
+          </div>
+        </div> 
+      {% endif %}
+      <li {% if 'homepage' in app.request.attributes.get('_route') %}class="active"{% endif %}>
         <a href="{{ path('homepage') }}">Accueil</a>
-    </li>
-    <li>
+      </li>
+      <li {% if 'productpage' in app.request.attributes.get('_route') %}class="active"{% endif %}>
         <a href="{{ path('productpage') }}">Nos produits</a>
-    </li>
-    <div class="logo">
-        <img class="img-responsive" src="img/logo/logo.png">
-    </div>
-    <li>
+      </li>
+      <div class="logo">
+        <img class="img-responsive" src="{{ asset ('img/logo/logo.png') }}">
+      </div>
+      <li {% if 'actualitypage' in app.request.attributes.get('_route') %}class="active"{% endif %}>
         <a href="{{ path('actualitypage') }}">Actualités</a>
-    </li>
-    <li>
+      </li>
+      <li {% if 'contactpage' in app.request.attributes.get('_route') %}class="active"{% endif %}>
         <a href="{{ path('contactpage') }}">Contact</a>
-    </li>
-    {% if is_granted('ROLE_USER') %}
-    <div class="btn btn-black">
-        2 <i class="fa fa-shopping-cart fa-2x" aria-hidden="true"></i>
-        <div class="containertext">
-            Panier
+      </li>
+      {% if  is_granted('ROLE_USER') %}
+        <a href="{{ path('panierpage') }}" class="btn btn-black">
+         <span class="compteur">2</span> <i class="fa fa-shopping-cart fa-2x" aria-hidden="true"></i>
+         <div class="containertext">
+          <span class="abreviation">Mon </span>Panier
+        </div>   
+      </a>  
+      <div class="dropdown">
+        <div class="btn btn-green dropdown-toggle" type="button" id="dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+          <i class="fa fa-user fa-2x" aria-hidden="true"></i>
+          <div class="containertext">
+            Mon compte&nbsp;&nbsp;
+          </div>
+          <span class="caret"></span>
         </div>
-    </div>
-    <div class="btn btn-green">
-        <i class="fa fa-user fa-2x" aria-hidden="true"></i>
-        <div class="containertext">
-            Mon compte
-        </div>
-    </div>
+        <ul class="dropdown-menu" aria-labelledby="dropdown">
+          <li><a href="#">Gérer</a></li>
+          <li><a href="{{ path('disconnect') }}"><i class="fa fa-times" aria-hidden="true"></i>Déconnexion</a></li>
+        </ul>
+      </div>
     {% else %}
-    <div class="btn btn-green">
+      <a href="{{ path('loginpage') }}" class="btn btn-green">
         <i class="fa fa-user fa-2x" aria-hidden="true"></i>
         <div class="containertext">
-            Connexion
+          Connexion
         </div>
-    </div>
+      </a>
     {% endif %}
-</ul>
+  </ul>
 </div>
 </nav>
 

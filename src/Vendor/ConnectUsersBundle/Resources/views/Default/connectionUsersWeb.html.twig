@@ -1,30 +1,60 @@
-<div class="col-md-6 inscription">
-  <h2>Déjà client ?</h2>
-  <p>Connectez-vous sur votre espace personnel afin de retrouver toutes les informations relatives à votre compte.</p>
-  <form  action="{{ path('login_check') }}" method="post">
-    <div class="form-group">
-      <label for="mail-connexion">E-mail</label>
-      <div class="input-group">
-        <div class="input-group-addon"><i class="fa fa-envelope" aria-hidden="true"></i>
+
+{# S'il y a une erreur, on l'affiche dans un joli cadre #}
+
+
+  <div class="col-md-6 inscription">
+    <div class="row">
+      <h2>Déjà client ?</h2>
+      <p>Connectez-vous sur votre espace personnel afin de retrouver toutes les informations relatives à votre compte.</p>
+      {% if error %}
+  <div class="alert alert-danger"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+    {{ error.message| replace({"Bad credentials." : "Email ou mot de passe invalide."}) }}</div>
+  {% endif %}
+      <form  action="{{ path('login_check') }}" method="post">
+        <div class="form-group">
+          <label for="mail-connexion">E-mail</label>
+          <div class="input-group">
+            <div class="input-group-addon"><i class="fa fa-envelope" aria-hidden="true"></i>
+            </div>
+            <input type="email" class="form-control"  name="_username" value="{{ last_username }}" id="mail-connexion" placeholder="Email">
+          </div>
         </div>
-        <input type="email" class="form-control"  name="_username" value="{{ last_username }}" id="mail-connexion" placeholder="Email">
-      </div>
-    </div>
-    <div class="form-group">
-      <label for="password-connexion">Mot de passe</label>
-      <div class="input-group">
-        <div class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i>
+        <div class="form-group">
+          <label for="password-connexion">Mot de passe</label>
+          <div class="input-group">
+            <div class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i>
+            </div>
+            <input type="password" name="_password"  class="form-control" id="password-connexion" placeholder="Mot de passe">
+          </div>
         </div>
-        <input type="password" name="_password"  class="form-control" id="password-connexion" placeholder="Mot de passe">
-      </div>
-      <a href="#" class="legende-input">Mot de passe oubié ?</a>
+
+        <div class="col-xs-12">
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" value="">
+              Rester connecté
+            </label>
+          </div>
+        </div>
+        <div class="col-xs-6">
+          <div class="btn btn-green" data-toggle="collapse" data-target="#formresetpassword" class="arrow" >mot de passe oublié?</div>
+
+
+        </div>
+        <div class="col-xs-6">
+          <button type="submit" class="btn btn-green">Me connecter</button>
+        </div>
+      </form>
     </div>
-    <div class="checkbox">
-      <label>
-        <input type="checkbox" value="">
-        Rester connecté
-      </label>
-    </div>
-    <button type="submit" class="btn btn-green">Me connecter</button>
-  </form>
-</div>
+    <div class="row collapse" id="formresetpassword">
+      <div class="form-group">
+        <label for="emailforresetpass">Email</label>
+        <div class="input-group">
+          <input id="emailforresetpass" type="email"  class="form-control" placeholder="email@email.email">
+          <div class="input-group-addon">
+           <i class="fa fa-check" aria-hidden="true"></i>
+         </div>
+       </div>
+     </div>
+   </div>
+ </div>

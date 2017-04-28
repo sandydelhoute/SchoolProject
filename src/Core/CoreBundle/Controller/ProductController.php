@@ -37,4 +37,15 @@ class ProductController extends Controller
 
     }
 
+
+ public function productsDetailAction($id)
+    {
+      $em = $this->getDoctrine()->getManager();
+      $product= $em->getRepository('CoreCoreBundle:Product')->findOneById($id);
+
+    return $this->render('CoreCoreBundle:Products:productsdetaillayout.html.twig',array('product'=>$product));
+
+
+
+    }
 }

@@ -1,0 +1,26 @@
+#tunnel{
+	.panel-default{
+		a{
+			text-decoration: none;
+			color: black;
+		}
+		.panel-heading{
+			background-color: #F2F2F2;
+			.etapes{
+				font-weight: bold;
+				.fa.fa-angle-down.arrow{
+					float: right;
+				}
+
+			}
+		}
+		.bold{
+			font-weight: bold;
+			padding-bottom: 15px;
+		}
+		.commanderetrait{
+			padding-top: 25px;
+		}
+
+	}
+}

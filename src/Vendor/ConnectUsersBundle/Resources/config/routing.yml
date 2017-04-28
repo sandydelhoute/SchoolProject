@@ -24,7 +24,7 @@ page_moncompte_employee:
 
 
 # --------------------General Users-------------------- #
-page_moncompte_deconnection:
+disconnect:
     path:     /deconnexion
 login_check:
     path:   /login_check

@@ -24,7 +24,12 @@ contactpage:
 # commande
 commandepage:
     path:     /commande
-    defaults: { _controller: CoreCoreBundle:Core:contact }
+    defaults: { _controller: CoreCoreBundle:Commande:commande }
+
+# panier
+panierpage:
+    path:     /panier
+    defaults: { _controller: CoreCoreBundle:Commande:panier }
 
 # produit
 productpage:
@@ -33,9 +38,10 @@ productpage:
 
 productdetailpage:
     path:     /produits/{id}
-    defaults: { _controller: CoreCoreBundle:Product:products }
+    defaults: { _controller: CoreCoreBundle:Product:productsDetail }
     options:
         expose: true
+
 productfilterpage:
     path:     /produits/filter/{allergene}/{priceMin}/{priceMax}
     defaults: { _controller: CoreCoreBundle:Product:productsFilter }

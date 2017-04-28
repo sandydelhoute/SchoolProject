@@ -43,7 +43,7 @@ security:
                login_path: /compte/connexionweb
                check_path: /compte/login_check
                default_target_path: /
-               failure_path: /
+               failure_path: /login
             logout:
                 path:   /compte/deconnexion
                 target: /

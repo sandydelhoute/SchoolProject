@@ -1,0 +1,60 @@
+.panier{
+  .panel-heading.global{
+    h3{
+      font-size: 2rem;
+    }
+  }
+  .panel-body{
+    .command-list-item{
+      margin: 5px 0;
+      display: inline-block;
+      .command-list-item-desc{
+        .panel-default{
+          border: none;
+          .panel-heading{
+            background: none;
+            padding: 10px 0;
+          }
+          .panel-body{
+            padding: 0;
+          }
+        }
+        .panel{
+          box-shadow: none;
+        }
+      }
+      .command-list-item-price{
+        .product-price{
+          color: $green;
+          font-weight: 700;
+          font-size: 1.2em;
+        }
+        .delete-product i{
+          color: darken(red, 5);
+          font-size: 1.2em;
+        }
+        .item-price-col{
+          text-align: center;
+          padding: 0;
+        }
+      }
+      .command-list-item-price,
+      .command-list-item-desc{
+        padding: 10px;
+      }
+      .fidelite-pts{
+        font-weight: 700;
+      }
+    }
+  }
+  .panel-footer{
+    text-align: right;
+    .command{
+      display: inline-block;
+      &.total-price{
+        padding: 0 15px;
+        font-size: 2rem;
+      }
+    }
+  }
+}

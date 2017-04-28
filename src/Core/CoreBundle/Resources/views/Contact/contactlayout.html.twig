@@ -8,9 +8,12 @@
 
 
 {% block javascripts %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 
-    <script src="{{ asset('js/jquery-3.1.1.min.js') }}"></script>
-    <script src="{{ asset('js/monjs.js') }}"></script>
+    {{ parent() }}
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBwMJ5jmCkk-47624pCu5AqLzmtRVBMHNM" charset="utf-8"></script>
+
+    <script src="{{ asset('js/map.js') }}"></script>
 
 {% endblock javascripts %}
 
@@ -21,7 +24,15 @@
         {% include 'CoreCoreBundle:Default:header.html.twig' %}
         {% endblock header %}
     </div>
-    <div class="row">
+    <div class="container">
+        {% block formContact %}
+            {% include 'CoreCoreBundle:Contact:formcontact.html.twig' %}
+        {% endblock formContact %}
+        {% block map %}
+            {% include 'CoreCoreBundle:Contact:map.html.twig' %}
+        {% endblock map %}
+    </div>
+    <div class="container-fluid">
       	{% block footer %}
         {% include 'CoreCoreBundle:Default:footer.html.twig' %}
         {% endblock footer %}

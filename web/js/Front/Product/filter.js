@@ -1,4 +1,6 @@
 function Filter(routeFilter,selector,render){
+
+	var that = this
 this.render=render;
 this.routeFilter=routeFilter;
 var defaultFilter={allergene:[],priceMin:0,priceMax:100};

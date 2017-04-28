@@ -104,36 +104,6 @@ public function resetPasswordAction($token,Request $request){
     }
 
 }
-
-  public function inscriptionAction(Request $request)
-  {
-        $usersWeb = new UsersWeb();
-        $form = $this->createForm(RegistrationUsersWebType::class,$usersWeb);
-     
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-
-            // 3) Encode the password (you could also do this via Doctrine listener)
-            $password = $this->get('security.password_encoder')
-                ->encodePassword($usersWeb,$usersWeb->getPlainPassword());
-            $usersWeb->setPassword($password);
-
-            // 4) save the User!
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($usersWeb);
-            $em->flush();
-
-            // ... do any other work - like sending them an email, etc
-            // maybe set a "flash" success message for the user
-
-            return $this->redirectToRoute('homepage');
-        }
-    
-        return $this->render(
-            'VendorConnectUsersBundle:Default:inscription2.html.twig',
-            array('form' => $form->createView())
-       );
-     }
       public function connectionAction(Request $request)
     {
 

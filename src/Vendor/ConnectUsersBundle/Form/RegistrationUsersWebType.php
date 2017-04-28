@@ -14,15 +14,14 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Vendor\ConnectUsersBundle\Entity\BusinessCompany;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-
 class RegistrationUsersWebType extends AbstractType
 {
 
 public function buildForm(FormBuilderInterface $builder, array $options)
 {
   			$builder
-  			    // ->add('provider', TexTType::class,array('label'=>'Société'))
             ->add('email', EmailType::class)
             ->add('name', TextType::class,array('label'=>"Prénom"))
             ->add('firstname', TextType::class,array('label'=>"Nom"))

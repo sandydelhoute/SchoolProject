@@ -6,6 +6,7 @@ $(document).ready(function(){
 		data.done(function(data){
 
 			$.each($.parseJSON(data.data), function(key,obj){
+			var params={id: obj.id};
 			var html= '<div class="col-xs-12 col-md-6">';
 				html += '<div class="produits">'
 				html += '<div class="img-zoom">';
@@ -18,7 +19,8 @@ $(document).ready(function(){
 				}
 				count ++;
 				})
-				html += '<a href="'+ Routing.generate('productdetailpage') +'" data-fancybox="produits">';
+				console.log(obj.id);
+				html += '<a href="'+ Routing.generate('productdetailpage',params) +'" data-fancybox="produits">';
 				html += '<div class="detail"></div>';
 				html += '</a>';
 				html += '</div>';
@@ -27,8 +29,7 @@ $(document).ready(function(){
 				html += '<h2>'+ obj.name +'</h2>';
 				html += '</div>';
 				html += '</div>';
-				html += '<div class="row">';
-				html += ' <div class="col-xs-12- col-md-8"><p>';
+				html += ' <div class="col-xs-12"><p>';
 
         var trimmable = '\u0009\u000A\u000B\u000C\u000D\u0020\u00A0\u1680\u180E\u2000\u2001\u2002\u2003\u2004\u2005\u2006\u2007\u2008\u2009\u200A\u202F\u205F\u2028\u2029\u3000\uFEFF';
         var reg = new RegExp('(?=[' + trimmable + '])');
@@ -40,9 +41,18 @@ $(document).ready(function(){
 				//html += obj.description.substring(0,100)+'....';
 				html += description;
 				html += '</p></div>'
-				html += '<div class="col-xs-12 col-md-4">';
-				html += '<h3>'+ obj.prix +'</h3>';
+				html += '<div class="col-xs-6 text-center">';
+				html += '<select id="quantite">';
+				for(var i=1;i<=10;i++)
+				{
+					html += '<option value="'+i+'">'+i+'</option>';
+				}
+				html += '</select>';
 				html += '</div>';
+				html += '<div class="col-xs-6">';
+				html += '<h3>'+ obj.prixEntier +'€';
+				html += '<small>'+obj.prixCentime+'<small>';
+				html += '</h3>';
 				html += '</div>';
 				html += '<div class="row">';
           		html += '<div class="col-xs-6 col-xs-offset-3">';

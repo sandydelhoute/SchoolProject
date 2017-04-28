@@ -1,0 +1,35 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+{{ parent() }}
+<link rel="stylesheet" type="text/css" href="{{ asset('css/main.css') }}"/>
+
+{% endblock stylesheets %}
+{% block body %}
+    
+    <div class="container-fluid">
+        {% block header %}
+        {% include 'CoreCoreBundle:Default:header.html.twig' %}
+        {% endblock header %}
+    </div>
+    <div class="container">
+        {% block detailProduct %}
+            {% include 'CoreCoreBundle:Products:details.html.twig' %}
+        {% endblock detailProduct%}
+    </div>
+    <div class="container-fluid">
+        {% block footer %}
+        {% include 'CoreCoreBundle:Default:footer.html.twig' %}
+        {% endblock footer %}
+     </div>
+
+
+
+{% endblock body %}
+{% block javascripts %}
+{{ parent() }}
+<script src="{{ asset('js/Admin/Default/ajax.js') }}"></script>
+<script src="{{ asset('js/Front/Product/filter.js') }}"></script>
+<script src="{{ asset('js/Front/Product/product.js') }}"></script>
+
+{% endblock %}
