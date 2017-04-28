@@ -22,13 +22,13 @@ class RegistrationUsersWebType extends AbstractType
 public function buildForm(FormBuilderInterface $builder, array $options)
 {
   			$builder
-            ->add('email', EmailType::class)
-            ->add('name', TextType::class,array('label'=>"Prénom"))
-            ->add('firstname', TextType::class,array('label'=>"Nom"))
+            ->add('email', EmailType::class,array('attr'=>array('placeholder'=>'email@email.email')))
+            ->add('name', TextType::class,array('label'=>"Prénom",'attr'=>array('placeholder'=>'Prenom')))
+            ->add('firstname', TextType::class,array('label'=>"Nom",'attr'=>array('placeholder'=>'Nom')))
             ->add('plainPassword', RepeatedType::class, array(
                 'type' => PasswordType::class,
-                'first_options'  => array('label' => 'Mot de passe'),
-                'second_options' => array('label' => 'Confirmation du mot de passe'),
+                'first_options'  => array('label' => 'Mot de passe','attr'=>array('placeholder'=>'Mot de passe')),
+                'second_options' => array('label' => 'Confirmation du mot de passe','attr'=>array('placeholder'=>'Mot de passe')),
             ))
             ->add('termsAccepted', CheckboxType::class, array(
                 'mapped' => false
