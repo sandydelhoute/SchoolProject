@@ -19,7 +19,6 @@ class Product
         $this->categories = new ArrayCollection();
         $this->allergenes = new ArrayCollection();
         $this->providers = new ArrayCollection();
-
     }
   /**
      * @var ArrayCollection categorie $categories
@@ -32,6 +31,7 @@ class Product
      * )
      */
     private $categories;
+
 
 
   /**
@@ -74,6 +74,7 @@ class Product
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\OneToMany(targetEntity="LineOrder", mappedBy="product")
      */
     private $id;
 

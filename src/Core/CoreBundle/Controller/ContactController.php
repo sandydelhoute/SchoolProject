@@ -28,7 +28,7 @@ class ContactController extends Controller
     // On crée le FormBuilder grâce au service form factory 
 		$form->handleRequest($request);
 		if ($form->isSubmitted() && $form->isValid()) {
-			$this->addFlash('registred', 'L \' utilisateur est bien enregistrée !');
+			$this->addFlash('contactok', 'Votre message a bien été transmis,nous reprendrons contact avec vous rapidement.');
 
 			$message = \Swift_Message::newInstance()
 			->setSubject('Hello Email')
@@ -42,10 +42,9 @@ class ContactController extends Controller
                 );
 			$this->get('mailer')->send($message);
 		}
-		else
-		{
+		
 			return $this->render('CoreCoreBundle:Contact:contactlayout.html.twig',array('form'=>$form->createView()));
-		}
+	
 
 
 	}

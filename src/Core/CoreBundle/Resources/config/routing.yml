@@ -47,6 +47,11 @@ productfilterpage:
     defaults: { _controller: CoreCoreBundle:Product:productsFilter }
     options:
         expose: true
+addproductpage:
+    path:     /produits/add/{id}/{quantity}
+    defaults: { _controller: CoreCoreBundle:Product:addProducts }
+    options:
+        expose: true
 # actuality
 actualitypage:
     path:     /actualites

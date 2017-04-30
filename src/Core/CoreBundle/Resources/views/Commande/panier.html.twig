@@ -9,90 +9,68 @@
       <div class="panel-body">
         <div class="command-list">
           <!-- PRODUIT -->
-          <div class="command-list-item">
+          {% if listOrderLine|length > 0 %}
+            {% for orderline in listOrderLine %}
+              <div class="command-list-item">
+                <div class="command-list-item-desc col-lg-9 col-md-9">
+                  <figure class="command-list-item col-lg-3 col-md-3 col-sm-6">
+                    {% set count = 0 %}
+                    {% for image in orderline.product.images %}
+                      {% if count == 0 %}
+                      <img src="{{ asset(image.path) }}" alt="{{ image.alt }}" class="img-responsive">
+                      {%  endif %}
+                      
+                    {% set count = 1 %}
+                    {% endfor %}
+                  </figure>
 
-            <div class="command-list-item-desc col-lg-9 col-md-9">
-              <figure class="command-list-item col-lg-3 col-md-3 col-sm-6">
-                <img src="{{ asset('img/product/fabienProduits/logo-delicourt.jpg') }}" alt="" class="img-responsive">
-              </figure>
+                  <div class="panel panel-default col-lg-9 col-md-9 col-sm-6">
+                    <div class="panel-heading">
+                      <h3 class="panel-title">{{ orderline.product.name }}</h3>
+                    </div>
 
-              <div class="panel panel-default col-lg-9 col-md-9 col-sm-6">
-                <div class="panel-heading">
-                  <h3 class="panel-title">Tagliatelles aux courgettes</h3>
+                    <div class="panel-body">
+                      {{ orderline.product.description }}
+                    </div>
+                  </div>
                 </div>
 
-                <div class="panel-body">
-                  Redécouvrez l'Italie avec une recette classique remise au goût du jour, prête à illuminer vos journées du soleil de Florence.
-                </div>
-              </div>
-            </div>
+                <div class="command-list-item-price col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                  <div class="item-price-col col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                    <p class="product-price">{{ orderline.product.prixEntier }}€{{ orderline.product.prixCentime }}</p>
+                  </div>
 
-            <div class="command-list-item-price col-lg-3 col-md-3 col-sm-12 col-xs-12">
-              <div class="item-price-col col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                <p class="product-price">9,50 €</p>
-              </div>
+                  <div class="item-price-col col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                    <input type="number"  id="input" class="form-control" value="{{ orderline.quantity }}" min="1"  step="1" required="required" title="">
+                  </div>
 
-              <div class="item-price-col col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                <input type="number" name="" id="input" class="form-control" value="1" min="{5"} max="" step="" required="required" title="">
-              </div>
-
-              <div class="item-price-col delete-product col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                <a href="#"><i class="fa fa-trash"></i></a>
-              </div>
-            </div>
-
-          </div>
-          <!-- FIN PRODUIT -->
-          <div style="clear:both;"></div>
-          <!-- PRODUIT -->
-          <div class="command-list-item">
-
-            <div class="command-list-item-desc col-lg-9 col-md-9">
-              <figure class="command-list-item col-lg-3 col-md-3 col-sm-6">
-                <img src="img/product/fabienProduits/logo-delicourt.jpg" alt="" class="img-responsive">
-              </figure>
-
-              <div class="panel panel-default col-lg-9 col-md-9 col-sm-6">
-                <div class="panel-heading">
-                  <h3 class="panel-title">Chocolat blanc aux fruits rouges</h3>
+                  <div class="item-price-col delete-product col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                    <a href="#"><i class="fa fa-trash"></i></a>
+                  </div>
                 </div>
 
-                <div class="panel-body">
-                  Redécouvrez l'Italie avec une recette classique remise au goût du jour, prête à illuminer vos journées du soleil de Florence.
-                </div>
               </div>
+
+            {% endfor %}
+
+            <hr>
+            <div class="command-list-item">
+              <p class="fidelite-gain">Cette commande vous rapporte <span class="fidelite-pts">2</span> points de fidélité.</p>
+              <p class="fidelite-total">Points de fidélité restants : <span class="fidelite-pts">22</span> (<span class="fidelite-prix">2,20</span> €)</p>
+              <p><a href="#">Utilisez vos points de fidélité !</a></p>
             </div>
+          {% else %}
+            <p>
+              Votre panier est vide.
+            </p>
+          {% endif %}
 
-            <div class="command-list-item-price col-lg-3 col-md-3 col-sm-12 col-xs-12">
-              <div class="item-price-col col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                <p class="product-price">8 €</p>
-              </div>
-
-              <div class="item-price-col col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                <input type="number" name="" id="input" class="form-control" value="1" min="{5"} max="" step="" required="required" title="">
-              </div>
-
-              <div class="item-price-col delete-product col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                <a href="#"><i class="fa fa-trash"></i></a>
-              </div>
-            </div>
-
-          </div>
-          <!-- FIN PRODUIT -->
-
-          <div style="clear:both;"></div>
-
-          <hr>
-          <div class="command-list-item">
-            <p class="fidelite-gain">Cette commande vous rapporte <span class="fidelite-pts">2</span> points de fidélité.</p>
-            <p class="fidelite-total">Points de fidélité restants : <span class="fidelite-pts">22</span> (<span class="fidelite-prix">2,20</span> €)</p>
-            <p><a href="#">Utilisez vos points de fidélité !</a></p>
-          </div>
         </div>
       </div>
       <div class="panel-footer">
         <p class="command total-price">Total : <label class="price">17,50€</label></p>
-        <a href="{{ path('commandepage') }}" class="btn btn-success command">Commander</a>
+
+        <a href="{{ path('commandepage') }}" class="btn btn-success command" {% if listOrderLine == 0 %}disabled {% endif %}>Commander</a>
       </div>
     </div>
   </div>

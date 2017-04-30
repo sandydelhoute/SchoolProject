@@ -1,6 +1,10 @@
 $(document).ready(function(){
+
+
+	
 	var selector=$("#listProduct");
 	var routeFilter="productfilterpage";
+	var routeAddPanier='addproductpage';
 	var render=function(data){
 
 		data.done(function(data){
@@ -19,7 +23,6 @@ $(document).ready(function(){
 				}
 				count ++;
 				})
-				console.log(obj.id);
 				html += '<a href="'+ Routing.generate('productdetailpage',params) +'" data-fancybox="produits">';
 				html += '<div class="detail"></div>';
 				html += '</a>';
@@ -38,26 +41,20 @@ $(document).ready(function(){
             count += word.length;
             return count <= 150;
         }).join('')+'...';
-				//html += obj.description.substring(0,100)+'....';
 				html += description;
 				html += '</p></div>'
 				html += '<div class="col-xs-6 text-center">';
-				html += '<select id="quantite">';
-				for(var i=1;i<=10;i++)
-				{
-					html += '<option value="'+i+'">'+i+'</option>';
-				}
-				html += '</select>';
+				html += '<input type="number" class="form-control quantity" value="1" min="1"  step="1" required="required"></input>'
 				html += '</div>';
 				html += '<div class="col-xs-6">';
 				html += '<h3>'+ obj.prixEntier +'€';
-				html += '<small>'+obj.prixCentime+'<small>';
+				html += '<small>'+obj.prixCentime+'</small>';
 				html += '</h3>';
 				html += '</div>';
 				html += '<div class="row">';
           		html += '<div class="col-xs-6 col-xs-offset-3">';
-          		html += '<a class="btn btn-success btn-block" href="#" role="button">';
-          		html += '<i class="fa fa-shopping-cart fa-2x" aria-hidden="true"></i> | Ajouter</a>'
+          		html += '<button class="btn btn-success btn-block addpanier" data-product="'+obj.id+'">';
+          		html += '<i class="fa fa-shopping-cart fa-2x" aria-hidden="true"></i> | Ajouter</button>'
          		html += '</div>';
          		html += '</div>';
         		html += '</div>';
@@ -75,29 +72,8 @@ $(document).ready(function(){
 	}
 	var objFilter = new Filter(routeFilter,selector,render);
 	objFilter.init();
+	var panier=new Panier(routeAddPanier);
+	panier.addpanier();
+
+
 });
-
-
-/*
-<div class="col-md-4">
-          <div class="col-md-12 produits">
-            <div class="img-zoom">
-            <a href="img/produit-1.jpg" data-fancybox="produits"><img src="img/produit-1.jpg" alt="" class="img-responsive"></a>
-            </div>
-            <h2>Burritos fajitas</h2>
-            <div class="col-md-8">
-            <p>Redécouvrez le mexique avec cette recette traditionnelle de burritos/fajitas aux épices du soleil.</p>
-          </div>
-          <div class="col-md-4">
-            <h3>14€<small>90</small></h3>
-          </div>
-          <div class="col-md-6">
-            <a class="btn btn-perso btn-block" href="#" role="button">Détails du produit</a>
-          </div>
-          <div class="col-md-6">
-            <a class="btn btn-success btn-block" href="#" role="button"><i class="fa fa-shopping-cart" aria-hidden="true"></i> | Ajouter au panier</a>
-          </div>
-          </div>
-        </div>
-
-       */

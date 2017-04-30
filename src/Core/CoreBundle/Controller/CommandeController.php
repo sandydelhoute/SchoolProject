@@ -3,6 +3,8 @@
 namespace Core\CoreBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class CommandeController extends Controller
 {
@@ -11,16 +13,12 @@ class CommandeController extends Controller
 
         return $this->render('CoreCoreBundle:Commande:commandelayout.html.twig');
     }
-     public function panierAction()
+     public function panierAction(Request $request)
     {
 
-        return $this->render('CoreCoreBundle:Commande:panierlayout.html.twig');
-    }
-
-     public function ajoutPanierAction()
-    {
-
-        return $this->render('CoreCoreBundle:Mentions:mentionslayout.html.twig');
+        $session = $request->getSession();
+        $listOrderLine=$session->get('panier');
+        return $this->render('CoreCoreBundle:Commande:panierlayout.html.twig',array('listOrderLine'=>$listOrderLine));
     }
     
 }
