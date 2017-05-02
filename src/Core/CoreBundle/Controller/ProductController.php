@@ -19,12 +19,15 @@ class ProductController extends Controller
    return $this->render('CoreCoreBundle:Products:productslayout.html.twig',array('listAllergene'=>$listAllergene,'listCategorie'=>$listCategorie));
 
  }
- public function productsFilterAction($allergene = null,$priceMin,$priceMax)
+ public function productsFilterAction($allergene = null,$categorie = null,$priceMin,$priceMax)
  {
    $em = $this->getDoctrine()->getManager();
 
    $listProduct = $em->getRepository('CoreCoreBundle:Product')
    ->findAll();
+
+   $listProduct = $em->getRepository('CoreCoreBundle:Product')
+   ->filterProduct($allergene,$categorie,$priceMin,$priceMax);
 
    $serializer = $this->get('serializer');
    $json = $serializer->serialize(

@@ -46,6 +46,28 @@ class ProductRepository extends \Doctrine\ORM\EntityRepository
 
         return $paginator;
     }
+public function filterProduct($categorie = null,$allergene = null,$priceMin,$priceMax){
+
+    $qb = $this->createQueryBuilder('p')
+    ->where('p.prixEntier > :prixentiermin')
+    ->setParameter('prixentiermin', $priceMin)
+    ->andWhere('p.prixEntier < :prixentiermax')
+    ->setParameter('prixentiermax', $priceMax);
+    //     if($categorie != null){
+    //     ->andWhere('p.categorie in (:categorie)')
+    //     ->setParameter('categorie', $categorie)
+    // }
+    // if($allergene != null){
+    //     ->andWhere('p.allergene in (:allergene)')
+    //     ->setParameter('allergene', $allergene)
+    // }
+    $query = $qb->getQuery();
+    $results = $query->getResult();
+    return $results;
+
+
+
+}
 
 
 }

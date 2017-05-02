@@ -10,7 +10,8 @@ function Filter(routeFilter,selector,render){
   this.init=function(){
    defaultAllergene();
    clickApply();
-   filterPrice();
+   resetfilter();
+   priceParams();
    render(objAjax.callAjax(Routing.generate(_this.routeFilter,defaultFilter)));
  }
  var render=function(data){
@@ -22,7 +23,7 @@ function Filter(routeFilter,selector,render){
     var listAllergene=[];
     var listCategorie=[];
     var priceMin= $( "#range" ).slider( "values", 0 );
-    var priceMax; $( "#range" ).slider( "values", 1 );
+    var priceMax=$( "#range" ).slider( "values", 1 );
     $('.allergenes-filter').each(function(){
       listAllergene.push($(this).val());
     });
@@ -59,7 +60,7 @@ var defaultAllergene=function(){
 
 }
 
-var filterPrice=function(){
+var priceParams=function(){
  $( "#range" ).slider({
   range: true,
   min: 0,
@@ -69,7 +70,29 @@ var filterPrice=function(){
     $( "#rangeinput" ).val( ui.values[ 0 ] +"€" + "-" + ui.values[ 1 ]+"€" );
   }
 });
- $( "#rangeinput" ).val( $( "#range" ).slider( "values", 0 ) +
+  $( "#rangeinput" ).val( $( "#range" ).slider( "values", 0 ) +
   "€ -" + $( "#range" ).slider( "values", 1 )+"€" );
 }
+
+var resetfilter=function(){
+$('#resetfilter').click(function(){
+  console.log('je suis dans le reset');
+   $( '#range' ).each(function(){
+
+      var options = $(this).slider( 'option' );
+
+      $(this).slider( 'values', [ options.min, options.max ] );
+
+    });
+  $( "#rangeinput" ).val( $( "#range" ).slider( "values", 0 ) +
+  "€ -" + $( "#range" ).slider( "values", 1 )+"€" );
+  $('.allergenes-filter').each(function(){
+    $(this).prop('checked', true);
+  });
+  $('.categories-filter').each(function(){
+  $(this).prop('checked',false);
+  });
+});
+}
+
 }

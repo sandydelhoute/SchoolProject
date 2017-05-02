@@ -450,6 +450,10 @@ header {
 /* import search */
 #filter label {
   font-size: 10px; }
+#filter #actionfilter {
+  margin: 10px 0px; }
+#filter #rangeinput {
+  margin: 10px; }
 
 /* import panier */
 .panier .panel-heading.global h3 {

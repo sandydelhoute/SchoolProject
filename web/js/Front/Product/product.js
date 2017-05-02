@@ -5,7 +5,7 @@ $(document).ready(function(){
 	var render=function(data){
 
 		data.done(function(data){
-
+			selector.html('');
 			$.each($.parseJSON(data.data), function(key,obj){
 			var params={id: obj.id};
 			var html= '<div class="col-xs-12 col-md-6">';
