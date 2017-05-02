@@ -13,12 +13,5 @@ class CommandeController extends Controller
 
         return $this->render('CoreCoreBundle:Commande:commandelayout.html.twig');
     }
-     public function panierAction(Request $request)
-    {
 
-        $session = $request->getSession();
-        $listOrderLine=$session->get('panier');
-        return $this->render('CoreCoreBundle:Commande:panierlayout.html.twig',array('listOrderLine'=>$listOrderLine));
-    }
-    
 }

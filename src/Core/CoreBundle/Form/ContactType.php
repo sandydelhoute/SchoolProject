@@ -34,7 +34,7 @@ class ContactType extends AbstractType
     'choices' => array('In Stock' => true, 'Out of Stock' => false),
     'label'=>'Indiquez-nous la raison de votre contact'
     ))
-        		->add('body',TextareaType::class)
+        		->add('body',TextareaType::class,array('label'=>'Votre message:'))
         		->add('save', SubmitType::class, array('label' => 'Envoye','attr'=>array('class'=>'btn-green')));
 
     }

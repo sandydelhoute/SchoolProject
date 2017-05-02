@@ -29,8 +29,17 @@ commandepage:
 # panier
 panierpage:
     path:     /panier
-    defaults: { _controller: CoreCoreBundle:Commande:panier }
-
+    defaults: { _controller: CoreCoreBundle:Panier:panier }
+addproductpage:
+    path:     /produits/add/{id}/{quantity}
+    defaults: { _controller: CoreCoreBundle:Panier:addProducts }
+    options:
+        expose: true
+deleteproductpage:
+    path:     /produits/delete/{id}
+    defaults: { _controller: CoreCoreBundle:Panier:deleteProducts }
+    options:
+        expose: true
 # produit
 productpage:
     path:     /produits
@@ -41,17 +50,24 @@ productdetailpage:
     defaults: { _controller: CoreCoreBundle:Product:productsDetail }
     options:
         expose: true
+productfilterpage:
+    path:     /produits/filter/{priceMin}/{priceMax}/
+    defaults: { _controller: CoreCoreBundle:Product:productsFilter}
+    options:
+        expose: true
+        
+productfilterpage:
+    path:     /produits/filter/{priceMin}/{priceMax}/{allergene}/
+    defaults: { _controller: CoreCoreBundle:Product:productsFilter}
+    options:
+        expose: true
 
 productfilterpage:
-    path:     /produits/filter/{allergene}/{priceMin}/{priceMax}
-    defaults: { _controller: CoreCoreBundle:Product:productsFilter }
+    path:     /produits/filter/{priceMin}/{priceMax}/{allergene}/{categorie}
+    defaults: { _controller: CoreCoreBundle:Product:productsFilter}
     options:
         expose: true
-addproductpage:
-    path:     /produits/add/{id}/{quantity}
-    defaults: { _controller: CoreCoreBundle:Product:addProducts }
-    options:
-        expose: true
+
 # actuality
 actualitypage:
     path:     /actualites

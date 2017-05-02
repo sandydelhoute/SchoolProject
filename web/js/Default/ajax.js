@@ -1,6 +1,7 @@
 
 function CallAjax(selector=null)
 {
+	var _this=this;
 	this.selector=selector;
 	this.spinner="<div class='fa  fa-refresh fa-spin fa-5x'></div>";
 
@@ -9,7 +10,7 @@ function CallAjax(selector=null)
 	    type:"GET",
 	    url: route,
 	    before:function(){
-	    	this.selector.append(this.spinner);
+	    	_this.selector.html(this.spinner);
 	    },
 	    sucess:function(data,statut){
 

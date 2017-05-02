@@ -1,9 +1,6 @@
-$(document).ready(function(){
-
-
-	
+$(document).ready(function(){	
 	var selector=$("#listProduct");
-	var routeFilter="productfilterpage";
+	var routeFilter='productfilterpage';
 	var routeAddPanier='addproductpage';
 	var render=function(data){
 
