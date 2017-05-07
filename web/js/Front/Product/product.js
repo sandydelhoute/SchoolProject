@@ -6,6 +6,7 @@ $(document).ready(function(){
 
 		data.done(function(data){
 			selector.html('');
+		
 			$.each($.parseJSON(data.data), function(key,obj){
 			var params={id: obj.id};
 			var html= '<div class="col-xs-12 col-md-6">';
@@ -44,8 +45,10 @@ $(document).ready(function(){
 				html += '<input type="number" class="form-control quantity" value="1" min="1"  step="1" required="required"></input>'
 				html += '</div>';
 				html += '<div class="col-xs-6">';
-				html += '<h3>'+ obj.prixEntier +'€';
-				html += '<small>'+obj.prixCentime+'</small>';
+				var prix=obj.prix.toString().split(".");
+				console.log(prix);
+				html += '<h3>'+prix[0]+'€';
+				html += '<small>'+prix[1]+'</small>';
 				html += '</h3>';
 				html += '</div>';
 				html += '<div class="row">';
@@ -58,6 +61,9 @@ $(document).ready(function(){
 
 				selector.append(html);
 			});
+		
+			
+			
 			// $('.pagination').html('');
 			// for(var i=1;i<=data.nbPage;i++)
 			// {
@@ -67,10 +73,7 @@ $(document).ready(function(){
 
 
 	}
-	var objFilter = new Filter(routeFilter,selector,render);
+	var objFilter = new Filter(routeFilter,routeAddPanier,selector,render);
 	objFilter.init();
-	var panier=new Panier(routeAddPanier);
-	panier.addpanier();
-
-
+	
 });

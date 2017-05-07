@@ -29,19 +29,11 @@ class OrderLine
     private $quantity;
 
     /**
-     * @var int
+     * @var float
      *
-     * @ORM\Column(name="prixEntier", type="integer")
+     * @ORM\Column(name="prixEntier", type="float")
      */
-    private $prixEntier;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="prixCentime", type="integer")
-     */
-    private $prixCentime;
-
+    private $prix;
 
     /**
      * @ORM\ManyToOne(targetEntity="Menu", inversedBy="id")
@@ -90,51 +82,27 @@ class OrderLine
     }
 
     /**
-     * Set prixEntier
+     * Set prix
      *
-     * @param integer $prixEntier
+     * @param integer $prix
      *
      * @return OrderLine
      */
-    public function setPrixEntier($prixEntier)
+    public function setPrix($prix)
     {
-        $this->prixEntier = $prixEntier;
+        $this->prix = $prix;
 
         return $this;
     }
 
     /**
-     * Get prixEntier
+     * Get prix
      *
-     * @return int
+     * @return float
      */
-    public function getPrixEntier()
+    public function getPrix()
     {
-        return $this->prixEntier;
-    }
-
-    /**
-     * Set prixCentime
-     *
-     * @param integer $prixCentime
-     *
-     * @return OrderLine
-     */
-    public function setPrixCentime($prixCentime)
-    {
-        $this->prixCentime = $prixCentime;
-
-        return $this;
-    }
-
-    /**
-     * Get prixCentime
-     *
-     * @return int
-     */
-    public function getPrixCentime()
-    {
-        return $this->prixCentime;
+        return $this->prix;
     }
 
     /**

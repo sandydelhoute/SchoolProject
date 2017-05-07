@@ -138,6 +138,25 @@ admin_vehicules:
     defaults: { _controller: AdminAdminBundle:Core:vehicules }
 
 
+# --------------------Actualite-------------------- #
+
+admin_posts:
+    path:    /actualite
+    defaults: { _controller: AdminAdminBundle:Posts:index }
+
+admin_posts_add:
+    path:    /actualite/add
+    defaults: { _controller: AdminAdminBundle:Posts:addPosts }
+
+admin_posts_edit:
+    path:    /actualite/edit/{id}
+    defaults: { _controller: AdminAdminBundle:Posts:editPosts }
+
+admin_posts_delete:
+    path:    /actualite/delete/{id}
+    defaults: { _controller: AdminAdminBundle:Posts:deletePosts }
+
+
 # --------------------Relais-------------------- #
 admin_relais:
     path:    /relais

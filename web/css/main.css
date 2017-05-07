@@ -475,6 +475,7 @@ header {
     font-weight: 700;
     font-size: 1.2em; }
   .panier .panel-body .command-list-item .command-list-item-price .delete-product i {
+    cursor: pointer;
     color: #e60000;
     font-size: 1.2em; }
   .panier .panel-body .command-list-item .command-list-item-price .item-price-col {

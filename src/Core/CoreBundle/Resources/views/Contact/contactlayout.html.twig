@@ -26,7 +26,11 @@
     </div>
     <div class="container">
         {% block formContact %}
+        {% if is_granted('ROLE_USER')  %}
+            {% include 'CoreCoreBundle:Contact:formcontactlog.html.twig' %}
+        {% else %}
             {% include 'CoreCoreBundle:Contact:formcontact.html.twig' %}
+        {% endif %}
         {% endblock formContact %}
         {% block map %}
             {% include 'CoreCoreBundle:Contact:map.html.twig' %}

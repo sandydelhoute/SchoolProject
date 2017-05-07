@@ -14,7 +14,7 @@
         <div class="panel-body collapse" id="allergene_content">
           {% for allergene in listAllergene %}
           <div class="col-xs-6 col-md-6">
-            <input type="checkbox" value="{{ allergene.name }}" class="allergenes-filter" checked="checked" />
+            <input type="checkbox" value="{{ allergene.name }}" class="allergenes-filter"  />
             <label for="arachide" title="{{ allergene.description }}">{{ allergene.name }}</label>
           </div>
     {% endfor %}
@@ -30,7 +30,7 @@
         <div class="panel-body collapse" id="categorie_content">
           {% for categorie in listCategorie %}
           <div class="col-xs-6 col-md-6">
-            <input type="checkbox" value="{{ categorie.name }}" class="categories-filter" />
+            <input type="checkbox" value="{{ categorie.name }}" class="categories-filter" checked />
             <label for="arachide">{{ categorie.name }}</label>
           </div>
           {% endfor %}

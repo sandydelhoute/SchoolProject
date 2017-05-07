@@ -8,10 +8,12 @@ use Symfony\Component\HttpFoundation\Session\Session;
 
 class CommandeController extends Controller
 {
-     public function commandeAction()
+     public function commandeAction(Request $request)
     {
+    	$session = $request->getSession();
+		$listOrderLine=$session->get('panier');
 
-        return $this->render('CoreCoreBundle:Commande:commandelayout.html.twig');
+        return $this->render('CoreCoreBundle:Commande:commandelayout.html.twig',array('listOrderLine'=>$listOrderLine));
     }
 
 }

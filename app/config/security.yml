@@ -32,7 +32,7 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         login:
-            pattern: ^/compte/connexionweb$
+            pattern: ^/compte/$
             security: false   
         core:
             host: ^www\.mealandbox\.fr$
@@ -57,8 +57,7 @@ security:
             host: ^admin\.mealandbox\.fr$
             pattern: ^/
             anonymous: true
-            http_basic:
-                provider:  admin
+            provider:  admin
             form_login:
                login_path: /compte/connexionadmin
                check_path: /compte/login_check

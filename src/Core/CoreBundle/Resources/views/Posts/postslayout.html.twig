@@ -1,0 +1,45 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/main.css') }}"/>
+
+{% endblock stylesheets %}
+
+{% block body %}
+
+    <div class="container-fluid">
+        {% block header %}
+            {% include 'CoreCoreBundle:Default:header.html.twig' %}
+        {% endblock header %}
+    </div>
+    <div class="container">
+        {% block actuality %}
+            <div class="row">
+              <div class="col-md-12">
+                <h1>Actualités</h1>
+                <p>Retrouvez ici les dernières actualités de Meal & Box</p>
+            </div>
+        </div>
+        <div class="col-xs-12">
+          <div class="articles" id="grid" data-columns>
+          </div>
+      </div>
+  {% endblock actuality %}
+</div>
+<div class="container-fluid">
+   {% block footer %}
+    {% include 'CoreCoreBundle:Default:footer.html.twig' %}
+{% endblock footer %}
+</div>
+
+
+{% endblock body %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/Default/ajax.js') }}"></script>
+    <script src="{{ asset('js/salvattore.min.js') }}"></script>
+    <script src="{{ asset('js/Default/scrollinfinity.js') }}"></script>
+    <script src="{{ asset('js/Front/Posts/posts.js') }}"></script>
+
+{% endblock %}

@@ -24,7 +24,7 @@ class ProductController extends Controller
     $form->handleRequest($request);
     if ($form->isSubmitted() && $form->isValid()) {
 
-     $em = $this->getDoctrine()->getManager();
+    $em = $this->getDoctrine()->getManager();
     $productexist=$em->getRepository('CoreCoreBundle:Product')
     ->findOneByName($product->getName());
     if(is_null($productexist))

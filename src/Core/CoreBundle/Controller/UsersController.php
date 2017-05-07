@@ -25,14 +25,14 @@ class UsersController extends Controller
 			$em = $this->getDoctrine()->getManager();
 			$em->persist($usersWeb);
 			$em->flush();
-			$token = new UsernamePasswordToken($usersWeb, null, 'core', array('ROLE_USER'));
-			$this->get('security.context')->setToken($token);
-			return $this->redirectToRoute('homepage');
+			// $token = new UsernamePasswordToken($usersWeb, null, 'core', array('ROLE_USER'));
+			// $this->get('security.context')->setToken($token);
+			$this->addFlash('error', 'Email existe déja');   
+			return $this->redirectToRoute('loginpage');
 		}
-		else
-		{
-			return $this->render('CoreCoreBundle:Login:loginlayout.html.twig',array('form' => $form->createView()));
-		}
+	
+		return $this->render('CoreCoreBundle:Login:loginlayout.html.twig',array('form' => $form->createView()));
+		
 
 
 

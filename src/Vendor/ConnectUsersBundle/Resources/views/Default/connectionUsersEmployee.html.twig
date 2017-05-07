@@ -3,11 +3,11 @@
   {# S'il y a une erreur, on l'affiche dans un joli cadre #}
   {% if error %}
     <div class="alert alert-danger">
-      <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>00
+      <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
           {{ error.message| replace({"Bad credentials." : "Invalid username or password."}) }}
     </div>
   {% endif %}
-  <form action="{{ path('login_check') }}" method="post">
+  <form action="{{ path("login_check", {}) }}" method="post">
 
 
 

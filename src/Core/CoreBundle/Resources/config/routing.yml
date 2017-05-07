@@ -35,11 +35,13 @@ addproductpage:
     defaults: { _controller: CoreCoreBundle:Panier:addProducts }
     options:
         expose: true
+
 deleteproductpage:
     path:     /produits/delete/{id}
     defaults: { _controller: CoreCoreBundle:Panier:deleteProducts }
     options:
         expose: true
+        
 # produit
 productpage:
     path:     /produits
@@ -50,6 +52,7 @@ productdetailpage:
     defaults: { _controller: CoreCoreBundle:Product:productsDetail }
     options:
         expose: true
+        
 productfilterpage:
     path:     /produits/filter/{priceMin}/{priceMax}/
     defaults: { _controller: CoreCoreBundle:Product:productsFilter}
@@ -58,6 +61,13 @@ productfilterpage:
         
 productfilterpage:
     path:     /produits/filter/{priceMin}/{priceMax}/{allergene}/
+    defaults: { _controller: CoreCoreBundle:Product:productsFilter}
+    options:
+        expose: true
+
+        
+productfilterpage:
+    path:     /produits/filter/{priceMin}/{priceMax}/{categorie}/
     defaults: { _controller: CoreCoreBundle:Product:productsFilter}
     options:
         expose: true
@@ -71,7 +81,19 @@ productfilterpage:
 # actuality
 actualitypage:
     path:     /actualites
-    defaults: { _controller: CoreCoreBundle:Actuality:actuality }
+    defaults: { _controller: CoreCoreBundle:Posts:index }
+
+actualityscrollpage:
+    path:     /actualites/{offsetmin}/{offsetmax}
+    defaults: { _controller: CoreCoreBundle:Posts:scroll }
+    options:
+        expose: true
+
+actualitydetailpage:
+    path:     /actualites/{id}
+    defaults: { _controller: CoreCoreBundle:Posts:detail }
+    options:
+        expose: true
 #login 
 loginpage:
     path:     /login

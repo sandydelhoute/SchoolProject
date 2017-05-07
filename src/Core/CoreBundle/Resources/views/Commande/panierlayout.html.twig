@@ -26,3 +26,9 @@
 
 
 {% endblock body %}
+{% block javascripts %}
+    {{ parent() }}
+<script src="{{ asset('js/Default/ajax.js') }}"></script>
+<script src="{{ asset('js/Front/Panier/eventspanier.js') }}"></script>
+<script src="{{ asset('js/Front/Panier/panier.js') }}"></script>
+{% endblock javascripts %}

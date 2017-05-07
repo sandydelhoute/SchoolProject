@@ -9,30 +9,23 @@
           </h4>
         </div>
       <div id="panier" class="">
+        {% for orderLine in listOrderLine %}
         <div class="panel-body">
           <div class="col-md-6">
-            <img src="{{ asset('img/product/fabienProduits/logo-delicourt.jpg') }}" alt="" class="img-responsive">
+            {% for image in orderLine.product.images%}
+            <img src="{{ asset('image.path') }}" alt="{{ image.alt }}" class="img-responsive">
+            {% endfor %}
           </div>
           <div class="col-md-6">
             <div class="bold">
-              Tagliatelles courgettes
-            </div>
-            Quantité : 1 <br />
-            <p class="product-price"> Prix : 5€50</p>
+            {{ orderLine.product.name }}
+              </div>
+            Quantité : {{ orderLine.quantity }}
+             <br />
+            <p class="product-price"> Prix : {{ orderLine.product.prix}}</p>
           </div>
         </div>
-        <div class="panel-body">
-          <div class="col-md-6">
-            <img src="{{ asset('img/product/fabienProduits/logo-delicourt.jpg') }}" alt="" class="img-responsive">
-          </div>
-          <div class="col-md-6">
-            <div class="bold">
-              Tagliatelles courgettes
-            </div>
-            Quantité : 1 <br />
-            <p class="product-price"> Prix : 5€50</p>
-          </div>
-        </div>
+      {% endfor %}
       </div>
     </div>
     <div class="panel panel-default">

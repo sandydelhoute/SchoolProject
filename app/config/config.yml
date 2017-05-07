@@ -8,6 +8,7 @@ imports:
 parameters:
     locale: fr
     img_product_directory: '%kernel.root_dir%/../web/img/product'
+    img_posts_directory: '%kernel.root_dir%/../web/img/posts'
 
 framework:
     #esi:             ~
@@ -29,7 +30,7 @@ framework:
         # http://symfony.com/doc/current/reference/configuration/framework.html#handler-id
         handler_id:  session.handler.native_file
         save_path:   "%kernel.root_dir%/../var/sessions/%kernel.environment%"
-        cookie_lifetime: 480
+        cookie_lifetime: 600
         cookie_domain: 'www.mealandbox.fr'
     fragments:       ~
     http_method_override: true
@@ -85,4 +86,4 @@ swiftmailer:
 #             options:
 #                 csrf: true
 fos_js_routing: 
-    routes_to_expose: [page_moncompte_resetpassword,admin_utilisateurs_filter]
+    routes_to_expose: [page_moncompte_resetpassword,admin_utilisateurs_filter,panierpage,deleteproductpage,productdetailpage,productfilterpage]

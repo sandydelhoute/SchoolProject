@@ -1,76 +1,88 @@
 {% block detail %}
-<div id="produitdetail">
- <div class="col-lg-5 col-md-5 col-sm-6">
-          <figure class="product-carousel col-lg-12 col-md-12 col-sm-12 col-xs-12">
+  <div id="produitdetail">
+   <div class="col-lg-5 col-md-5 col-sm-6">
 
-            <div id="carousel-id" class="carousel slide" data-ride="carousel">
-              <ol class="carousel-indicators">
-              {% for i in product.images %}
-                <li data-target="#carousel-id" data-slide-to="i" class="active"></li>
-                <li data-target="#carousel-id" data-slide-to="i" class=""></li>
-              </ol>
-              {% endfor %}
-              <div class="carousel-inner">
-                {% for image in product.images %}
-                <div class="item">
-                  <img data-src="holder.js/900x500/auto/#666:#6a6a6a/text:Second slide" alt="Second slide" src="{{ asset(image.path) }}">
+    <figure class="product-carousel col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      {% set imagelength = product.images|length %}
+      {% set count = 1 %}
+      {% if  imagelength > 1 %}
+       <div id="carousel-id" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+          {% for i in 1..imagelength %}
+            <li data-target="#carousel-id" data-slide-to="{{ i }}" {% if i == 1 %}
+            class="active"{% endif %}></li>
+          {% endfor %}
+        </ol>
+
+        <div class="carousel-inner">
+          {% for image in product.images %}
+            
+            <div class="item {% if count == 1 %}active{% endif %}">
+              <img data-src="{{ asset(image.path) }}" alt="Second slide" src="{{ asset(image.path) }}">
                   <div class="container">
                     <div class="carousel-caption">
                     </div>
-                  </div>
+                  </div> 
                 </div>
-              </div>
+                {% set count = count + 1 %}
               {% endfor %}
-              <a class="left carousel-control" href="#carousel-id" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
-              <a class="right carousel-control" href="#carousel-id" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
             </div>
-    
-          </figure>
-          <div class="col-lg-12 col-md-12 price-block display-price-desktop">
-            <p class="product-price col-xs-8"><span class="euro">{{ product.prixEntier }}</span>,<sup class="cents">{{ product.prixCentime }}</sup> €</p>
-            <div class="nb-panier col-xs-4">
-              <input type="number" name="" id="input" class="form-control" value="1" min="1" max="5" step="" required="required" title="">
-            </div>
-            <button type="button" class="btn btn-success col-xs-12"><i class="fa fa-shopping-cart"></i>&nbsp;&nbsp;Ajouter au panier</button>
+            
+            <a class="left carousel-control" href="#carousel-id" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+            <a class="right carousel-control" href="#carousel-id" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
           </div>
-        </div>
+        {% else %}
+          {% for image in product.images %}
+          <img src="{{ asset(image.path) }}" class="img-responsive" alt="{{ image.alt }}" >
+        {% endfor %}
+{% endif %}
+</figure>
+<div class="col-lg-12 col-md-12 price-block display-price-desktop">
+  {% set prix = product.prix|split('.') %}
+    <p class="product-price col-xs-8"><span class="euro">{{  prix[0] }}</span>€<sup class="cents">{{  prix[1] }}</sup></p>
+    <div class="nb-panier col-xs-4">
+      <input type="number" name="" id="input" class="form-control" value="1" min="1" max="5" step="" required="required" title="">
+    </div>
+    <button type="button" class="btn btn-success col-xs-12"><i class="fa fa-shopping-cart"></i>Ajouter au panier</button>
+  </div>
+</div>
 
 
-        <div class="produc-desc col-lg-7 col-md-7 col-sm-6 col-xs-12">
-          <h3>Tomates Mozzarella</h3>
-          <hr class="hr3-product">
-          <div class="description"></div>
-          <h4>Description :</h4>
-          <hr class="hr4-product">
-          <p class="description">
-           {{ product.description }}
-          </p>
-          <h4>Ingrédients :</h4>
-          <hr class="hr4-product">
-          <ul class="description list-ingredients">
-            <li>Tomates</li>
-            <li>Mozzarella</li>
-            <li>Mâche</li>
-            <li>Roquette</li>
-            <li>Vinaigre balsamique</li>
-            <li>Huile d'olive</li>
-          </ul>
-          <h4>Allergènes :</h4>
-          <hr class="hr4-product">
-          <ul class="description list-allergenes">
-          	{% for allergene in product.allergenes %}
-            <li>{{ allergene.name }}</li>
-        	{% endfor %}
-          </ul>
-        </div>
+<div class="produc-desc col-lg-7 col-md-7 col-sm-6 col-xs-12">
+  <h3>Tomates Mozzarella</h3>
+  <hr class="hr3-product">
+  <div class="description"></div>
+  <h4>Description :</h4>
+  <hr class="hr4-product">
+  <p class="description">
+   {{ product.description }}
+ </p>
+ <h4>Ingrédients :</h4>
+ <hr class="hr4-product">
+ <ul class="description list-ingredients">
+  <li>Tomates</li>
+  <li>Mozzarella</li>
+  <li>Mâche</li>
+  <li>Roquette</li>
+  <li>Vinaigre balsamique</li>
+  <li>Huile d'olive</li>
+</ul>
+<h4>Allergènes :</h4>
+<hr class="hr4-product">
+<ul class="description list-allergenes">
+ {% for allergene in product.allergenes %}
+  <li>{{ allergene.name }}</li>
+{% endfor %}
+</ul>
+</div>
 
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 price-block display-price-mobile">
-          <p class="product-price col-xs-8"><span class="euro">9</span>,<small class="cents">50</small> €</p>
-          <div class="nb-panier col-md-3 col-xs-4">
-            <input type="number" name="" id="input" class="form-control" value="1" min="1" max="5" step="" required="required" title="">
-          </div>
-          <button type="button" class="btn btn-success col-sm-12 col-xs-12"><i class="fa fa-shopping-cart"></i>&nbsp;&nbsp;Ajouter au panier</button>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 price-block display-price-mobile">
+  <p class="product-price col-xs-8"><span class="euro">9</span>,<small class="cents">50</small> €</p>
+  <div class="nb-panier col-md-3 col-xs-4">
+    <input type="number" name="" id="input" class="form-control" value="1" min="1" max="5" step="" required="required" title="">
+  </div>
+  <button type="button" class="btn btn-success col-sm-12 col-xs-12"><i class="fa fa-shopping-cart"></i>&nbsp;&nbsp;Ajouter au panier</button>
 
-        </div>
+</div>
 </div>
 {% endblock detail %}

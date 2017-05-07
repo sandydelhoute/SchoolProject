@@ -11,16 +11,15 @@
             {% set total = 0 %}
             {% if listOrderLine|length > 0 %}
                 {% for orderline in listOrderLine %}
-                    {% set prix = orderline.product.prixEntier~'.'~orderline.product.prixCentime %}
-                    {% set total = total + (orderline.quantity * prix) %}
+                    {% set total = total + (orderline.quantity * orderline.prix) %}
                     <div class="command-list-item">
                         <div class="command-list-item-desc col-lg-9 col-md-9">
                             <figure class="command-list-item col-lg-3 col-md-3 col-sm-6">
-                            {% set count = 0 %}
-                            {% for image in orderline.product.images %}
-                            {#  {% if count == 0 %} #}
+                            {% set count =  orderline.product.images|length %}
+                            {% for i in count %}
+                              {% if count == 0 %}
                                     <img src="{{ asset(image.path) }}" alt="{{ image.alt }}" class="img-responsive">
-                            {#  {%  endif %} #}
+                             {%  endif %} 
                                 {% set count = 1 %}
                             {% endfor %}
                             </figure>
@@ -36,7 +35,9 @@
                         <div class="command-list-item-price col-lg-3 col-md-3 col-sm-12 col-xs-12">
                             <div class="item-price-col col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                 <p class="product-price">
-                                    {{ orderline.product.prixEntier }}€{{ orderline.product.prixCentime }}
+                                  {% set prix = orderline.product.prix|split('.') %}
+                                    {{ prix[0] }}€{{ prix[1] }}
+                                  
                                 </p>
                             </div>
                             <div class="item-price-col col-lg-4 col-md-4 col-sm-4 col-xs-4">

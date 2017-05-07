@@ -19,10 +19,14 @@ class ContactController extends Controller
 		$form = $this->createForm(ContactType::class,$contact);
 		$securityContext = $this->container->get('security.authorization_checker');
 		if ($securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
-			$contact->setEmail();
-			$contact->setFirstName();
-			$contact->setFirstName();
-			$form->remove();
+			$usr= $this->getUser();
+			// $contact->setEmail($usr->getEmail());
+			// $contact->setFirstName($usr->getFirstName());
+			// $contact->setFirstName($usr->getName());
+			$form->remove('email');
+			$form->remove('firstName');
+			$form->remove('name');
+
 		}
 
     // On crée le FormBuilder grâce au service form factory 
@@ -34,7 +38,7 @@ class ContactController extends Controller
 			->setSubject('Hello Email')
 			->setFrom('mealandbox@gmail.com')
 			->setTo('s.delhoute@sfr.fr')
-            //->setTo($usersemployee->getEmail())
+			->setTo($usersemployee->getEmail())
 			->setBody(
                 $this->renderView(':Email:registration.html.twig'//,array('name' => "guillaume")
                 	),
@@ -42,10 +46,7 @@ class ContactController extends Controller
                 );
 			$this->get('mailer')->send($message);
 		}
-		
+
 			return $this->render('CoreCoreBundle:Contact:contactlayout.html.twig',array('form'=>$form->createView()));
-	
-
-
 	}
 }

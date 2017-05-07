@@ -12,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Core\CoreBundle\Form\ImagesType;
 use Core\CoreBundle\Form\AllergeneType;
 use Core\CoreBundle\Form\CategorieType;
@@ -28,8 +29,7 @@ class ProductType extends AbstractType
             ))
             ->add('description', TextareaType::class)
             ->add('composition', TextareaType::class)
-            ->add('prixEntier', IntegerType::class)
-            ->add('prixCentime', IntegerType::class)
+            ->add('prix', NumberType::class)
             ->add('active', ChoiceType::class,array('choices'  => array(
         		'Oui' => true,
         		'Non' => false

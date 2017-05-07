@@ -35,14 +35,6 @@ class UsersWeb extends Users
     private $rewardPoints;
 
 
-
-
-    /**
-     * @ORM\ManyToOne(targetEntity="BusinessCompany", inversedBy="usersWeb")
-     * @ORM\JoinColumn(name="businesscompany", referencedColumnName="id",nullable=true)
-     */
-    private $businessCompany;
-
     /**
      * Get id
      *
@@ -105,28 +97,4 @@ class UsersWeb extends Users
         return array('ROLE_USER');
      }
 
-
-    /**
-     * Set businessCompany
-     *
-     * @param \Vendor\ConnectUsersBundle\Entity\BusinessCompany $businessCompany
-     *
-     * @return UsersWeb
-     */
-    public function setBusinessCompany(\Vendor\ConnectUsersBundle\Entity\BusinessCompany $businessCompany = null)
-    {
-        $this->businessCompany = $businessCompany;
-
-        return $this;
-    }
-
-    /**
-     * Get businessCompany
-     *
-     * @return \Vendor\ConnectUsersBundle\Entity\BusinessCompany
-     */
-    public function getBusinessCompany()
-    {
-        return $this->businessCompany;
-    }
 }

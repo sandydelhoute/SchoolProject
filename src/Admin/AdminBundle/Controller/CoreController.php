@@ -13,16 +13,15 @@ use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 class CoreController extends Controller
 {
 
-
-    public function indexAction(Request $request)
-    {
+    public function indexAction(Request $request) {
         $securityContext = $this->container->get('security.authorization_checker');
-        if ($securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')) 
+        if ($securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
             return $this->render('AdminAdminBundle:Default:accueil.html.twig');
-        else
-           return $this->render('AdminAdminBundle:Compte:loginlayout.html.twig');
-    }
+        } else {
 
+             return $this->render('AdminAdminBundle:Compte:loginlayout.html.twig');
+        }
+    }
        public function compteAction(Request $request)
     { 
         return $this->render('AdminAdminBundle:Compte:comptelayout.html.twig');
