@@ -41,7 +41,12 @@ deleteproductpage:
     defaults: { _controller: CoreCoreBundle:Panier:deleteProducts }
     options:
         expose: true
-        
+changequantity:
+    path:     /produits/quantite/{id}/{quantity}
+    defaults: { _controller: CoreCoreBundle:Panier:changeQuantity }
+    options:
+        expose: true
+
 # produit
 productpage:
     path:     /produits
@@ -53,30 +58,14 @@ productdetailpage:
     options:
         expose: true
         
+
+#filter
 productfilterpage:
-    path:     /produits/filter/{priceMin}/{priceMax}/
-    defaults: { _controller: CoreCoreBundle:Product:productsFilter}
-    options:
-        expose: true
-        
-productfilterpage:
-    path:     /produits/filter/{priceMin}/{priceMax}/{allergene}/
-    defaults: { _controller: CoreCoreBundle:Product:productsFilter}
+    path:     /produits/filter/{priceMin}/{priceMax}/{categorie}/{allergene}
+    defaults: { _controller: CoreCoreBundle:Product:productsFilter,allergene:null}
     options:
         expose: true
 
-        
-productfilterpage:
-    path:     /produits/filter/{priceMin}/{priceMax}/{categorie}/
-    defaults: { _controller: CoreCoreBundle:Product:productsFilter}
-    options:
-        expose: true
-
-productfilterpage:
-    path:     /produits/filter/{priceMin}/{priceMax}/{allergene}/{categorie}
-    defaults: { _controller: CoreCoreBundle:Product:productsFilter}
-    options:
-        expose: true
 
 # actuality
 actualitypage:
@@ -98,3 +87,8 @@ actualitydetailpage:
 loginpage:
     path:     /login
     defaults: { _controller: CoreCoreBundle:Users:login }
+
+#compte 
+comptepage:
+    path: /compte/user
+    defaults: {_controller:CoreCoreBundle:Users:compte}

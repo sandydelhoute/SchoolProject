@@ -33,9 +33,9 @@ class UsersController extends Controller
 	
 		return $this->render('CoreCoreBundle:Login:loginlayout.html.twig',array('form' => $form->createView()));
 		
-
-
-
+	}
+	public function compteAction(){
+		return $this->render('CoreCoreBundle:Compte:comptelayout.html.twig');
 	}
 
 }

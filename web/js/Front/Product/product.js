@@ -46,7 +46,6 @@ $(document).ready(function(){
 				html += '</div>';
 				html += '<div class="col-xs-6">';
 				var prix=obj.prix.toString().split(".");
-				console.log(prix);
 				html += '<h3>'+prix[0]+'€';
 				html += '<small>'+prix[1]+'</small>';
 				html += '</h3>';
@@ -61,14 +60,6 @@ $(document).ready(function(){
 
 				selector.append(html);
 			});
-		
-			
-			
-			// $('.pagination').html('');
-			// for(var i=1;i<=data.nbPage;i++)
-			// {
-			// 	$('.pagination').append("<li><a href='"+Routing.generate(routeOrder,{page:i,nbMaxParPage:data.nbMaxParPage,champ:data.champ,order:data.order})+"'>"+i+"</a></li>");
-			// }
 		})
 
 

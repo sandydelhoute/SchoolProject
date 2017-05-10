@@ -1,0 +1,39 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+{{ parent() }}
+<link rel="stylesheet" type="text/css" href="{{ asset('css/main.css') }}"/>
+
+{% endblock stylesheets %}
+
+
+{% block javascripts %}
+
+    {{ parent() }}
+    <script src="{{ asset('js/monjs.js') }}"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAE6dCPBTnGEsKzpyim81lzA7cYanfqP8U&libraries=places"></script>
+
+
+{% endblock javascripts %}
+
+{% block body %}
+    
+    <div class="container-fluid">
+        {% block header %}
+        {% include 'CoreCoreBundle:Default:header.html.twig' %}
+        {% endblock header %}
+    </div>
+    <div class="container">
+    {% block compte %}
+        {% include 'CoreCoreBundle:Compte:compte.html.twig' %}
+    {% endblock compte %}
+    {% block history %}
+        {% include 'CoreCoreBundle:Commande:historycommande.html.twig' %}
+    {% endblock history %}
+    </div>
+    <div class="container-fluid">
+      	{% block footer %}
+        {% include 'CoreCoreBundle:Default:footer.html.twig' %}
+        {% endblock footer %}
+     </div>
+{% endblock body %}

@@ -1,6 +1,7 @@
 $(document).ready(function(){
-var routeDeletePanier='deleteproductpage'; 
-var panier = new Panier(routeDeletePanier);
+var routeDeletePanier='deleteproductpage';
+var routeChangeQuantity='changequantity';
+var panier = new Panier(routeDeletePanier,routeChangeQuantity);
 panier.init();
 
 });

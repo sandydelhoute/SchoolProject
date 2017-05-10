@@ -9,11 +9,16 @@
           </h4>
         </div>
       <div id="panier" class="">
+        {% set total = 0%}
         {% for orderLine in listOrderLine %}
         <div class="panel-body">
           <div class="col-md-6">
-            {% for image in orderLine.product.images%}
-            <img src="{{ asset('image.path') }}" alt="{{ image.alt }}" class="img-responsive">
+            {% set count = 0 %}
+            {% for image in orderLine.product.images %}
+              {% if count == 0 %}
+              <img src="{{ asset(image.path) }}" alt="{{ image.alt }}" class="img-responsive">
+              {% set count = 1 %}
+              {% endif %}
             {% endfor %}
           </div>
           <div class="col-md-6">
@@ -25,6 +30,7 @@
             <p class="product-price"> Prix : {{ orderLine.product.prix}}</p>
           </div>
         </div>
+        {% set total = total + (orderLine.quantity * orderLine.product.prix) %}
       {% endfor %}
       </div>
     </div>
@@ -32,7 +38,9 @@
       <div class="panel-heading">
         <h4 class="panel-title">
           <div class="etapes total">
-            Total : 11€
+                  {% set total = total|split('.') %}
+                                
+            Total : {{ total|join('€') }}
           </div>
         </h4>
       </div>

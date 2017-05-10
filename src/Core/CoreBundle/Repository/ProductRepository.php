@@ -46,15 +46,18 @@ class ProductRepository extends \Doctrine\ORM\EntityRepository
 
         return $paginator;
     }
-public function filterProduct($categorie = null ,$allergene = null ,$priceMin,$priceMax){
-
+public function filterProduct($categorie,$allergene = null ,$priceMin,$priceMax){
     $qb = $this->createQueryBuilder('p')
-    // ->innerjoin('p.categories', 'cat')
-    // ->addSelect('cat')
-    // ->Where('cat.name in (:categorie)')
-    // ->setParameter('categorie',$categorie)
-    // ->innerjoin('p.allergenes', 'all')
-    // ->addSelect('all')
+    // ->innerjoin('p.categories', 'c')
+    // ->addSelect('c')
+    // ->where('c.name = :categorie')
+    // ->setParameter('categorie',array_value($categorie))
+
+    
+    // ->setParameter('categorie','dessert')
+
+    //->innerjoin('p.allergenes', 'all')
+    //->addSelect('all')
     // ->andWhere('all.name not in (:allergene)')
     // ->setParameter('allergene', $allergene)
     ->andwhere('p.prix > :prixentiermin')

@@ -1,3 +1,5 @@
+
+$(document).ready(function(){
 function init_map() {
 	var var_location = new google.maps.LatLng(50.6336147,3.0518345,17);
 
@@ -17,5 +19,10 @@ function init_map() {
 	var_marker.setMap(var_map);
 
 }
+	google.maps.event.addDomListener(window, 'load', init_map);
 
-google.maps.event.addDomListener(window, 'load', init_map);
+
+});
+
+
+

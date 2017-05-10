@@ -5,12 +5,12 @@ namespace Core\CoreBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * City
+ * CodePostal
  *
- * @ORM\Table(name="city")
- * @ORM\Entity(repositoryClass="Core\CoreBundle\Repository\CityRepository")
+ * @ORM\Table(name="code_postal")
+ * @ORM\Entity(repositoryClass="Core\CoreBundle\Repository\CodePostalRepository")
  */
-class City
+class CodePostal
 {
     /**
      * @var int
@@ -21,13 +21,12 @@ class City
      */
     private $id;
 
-
     /**
      * @var string
      *
-     * @ORM\Column(name="city", type="string", length=255, unique=true)
+     * @ORM\Column(name="code", type="string", length=8, unique=true)
      */
-    private $city;
+    private $code;
 
 
     /**
@@ -41,27 +40,27 @@ class City
     }
 
     /**
-     * Set city
+     * Set code
      *
-     * @param string $city
+     * @param string $code
      *
-     * @return City
+     * @return CodePostal
      */
-    public function setCity($city)
+    public function setCode($code)
     {
-        $this->city = $city;
+        $this->code = $code;
 
         return $this;
     }
 
     /**
-     * Get city
+     * Get code
      *
      * @return string
      */
-    public function getCity()
+    public function getCode()
     {
-        return $this->city;
+        return $this->code;
     }
 }
 

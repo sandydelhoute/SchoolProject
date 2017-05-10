@@ -46,7 +46,10 @@ class ContactController extends Controller
                 );
 			$this->get('mailer')->send($message);
 		}
+		$breadcrumbs = $this->get("white_october_breadcrumbs");
+		$breadcrumbs->addItem('contact');
+		$breadcrumbs->prependRouteItem("Accueil", "homepage");
 
-			return $this->render('CoreCoreBundle:Contact:contactlayout.html.twig',array('form'=>$form->createView()));
+		return $this->render('CoreCoreBundle:Contact:contactlayout.html.twig',array('form'=>$form->createView()));
 	}
 }

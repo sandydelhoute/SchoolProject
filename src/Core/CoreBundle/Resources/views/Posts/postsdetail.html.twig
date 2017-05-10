@@ -1,0 +1,8 @@
+<h1>{{ posts.title }}</h1>
+        <p class="DateArticle uppercase">{{ posts.datePublish|date("m/d/Y") }}</p>
+        {% for image in posts.images %}
+        <img src="asset('image.path') }}" alt="" class="ImgLeft">
+        {% endfor %}
+        <p>
+        	{{ posts.content }}
+        </p>

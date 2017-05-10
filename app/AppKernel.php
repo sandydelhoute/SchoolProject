@@ -18,7 +18,8 @@ class AppKernel extends Kernel
             new Vendor\ConnectUsersBundle\VendorConnectUsersBundle(),
             new Admin\AdminBundle\AdminAdminBundle(),
             new Core\CoreBundle\CoreCoreBundle(),
-            new FOS\JsRoutingBundle\FOSJsRoutingBundle()
+            new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
+            new WhiteOctober\BreadcrumbsBundle\WhiteOctoberBreadcrumbsBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

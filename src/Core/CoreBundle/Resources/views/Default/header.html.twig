@@ -23,7 +23,7 @@
     <div class="collapse navbar-collapse color-black" id="account">
       <ul class="navmenu nav navbar-nav navbar-left">
         <li {% if not is_granted('ROLE_USER') %} class="nodisplay" {% endif %}>
-          <a href="#">Gérer mon compte</a>
+          <a href="{{ path('comptepage') }}">Gérer mon compte</a>
         </li>
         <li class="{% if is_granted('ROLE_USER') %} nodisplay {% endif %}">
           <a href="#"><i class="fa fa-check" aria-hidden="true"></i>&nbsp;&nbsp;Connexion</a>
@@ -90,7 +90,7 @@
           <span class="caret"></span>
         </div>
         <ul class="dropdown-menu" aria-labelledby="dropdown">
-          <li><a href="#">Gérer</a></li>
+          <li><a href="{{ path('comptepage') }}">Gérer</a></li>
           <li><a href="{{ path('disconnect') }}"><i class="fa fa-times" aria-hidden="true"></i>Déconnexion</a></li>
         </ul>
       </div>
@@ -107,3 +107,6 @@
 </nav>
 
 </header>
+<div class="container">
+  {{ wo_render_breadcrumbs() }}
+</div>

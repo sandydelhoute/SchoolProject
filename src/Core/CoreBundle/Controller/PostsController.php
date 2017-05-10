@@ -9,9 +9,12 @@ class PostsController extends Controller
 {
 
 
-    public function IndexAction()
-   {
-       return $this->render('CoreCoreBundle:Posts:postslayout.html.twig');
+    public function IndexAction(){  
+    $breadcrumbs = $this->get("white_october_breadcrumbs");
+    $breadcrumbs->addItem('Actualités');
+    $breadcrumbs->prependRouteItem("Accueil", "homepage");
+
+      return $this->render('CoreCoreBundle:Posts:postslayout.html.twig');
 
    }
    public function ScrollAction($offsetmin,$offsetmax)
@@ -30,6 +33,19 @@ class PostsController extends Controller
     array('data'=>$json)
     );
    return $response ;
+   }
+
+
+   public function detailAction($id){
+   $em = $this->getDoctrine()->getManager();
+   $posts = $em->getRepository('CoreCoreBundle:Posts')
+   ->findOneById($id);
+    $breadcrumbs = $this->get("white_october_breadcrumbs");
+    $breadcrumbs->addItem("Actualités", $this->get("router")->generate("actualitypage"));
+    $breadcrumbs->addItem($posts->getTitle());
+    $breadcrumbs->prependRouteItem("Accueil", "homepage");
+    return $this->render('CoreCoreBundle:Posts:postsdetaillayout.html.twig',array('posts'=>$posts));
+
    }
 
 }

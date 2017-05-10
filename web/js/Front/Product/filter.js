@@ -1,11 +1,12 @@
 function Filter(routeFilter,routeAdd,selector,render){
 
   this.routeAdd=routeAdd;
-  var dataFilter={priceMin:0,priceMax:100};
   this.render=render;
   this.routeFilter=routeFilter;
+  this.selector=selector;
   var _this = this;
   var objAjax=new CallAjax(selector);
+  var dataFilter={priceMin:0,priceMax:100};
 
   
 
@@ -26,9 +27,15 @@ function Filter(routeFilter,routeAdd,selector,render){
     filterAllergene();
     filterCategorie();
     filterPrice();
-    console.log(dataFilter.categorie);
-    console.log(dataFilter.allergene);
-  render(objAjax.callAjax(Routing.generate(_this.routeFilter,dataFilter)));
+  if(dataFilter.categorie.length > 0)
+  {
+     render(objAjax.callAjax(Routing.generate(_this.routeFilter,dataFilter)));
+ 
+  }
+  else
+  {
+    _this.selector.text('Votre recherche ne peut aboutir si aucune categorie est cochée')
+  }
 });
 }
 
@@ -50,12 +57,7 @@ var filterCategorie=function(){
      if($(this).prop('checked'))
       listCategorie.push($(this).val());
     });
-  // if(listCategorie.length == 0)
-  // {
-  //   listCategorie=null;
-  // }
     dataFilter.categorie=listCategorie;
-      console.log( dataFilter.categorie);
 
 
 }
@@ -81,7 +83,6 @@ var priceParams=function(){
 
 var resetfilter=function(){
 $('#resetfilter').click(function(){
-  console.log('je suis dans le reset');
    $( '#range' ).each(function(){
 
       var options = $(this).slider( 'option' );
@@ -92,10 +93,10 @@ $('#resetfilter').click(function(){
   $( "#rangeinput" ).val( $( "#range" ).slider( "values", 0 ) +
   "€ -" + $( "#range" ).slider( "values", 1 )+"€" );
   $('.allergenes-filter').each(function(){
-    $(this).prop('checked', true);
+    $(this).prop('checked', false);
   });
   $('.categories-filter').each(function(){
-  $(this).prop('checked',false);
+  $(this).prop('checked',true);
   });
 });
 }
@@ -107,5 +108,6 @@ var quantity=$(this).parents('.produits').find('.quantity').val();
 objAjax.callAjax(Routing.generate(_this.routeAdd,{id:idProduct,quantity:quantity}));
 })
 }
+
 
 }

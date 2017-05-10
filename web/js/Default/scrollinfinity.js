@@ -1,11 +1,12 @@
 
-function InfiniteScroll(route,selector,render){
+function InfiniteScroll(route,selector,render,offset){
   var _this=this;
   var objAjax=new CallAjax();
-  this.param={offsetmin:0,offsetmax:3};
+  this.param={offsetmin:0,offsetmax:offset};
   this.ajaxready = true;
   this.render=render;
   this.route=route;
+  this.offset=offset;
 
  var render=function(data){
    _this.render(data);
@@ -25,23 +26,17 @@ var scroll=function(){
     console.log("document - height "+($(document).height()-$(window).height()-200));
     if ( _this.ajaxready == false) 
     return;			
-if($(window).scrollTop() > ($(document).height()-$(window).height()-200)){
+if($(window).scrollTop() > ($(document).height()-$(window).height()-10)){
     	  _this.ajaxready=false;
       console.log("je suis dans le id du scroll");
-    _this.param.offsetmin = _this.param.offsetmin + _this.param.offsetmax;
-    _this.param.offsetmax = _this.param.offsetmax * 2 ;
-    render(objAjax.callAjax(Routing.generate(_this.route,_this.param)));
-  _this.ajaxready=true;
+    _this.param.offsetmin = _this.param.offsetmin + _this.offset + 1;
+    _this.param.offsetmax = _this.param.offsetmax + _this.offset + 1 ;
+  _this.ajaxready=render(objAjax.callAjax(Routing.generate(_this.route,_this.param)));
+;
 
     }
   });
 }
-
-
-// var render=function(data){
-//   console.log('je suis dans le reder');
-// 	  $('#grid').append(_this.render);
-// }
 		//$('#content #loader').fadeIn(400);
 		//$('#content #loader').fadeOut(400);			
 

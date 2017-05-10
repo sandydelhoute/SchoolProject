@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /* COOULEURS, BACKGROUND, PARAMETRES GENERAUX */
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600,700");
 * {
@@ -6,6 +7,12 @@
 body {
   font-family: 'Open Sans', sans-serif;
   overflow-x: hidden; }
+
+a {
+  text-decoration: none; }
+
+a:hover {
+  text-decoration: none; }
 
 h1, h2, h3 {
   font-weight: 700; }
@@ -595,5 +602,54 @@ header {
 @media screen and (min-width: 1024px) {
   #grid[data-columns]::before {
     content: '3 .column.size-1of3'; } }
+/* import compte */
+#gestioncompte .panel-default > a {
+  text-decoration: none;
+  color: black; }
+  #gestioncompte .panel-default > a .panel-heading {
+    background-color: #F2F2F2; }
+    #gestioncompte .panel-default > a .panel-heading .etapes {
+      font-weight: bold; }
+#gestioncompte #cartecb .clear-both {
+  clear: both; }
+#gestioncompte #cartecb .row > .paypal-bouton .btn {
+  margin-left: 30px; }
+#gestioncompte #info-perso .panel-body .bouton-modifié-moncompte {
+  float: right; }
+#gestioncompte #info-perso .margin-information {
+  margin-bottom: 20px; }
+#gestioncompte #panier .panel-body .prix-historique-commande {
+  float: right;
+  color: green; }
+#gestioncompte #panier .page-nation {
+  width: 100%;
+  text-align: center;
+  margin: auto; }
+#gestioncompte #cartecb .bouton-paiement {
+  height: 40px;
+  width: 50%;
+  margin: auto; }
+#gestioncompte #cartecb .div-bouton-validation {
+  margin-top: 27px; }
+#gestioncompte #cartecb .moiscb {
+  padding-bottom: 15px;
+  padding-top: 10px; }
+#gestioncompte #cartecb .margin-cb {
+  padding-bottom: 15px; }
+#gestioncompte .form-control.paiement {
+  margin-top: 10px; }
+#gestioncompte .bouton-paypal {
+  margin: auto;
+  margin-top: 15px; }
+#gestioncompte .row > .paypal-bouton .btn {
+  margin-left: 30px; }
+#gestioncompte .padding-top-credit {
+  padding-top: 15px; }
+#gestioncompte .fa.fa-angle-down.arrow {
+  float: right; }
+#gestioncompte .bold {
+  font-weight: bold; }
+#gestioncompte .tab {
+  text-align: center; }
 
 /*# sourceMappingURL=main.css.map */
