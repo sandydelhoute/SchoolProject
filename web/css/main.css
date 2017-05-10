@@ -652,4 +652,8 @@ header {
 #gestioncompte .tab {
   text-align: center; }
 
+/* import map */
+#map {
+  height: 300px; }
+
 /*# sourceMappingURL=main.css.map */

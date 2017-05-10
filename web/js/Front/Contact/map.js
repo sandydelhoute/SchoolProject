@@ -11,7 +11,9 @@ function init_map() {
 	var var_marker = new google.maps.Marker({
 		position: var_location,
 		map: var_map,
-		title:"Venice"});
+		title:"MealandBox",
+	    //icon: 'favicon.ico'
+	});
 
 	var var_map = new google.maps.Map(document.getElementById("map"),
 		var_mapoptions);
