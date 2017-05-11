@@ -39,6 +39,10 @@ h3 {
   color: #f2f2f2;
 }
 
+.form-group .btn-green {
+  width: 25%;
+}
+
 .btn-black {
   background: #2b2b2b;
   color: #f2f2f2;
@@ -689,6 +693,14 @@ header .navmenu .active {
   margin: 10px;
 }
 
+#filter h3 {
+  margin: 10px 0px;
+}
+
+#filter .btn-danger {
+  width: 100%;
+}
+
 /* import panier */
 .panier .panel-heading.global h3 {
   font-size: 2rem;
@@ -786,6 +798,41 @@ header .navmenu .active {
   height: 24px;
   margin: auto;
   max-width: 100%;
+}
+
+/* import inscription */
+.legende-input {
+  display: block;
+  text-align: right;
+  color: grey;
+  font-size: 12px;
+}
+
+.connexion, .inscription {
+  padding: 3vw;
+}
+
+@media screen and (max-width: 991px) {
+  .connexion, .inscription {
+    padding: 0 15px;
+  }
+}
+
+.inscription .homer {
+  margin-bottom: 15px;
+}
+
+.inscription .checkbox input[type="checkbox"] {
+  margin-left: 0;
+}
+
+.nopad .col-xs-12 {
+  padding: 0;
+}
+
+.nopad .col-xs-12 .btn-green {
+  width: 40%;
+  margin-bottom: 20px;
 }
 
 /* import produitdetail */

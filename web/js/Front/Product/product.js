@@ -66,5 +66,4 @@ $(document).ready(function(){
 	}
 	var objFilter = new Filter(routeFilter,routeAddPanier,selector,render);
 	objFilter.init();
-
 });

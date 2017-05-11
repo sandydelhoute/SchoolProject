@@ -61,7 +61,7 @@ class Product
 
 
 
-    /** 
+    /**
      * @ORM\ManyToOne(targetEntity="Provider", inversedBy="id")
      * @ORM\JoinColumn(name="product_provider", referencedColumnName="id")
      */
@@ -114,7 +114,7 @@ class Product
      */
     private $active;
 
- 
+
 
     /**
      * Remove Image
@@ -125,7 +125,7 @@ class Product
  public function removeImage(Images $image)
     {
         $this->images->removeElement($image);
-        
+
     }
 
     /**
@@ -391,6 +391,6 @@ class Product
         return $this->providers;
     }
     public function toString(){
-        
+
     }
 }

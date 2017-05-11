@@ -35,7 +35,7 @@ class ContactType extends AbstractType
     'label'=>'Indiquez-nous la raison de votre contact'
     ))
         		->add('body',TextareaType::class,array('label'=>'Votre message:'))
-        		->add('save', SubmitType::class, array('label' => 'Envoye','attr'=>array('class'=>'btn-green')));
+        		->add('save', SubmitType::class, array('label' => 'Envoyez','attr'=>array('class'=>'btn-green')));
 
     }
      /**

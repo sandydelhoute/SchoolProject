@@ -10,7 +10,7 @@
   <div class="alert alert-danger"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
     {{ error.message| replace({"Bad credentials." : "Email ou mot de passe invalide."}) }}</div>
   {% endif %}
-      <form  action="{{ path('login_check') }}" method="post">
+      <form  action="{{ path('login_check') }}" method="post" class="nopad">
         <div class="form-group">
           <label for="mail-connexion">E-mail</label>
           <div class="input-group">
@@ -34,25 +34,23 @@
               <label for="remember_me">Rester connecté</label>
           </div>
         </div>
-        <div class="col-xs-6">
-          <div class="btn btn-green" data-toggle="collapse" data-target="#formresetpassword" class="arrow" >mot de passe oublié?</div>
-
-
+        <div class="col-xs-12 homer">
+          <a href="#" data-toggle="collapse" data-target="#formresetpassword" class="arrow" >Mot de passe oublié ?</a>
         </div>
-        <div class="col-xs-6">
+        <div class="col-xs-12">
           <button type="submit" class="btn btn-green">Me connecter</button>
         </div>
       </form>
-    </div>
-    <div class="row collapse" id="formresetpassword">
-      <div class="form-group">
-        <label for="emailforresetpass">Email</label>
-        <div class="input-group">
-          <input id="emailforresetpass" type="email"  class="form-control" placeholder="email@email.email">
-          <div class="input-group-addon">
-           <i class="fa fa-check" aria-hidden="true"></i>
+      <div class="row collapse" id="formresetpassword">
+        <div class="form-group">
+          <label for="emailforresetpass">Email</label>
+          <div class="input-group">
+            <input id="emailforresetpass" type="email"  class="form-control" placeholder="email@email.email">
+            <div class="input-group-addon">
+             <i class="fa fa-check" aria-hidden="true"></i>
+           </div>
          </div>
        </div>
      </div>
-   </div>
+    </div>
  </div>
