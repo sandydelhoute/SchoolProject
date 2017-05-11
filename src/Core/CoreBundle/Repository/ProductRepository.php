@@ -46,7 +46,7 @@ class ProductRepository extends \Doctrine\ORM\EntityRepository
 
         return $paginator;
     }
-public function filterProduct($categorie,$allergene,$priceMin,$priceMax){
+public function filterProduct($categorie,$allergene,$priceMin,$priceMax,$offsetMin,$offsetMax){
 
     $qb = $this->createQueryBuilder('p')
     ->join('p.categories', 'c')
@@ -58,7 +58,9 @@ public function filterProduct($categorie,$allergene,$priceMin,$priceMax){
     ->setParameter('allergene', $allergene)
     ->setParameter('categorie',$categorie)
     ->setParameter('prixentiermin',$priceMin)
-    ->setParameter('prixentiermax', $priceMax);
+    ->setParameter('prixentiermax', $priceMax)
+    ->setFirstResult($offsetMin)
+    ->setMaxResults($offsetMax);
 
 
     $query = $qb->getQuery();
