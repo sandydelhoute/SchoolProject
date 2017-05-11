@@ -122,7 +122,7 @@ class Product
      * @param Images $image
      */
 
- public function removeImage(Image $image)
+ public function removeImage(Images $image)
     {
         $this->images->removeElement($image);
 
@@ -133,7 +133,7 @@ class Product
      *
      * @param Images $image
      */
-    public function addImage(Image $image)
+    public function addImage(Images $image)
     {
         // Si l'objet fait déjà partie de la collection on ne l'ajoute pas
         if (!$this->images->contains($image)) {
