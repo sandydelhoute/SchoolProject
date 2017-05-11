@@ -1,13 +1,14 @@
 $(document).ready(function(){
 var container=$('#product_images');
 var index=container.find(':input').length;
-
+console.log(index);
 
 function addImage(container)
 {
 var template=container.attr('data-prototype')
 .replace(/__name__label__/g,'image n°'+(index+1))
 .replace(/__name__/g,index);
+
 var prototype=$(template);
 addDeleteLink(prototype);
 container.append(prototype);

@@ -4,10 +4,10 @@ namespace Vendor\ConnectUsersBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+ /* @ORM\Table(name="users_web")*/
 
 /**
- * UsersWeb
- *
+ * 
  * @ORM\Table(name="users_web")
  * @ORM\Entity(repositoryClass="Vendor\ConnectUsersBundle\Repository\UsersWebRepository")
  */
@@ -18,7 +18,25 @@ class UsersWeb extends Users
 
         $this->cashBalance=0;
         $this->rewardPoints=0;
+        $this->order = new ArrayCollection();
+
     }
+
+
+
+    /**
+     * @var bigint
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Core\CoreBundle\Entity\OrderClient",mappedBy="users")
+     */
+    private $order;
 
     /**
      * @var float
@@ -96,5 +114,6 @@ class UsersWeb extends Users
    public function getRoles(){
         return array('ROLE_USER');
      }
+
 
 }

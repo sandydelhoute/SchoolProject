@@ -64,4 +64,3 @@ class City
         return $this->city;
     }
 }
-

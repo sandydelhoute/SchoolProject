@@ -32,4 +32,3 @@ class Addres
         return $this->id;
     }
 }
-

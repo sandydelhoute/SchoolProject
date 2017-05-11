@@ -5,10 +5,8 @@ namespace Vendor\ConnectUsersBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
-
 /** @ORM\MappedSuperclass */
-
- abstract class Users implements UserInterface, \Serializable
+abstract class Users implements UserInterface,\Serializable
 {
     /**
      * @Assert\NotBlank()
@@ -40,16 +38,8 @@ use Symfony\Component\Security\Core\User\UserInterface;
     private $limiteDateResetPass;
 
 
-    /**
-     * @var bigint
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     * @ORM\OneToMany(targetEntity="PasswordReset", mappedBy="users")
-     */
-    
-    private $id;
+
+    protected $id;
 
     /**
      * @var string
@@ -82,15 +72,6 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
    
 
-    /**
-     * Get id
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
 
     /**
      * Set name
@@ -262,5 +243,10 @@ use Symfony\Component\Security\Core\User\UserInterface;
     public function getLimiteDateResetPass()
     {
         return $this->limiteDateResetPass;
+    }
+
+
+    public function getRoles(){
+        
     }
 }

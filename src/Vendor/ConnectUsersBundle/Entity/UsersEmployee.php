@@ -5,21 +5,25 @@ namespace Vendor\ConnectUsersBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use JsonSerializable;
-
 /**
- * UsersEmployee
- *
- * @ORM\Table(name="users_employee")
+ * 
+ * @ORM\Table(name="users_employe")
  * @ORM\Entity(repositoryClass="Vendor\ConnectUsersBundle\Repository\UsersEmployeeRepository")
  */
 class UsersEmployee extends Users
 {
 
    
+    /**
+     * @var bigint
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
 
     public function getRoles(){
-        
-      
         return array('ROLE_'.$this->status->getName());
      }
 
@@ -30,10 +34,6 @@ class UsersEmployee extends Users
       * @ORM\JoinColumn(name="status", referencedColumnName="id")
       */
     private $status;
-
-
-
-
 
     /**
      * @var \Date

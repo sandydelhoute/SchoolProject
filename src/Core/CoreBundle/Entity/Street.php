@@ -63,4 +63,3 @@ class Street
         return $this->street;
     }
 }
-

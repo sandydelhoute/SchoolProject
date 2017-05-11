@@ -129,7 +129,7 @@ class Product
     }
 
     /**
-     * Add Image
+     * Add Images
      *
      * @param Images $image
      */
