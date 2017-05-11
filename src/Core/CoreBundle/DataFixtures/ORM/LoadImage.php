@@ -6,23 +6,24 @@ namespace Core\CoreBundle\DataFixtures\ORM;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use Core\CoreBundle\Entity\Provider;
-use \DateTime;
+use Core\CoreBundle\Entity\Images;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 
-class LoadProvider extends AbstractFixture implements OrderedFixtureInterface
+class LoadImage extends AbstractFixture implements OrderedFixtureInterface
 {
 
 public Function load(ObjectManager $manager){
 
-$provider=new Provider();
-$provider->setName("babar");
-$this->addReference('Provider',$provider);
-$manager->persist($provider);
+$image=new Images();
+$image->setPath("img/fixtures/fixture.png");
+$image->setAlt('fixture');
+$this->addReference('image',$image);
+$manager->persist($image);
 $manager->flush();
 }
     public function getOrder()
     {
-        return 6;
+        return 5;
     }
 }

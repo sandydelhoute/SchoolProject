@@ -30,6 +30,7 @@ $ListAllergene=array(
 foreach ($ListAllergene as $allergene=>$value) {
 	$allergene =new Allergene();
 	$allergene->setName($value);
+	$this->addReference($value,$allergene);
 	$manager->persist($allergene);
 }
 $manager->flush();
