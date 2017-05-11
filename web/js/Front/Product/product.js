@@ -32,8 +32,7 @@ $(document).ready(function(){
                  html += '</div>';
                  html += '</div>';
                  html += ' <div class="col-xs-12"><p>';
-
-<<<<<<< HEAD
+                 
                  var trimmable = '\u0009\u000A\u000B\u000C\u000D\u0020\u00A0\u1680\u180E\u2000\u2001\u2002\u2003\u2004\u2005\u2006\u2007\u2008\u2009\u200A\u202F\u205F\u2028\u2029\u3000\uFEFF';
                  var reg = new RegExp('(?=[' + trimmable + '])');
                  var count = 0;
@@ -59,33 +58,6 @@ $(document).ready(function(){
                  html += '</div>';
                  html += '</div>';
                  html += '</div>';
-=======
-        var trimmable = '\u0009\u000A\u000B\u000C\u000D\u0020\u00A0\u1680\u180E\u2000\u2001\u2002\u2003\u2004\u2005\u2006\u2007\u2008\u2009\u200A\u202F\u205F\u2028\u2029\u3000\uFEFF';
-        var reg = new RegExp('(?=[' + trimmable + '])');
-        var count = 0;
-        var description=obj.description.split(reg).filter(function(word) {
-            count += word.length;
-            return count <= 150;
-        }).join('')+'...';
-				html += description;
-				html += '</p></div>'
-				html += '<div class="col-xs-6 text-center">';
-				html += '<input type="number" class="form-control quantity" value="1" min="1"  step="1" required="required"></input>'
-				html += '</div>';
-				html += '<div class="col-xs-6">';
-				var prix=obj.prix.toString().split(".");
-				html += '<h3>'+prix[0]+'â‚¬';
-				html += '<small>'+prix[1]+'</small>';
-				html += '</h3>';
-				html += '</div>';
-				html += '<div class="row">';
-          		html += '<div class="col-xs-6 col-xs-offset-3">';
-          		html += '<button class="btn btn-success btn-block addpanier" data-product="'+obj.id+'">';
-          		html += '<i class="fa fa-shopping-cart fa-2x" aria-hidden="true"></i> | Ajouter</button>'
-         		html += '</div>';
-         		html += '</div>';
-        		html += '</div>';
->>>>>>> e5762673f68946f2e49255ca90f4b69f568d5796
 
                  selector.append(html);
              });
