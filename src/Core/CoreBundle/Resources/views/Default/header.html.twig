@@ -1,4 +1,5 @@
-<header>
+<div class="row">
+  <header>
   <nav class="navbar navbar-default  color-black background-yellow uppercase row" role="navigation">
 
     <div class="navbar-header">
@@ -57,30 +58,30 @@
           <div class="containertext">
             choissiez votre</br> point relais
           </div>
-        </div> 
+        </div>
       {% endif %}
-      <li {% if 'homepage' in app.request.attributes.get('_route') %}class="active"{% endif %}>
-        <a href="{{ path('homepage') }}">Accueil</a>
+      <li>
+        <a {% if 'homepage' in app.request.attributes.get('_route') %}class="active"{% endif %} href="{{ path('homepage') }}">Accueil</a>
       </li>
-      <li {% if 'productpage' in app.request.attributes.get('_route') %}class="active"{% endif %}>
-        <a href="{{ path('productpage') }}">Nos produits</a>
+      <li>
+        <a {% if 'productpage' in app.request.attributes.get('_route') %}class="active"{% endif %} href="{{ path('productpage') }}">Produits</a>
       </li>
       <div class="logo">
         <img class="img-responsive" src="{{ asset ('img/logo/logo.png') }}">
       </div>
-      <li {% if 'actualitypage' in app.request.attributes.get('_route') %}class="active"{% endif %}>
-        <a href="{{ path('actualitypage') }}">Actualités</a>
+      <li>
+        <a {% if 'actualitypage' in app.request.attributes.get('_route') %}class="active"{% endif %} href="{{ path('actualitypage') }}">Actualités</a>
       </li>
-      <li {% if 'contactpage' in app.request.attributes.get('_route') %}class="active"{% endif %}>
-        <a href="{{ path('contactpage') }}">Contact</a>
+      <li>
+        <a {% if 'contactpage' in app.request.attributes.get('_route') %}class="active"{% endif %} href="{{ path('contactpage') }}">Contact</a>
       </li>
       {% if  is_granted('ROLE_USER') %}
         <a href="{{ path('panierpage') }}" class="btn btn-black">
          <span class="compteur">{% if app.session.get('panier') is defined %}{{app.session.get('panier')|length}}{% endif %}</span> <i class="fa fa-shopping-cart fa-2x" aria-hidden="true"></i>
          <div class="containertext">
           <span class="abreviation">Mon </span>Panier
-        </div>   
-      </a>  
+        </div>
+      </a>
       <div class="dropdown">
         <div class="btn btn-green dropdown-toggle" type="button" id="dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
           <i class="fa fa-user fa-2x" aria-hidden="true"></i>
@@ -91,7 +92,7 @@
         </div>
         <ul class="dropdown-menu" aria-labelledby="dropdown">
           <li><a href="{{ path('comptepage') }}">Gérer</a></li>
-          <li><a href="{{ path('disconnect') }}"><i class="fa fa-times" aria-hidden="true"></i>Déconnexion</a></li>
+          <li><a href="{{ path('disconnect') }}"><i class="fa fa-times" aria-hidden="true"></i>&nbsp;&nbsp;Déconnexion</a></li>
         </ul>
       </div>
     {% else %}
@@ -107,6 +108,7 @@
 </nav>
 
 </header>
+</div>
 <div class="container">
   {{ wo_render_breadcrumbs() }}
 </div>

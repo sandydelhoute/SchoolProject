@@ -1,87 +1,117 @@
-$yellow:        #ffbe3b ; // PRIMARY COLOR
-$black:         #2b2b2b ; // SECONDARY COLOR
-$green:         #02b253 ; // TERTIARY COLOR
-$white:         #f2f2f2 ; // QUATERNARY COLOR
-$red:         #db524b ; // Cinquieme COLOR
-$xsmall:        480px;
-$small:         768px;
-$medium:        1024px;
+$yellow: #ffbe3b; // PRIMARY COLOR
+$black: #2b2b2b; // SECONDARY COLOR
+$green: #02b253; // TERTIARY COLOR
+$white: #f2f2f2; // QUATERNARY COLOR
+$red: #db524b; // Cinquieme COLOR
+$xsmall: 480px;
+$small: 768px;
+$medium: 1024px;
+
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 @import url( 'https://fonts.googleapis.com/css?family=Open+Sans:400,600,700');
+
 body {
-  font-family: 'Open Sans', sans-serif;
-  overflow-x: hidden;
+    font-family: 'Open Sans', sans-serif;
+    overflow-x: hidden;
 }
-a{text-decoration:none;}
-a:hover{text-decoration:none;}
-h1,h2,h3{
-  font-weight: 700;
+
+a {
+    text-decoration: none;
 }
+
+a:hover {
+    text-decoration: none;
+}
+
+h1,
+h2,
+h3 {
+    font-weight: 700;
+}
+
 .btn {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  height: 50px;
-  font-weight: bold;
-  transition: 0.125s ease-in-out all;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 50px;
+    font-weight: bold;
+    transition: 0.125s ease-in-out all;
 }
+
 .btn-green {
-  background: $green;
-  color: $white;
+    background: $green;
+    color: $white;
 }
+
 .btn-black {
-  background: $black;
-  color: $white;
+    background: $black;
+    color: $white;
 }
+
 .btn-blackborder {
-  border: $black 1px solid;
-}
-.color-yellow{
-    color:      $yellow !important;
-}
-.color-green{
-    color:      $green !important;
-}
-.color-white{
-    color:      $white !important;
+    border: $black 1px solid;
 }
 
-.color-black{
-    color:      $black !important;
+.color-yellow {
+    color: $yellow !important;
 }
 
-.color-black{
-    color:      $red !important;
+.color-green {
+    color: $green !important;
 }
-.background-black{
+
+.color-white {
+    color: $white !important;
+}
+
+.color-black {
+    color: $black !important;
+}
+
+.color-red {
+    color: $red !important;
+}
+
+.background-black {
     background-color: $black;
 }
-.background-green{
+
+.background-green {
     background-color: $green;
 }
-.background-yellow{
+
+.background-yellow {
     background-color: $yellow;
 }
-.background-red{
+
+.background-red {
     background-color: $red;
 }
-.uppercase{
+
+.uppercase {
     text-transform: uppercase;
 }
-ul{ list-style : none;}
-.display-desktop{ display:none;
-  @media screen and (max-width : 768px) {
-      display:block;
-   }
-}
-.display-mobile{ display:none;
-    @media screen and (min-width : 768px) {
-      display:block;
-   }
+
+ul {
+    list-style: none;
 }
 
-label{
-  font-weight:600;
+.display-desktop {
+    display: none;
+    @media screen and (max-width : 768px) {
+        display: block;
+    }
+}
+
+.display-mobile {
+    display: none;
+    @media screen and (min-width : 768px) {
+        display: block;
+    }
+}
+
+label {
+    font-weight: 600;
 }

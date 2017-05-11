@@ -1,6 +1,6 @@
 header {
     @import url( 'https://fonts.googleapis.com/css?family=Comfortaa:700');
-    margin-bottom:30px;
+
     #account{
       @media screen and (min-width: 1024px){
         display: none !important;
@@ -25,6 +25,7 @@ header {
 
     .logo {
         position: relative;
+        margin : 0.5vw;
         padding: 1vw;
         top: 1.1vw;
         border-radius: 50%;
@@ -42,8 +43,8 @@ header {
 
     .btn {
         font-size: 0.7vw;
-        &:hover{
-          color: $white;
+        &:hover, &:focus{
+          color: $white !important;
         }
         &:active{
           box-shadow: none;
@@ -141,7 +142,7 @@ header {
             padding: 10px 0.8%;
             width: 7%;
             @media screen and (max-width: 1330px) {
-                font-size: 0.9vw;
+                font-size: 1.1vw;
             }
             @media screen and (max-width: 1024px) {
                 width: 100%;
@@ -152,12 +153,12 @@ header {
                 background-color: inherit;
                 color: $black !important;
                 padding: 5px 0;
-                text-decoration:none;
             }
 
             a:hover {
                 background-color: inherit;
                 color: $white !important;
+                border-bottom: $green solid 2px;
                 @media screen and (max-width: 1024px) {
                     color: $black;
                     border: none;
@@ -167,11 +168,7 @@ header {
 
             &:hover {
                 color: $white !important;
-                border-bottom: $green solid 2px;
             }
-        }
-        .dropdown{
-            margin: 10px 0.8%;
         }
         #dropdown{
           width: 100%;
@@ -248,7 +245,7 @@ header {
                 font-size: 0.8vw;
                 @media screen and (max-width: 1330px) {
                     padding: 0;
-                    font-size: 0.9vw;
+                    font-size: 1.1vw;
                 }
             }
 
@@ -268,10 +265,6 @@ header {
         .active {
             border-bottom: $green solid 2px;
             color: $white;
-
-            a:hover{
-                color:inherit;
-            }
             @media screen and (max-width: 1024px) {
                 border: none;
             }
