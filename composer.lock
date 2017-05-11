@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "aa67472325ad0a8cc3d3c87b0bc30c63",
-    "content-hash": "f2e9996e6480b2f95bb7b35edbbd8094",
+    "hash": "aceddad126cfa6b037c43c5fcacd983a",
+    "content-hash": "4aa92b981a952d28c41369f162aca68d",
     "packages": [
         {
             "name": "composer/ca-bundle",
@@ -1742,16 +1742,16 @@
         },
         {
             "name": "swiftmailer/swiftmailer",
-            "version": "v5.4.7",
+            "version": "v5.4.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/swiftmailer/swiftmailer.git",
-                "reference": "56db4ed32a6d5c9824c3ecc1d2e538f663f47eb4"
+                "reference": "9a06dc570a0367850280eefd3f1dc2da45aef517"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/56db4ed32a6d5c9824c3ecc1d2e538f663f47eb4",
-                "reference": "56db4ed32a6d5c9824c3ecc1d2e538f663f47eb4",
+                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/9a06dc570a0367850280eefd3f1dc2da45aef517",
+                "reference": "9a06dc570a0367850280eefd3f1dc2da45aef517",
                 "shasum": ""
             },
             "require": {
@@ -1792,7 +1792,7 @@
                 "mail",
                 "mailer"
             ],
-            "time": "2017-04-20 17:32:18"
+            "time": "2017-05-01 15:54:03"
         },
         {
             "name": "symfony/monolog-bundle",
@@ -2394,21 +2394,20 @@
         },
         {
             "name": "twig/twig",
-            "version": "v2.3.2",
+            "version": "v1.33.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "85e8372c451510165c04bf781295f9d922fa524b"
+                "reference": "dd6ca96227917e1e85b41c7c3cc6507b411e0927"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/85e8372c451510165c04bf781295f9d922fa524b",
-                "reference": "85e8372c451510165c04bf781295f9d922fa524b",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/dd6ca96227917e1e85b41c7c3cc6507b411e0927",
+                "reference": "dd6ca96227917e1e85b41c7c3cc6507b411e0927",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.0",
-                "symfony/polyfill-mbstring": "~1.0"
+                "php": ">=5.2.7"
             },
             "require-dev": {
                 "psr/container": "^1.0",
@@ -2418,7 +2417,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.3-dev"
+                    "dev-master": "1.33-dev"
                 }
             },
             "autoload": {
@@ -2453,50 +2452,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2017-04-21 00:13:02"
-        },
-        {
-            "name": "whiteoctober/breadcrumbs-bundle",
-            "version": "1.2.2",
-            "target-dir": "WhiteOctober/BreadcrumbsBundle",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/whiteoctober/BreadcrumbsBundle.git",
-                "reference": "52b748c0fce0b3500891a0501c4f796085d318de"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/whiteoctober/BreadcrumbsBundle/zipball/52b748c0fce0b3500891a0501c4f796085d318de",
-                "reference": "52b748c0fce0b3500891a0501c4f796085d318de",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.2",
-                "symfony/framework-bundle": "~2.0|~3.0"
-            },
-            "type": "symfony-bundle",
-            "autoload": {
-                "psr-0": {
-                    "WhiteOctober\\BreadcrumbsBundle": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Rich Sage",
-                    "email": "rich.sage@gmail.com"
-                }
-            ],
-            "description": "A small breadcrumbs bundle for Symfony2",
-            "homepage": "https://github.com/whiteoctober/BreadcrumbsBundle",
-            "keywords": [
-                "breadcrumbs",
-                "symfony"
-            ],
-            "time": "2016-02-05 10:46:40"
+            "time": "2017-04-20 17:39:48"
         },
         {
             "name": "willdurand/jsonp-callback-validator",
@@ -2657,6 +2613,75 @@
             "time": "2015-11-04 21:23:23"
         },
         {
+            "name": "pagerfanta/pagerfanta",
+            "version": "v1.0.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/whiteoctober/Pagerfanta.git",
+                "reference": "29aade64addfdfb12c05aabf160f09d1aea6b143"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/whiteoctober/Pagerfanta/zipball/29aade64addfdfb12c05aabf160f09d1aea6b143",
+                "reference": "29aade64addfdfb12c05aabf160f09d1aea6b143",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "doctrine/orm": "~2.3",
+                "doctrine/phpcr-odm": "1.*",
+                "jackalope/jackalope-doctrine-dbal": "1.*",
+                "jmikola/geojson": "~1.0",
+                "mandango/mandango": "~1.0@dev",
+                "mandango/mondator": "~1.0@dev",
+                "phpunit/phpunit": "~4 | ~5",
+                "propel/propel": "~2.0@dev",
+                "propel/propel1": "~1.6",
+                "ruflin/elastica": "~1.3",
+                "solarium/solarium": "~3.1"
+            },
+            "suggest": {
+                "doctrine/mongodb-odm": "To use the DoctrineODMMongoDBAdapter.",
+                "doctrine/orm": "To use the DoctrineORMAdapter.",
+                "doctrine/phpcr-odm": "To use the DoctrineODMPhpcrAdapter. >= 1.1.0",
+                "mandango/mandango": "To use the MandangoAdapter.",
+                "propel/propel": "To use the Propel2Adapter",
+                "propel/propel1": "To use the PropelAdapter",
+                "solarium/solarium": "To use the SolariumAdapter."
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Pagerfanta\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Pablo Díez",
+                    "email": "pablodip@gmail.com"
+                }
+            ],
+            "description": "Pagination for PHP 5.3",
+            "keywords": [
+                "page",
+                "pagination",
+                "paginator",
+                "paging"
+            ],
+            "time": "2017-03-20 13:46:15"
+        },
+        {
             "name": "sensio/generator-bundle",
             "version": "v3.1.4",
             "source": {
@@ -2771,6 +2796,101 @@
             "description": "Symfony PHPUnit Bridge",
             "homepage": "https://symfony.com",
             "time": "2017-04-12 14:13:17"
+        },
+        {
+            "name": "white-october/pagerfanta-bundle",
+            "version": "v1.0.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/whiteoctober/WhiteOctoberPagerfantaBundle.git",
+                "reference": "ba78522935b141e7e3dee637dc0095fb44fde65b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/whiteoctober/WhiteOctoberPagerfantaBundle/zipball/ba78522935b141e7e3dee637dc0095fb44fde65b",
+                "reference": "ba78522935b141e7e3dee637dc0095fb44fde65b",
+                "shasum": ""
+            },
+            "require": {
+                "pagerfanta/pagerfanta": "1.0.*",
+                "symfony/framework-bundle": "~2.3|~3.0",
+                "symfony/property-access": "~2.3|~3.0",
+                "symfony/twig-bundle": "~2.3|~3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~3.7",
+                "symfony/symfony": "~2.3|~3.0"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "WhiteOctober\\PagerfantaBundle\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Pablo Díez",
+                    "email": "pablodip@gmail.com"
+                }
+            ],
+            "description": "Bundle to use Pagerfanta with Symfony2",
+            "keywords": [
+                "page",
+                "paging"
+            ],
+            "time": "2017-02-10 16:54:59"
+        },
+        {
+            "name": "whiteoctober/breadcrumbs-bundle",
+            "version": "1.2.2",
+            "target-dir": "WhiteOctober/BreadcrumbsBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/whiteoctober/BreadcrumbsBundle.git",
+                "reference": "52b748c0fce0b3500891a0501c4f796085d318de"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/whiteoctober/BreadcrumbsBundle/zipball/52b748c0fce0b3500891a0501c4f796085d318de",
+                "reference": "52b748c0fce0b3500891a0501c4f796085d318de",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2",
+                "symfony/framework-bundle": "~2.0|~3.0"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-0": {
+                    "WhiteOctober\\BreadcrumbsBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Rich Sage",
+                    "email": "rich.sage@gmail.com"
+                }
+            ],
+            "description": "A small breadcrumbs bundle for Symfony2",
+            "homepage": "https://github.com/whiteoctober/BreadcrumbsBundle",
+            "keywords": [
+                "breadcrumbs",
+                "symfony"
+            ],
+            "time": "2016-02-05 10:46:40"
         }
     ],
     "aliases": [],
