@@ -1,0 +1,28 @@
+.legende-input{
+  display: block;
+  text-align: right;
+  color: grey;
+  font-size: 12px;
+}
+.connexion, .inscription{
+  padding: 3vw;
+  @media screen and (max-width: 991px){
+    padding: 0 15px;
+  }
+}
+.inscription{
+  .homer{
+    margin-bottom: 15px;
+  }
+  .checkbox input[type="checkbox"]{
+  margin-left: 0;
+  }
+}
+
+.nopad .col-xs-12{
+  padding : 0;
+  .btn-green{
+    width : 40%;
+    margin-bottom: 20px;
+  }
+}
