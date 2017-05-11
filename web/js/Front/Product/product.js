@@ -1,4 +1,4 @@
-$(document).ready(function(){	
+$(document).ready(function(){
 	var selector=$("#listProduct");
 	var routeFilter='productfilterpage';
 	var routeAddPanier='addproductpage';
@@ -6,7 +6,7 @@ $(document).ready(function(){
 
 		data.done(function(data){
 			selector.html('');
-			if($.parseJSON(data.data)>0)
+			//if($.parseJSON(data.data)>0)
 			$.each($.parseJSON(data.data), function(key,obj){
 			var params={id: obj.id};
 			var html= '<div class="col-xs-12 col-md-6">';
@@ -46,7 +46,7 @@ $(document).ready(function(){
 				html += '</div>';
 				html += '<div class="col-xs-6">';
 				var prix=obj.prix.toString().split(".");
-				html += '<h3>'+prix[0]+'€';
+				html += '<h3>'+prix[0]+'â‚¬';
 				html += '<small>'+prix[1]+'</small>';
 				html += '</h3>';
 				html += '</div>';
@@ -66,5 +66,5 @@ $(document).ready(function(){
 	}
 	var objFilter = new Filter(routeFilter,routeAddPanier,selector,render);
 	objFilter.init();
-	
+
 });

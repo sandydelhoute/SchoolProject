@@ -96,4 +96,3 @@ class Coordonates
         return $this->phone;
     }
 }
-

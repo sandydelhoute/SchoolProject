@@ -5,12 +5,12 @@ namespace Core\CoreBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * CodePostal
+ * Payement
  *
- * @ORM\Table(name="code_postal")
- * @ORM\Entity(repositoryClass="Core\CoreBundle\Repository\CodePostalRepository")
+ * @ORM\Table(name="payement")
+ * @ORM\Entity(repositoryClass="Core\CoreBundle\Repository\PayementRepository")
  */
-class CodePostal
+class Payement
 {
     /**
      * @var int
@@ -24,9 +24,9 @@ class CodePostal
     /**
      * @var string
      *
-     * @ORM\Column(name="code", type="string", length=8, unique=true)
+     * @ORM\Column(name="type", type="string", length=255, unique=true)
      */
-    private $code;
+    private $type;
 
 
     /**
@@ -40,26 +40,26 @@ class CodePostal
     }
 
     /**
-     * Set code
+     * Set type
      *
-     * @param string $code
+     * @param string $type
      *
-     * @return CodePostal
+     * @return Payement
      */
-    public function setCode($code)
+    public function setType($type)
     {
-        $this->code = $code;
+        $this->type = $type;
 
         return $this;
     }
 
     /**
-     * Get code
+     * Get type
      *
      * @return string
      */
-    public function getCode()
+    public function getType()
     {
-        return $this->code;
+        return $this->type;
     }
 }

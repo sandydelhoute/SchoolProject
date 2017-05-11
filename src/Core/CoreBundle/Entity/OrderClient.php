@@ -3,7 +3,6 @@
 namespace Core\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
 /**
  * OrderClient
  *
@@ -12,6 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class OrderClient
 {
+
     /**
      * @var int
      *
@@ -20,13 +20,32 @@ class OrderClient
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+    /**
+     * Many Features have One Product.
+     * @ORM\ManyToOne(targetEntity="Vendor\ConnectUsersBundle\Entity\UsersWeb",inversedBy="id")
+     * @ORM\JoinColumn(name="users_id",referencedColumnName="id")
+     */
+    private $users;
 
+    
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="datePurchase", type="datetime")
      */
     private $datePurchase;
+
+    /**
+     *
+     * @ORM\OneToMany(targetEntity="OrderLine", mappedBy="orderClient")
+     */
+    private $orderLine;
+
+
+
+    public function __construct() {
+        $this->orderLine = new ArrayCollection();
+    }
 
 
     /**
@@ -62,5 +81,39 @@ class OrderClient
     {
         return $this->datePurchase;
     }
-}
 
+    /**
+     * Add orderLine
+     *
+     * @param \Core\CoreBundle\Entity\OrderLine $orderLine
+     *
+     * @return OrderClient
+     */
+    public function addOrderLine(\Core\CoreBundle\Entity\OrderLine $orderLine)
+    {
+        $this->orderLine[] = $orderLine;
+
+        return $this;
+    }
+
+    /**
+     * Remove orderLine
+     *
+     * @param \Core\CoreBundle\Entity\OrderLine $orderLine
+     */
+    public function removeOrderLine(\Core\CoreBundle\Entity\OrderLine $orderLine)
+    {
+        $this->orderLine->removeElement($orderLine);
+    }
+
+    /**
+     * Get orderLine
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getOrderLine()
+    {
+        return $this->orderLine;
+    }
+
+}

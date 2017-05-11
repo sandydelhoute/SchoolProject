@@ -63,4 +63,3 @@ class TypeStreet
         return $this->name;
     }
 }
-

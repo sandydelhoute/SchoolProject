@@ -9,6 +9,7 @@ parameters:
     locale: fr
     img_product_directory: '%kernel.root_dir%/../web/img/product'
     img_posts_directory: '%kernel.root_dir%/../web/img/posts'
+    img_fixture: '%kernel.root_dir%/../web/img/fixtures'
 
 framework:
     #esi:             ~
@@ -89,7 +90,7 @@ fos_js_routing:
     routes_to_expose: [page_moncompte_resetpassword,admin_utilisateurs_filter,panierpage,deleteproductpage,productdetailpage,productfilterpage,changeQuantity]
 
 white_october_breadcrumbs:
-    separator:          '/'
+    separator:          ''
     separatorClass:     'sepaseparatorrator'
     listId:             'wo-breadcrumbs'
     listClass:          'breadcrumb'

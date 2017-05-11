@@ -21,6 +21,14 @@ class OrderLine
      */
     private $id;
 
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="OrderCLient",inversedBy="order")
+     * @ORM\JoinColumn(name="order_id",referencedColumnName="id")
+     */
+    private $orderClient;
+
+
     /**
      * @var int
      *
@@ -151,5 +159,29 @@ class OrderLine
     public function getProduct()
     {
         return $this->product;
+    }
+
+    /**
+     * Set orderClient
+     *
+     * @param \Core\CoreBundle\Entity\OrderCLient $orderClient
+     *
+     * @return OrderLine
+     */
+    public function setOrderClient(\Core\CoreBundle\Entity\OrderCLient $orderClient = null)
+    {
+        $this->orderClient = $orderClient;
+
+        return $this;
+    }
+
+    /**
+     * Get orderClient
+     *
+     * @return \Core\CoreBundle\Entity\OrderCLient
+     */
+    public function getOrderClient()
+    {
+        return $this->orderClient;
     }
 }
