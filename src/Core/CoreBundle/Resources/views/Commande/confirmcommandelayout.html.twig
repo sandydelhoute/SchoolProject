@@ -5,17 +5,6 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('css/main.css') }}"/>
 
 {% endblock stylesheets %}
-
-
-{% block javascripts %}
-
-    {{ parent() }}
-    <script src="{{ asset('js/monjs.js') }}"></script>
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAE6dCPBTnGEsKzpyim81lzA7cYanfqP8U&libraries=places"></script>
-
-
-{% endblock javascripts %}
-
 {% block body %}
     
     <div class="container-fluid">
@@ -24,16 +13,20 @@
         {% endblock header %}
     </div>
     <div class="container">
-    {% block compte %}
-        {% include 'CoreCoreBundle:Compte:compte.html.twig' %}
-    {% endblock compte %}
-    {% block history %}
-        {% include 'CoreCoreBundle:Commande:historycommande.html.twig' %}
-    {% endblock history %}
+        {% block tunnel %}
+            {% include 'CoreCoreBundle:Commande:commande.html.twig' %}
+        {% endblock tunnel %}
+        
+         {% block resume %}
+            {% include 'CoreCoreBundle:Commande:detailpanier.html.twig' %}
+        {% endblock resume%}
     </div>
     <div class="container-fluid">
-      	{% block footer %}
+        {% block footer %}
         {% include 'CoreCoreBundle:Default:footer.html.twig' %}
         {% endblock footer %}
      </div>
+
+
+
 {% endblock body %}

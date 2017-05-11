@@ -20,6 +20,8 @@ class AppKernel extends Kernel
             new Core\CoreBundle\CoreCoreBundle(),
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
             new WhiteOctober\BreadcrumbsBundle\WhiteOctoberBreadcrumbsBundle(),
+            new Knp\Bundle\SnappyBundle\KnpSnappyBundle(),
+
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

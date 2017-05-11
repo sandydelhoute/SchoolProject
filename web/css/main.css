@@ -516,6 +516,10 @@ header {
   padding-bottom: 15px; }
 #tunnel .panel-default .commanderetrait {
   padding-top: 25px; }
+#tunnel #paiement .nav-tabs img {
+  height: 24px;
+  margin: auto;
+  max-width: 100%; }
 
 /* import produitdetail */
 #produitdetail .btn {

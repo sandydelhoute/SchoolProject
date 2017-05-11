@@ -6,7 +6,7 @@ $(document).ready(function(){
 
 		data.done(function(data){
 			selector.html('');
-		
+			if($.parseJSON(data.data)>0)
 			$.each($.parseJSON(data.data), function(key,obj){
 			var params={id: obj.id};
 			var html= '<div class="col-xs-12 col-md-6">';

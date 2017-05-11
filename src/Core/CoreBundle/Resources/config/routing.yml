@@ -26,6 +26,9 @@ commandepage:
     path:     /commande
     defaults: { _controller: CoreCoreBundle:Commande:commande }
 
+downloadorder:
+    path:     /commande/download/{id}
+    defaults: { _controller: CoreCoreBundle:Commande:downloadResumeOrder }
 # panier
 panierpage:
     path:     /panier

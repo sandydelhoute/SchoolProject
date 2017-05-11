@@ -24,10 +24,12 @@ class ProductController extends Controller
  public function productsFilterAction($allergene=null,$categorie,$priceMin,$priceMax)
  {
    $em = $this->getDoctrine()->getManager();
+   $categorie=explode(",", $categorie);
+   $allergene=explode(",", $allergene);
 
    $listProduct = $em->getRepository('CoreCoreBundle:Product')
-   ->filterProduct($allergene,$categorie,$priceMin,$priceMax);
-
+   ->filterProduct($categorie,$allergene,$priceMin,$priceMax);
+ 
    $serializer = $this->get('serializer');
    $json = $serializer->serialize(
     $listProduct,
