@@ -4,6 +4,8 @@ $(document).ready(function(){
 	var routeAddPanier='addproductpage';
 	var render=function(data){
 
+    var stopAjax = false;
+
 		data.done(function(data){
 			// selector.html('');
 			if($.parseJSON(data.data).length>0){
@@ -62,12 +64,12 @@ $(document).ready(function(){
                  selector.append(html);
              });
          }
-
          else{
-            return false;
-        }
+            stopAjax = true;
+         }
     })
 
+    return stopAjax;
 
 	}
 	var objFilter = new Filter(routeFilter,routeAddPanier,selector,render,4);

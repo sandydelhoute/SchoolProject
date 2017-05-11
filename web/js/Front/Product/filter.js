@@ -4,7 +4,7 @@ function Filter(routeFilter,routeAdd,selector,render,offset){
   this.render=render;
   this.routeFilter=routeFilter;
   this.selector=selector;
-  this.ajaxready=true;
+  var ajaxready=true;
 
   this.offset=offset;
 
@@ -22,11 +22,11 @@ function Filter(routeFilter,routeAdd,selector,render,offset){
     priceParams();
     addPanier();
     render(objAjax.callAjax(Routing.generate(_this.routeFilter,dataFilter)));
-    console.log(dataFilter);
+    console.log(ajaxready);
     scroll();
   }
   var render=function(data){
-   _this.render(data);
+   return _this.render(data);
  }
  var clickApply=function(){
   $('#applyfilter').click(function(){
@@ -35,8 +35,11 @@ function Filter(routeFilter,routeAdd,selector,render,offset){
     filterPrice();
     if(dataFilter.categorie.length > 0)
     {
+     ajaxready = true;
+     _this.selector.html('');
+     dataFilter.offsetMin=0;
+     dataFilter.offsetMax=_this.offset;
      render(objAjax.callAjax(Routing.generate(_this.routeFilter,dataFilter)));
-
    }
    else
    {
@@ -124,17 +127,23 @@ var scroll=function(){
     // console.log("windows "+$(window).height());
     // console.log("document - height "+($(document).height()-$(window).height()-200));
 
-    console.log(dataFilter);
-    if ( _this.ajaxready == false) 
-      return;     
-    if($(window).scrollTop() > ($(document).height()-$(window).height()-100)){
-     _this.ajaxready=false;
-     console.log("je suis dans le id du scroll");
-     dataFilter.offsetMin = dataFilter.offsetMin + _this.offset + 1;
-     dataFilter.offsetMax = dataFilter.offsetMax + _this.offset + 1 ;
-     _this.ajaxready=render(objAjax.callAjax(Routing.generate(_this.routeFilter,dataFilter)));
-     ;
+    // console.log(dataFilter);
+    // console.log(ajaxready);
 
+    // var heightScroll = $(window).scrollTop();
+    // $('#filter').css({top:heightScroll});
+
+    if ( ajaxready == false)
+      return;
+    if($(window).scrollTop() > ($(document).height()-$(window).height()-200)){
+     ajaxready=false;
+     console.log("je suis dans le id du scroll");
+     dataFilter.offsetMin = dataFilter.offsetMin + _this.offset;
+     dataFilter.offsetMax = dataFilter.offsetMax + _this.offset + 1 ;
+     ajaxready=render(objAjax.callAjax(Routing.generate(_this.routeFilter,dataFilter)));
+     // render(objAjax.callAjax(Routing.generate(_this.routeFilter,dataFilter)));
+     // ajaxready = true;
+     console.log(ajaxready);
    }
  });
 }
