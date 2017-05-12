@@ -6,7 +6,7 @@
     height: auto;
     position: relative;
     transition: 0.25s all linear;
-
+    min-height: 480px;
     &:hover {
         -moz-box-shadow: 0px 0px 5px 0px #2b2b2b;
         -webkit-box-shadow: 0px 0px 5px 0px #2b2b2b;

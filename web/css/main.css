@@ -603,6 +603,7 @@ header .navmenu .active {
   height: auto;
   position: relative;
   transition: 0.25s all linear;
+  min-height: 480px;
 }
 
 .produits:hover {
