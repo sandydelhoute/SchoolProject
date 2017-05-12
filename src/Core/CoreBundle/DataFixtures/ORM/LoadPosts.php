@@ -15,7 +15,7 @@ class LoadPosts extends AbstractFixture implements OrderedFixtureInterface
 
     public Function load(ObjectManager $manager){
         $content = "Vous l'attendiez depuis longtemps : le voici enfin ! Découvrez sans plus tarder notre nouvelle recette de suprêmes de chapon aux épices.";
-        $content0 = "Nous sommes heureux de vous annoncer que de nouveaux points de livraison sont désormais disponibles pour vous! Désormais vous avez la possibilité d'être livré à onse-en-Baroeul et La Madeleine.";
+        $content0 = "Nous sommes heureux de vous annoncer que de nouveaux points de livraison sont désormais disponibles pour vous! Désormais vous avez la possibilité d'être livré à Mons-en-Baroeul et La Madeleine.";
         $posts=new Posts();
         $posts->setTitle("Nouveaux points de livraison");
         $posts->setDatePublish(new DateTime('Now'));
