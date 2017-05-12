@@ -1,4 +1,4 @@
-$(document).ready(function(){	
+$(document).ready(function(){
 	var selector=$("#grid");
 	var routePosts='actualityscrollpage';
 	var routeDetailPosts='actualitydetailpage';
@@ -30,7 +30,7 @@ $(document).ready(function(){
 			        html += description;
 			        html += '</p>';
 			        html += '<a href="'+Routing.generate(routeDetailPosts,{id:obj.id})+'">';
-			       	html += 'suite';
+			       	html += 'Lire la suite';
 			       	html += '</a>';
 			       	html += '</article>';
 					var item=document.createElement('article');
@@ -44,7 +44,7 @@ $(document).ready(function(){
 		});
 
     return stopAjax;
-    
+
 	}
 	var objInfiniteScroll = new InfiniteScroll(routePosts,selector,render,3);
 	objInfiniteScroll.init();

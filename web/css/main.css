@@ -1150,6 +1150,11 @@ header .navmenu .active {
 }
 
 /* import liste actuality */
+.img-full {
+  width: 100%;
+  height: auto;
+}
+
 .articles .column {
   float: left;
 }
@@ -1177,6 +1182,7 @@ header .navmenu .active {
 }
 
 .articles article {
+  padding-bottom: 10px;
   background: #ffbe3b;
   line-height: 1.5em;
   color: #2b2b2b;
@@ -1187,13 +1193,16 @@ header .navmenu .active {
 
 .articles article a {
   color: #2b2b2b;
+  margin: 0;
+  padding: 10px;
+  text-decoration: underline;
 }
 
 .articles article a:hover {
   text-decoration: none;
 }
 
-.articles article a h3 {
+.articles article h3 {
   margin: 0;
   padding: 10px;
 }
