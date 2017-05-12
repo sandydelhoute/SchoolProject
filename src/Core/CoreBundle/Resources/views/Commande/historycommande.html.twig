@@ -13,53 +13,21 @@
         </a>
           <div id="panier" class="panel-collapse collapse in">
             <div class="panel-body">
+
+                {% for order in listOrder %}
+                {% set total = 0 %}
+                      {{ dump(order)}}
+
+                  {% for orderline in order.orderLine %}
+                    {% set total = orderline.quantity * orderline.product.prix %}
+                  {% endfor %} 
                 <div class="bold">
-                  Commande du 20/01/2017 - 9h47
+                  Commande du {{ order.datePurchase|date("m/d/Y H:i") }}
                   <div class="prix-historique-commande">
-                    9€99
+                    {{ total }}
                   </div>
                 </div>
-                <a href="#">Details de la commande</a>
-                <br /><br />
-                <div class="bold">
-                  Commande du 20/01/2017 - 9h47
-                  <div class="prix-historique-commande">
-                    9€99
-                  </div>
-                </div>
-                <a href="#">Details de la commande</a>
-                <br /><br />
-                <div class="bold">
-                  Commande du 20/01/2017 - 9h47
-                  <div class="prix-historique-commande">
-                    9€99
-                  </div>
-                </div>
-                <a href="#">Details de la commande</a>
-                <br /><br />
-                <div class="bold">
-                  Commande du 20/01/2017 - 9h47
-                  <div class="prix-historique-commande">
-                    9€99
-                  </div>
-                </div>
-                <a href="#">Details de la commande</a>
-                <br /><br />
-                <div class="bold">
-                  Commande du 20/01/2017 - 9h47
-                  <div class="prix-historique-commande">
-                    9€99
-                  </div>
-                </div>
-                <a href="#">Details de la commande</a>
-                <br /><br />
-                <div class="bold">
-                  Commande du 20/01/2017 - 9h47
-                  <div class="prix-historique-commande">
-                    9€99
-                  </div>
-                </div>
-                <a href="#">Details de la commande</a>
+              {% endfor %}
             </div>
             <div class="page-nation pagination">
               <ul class="pagination pagination-large">

@@ -40,7 +40,7 @@ class Menu
      * @var ArrayCollection images $images
      * Owning Side
      *
-     * @ORM\ManyToMany(targetEntity="images", inversedBy="menu", cascade={"persist", "merge"})
+     * @ORM\ManyToMany(targetEntity="Images", inversedBy="menu", cascade={"persist", "merge"})
      * @ORM\JoinTable(name="images_menu",
      *   joinColumns={@ORM\JoinColumn(name="id_menu", referencedColumnName="id")},
      *   inverseJoinColumns={@ORM\JoinColumn(name="id_images", referencedColumnName="id")}
@@ -225,42 +225,6 @@ class Menu
         return $this->composition;
     }
     
-   
-
-    /**
-     * Add image
-     *
-     * @param \Core\CoreBundle\Entity\images $image
-     *
-     * @return Menu
-     */
-    public function addImage(\Core\CoreBundle\Entity\images $image)
-    {
-        $this->images[] = $image;
-
-        return $this;
-    }
-
-    /**
-     * Remove image
-     *
-     * @param \Core\CoreBundle\Entity\images $image
-     */
-    public function removeImage(\Core\CoreBundle\Entity\images $image)
-    {
-        $this->images->removeElement($image);
-    }
-
-    /**
-     * Get images
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getImages()
-    {
-        return $this->images;
-    }
-
     
     /**
      * Add product
@@ -294,5 +258,39 @@ class Menu
     public function getProducts()
     {
         return $this->products;
+    }
+
+    /**
+     * Add image
+     *
+     * @param \Core\CoreBundle\Entity\images $image
+     *
+     * @return Menu
+     */
+    public function addImage(\Core\CoreBundle\Entity\images $image)
+    {
+        $this->images[] = $image;
+
+        return $this;
+    }
+
+    /**
+     * Remove image
+     *
+     * @param \Core\CoreBundle\Entity\images $image
+     */
+    public function removeImage(\Core\CoreBundle\Entity\images $image)
+    {
+        $this->images->removeElement($image);
+    }
+
+    /**
+     * Get images
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getImages()
+    {
+        return $this->images;
     }
 }
