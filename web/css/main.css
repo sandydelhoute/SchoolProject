@@ -1378,6 +1378,14 @@ header .navmenu .active {
   text-align: center;
 }
 
+.detail-commande {
+  margin-top: 55px;
+}
+
+.pull-center .btn-green {
+  margin: 15px auto;
+}
+
 /* import map */
 #map {
   height: 300px;
