@@ -8,9 +8,8 @@ class PayCards
 
     protected $numberCards;
 
-    protected $monthExpiration;
+    protected $dateExpiration;
 
-    protected $yearExpiration;
 
     protected $securityCode;
 
@@ -33,25 +32,16 @@ class PayCards
     {
         $this->numberCards = $numberCards;
     }
-    public function getMonthExpiration()
+    public function getDateExpiration()
     {
-        return $this->monthExpiration;
+        return $this->dateExpiration;
     }
 
-    public function setMonthExpiration($monthExpiration)
+    public function setDateExpiration($dateExpiration)
     {
-        $this->monthExpiration = $monthExpiration;
+        $this->dateExpiration = $dateExpiration;
     }
 
-    public function getYearExpiration()
-    {
-        return $this->yearExpiration;
-    }
-
-    public function setYearExpiration($yearExpiration)
-    {
-        $this->yearExpiration = $yearExpiration;
-    }
 
     public function getSecurityCode()
     {

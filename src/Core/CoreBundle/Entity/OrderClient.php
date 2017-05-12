@@ -3,6 +3,7 @@
 namespace Core\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 /**
  * OrderClient
  *
@@ -37,7 +38,7 @@ class OrderClient
 
     /**
      *
-     * @ORM\OneToMany(targetEntity="OrderLine", mappedBy="orderClient")
+     * @ORM\OneToMany(targetEntity="OrderLine", mappedBy="orderClient",cascade={"persist"})
      */
     private $orderLine;
 
@@ -116,4 +117,28 @@ class OrderClient
         return $this->orderLine;
     }
 
+
+    /**
+     * Set users
+     *
+     * @param \Vendor\ConnectUsersBundle\Entity\UsersWeb $users
+     *
+     * @return OrderClient
+     */
+    public function setUsers(\Vendor\ConnectUsersBundle\Entity\UsersWeb $users = null)
+    {
+        $this->users = $users;
+
+        return $this;
+    }
+
+    /**
+     * Get users
+     *
+     * @return \Vendor\ConnectUsersBundle\Entity\UsersWeb
+     */
+    public function getUsers()
+    {
+        return $this->users;
+    }
 }

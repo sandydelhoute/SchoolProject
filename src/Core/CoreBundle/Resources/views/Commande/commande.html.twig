@@ -88,49 +88,35 @@
               <div class="panel-body">
                 <div class="tab-content">
                   <div class="tab-pane fade in active" id="cartecb">
-                    <div class="bold col-xs12 col-md-6">
-                      Nom du titulaire de la carte
-                      <input type="nomcb" class="form-control paiement" id="nomcb" placeholder="Nom Prénom">
+                    {{ form_start(form) }}
+                    <div class="bold col-xs-12 col-md-6">
+                      {{ form_label(form.name) }}
+                      {{ form_errors(form.name) }}
+                      {{ form_widget(form.name) }}
                     </div>
                     <div class="bold col-xs-12 col-md-6">
-                      Numéro Carte
-                      <input type="numerocb" class="form-control paiement" id="numerocb" placeholder="Numéro de la carte">
+                        {{ form_label(form.numberCards) }}
+                        {{ form_errors(form.numberCards) }}
+                        {{ form_widget(form.numberCards) }}
                     </div>
                     <div class="clear-both"></div>
                     <div class="bold">
-                      <div class="col-lg-12">
-                        Date d'expiration
-                      </div>
                       <div class="col-xs-12 col-md-6 moiscb">
-
-                       <select class="form-control">
-                        {% for i in 1..12 %}
-                         <option>{{ i }}</option>
-                        {% endfor %}
-                       </select>
-                     </div>
-                     <div class="col-xs-12 col-md-6 moiscb">
-                      {% set date="now"|date("Y")%}
-                       <select class="form-control">
-                         <option>{{ date }}</option>
-                         <option>2018</option>
-                         <option>2019</option>
-                         <option>2020</option>
-                         <option>2021</option>
-                         <option>2022</option>
-                       </select>
+                        {{ form_label(form.securityCode) }}
+                        {{ form_errors(form.securityCode) }}
+                        {{ form_widget(form.securityCode) }}
                      </div>
                    </div>
                    <div class="clear-both"></div>
                    <div class="bold col-xs-12 col-md-6">
-                    Code de Sécurité
-                    <input type="cryptogramme" class="form-control paiement" id="cryptogramme" placeholder="">
+                        {{ form_label(form.dateExpiration) }}
+                        {{ form_errors(form.dateExpiration) }}
+                        {{ form_widget(form.dateExpiration) }}
                   </div>
-                  <div class="col-xs-12 col-md-6 div-bouton-validation">
-                    <button type="button" class="btn btn-green bouton-paiement">Valider</button>
-                  </div>
-
-
+                  
+                  {#  div-bouton-validation #}
+                    {{ form_end(form) }}
+                  
                 </div>
                 <!--PAYPAL-->
                 <div class="tab-pane fade" id="paypal">

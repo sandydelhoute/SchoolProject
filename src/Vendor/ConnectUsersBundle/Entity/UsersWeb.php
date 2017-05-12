@@ -4,7 +4,7 @@ namespace Vendor\ConnectUsersBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
- /* @ORM\Table(name="users_web")*/
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * 
@@ -34,7 +34,7 @@ class UsersWeb extends Users
     protected $id;
 
     /**
-     * @ORM\OneToMany(targetEntity="Core\CoreBundle\Entity\OrderClient",mappedBy="users")
+     * @ORM\OneToMany(targetEntity="Core\CoreBundle\Entity\OrderClient",mappedBy="users",cascade={"persist"}))
      */
     private $order;
 
@@ -116,4 +116,38 @@ class UsersWeb extends Users
      }
 
 
+
+    /**
+     * Add order
+     *
+     * @param \Core\CoreBundle\Entity\OrderClient $order
+     *
+     * @return UsersWeb
+     */
+    public function addOrder(\Core\CoreBundle\Entity\OrderClient $order)
+    {
+        $this->order[] = $order;
+
+        return $this;
+    }
+
+    /**
+     * Remove order
+     *
+     * @param \Core\CoreBundle\Entity\OrderClient $order
+     */
+    public function removeOrder(\Core\CoreBundle\Entity\OrderClient $order)
+    {
+        $this->order->removeElement($order);
+    }
+
+    /**
+     * Get order
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getOrder()
+    {
+        return $this->order;
+    }
 }

@@ -23,7 +23,7 @@ class OrderLine
 
     
     /**
-     * @ORM\ManyToOne(targetEntity="OrderCLient",inversedBy="order")
+     * @ORM\ManyToOne(targetEntity="OrderCLient",inversedBy="orderLine")
      * @ORM\JoinColumn(name="order_id",referencedColumnName="id")
      */
     private $orderClient;
@@ -39,7 +39,7 @@ class OrderLine
     /**
      * @var float
      *
-     * @ORM\Column(name="prixEntier", type="float")
+     * @ORM\Column(name="prix", type="float")
      */
     private $prix;
 

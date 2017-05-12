@@ -6,6 +6,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Response;
+use Core\CoreBundle\Entity\PayCards;
+use Core\CoreBundle\Form\PayCardsType;
+use Core\CoreBundle\Entity\OrderClient;
+use Symfony\Component\Validator\Constraints\DateTime;
 class CommandeController extends Controller
 {
      public function commandeAction(Request $request)
@@ -18,7 +22,26 @@ class CommandeController extends Controller
 					$product= $em->getRepository('CoreCoreBundle:Product')->findOneById($orderline->getProduct()->getId());
 				$orderline->setProduct($product);
 		}
-        return $this->render('CoreCoreBundle:Commande:commandelayout.html.twig',array('listOrderLine'=>$listOrderLine));
+        $payCards= new PayCards();
+        $form = $this->createForm(PayCardsType::class,$payCards);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $currentuser= $this->getUser();
+            $orderclient = new OrderClient();
+            $orderclient->setUsers($currentuser);
+            $orderclient ->setDatePurchase(new \DateTime('NOW'));
+            foreach ($listOrderLine as $orderline) {
+                $orderclient->addOrderLine($orderline);
+                $orderline->setOrderClient($orderclient);
+            }
+
+        $currentuser->addOrder($orderclient);
+        $em->persist($currentuser);
+        $em->flush();
+        }
+        return $this->render('CoreCoreBundle:Commande:commandelayout.html.twig',array('listOrderLine'=>$listOrderLine,'form'=>$form->createView()));
     }
 
      public function downloadResumeOrderAction($id)
