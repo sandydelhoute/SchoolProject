@@ -37,9 +37,7 @@ class UsersController extends Controller
 	public function compteAction(){
 		$em = $this->getDoctrine()->getManager();
 		$currentUsers=$this->getUser();
-		$listOrder=$em->getRepository('CoreCoreBundle:OrderClient')->findOneByUsers($currentUsers);
-		var_dump($listOrder);
-		exit;
+		$listOrder=$em->getRepository('CoreCoreBundle:OrderClient')->findByUsers($currentUsers);
 		return $this->render('CoreCoreBundle:Compte:comptelayout.html.twig',array('listOrder'=>$listOrder));
 	}
 

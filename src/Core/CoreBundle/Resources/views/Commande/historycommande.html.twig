@@ -13,13 +13,10 @@
         </a>
           <div id="panier" class="panel-collapse collapse in">
             <div class="panel-body">
-
                 {% for order in listOrder %}
-                {% set total = 0 %}
-                      {{ dump(order)}}
-
+                  {% set total = 0 %}
                   {% for orderline in order.orderLine %}
-                    {% set total = orderline.quantity * orderline.product.prix %}
+                    {% set total = (orderline.quantity * orderline.product.prix) %}
                   {% endfor %} 
                 <div class="bold">
                   Commande du {{ order.datePurchase|date("m/d/Y H:i") }}
