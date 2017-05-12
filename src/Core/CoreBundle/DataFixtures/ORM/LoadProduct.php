@@ -19,7 +19,7 @@ public Function load(ObjectManager $manager){
 
 $prix=2.99;
 $listAllergene=array(
-0=>"gluten",
+0=>"Gluten",
 1=>"Crustacés",
 2=>"Oeufs",
 3=>"Poissons",
@@ -29,7 +29,7 @@ $listAllergene=array(
 7=>"Fruits à coques",
 8=>"Céleri",
 9=>"Moutarde",
-10=>"Graines de sésame");
+10=>"Sésame");
 $composition=
 	'
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed gravida nunc eu ligula luctus, et efficitur est tincidunt. Praesent sed egestas velit. Sed eros felis, placerat eu convallis non, sagittis sollicitudin massa. Donec sit amet elit risus. Integer quis volutpat enim. Etiam felis eros, aliquet sed posuere ac, consequat at felis. Nullam eu elit ac mi imperdiet congue quis non dui. Mauris pulvinar ornare ante non faucibus.
