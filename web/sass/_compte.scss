@@ -1,4 +1,5 @@
-#gestioncompte{
+.gestioncompte{
+  margin-top: 55px;
 
 .panel-default>a{
   text-decoration: none;
@@ -101,4 +102,12 @@
 .tab{
   text-align: center;
 }
+}
+.detail-commande{
+  margin-top: 55px;
+}
+.pull-center{
+  .btn-green{
+    margin: 15px auto;
+  }
 }

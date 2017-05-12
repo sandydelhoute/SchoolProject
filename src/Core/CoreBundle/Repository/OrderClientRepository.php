@@ -10,4 +10,5 @@ namespace Core\CoreBundle\Repository;
  */
 class OrderClientRepository extends \Doctrine\ORM\EntityRepository
 {
+
 }

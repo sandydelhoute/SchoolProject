@@ -15,4 +15,12 @@
 	.panel-group{
 		margin-bottom: 0;
 	}
+	#applyfilter {
+		@media screen and (max-width: 1024px){
+			width: 100%;
+			text-align: center;
+			margin-bottom: 15px;
+			justify-content: center;
+		}
+}
 }

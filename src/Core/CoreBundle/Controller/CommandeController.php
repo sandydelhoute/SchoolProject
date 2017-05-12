@@ -69,6 +69,13 @@ class CommandeController extends Controller
             ]
         );
     }
+    public function historyAction($id){
 
+        $em = $this->getDoctrine()->getManager();
+        $order=$em->getRepository('CoreCoreBundle:OrderClient')->findOneById($id);
+
+        return $this->render('CoreCoreBundle:Commande:commandehistorylayout.html.twig',array('order'=>$order));
+
+    }
 
 }

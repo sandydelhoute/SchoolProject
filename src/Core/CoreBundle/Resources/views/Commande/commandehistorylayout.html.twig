@@ -13,13 +13,9 @@
         {% endblock header %}
     </div>
     <div class="container">
-        {% block tunnel %}
-            {% include 'CoreCoreBundle:Commande:commande.html.twig' %}
-        {% endblock tunnel %}
-        
-         {% block resume %}
-            {% include 'CoreCoreBundle:Commande:detailpanier.html.twig' %}
-        {% endblock resume%}
+         {% block resumehistory %}
+            {% include 'CoreCoreBundle:Commande:detailhistorycommande.html.twig' %}
+        {% endblock resumehistory %}
     </div>
     <div class="container-fluid">
         {% block footer %}

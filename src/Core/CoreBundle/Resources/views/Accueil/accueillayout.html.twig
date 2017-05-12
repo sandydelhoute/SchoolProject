@@ -23,6 +23,11 @@
       {% block concept %}
           {% include 'CoreCoreBundle:Accueil:concept.html.twig' %}
       {% endblock concept %}
+      <div class="articles">
+        {% block lastnews %}
+            {% include 'CoreCoreBundle:Accueil:lastnews.html.twig' %}
+        {% endblock lastnews %}
+      </div>
     </div>
     <div class="container-fluid">
       	{% block footer %}

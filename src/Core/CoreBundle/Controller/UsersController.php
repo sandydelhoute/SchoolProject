@@ -35,7 +35,10 @@ class UsersController extends Controller
 		
 	}
 	public function compteAction(){
-		return $this->render('CoreCoreBundle:Compte:comptelayout.html.twig');
+		$em = $this->getDoctrine()->getManager();
+		$currentUsers=$this->getUser();
+		$listOrder=$em->getRepository('CoreCoreBundle:OrderClient')->findByUsers($currentUsers);
+		return $this->render('CoreCoreBundle:Compte:comptelayout.html.twig',array('listOrder'=>$listOrder));
 	}
 
 }

@@ -38,6 +38,9 @@ addproductpage:
     defaults: { _controller: CoreCoreBundle:Panier:addProducts }
     options:
         expose: true
+historyCommande:
+    path:     /commande/historique/{id}
+    defaults: { _controller: CoreCoreBundle:Commande:history }
 
 deleteproductpage:
     path:     /produits/delete/{id}
