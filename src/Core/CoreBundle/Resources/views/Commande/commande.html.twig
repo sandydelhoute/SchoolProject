@@ -2,7 +2,7 @@
 {% for orderLine in listOrderLine %}
   {% set total = total + (orderLine.quantity * orderLine.product.prix) %}
 {% endfor %}
-  <div class="col-xs-12 col-md-8">
+  <div {% if totalCommande == 0 %}class="col-xs-12 col-md-8"{% else %}class="col-xs-12"{% endif %}>
     <div class="panel-group" id="tunnel">
       <div class="panel panel-default">
         <a data-toggle="collapse" data-parent="#tunnel" href="#livraison">
@@ -156,7 +156,7 @@
         </div>
       </div>
     </div>
-
+    {% if valideCommande %}
     <div class="panel panel-default">
       <a data-toggle="collapse" data-parent="#tunnel" href="#resume">
         <div class="panel-heading">
@@ -170,17 +170,24 @@
       </a>
       <div id="resume" class="panel-collapse collapse">
        <div class="panel-body">
-         Votre commande n°<b>218484</b> d'une valeur de <b>11€</b> a bien été prise en compte. <br/>
+        {% set count = 0 %}
+          {% set numberorder = app.user.order|length -1%}
+          {% for order in app.user.order %}
+            {% if count == numberorder %}
+         Votre commande n°<b>{{ order.id }}</b> d'une valeur de <b>{{ totalCommande }}</b> a bien été prise en compte. <br/>
          Vous recevrez dans les 5 minutes qui suivent un mail de confirmation.<br/>
-         Grâce à votre commande, vous avez accumulé <b>12</b> points de fidélité pour un total de <b>75</b>.<br/>
+         Grâce à votre commande, vous avez accumulé <b>{{ ptsFideleCommande }}</b> points de fidélité pour un total de <b>{{ app.user.rewardPoints }} </b>.<br/>
          Merci d'avoir commandé chez Meal & Box, nous vous souhaitons un bon appétit
          <div class="col-lg-12 paypal-bouton">
-          <button type="button" class="btn btn-green btn-fin-validation">Valider</button>
-        </div>
+          <a href="{{ path('downloadorder',{id:order.id}) }}"><button type="button" class="btn btn-green btn-fin-validation">Telecharger ma facture</button></a>
+        </div> 
+        {% endif %}
+                {% set count = count + 1  %}
+      {% endfor %}
       </div>
     </div>
   </div>
-
+  {% endif %}
 
 </div>
 

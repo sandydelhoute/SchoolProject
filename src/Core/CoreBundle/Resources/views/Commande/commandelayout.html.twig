@@ -16,10 +16,11 @@
         {% block tunnel %}
             {% include 'CoreCoreBundle:Commande:commande.html.twig' %}
         {% endblock tunnel %}
-        
-         {% block resume %}
-            {% include 'CoreCoreBundle:Commande:detailpanier.html.twig' %}
-        {% endblock resume%}
+        {% if listOrderLine|length > 0 %}
+            {% block resume %}
+                {% include 'CoreCoreBundle:Commande:detailpanier.html.twig' %}
+            {% endblock resume%}
+        {% endif %}
     </div>
     <div class="container-fluid">
         {% block footer %}
