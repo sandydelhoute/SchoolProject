@@ -16,18 +16,18 @@
 
         <div class="carousel-inner">
           {% for image in product.images %}
-            
+
             <div class="item {% if count == 1 %}active{% endif %}">
               <img data-src="{{ asset(image.path) }}" alt="Second slide" src="{{ asset(image.path) }}">
                   <div class="container">
                     <div class="carousel-caption">
                     </div>
-                  </div> 
+                  </div>
                 </div>
                 {% set count = count + 1 %}
               {% endfor %}
             </div>
-            
+
             <a class="left carousel-control" href="#carousel-id" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
             <a class="right carousel-control" href="#carousel-id" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
           </div>
@@ -43,7 +43,7 @@
     <div class="nb-panier col-xs-4">
       <input type="number" name="" id="input" class="form-control" value="1" min="1" max="5" step="" required="required" title="">
     </div>
-    <button type="button" class="btn btn-success col-xs-12"><i class="fa fa-shopping-cart"></i>Ajouter au panier</button>
+    <button type="button" class="btn btn-success col-xs-12"><i class="fa fa-shopping-cart"></i>&nbsp;&nbsp;Ajouter au panier</button>
   </div>
 </div>
 

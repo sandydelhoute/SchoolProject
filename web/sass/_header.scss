@@ -153,11 +153,12 @@ header {
                 background-color: inherit;
                 color: $black !important;
                 padding: 5px 0;
+                border-bottom: $yellow solid 2px;
             }
 
             a:hover {
                 background-color: inherit;
-                color: $white !important;
+                // color: $white !important;
                 border-bottom: $green solid 2px;
                 @media screen and (max-width: 1024px) {
                     color: $black;

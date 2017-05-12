@@ -45,6 +45,11 @@ h3 {
     color: $white;
 }
 
+.btn-green:hover{
+  color: $white !important;
+  background-color: #449D44;
+}
+
 .form-group{
   .btn-green{
     width:25%;
