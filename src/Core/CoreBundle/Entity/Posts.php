@@ -17,10 +17,10 @@ class Posts
 {
 
 
-      public function __construct()
-    {
-        $this->images = new ArrayCollection();
-    }
+  public function __construct()
+  {
+    $this->images = new ArrayCollection();
+}
 
     /**
      * @var int
@@ -101,47 +101,7 @@ class Posts
         return $this->title;
     }
 
-    /**
-     * Remove Image
-     *
-     * @param Images $image
-     */
 
-    public function removeImage(Image $image)
-    {
-        $this->images->removeElement($image);
-        
-    }
-
-    /**
-     * Add Image
-     *
-     * @param Images $image
-     */
-     public function addImage(Image $image)
-     {
-        // Si l'objet fait déjà partie de la collection on ne l'ajoute pas
-        if (!$this->images->contains($image)) {
-            $this->images->add($image);
-        }
-    }
-    /**
-     * Add Collection Images
-     *
-     * @param Images $images
-     */
-     public function setImages($images)
-     {
-        if ($images instanceof ArrayCollection || is_array($images)) {
-            foreach ($image as $images) {
-                $this->addProduit($image);
-            }
-        } elseif ($images instanceof Images) {
-            $this->addProduit($images);
-        } else {
-            throw new Exception("$items must be an instance of Produit or ArrayCollection");
-        }
-    }
 
     /**
      * Set content
@@ -189,6 +149,30 @@ class Posts
     public function getDatepublish()
     {
         return $this->datepublish;
+    }
+
+    /**
+     * Add image
+     *
+     * @param \Core\CoreBundle\Entity\Images $image
+     *
+     * @return Posts
+     */
+    public function addImage(\Core\CoreBundle\Entity\Images $image)
+    {
+        $this->images[] = $image;
+
+        return $this;
+    }
+
+    /**
+     * Remove image
+     *
+     * @param \Core\CoreBundle\Entity\Images $image
+     */
+    public function removeImage(\Core\CoreBundle\Entity\Images $image)
+    {
+        $this->images->removeElement($image);
     }
 
     /**
