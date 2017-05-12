@@ -16,7 +16,7 @@ class LoadImage extends AbstractFixture implements OrderedFixtureInterface
 public Function load(ObjectManager $manager){
 
 $image=new Images();
-$image->setPath("img/fixtures/fixture.png");
+$image->setPath("/img/fixtures/fixture.png");
 $image->setAlt('fixture');
 $this->addReference('image',$image);
 $manager->persist($image);
