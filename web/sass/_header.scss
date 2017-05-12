@@ -51,7 +51,7 @@ header {
         }
     }
     .btn-blackborder:hover{
-      color: $black;
+      color: $black !important;
     }
 
     .navbar-collapse {
@@ -197,6 +197,7 @@ header {
             }
             a{
               color: $white !important;
+              border: none;
               &:hover{
                 border: none;
               }

@@ -223,7 +223,7 @@ header .btn:active {
 }
 
 header .btn-blackborder:hover {
-  color: #2b2b2b;
+  color: #2b2b2b !important;
 }
 
 header .navbar-collapse {
@@ -405,6 +405,7 @@ header .navmenu .dropdown-menu li:hover {
 
 header .navmenu .dropdown-menu li a {
   color: #f2f2f2 !important;
+  border: none;
 }
 
 header .navmenu .dropdown-menu li a:hover {
@@ -557,6 +558,41 @@ header .navmenu .active {
   .footer-section {
     text-align: center !important;
   }
+}
+
+/* import actualite */
+.actualite h1 {
+  margin-bottom: 10px;
+}
+
+.actualite h1:after {
+  content: "";
+  display: block;
+  height: 3px;
+  width: 200px;
+  background-color: #ffbe3b;
+}
+
+.actualite .DateArticle {
+  color: #02b253;
+}
+
+.actualite .img-entete {
+  background-image: url("../img/fixtures/fixture.png");
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 200px;
+}
+
+.actualite .ImgRight {
+  float: right;
+  padding-left: 25px;
+}
+
+.actualite .ImgLeft {
+  float: left;
+  padding-right: 25px;
 }
 
 /* import produitsliste */
@@ -911,7 +947,7 @@ header .navmenu .active {
 
 /* import search */
 #filter label {
-  font-size: 10px;
+  font-size: 12px;
 }
 
 #filter #actionfilter {
@@ -934,7 +970,21 @@ header .navmenu .active {
   margin-bottom: 0;
 }
 
+@media screen and (max-width: 1024px) {
+  #filter #applyfilter {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 15px;
+    justify-content: center;
+  }
+}
+
 /* import panier */
+.panier .command {
+  height: auto;
+  padding: 12px;
+}
+
 .panier .panel-heading.global h3 {
   font-size: 2rem;
 }
@@ -1001,6 +1051,14 @@ header .navmenu .active {
 }
 
 /* import tunnelCommande */
+#tunnel {
+  margin-top: 55px;
+}
+
+#tunnel .bouton-paypal {
+  margin-top: 15px;
+}
+
 #tunnel .panel-default a {
   text-decoration: none;
   color: black;
@@ -1137,6 +1195,11 @@ header .navmenu .active {
 }
 
 /* import liste actuality */
+.img-full {
+  width: 100%;
+  height: auto;
+}
+
 .articles .column {
   float: left;
 }
@@ -1164,6 +1227,7 @@ header .navmenu .active {
 }
 
 .articles article {
+  padding-bottom: 10px;
   background: #ffbe3b;
   line-height: 1.5em;
   color: #2b2b2b;
@@ -1174,13 +1238,16 @@ header .navmenu .active {
 
 .articles article a {
   color: #2b2b2b;
+  margin: 0;
+  padding: 10px;
+  text-decoration: underline;
 }
 
 .articles article a:hover {
   text-decoration: none;
 }
 
-.articles article a h3 {
+.articles article h3 {
   margin: 0;
   padding: 10px;
 }
@@ -1214,91 +1281,91 @@ header .navmenu .active {
 }
 
 /* import compte */
-#gestioncompte .panel-default > a {
+.gestioncompte .panel-default > a {
   text-decoration: none;
   color: black;
 }
 
-#gestioncompte .panel-default > a .panel-heading {
+.gestioncompte .panel-default > a .panel-heading {
   background-color: #F2F2F2;
 }
 
-#gestioncompte .panel-default > a .panel-heading .etapes {
+.gestioncompte .panel-default > a .panel-heading .etapes {
   font-weight: bold;
 }
 
-#gestioncompte #cartecb .clear-both {
+.gestioncompte #cartecb .clear-both {
   clear: both;
 }
 
-#gestioncompte #cartecb .row > .paypal-bouton .btn {
+.gestioncompte #cartecb .row > .paypal-bouton .btn {
   margin-left: 30px;
 }
 
-#gestioncompte #info-perso .panel-body .bouton-modifié-moncompte {
+.gestioncompte #info-perso .panel-body .bouton-modifié-moncompte {
   float: right;
 }
 
-#gestioncompte #info-perso .margin-information {
+.gestioncompte #info-perso .margin-information {
   margin-bottom: 20px;
 }
 
-#gestioncompte #panier .panel-body .prix-historique-commande {
+.gestioncompte #panier .panel-body .prix-historique-commande {
   float: right;
   color: green;
 }
 
-#gestioncompte #panier .page-nation {
+.gestioncompte #panier .page-nation {
   width: 100%;
   text-align: center;
   margin: auto;
 }
 
-#gestioncompte #cartecb .bouton-paiement {
+.gestioncompte #cartecb .bouton-paiement {
   height: 40px;
   width: 50%;
   margin: auto;
 }
 
-#gestioncompte #cartecb .div-bouton-validation {
+.gestioncompte #cartecb .div-bouton-validation {
   margin-top: 27px;
 }
 
-#gestioncompte #cartecb .moiscb {
+.gestioncompte #cartecb .moiscb {
   padding-bottom: 15px;
   padding-top: 10px;
 }
 
-#gestioncompte #cartecb .margin-cb {
+.gestioncompte #cartecb .margin-cb {
   padding-bottom: 15px;
 }
 
-#gestioncompte .form-control.paiement {
+.gestioncompte .form-control.paiement {
   margin-top: 10px;
 }
 
-#gestioncompte .bouton-paypal {
+.gestioncompte .bouton-paypal {
   margin: auto;
   margin-top: 15px;
 }
 
-#gestioncompte .row > .paypal-bouton .btn {
+.gestioncompte .row > .paypal-bouton .btn {
   margin-left: 30px;
 }
 
-#gestioncompte .padding-top-credit {
+.gestioncompte .padding-top-credit {
   padding-top: 15px;
 }
 
-#gestioncompte .fa.fa-angle-down.arrow {
+.gestioncompte .fa.fa-angle-down.arrow {
   float: right;
 }
 
-#gestioncompte .bold {
+.gestioncompte .bold {
   font-weight: bold;
 }
 
-#gestioncompte .tab {
+.gestioncompte .tab {
   text-align: center;
 }
 

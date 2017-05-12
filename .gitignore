@@ -12,3 +12,4 @@
 /app/config/parameters.ini
 var/
 app/config/parameters.yml.rej
+/web/bundles/*

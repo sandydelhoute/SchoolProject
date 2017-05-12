@@ -16,7 +16,7 @@ class LoadAllergene extends AbstractFixture implements OrderedFixtureInterface
 public Function load(ObjectManager $manager){
 
 $ListAllergene=array(
-0=>"gluten",
+0=>"Gluten",
 1=>"Crustacés",
 2=>"Oeufs",
 3=>"Poissons",
@@ -26,7 +26,7 @@ $ListAllergene=array(
 7=>"Fruits à coques",
 8=>"Céleri",
 9=>"Moutarde",
-10=>"Graines de sésame");
+10=>"Sésame");
 foreach ($ListAllergene as $allergene=>$value) {
 	$allergene =new Allergene();
 	$allergene->setName($value);
