@@ -43,11 +43,24 @@ class CommandeController extends Controller
         $ptsFideleCommande=round($total/10, 2);
         $valideCommande=true;
         $listOrderLine=array();
+        $session->set('panier',null);
         $currentuser->setRewardPoints($currentuser->getRewardPoints()+$ptsFideleCommande);
         $currentuser->addOrder($orderclient);
         $em->persist($currentuser);
         $em->flush();
 
+        $message = \Swift_Message::newInstance()
+        ->setSubject('Récapitulatif de commande Meal & Box')
+        ->setFrom('mealandbox@sfr.fr')
+        ->setTo($currentuser->getEmail())
+        ->setBody(
+          $this->renderView(
+            ':Email:confirmcommande.html.twig',
+            array('order' => $orderclient)
+            ),
+        'text/html'
+        );  
+        $this->get('mailer')->send($message);
         }
         return $this->render('CoreCoreBundle:Commande:commandelayout.html.twig',array('listOrderLine'=>$listOrderLine,'form'=>$form->createView(),'valideCommande'=>$valideCommande ,'totalCommande'=>$total,'ptsFideleCommande'=>$ptsFideleCommande));
     }
