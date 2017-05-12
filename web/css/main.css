@@ -1138,6 +1138,10 @@ header .navmenu .active {
   font-size: 18px;
 }
 
+#produitdetail h4 {
+  font-weight: 700;
+}
+
 #produitdetail ul {
   list-style-type: initial;
 }
