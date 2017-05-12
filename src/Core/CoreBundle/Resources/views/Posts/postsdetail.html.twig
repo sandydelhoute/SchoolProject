@@ -1,8 +1,14 @@
+<div class="row actualite">
+
 {% for image in posts.images %}
-<img src="{{ asset(image.path) }}" alt="" class="ImgLeft img-responsive img-full">
+<div class="img-entete">
+
+</div>
+<!-- <img src="{{ asset(image.path) }}" alt="" class="ImgLeft img-responsive img-full"> -->
 {% endfor %}
 <h1>{{ posts.title }}</h1>
-        <p class="DateArticle uppercase">{{ posts.datePublish|date("d/m/Y") }}</p>
+        <p class="DateArticle uppercase">Publié le {{ posts.datePublish|date("d/m/Y") }}</p>
         <p>
         	{{ posts.content }}
         </p>
+</div>
