@@ -1,35 +1,4 @@
 
-{% block body %}
-	{% block invoice %}
-		 <div class="container">
-
-                <div class="panel-body mobile-center">
-                    <div class="col-xs-5">
-                        <address>
-                            <strong>Adresse de Facturation :</strong><br><br>
-                            John Smith<br>
-                            Efficom<br>
-                            146 Rue Nationale<br>
-                            59000 Lille
-                        </address>
-                    </div>
-
-                    <div class="col-xs-2 taille-logo">
-                        <img src="img/logo_couleur.png" class="img-responsive">
-                    </div>
-
-                    <div class="col-xs-5  text-right adresse-livraison">
-                        <address>
-                            <strong>Adresse de Livraison :</strong><br><br>
-                            Meal And Box<br>
-                            1234 Main<br>
-                            Rue du docteur Laennec<br>
-                            59139 Wattignies
-                        </address>
-                    </div>
-
-                </div>
-
             <div class="row">
                 <div class="col-xs-12">
                     <div class="panel panel-default">
@@ -54,6 +23,7 @@
                                         {% for orderline in order.orderLine %}
                                         	{% set total = orderline.quantity * orderline.product.prix %}
                                         	{% set totalCommande = totalCommande + total %}
+
 
                                         <tr>
                                             <td class="col-md-4 text-center">
@@ -112,15 +82,3 @@
                 </div>
 
             </div>
-            <div class="url-MandB text-center">
-              <a href="#" class="url-MandB">www.mealandbox.fr</a>
-            </div>
-
-        </div>
-	{% endblock %}
-
-{% endblock %}
-{% block stylesheets %}
-	<link href="{{ absolute_url(asset('css/bootstrap-3.3.7-dist/bootstrap.min.css')) }}" rel="stylesheet" type="text/css"/>
-	<link href="{{ absolute_url(asset('css/pdf/facture.css')) }}" rel="stylesheet" type="text/css"/>
-{% endblock %}

@@ -112,8 +112,10 @@ var resetfilter=function(){
 
 var addPanier=function(){
   $('#listProduct').on('click','.addpanier',function(e){
+    var countPanier=parseInt($('#countpanier').text());
     var idProduct=$(this).data('product');
     var quantity=$(this).parents('.produits').find('.quantity').val();
+    $('#countpanier').text(countPanier + 1 );
     objAjax.callAjax(Routing.generate(_this.routeAdd,{id:idProduct,quantity:quantity}));
   })
 }
@@ -121,18 +123,6 @@ var addPanier=function(){
 
 var scroll=function(){
   $(window).scroll(function() {
-    // console.log("scrolTop "+$(window).scrollTop());
-    // console.log($(window).height());
-    // console.log("document "+$(document).height());
-    // console.log("windows "+$(window).height());
-    // console.log("document - height "+($(document).height()-$(window).height()-200));
-
-    // console.log(dataFilter);
-    // console.log(ajaxready);
-
-    // var heightScroll = $(window).scrollTop();
-    // $('#filter').css({top:heightScroll});
-
     if ( ajaxready == false)
       return;
     if($(window).scrollTop() > ($(document).height()-$(window).height()-200)){
