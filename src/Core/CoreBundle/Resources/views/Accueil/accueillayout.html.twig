@@ -9,7 +9,7 @@
 
 
 {% block body %}
-    
+
     <div class="container-fluid">
         {% block header %}
         {% include 'CoreCoreBundle:Default:header.html.twig' %}
@@ -19,6 +19,11 @@
         {% block search %}
             {% include 'CoreCoreBundle:Accueil:searchrelais.html.twig' %}
         {% endblock search %}
+    </div>
+    <div class="container">
+      {% block concept %}
+          {% include 'CoreCoreBundle:Accueil:concept.html.twig' %}
+      {% endblock concept %}
     </div>
     <div class="container-fluid">
       	{% block footer %}

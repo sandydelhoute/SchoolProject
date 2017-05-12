@@ -1,0 +1,115 @@
+.concept {
+  .col-md-12 {
+    height: 300px;
+
+    br {
+      @media screen and (max-width : 992px) {
+        display: none;
+      }
+    }
+  }
+
+  .col-md-4:first-child {
+    .col-md-12 {
+      background-image: url("http://www.bateaux-privatises-paris.com/wp-content/uploads/2013/06/gastronomie-02.jpg");
+    }
+  }
+
+  .col-md-4:nth-child(2) {
+    .col-md-12 {
+      background-image: url("http://www.hautes-alpes.net/fileadmin/user_upload/experiences-gastronomie-header.jpg");
+    }
+  }
+  .col-md-4 {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    .col-md-12 {
+      text-align: center;
+      color: white;
+      position: relative;
+      overflow: hidden;
+      background-position: center center;
+      background-size: cover;
+      padding: 0;
+
+      h3 {
+        height: 75px;
+        margin: 0;
+        padding: 10px 0;
+        background-color: rgba(43,43,43,0.9);
+        @media screen and (max-width: 992px) {
+          height: 50px;
+        }
+      }
+
+      .description {
+        color: $black;
+        height: 300px;
+        position: absolute;
+        top: 300px;
+        left: 0;
+        width: 100%;
+        padding: 15px;
+        background: rgba(255, 190, 59,0.9);
+        transition: 0.1s linear all;
+        @media screen and (max-width: 992px) {
+          top: 50px;
+        }
+
+        h4 {
+          @media screen and (max-width: 1024px) {
+            font-size: 24px;
+          }
+          br{
+            @media screen and (max-width: 615px){
+              display: block;
+            }
+            @media screen and (max-width: 420px){
+              display: none;
+            }
+          }
+        }
+
+        p {
+          text-align: left;
+          @media screen and (max-width: 1024px) {
+            font-size: 16px;
+          }
+        }
+      }
+
+      &:hover .description {
+        top: 75px;
+        @media screen and (max-width: 992px) {
+          top: 50px;
+        }
+      }
+    }
+  }
+
+  .col-md-4:last-child {
+    .col-md-12 {
+      background-image: url("http://www.martinique.org/sites/martinique/files/styles/teaser/public/f._smith_gastronomie_le_patio_070213_82.jpg?itok=rGbQThcw");
+
+      h3 {
+        @media screen and (max-width: 435px) {
+          height: 75px !important;
+        }
+      }
+    }
+
+    .plusbas {
+      @media screen and (max-width: 435px) {
+        top: 75px !important;
+      }
+    }
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-weight: 700;
+  }
+}
