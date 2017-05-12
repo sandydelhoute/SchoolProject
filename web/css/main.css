@@ -223,7 +223,7 @@ header .btn:active {
 }
 
 header .btn-blackborder:hover {
-  color: #2b2b2b;
+  color: #2b2b2b !important;
 }
 
 header .navbar-collapse {
@@ -911,7 +911,7 @@ header .navmenu .active {
 
 /* import search */
 #filter label {
-  font-size: 10px;
+  font-size: 12px;
 }
 
 #filter #actionfilter {
@@ -935,6 +935,11 @@ header .navmenu .active {
 }
 
 /* import panier */
+.panier .command {
+  height: auto;
+  padding: 12px;
+}
+
 .panier .panel-heading.global h3 {
   font-size: 2rem;
 }
@@ -1001,6 +1006,14 @@ header .navmenu .active {
 }
 
 /* import tunnelCommande */
+#tunnel {
+  margin-top: 55px;
+}
+
+#tunnel .bouton-paypal {
+  margin-top: 15px;
+}
+
 #tunnel .panel-default a {
   text-decoration: none;
   color: black;
