@@ -8,16 +8,22 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">
+      <a class="navbar-brand" href="{{ path('homepage') }}">
         meal & box
       </a>
       <div>
-        <div class="btn btn-white" type="button" data-toggle="collapse" data-target="#account" aria-expanded="false">
-          <i aria-hidden="true" class="fa fa-user fa-2x"></i><br>
-        </div>
-        <div class="btn btn-white">
-          <i class="fa fa-shopping-cart fa-2x" aria-hidden="true"></i><br>
-        </div>
+
+          <div class="btn btn-white" type="button" data-toggle="collapse" data-target="#account" aria-expanded="false">
+            <i aria-hidden="true" class="fa fa-user fa-2x"></i><br>
+          </div>
+
+        {% if is_granted('ROLE_USER') %}
+        <a href="{{ path('panierpage') }}">
+          <div class="btn btn-white">
+            <i class="fa fa-shopping-cart fa-2x" aria-hidden="true"></i><br>
+          </div>
+        </a>
+      {% endif %}
       </div>
     </div>
 
@@ -27,7 +33,7 @@
           <a href="{{ path('comptepage') }}">Gérer mon compte</a>
         </li>
         <li class="{% if is_granted('ROLE_USER') %} nodisplay {% endif %}">
-          <a href="#"><i class="fa fa-check" aria-hidden="true"></i>&nbsp;&nbsp;Connexion</a>
+            <a href="{{ path('loginpage') }}"><i class="fa fa-check" aria-hidden="true"></i>&nbsp;&nbsp;Connexion</a>
         </li>
         <li class="background-red color-white{% if not is_granted('ROLE_USER') %} nodisplay {% endif %}">
           <a href="{{ path('disconnect') }}" class="deco"><i class="fa fa-times" aria-hidden="true"></i>&nbsp;&nbsp;Déconnexion</a>
@@ -67,7 +73,9 @@
         <a {% if 'productpage' in app.request.attributes.get('_route') %}class="active"{% endif %} href="{{ path('productpage') }}">Produits</a>
       </li>
       <div class="logo">
+        <a href="{{ path('homepage') }}">
         <img class="img-responsive" src="{{ asset ('img/logo/logo.png') }}">
+        </a>
       </div>
       <li>
         <a {% if 'actualitypage' in app.request.attributes.get('_route') %}class="active"{% endif %} href="{{ path('actualitypage') }}">Actualités</a>
