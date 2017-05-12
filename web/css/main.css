@@ -1091,6 +1091,11 @@ header .navmenu .active {
   max-width: 100%;
 }
 
+.btn-fin-validation {
+  margin-left: -15px;
+  margin-top: 15px;
+}
+
 /* import inscription */
 .legende-input {
   display: block;
@@ -1281,6 +1286,10 @@ header .navmenu .active {
 }
 
 /* import compte */
+.gestioncompte {
+  margin-top: 55px;
+}
+
 .gestioncompte .panel-default > a {
   text-decoration: none;
   color: black;
