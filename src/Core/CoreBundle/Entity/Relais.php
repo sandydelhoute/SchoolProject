@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Relais
 {
 public function __toString() {
-    return $this->name;
+    return "Relais";
 }
     /**
      * @var int
@@ -21,9 +21,14 @@ public function __toString() {
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
-     * @ORM\OneToMany(targetEntity="Opening", mappedBy="relais")
      */
     private $id;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Opening", inversedBy="relais")
+     * @ORM\JoinColumn(name="opening_id", referencedColumnName="id")
+     */     
+    private $opening;
 
     /**
      * @var string
@@ -96,5 +101,29 @@ public function __toString() {
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * Set opening
+     *
+     * @param \Core\CoreBundle\Entity\Relais $opening
+     *
+     * @return Relais
+     */
+    public function setOpening(\Core\CoreBundle\Entity\Relais $opening = null)
+    {
+        $this->opening = $opening;
+
+        return $this;
+    }
+
+    /**
+     * Get opening
+     *
+     * @return \Core\CoreBundle\Entity\Relais
+     */
+    public function getOpening()
+    {
+        return $this->opening;
     }
 }

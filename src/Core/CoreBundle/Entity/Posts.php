@@ -55,15 +55,8 @@ class Posts
      */
     private $datepublish;
 
-  /**
-     * @var ArrayCollection images $images
-     * Owning Side
-     *
-     * @ORM\ManyToMany(targetEntity="Core\CoreBundle\Entity\Images", inversedBy="posts", cascade={"persist", "merge"})
-     * @ORM\JoinTable(name="images_posts",
-     *   joinColumns={@ORM\JoinColumn(name="id_posts", referencedColumnName="id")},
-     *   inverseJoinColumns={@ORM\JoinColumn(name="id_images", referencedColumnName="id")}
-     * )
+   /**
+     * @ORM\ManyToMany(targetEntity="Images", inversedBy="posts")
      */
   private $images;
 
@@ -160,6 +153,7 @@ class Posts
      */
     public function addImage(\Core\CoreBundle\Entity\Images $image)
     {
+        $image->addPost($this); // synchronously updating inverse side
         $this->images[] = $image;
 
         return $this;

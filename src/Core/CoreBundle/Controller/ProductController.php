@@ -29,15 +29,11 @@ class ProductController extends Controller
 
    $listProduct = $em->getRepository('CoreCoreBundle:Product')
    ->filterProduct($categorie,$allergene,$priceMin,$priceMax,$offsetMin,$offsetMax);
- 
-   $serializer = $this->get('serializer');
-   $json = $serializer->serialize(
-    $listProduct,
-    'json'
-    );
-
+       
+  $serializer = $this->get('jms_serializer');
+  $seri=$serializer->serialize($listProduct,'json');
    $response = new JsonResponse(
-    array('data'=>$json)
+    array('data'=>$seri)
     );
    return $response ;
 

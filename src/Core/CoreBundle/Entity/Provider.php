@@ -26,7 +26,6 @@ public function __toString() {
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
-     * @ORM\OneToMany(targetEntity="Product", mappedBy="provider")
      */
     private $id;
 

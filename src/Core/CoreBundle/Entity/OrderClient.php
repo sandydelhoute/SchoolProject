@@ -13,6 +13,10 @@ use Doctrine\Common\Collections\ArrayCollection;
 class OrderClient
 {
 
+    public function __toString(){
+        return "OrderClient";
+    }
+
     /**
      * @var int
      *
@@ -23,11 +27,22 @@ class OrderClient
     private $id;
     /**
      * Many Features have One Product.
-     * @ORM\ManyToOne(targetEntity="Vendor\ConnectUsersBundle\Entity\UsersWeb",inversedBy="id")
+     * @ORM\ManyToOne(targetEntity="Vendor\ConnectUsersBundle\Entity\UsersWeb")
      * @ORM\JoinColumn(name="users_id",referencedColumnName="id")
      */
     private $users;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Relais")
+     * @ORM\JoinColumn(name="relais_id",referencedColumnName="id")
+     */
+    private $relais;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Payement")
+     * @ORM\JoinColumn(name="payement_id",referencedColumnName="id")
+     */
+    private $payement;
     
     /**
      * @var \DateTime
@@ -117,7 +132,6 @@ class OrderClient
         return $this->orderLine;
     }
 
-
     /**
      * Set users
      *
@@ -140,5 +154,53 @@ class OrderClient
     public function getUsers()
     {
         return $this->users;
+    }
+
+    /**
+     * Set payement
+     *
+     * @param \Core\CoreBundle\Entity\Payement $payement
+     *
+     * @return OrderClient
+     */
+    public function setPayement(\Core\CoreBundle\Entity\Payement $payement = null)
+    {
+        $this->payement = $payement;
+
+        return $this;
+    }
+
+    /**
+     * Get payement
+     *
+     * @return \Core\CoreBundle\Entity\Payement
+     */
+    public function getPayement()
+    {
+        return $this->payement;
+    }
+
+    /**
+     * Set relais
+     *
+     * @param \Core\CoreBundle\Entity\Relais $relais
+     *
+     * @return OrderClient
+     */
+    public function setRelais(\Core\CoreBundle\Entity\Relais $relais = null)
+    {
+        $this->relais = $relais;
+
+        return $this;
+    }
+
+    /**
+     * Get relais
+     *
+     * @return \Core\CoreBundle\Entity\Relais
+     */
+    public function getRelais()
+    {
+        return $this->relais;
     }
 }

@@ -49,11 +49,11 @@ class ProductRepository extends \Doctrine\ORM\EntityRepository
 public function filterProduct($categorie,$allergene,$priceMin,$priceMax,$offsetMin,$offsetMax){
 
     $qb = $this->createQueryBuilder('p')
-    ->join('p.categories', 'c')
-    ->addSelect('c')
-    ->innerjoin('p.allergenes', 'a')
-    ->addSelect('a')
-    ->having('c.name IN (:categorie) and a.name NOT IN (:allergene) and p.prix > :prixentiermin and p.prix < :prixentiermax' )
+     ->join('p.categories', 'c')
+     ->addSelect('c')
+     ->innerjoin('p.allergenes', 'a')
+     ->addSelect('a')
+     ->having('c.name IN (:categorie) and a.name NOT IN (:allergene) and p.prix > :prixentiermin and p.prix < :prixentiermax' )
     //or cp.name IN (:categorie)
     ->setParameter('allergene', $allergene)
     ->setParameter('categorie',$categorie)

@@ -18,8 +18,6 @@ class UsersWeb extends Users
 
         $this->cashBalance=0;
         $this->rewardPoints=0;
-        $this->order = new ArrayCollection();
-
     }
 
 
@@ -32,11 +30,6 @@ class UsersWeb extends Users
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
-
-    /**
-     * @ORM\OneToMany(targetEntity="Core\CoreBundle\Entity\OrderClient",mappedBy="users",cascade={"persist"}))
-     */
-    private $order;
 
     /**
      * @var float
@@ -114,40 +107,8 @@ class UsersWeb extends Users
    public function getRoles(){
         return array('ROLE_USER');
      }
-
-
-
-    /**
-     * Add order
-     *
-     * @param \Core\CoreBundle\Entity\OrderClient $order
-     *
-     * @return UsersWeb
-     */
-    public function addOrder(\Core\CoreBundle\Entity\OrderClient $order)
-    {
-        $this->order[] = $order;
-
-        return $this;
+    public function __toString(){
+        return "UsersWeb";
     }
 
-    /**
-     * Remove order
-     *
-     * @param \Core\CoreBundle\Entity\OrderClient $order
-     */
-    public function removeOrder(\Core\CoreBundle\Entity\OrderClient $order)
-    {
-        $this->order->removeElement($order);
-    }
-
-    /**
-     * Get order
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getOrder()
-    {
-        return $this->order;
-    }
 }

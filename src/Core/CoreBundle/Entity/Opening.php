@@ -14,12 +14,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 class Opening
 {
 
-  public function __construct() {
-    $this->relais = new ArrayCollection();
-}
-
-
-
     /**
      * @var int
      *
@@ -32,7 +26,7 @@ class Opening
     /**
      * @var \String
      *
-     * @ORM\Column(type="string", columnDefinition="ENUM('Monday', 'Thuesday')") 
+     * @ORM\Column(type="string") 
      */
     private $dayopen;
 
@@ -68,8 +62,8 @@ class Opening
     /**
      * @var \Relais
      *
-     * @ORM\ManyToOne(targetEntity="Relais", inversedBy="id")
-     * @ORM\JoinColumn(onDelete="CASCADE")
+     * @ORM\OneToMany(targetEntity="Core\CoreBundle\Entity\Relais", 
+     mappedBy="opening")
      */
     private $relais;
 
@@ -203,8 +197,6 @@ class Opening
     {
         return $this->timelimitshop;
     }
-
-  
 
     /**
      * Set relais

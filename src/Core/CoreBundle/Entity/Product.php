@@ -18,55 +18,35 @@ class Product
         $this->images = new ArrayCollection();
         $this->categories = new ArrayCollection();
         $this->allergenes = new ArrayCollection();
-        $this->providers = new ArrayCollection();
     }
-  /**
-     * @var ArrayCollection categorie $categories
-     * Owning Side
-     *
-     * @ORM\ManyToMany(targetEntity="Core\CoreBundle\Entity\Categorie", inversedBy="product", cascade={"persist", "merge"})
-     * @ORM\JoinTable(name="categorie_product",
-     *   joinColumns={@ORM\JoinColumn(name="id_product", referencedColumnName="id")},
-     *   inverseJoinColumns={@ORM\JoinColumn(name="id_categorie", referencedColumnName="id")}
-     * )
+    /**
+     * @ORM\ManyToMany(targetEntity="Categorie", inversedBy="product")
      */
     private $categories;
 
 
 
-  /**
-     * @var ArrayCollection allergenes $allergenes
-     * Owning Side
-     *
-     * @ORM\ManyToMany(targetEntity="Core\CoreBundle\Entity\Allergene", inversedBy="product", cascade={"persist", "merge"})
-     * @ORM\JoinTable(name="allergene_product",
-     *   joinColumns={@ORM\JoinColumn(name="id_product", referencedColumnName="id")},
-     *   inverseJoinColumns={@ORM\JoinColumn(name="id_allergene", referencedColumnName="id")}
-     * )
+    /**
+     * @ORM\ManyToMany(targetEntity="Allergene", inversedBy="product")
      */
     private $allergenes;
 
-
-  /**
-     * @var ArrayCollection images $images
-     * Owning Side
-     *
-     * @ORM\ManyToMany(targetEntity="Core\CoreBundle\Entity\Images", inversedBy="product", cascade={"persist", "merge"})
-     * @ORM\JoinTable(name="images_product",
-     *   joinColumns={@ORM\JoinColumn(name="id_product", referencedColumnName="id")},
-     *   inverseJoinColumns={@ORM\JoinColumn(name="id_images", referencedColumnName="id")}
-     * )
+    /**
+     * @ORM\ManyToMany(targetEntity="Images", inversedBy="product")
      */
     private $images;
 
 
+    /**
+     * @ORM\ManyToMany(targetEntity="Menu", mappedBy="product")
+     */
+    private $menu;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Provider", inversedBy="id")
-     * @ORM\JoinColumn(name="product_provider", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Provider")
+     * @ORM\JoinColumn(name="provider_id", referencedColumnName="id")
      */
-
-    private $providers;
+    private $provider;
 
     /**
      * @var int
@@ -113,60 +93,6 @@ class Product
      * @ORM\Column(name="active", type="boolean")
      */
     private $active;
-
-
-
-    /**
-     * Remove Image
-     *
-     * @param Images $image
-     */
-
- public function removeImage(Images $image)
-    {
-        $this->images->removeElement($image);
-
-    }
-
-    /**
-     * Add Images
-     *
-     * @param Images $image
-     */
-    public function addImage(Images $image)
-    {
-        // Si l'objet fait déjà partie de la collection on ne l'ajoute pas
-        if (!$this->images->contains($image)) {
-            $this->images->add($image);
-        }
-    }
-     /**
-     * Add Collection Images
-     *
-     * @param Images $images
-     */
-    public function setImages($images)
-    {
-        if ($images instanceof ArrayCollection || is_array($images)) {
-            foreach ($image as $images) {
-                $this->addProduit($image);
-            }
-        } elseif ($images instanceof Images) {
-            $this->addProduit($images);
-        } else {
-            throw new Exception("$items must be an instance of Produit or ArrayCollection");
-        }
-    }
-    /**
-     * Get ArrayCollection
-     *
-     * @return ArrayCollection $produits
-     */
-    public function getImages()
-    {
-        return $this->images;
-    }
-
 
     /**
      * Get id
@@ -299,40 +225,6 @@ class Product
     }
 
     /**
-     * Add category
-     *
-     * @param \Core\CoreBundle\Entity\Categorie $category
-     *
-     * @return Product
-     */
-    public function addCategory(\Core\CoreBundle\Entity\Categorie $category)
-    {
-        $this->categories[] = $category;
-
-        return $this;
-    }
-
-    /**
-     * Remove category
-     *
-     * @param \Core\CoreBundle\Entity\Categorie $category
-     */
-    public function removeCategory(\Core\CoreBundle\Entity\Categorie $category)
-    {
-        $this->categories->removeElement($category);
-    }
-
-    /**
-     * Get categories
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getCategories()
-    {
-        return $this->categories;
-    }
-
-    /**
      * Add allergene
      *
      * @param \Core\CoreBundle\Entity\Allergene $allergene
@@ -341,6 +233,7 @@ class Product
      */
     public function addAllergene(\Core\CoreBundle\Entity\Allergene $allergene)
     {
+        $allergene->addProduct($this); // synchronously updating inverse side
         $this->allergenes[] = $allergene;
 
         return $this;
@@ -366,31 +259,132 @@ class Product
         return $this->allergenes;
     }
 
-
     /**
-     * Set providers
+     * Add menu
      *
-     * @param \Core\CoreBundle\Entity\Provider $providers
+     * @param \Core\CoreBundle\Entity\Menu $menu
      *
      * @return Product
      */
-    public function setProviders(\Core\CoreBundle\Entity\Provider $providers = null)
+    public function addMenu(\Core\CoreBundle\Entity\Menu $menu)
     {
-        $this->providers = $providers;
+        $this->menu[] = $menu;
 
         return $this;
     }
 
     /**
-     * Get providers
+     * Remove menu
+     *
+     * @param \Core\CoreBundle\Entity\Menu $menu
+     */
+    public function removeMenu(\Core\CoreBundle\Entity\Menu $menu)
+    {
+        $this->menu->removeElement($menu);
+    }
+
+    /**
+     * Get menu
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getMenu()
+    {
+        return $this->menu;
+    }
+
+    /**
+     * Add image
+     *
+     * @param \Core\CoreBundle\Entity\Images $image
+     *
+     * @return Product
+     */
+    public function addImage(\Core\CoreBundle\Entity\Images $image)
+    {
+        $image->addProduct($this); // synchronously updating inverse side
+        $this->images[] = $image;
+
+        return $this;
+    }
+
+    /**
+     * Remove image
+     *
+     * @param \Core\CoreBundle\Entity\Images $image
+     */
+    public function removeImage(\Core\CoreBundle\Entity\Images $image)
+    {
+        $this->images->removeElement($image);
+    }
+
+    /**
+     * Get images
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getImages()
+    {
+        return $this->images;
+    }
+
+    /**
+     * Add category
+     *
+     * @param \Core\CoreBundle\Entity\Categorie $category
+     *
+     * @return Product
+     */
+    public function addCategory(\Core\CoreBundle\Entity\Categorie $category)
+    {
+        $category->addProduct($this);// synchronously updating inverse side
+        $this->categories[] = $category;
+
+        return $this;
+    }
+
+    /**
+     * Remove category
+     *
+     * @param \Core\CoreBundle\Entity\Categorie $category
+     */
+    public function removeCategory(\Core\CoreBundle\Entity\Categorie $category)
+    {
+        $this->categories->removeElement($category);
+    }
+
+    /**
+     * Get categories
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCategories()
+    {
+        return $this->categories;
+    }
+
+
+    /**
+     * Set provider
+     *
+     * @param \Core\CoreBundle\Entity\Provider $provider
+     *
+     * @return Product
+     */
+    public function setProvider(\Core\CoreBundle\Entity\Provider $provider = null)
+    {
+        $this->provider = $provider;
+
+        return $this;
+    }
+
+    /**
+     * Get provider
      *
      * @return \Core\CoreBundle\Entity\Provider
      */
-    public function getProviders()
+    public function getProvider()
     {
-        return $this->providers;
-    }
-    public function toString(){
-
+        return $this->provider;
     }
 }

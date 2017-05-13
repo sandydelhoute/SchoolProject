@@ -60,7 +60,7 @@ public Function load(ObjectManager $manager){
         $product->setName("Fondant au chocolat");
         $product->setActive(True);
         $product->setPrix($prix);
-        $product->setProviders($this->getReference('Provider'));
+        $product->setProvider($this->getReference('Provider'));
         $product->setComposition($description);
         $product->setDescription($description);
         $product->addAllergene($this->getReference($listAllergene[2]));
@@ -73,7 +73,7 @@ public Function load(ObjectManager $manager){
         $product1->setName("Mafé");
         $product1->setActive(True);
         $product1->setPrix($prix+1);
-        $product1->setProviders($this->getReference('Provider'));
+        $product1->setProvider($this->getReference('Provider'));
         $product1->setComposition($description1);
         $product1->setDescription($description1);
         $product1->addAllergene($this->getReference($listAllergene[4]));
@@ -86,7 +86,7 @@ public Function load(ObjectManager $manager){
         $product2->setName("Poulet braisé");
         $product2->setActive(True);
         $product2->setPrix($prix+2);
-        $product2->setProviders($this->getReference('Provider'));
+        $product2->setProvider($this->getReference('Provider'));
         $product2->setComposition($description2);
         $product2->setDescription($description2);
         $product2->addAllergene($this->getReference($listAllergene[0]));
@@ -99,7 +99,7 @@ public Function load(ObjectManager $manager){
         $product3->setName("Tiramisu");
         $product3->setActive(True);
         $product3->setPrix($prix+3);
-        $product3->setProviders($this->getReference('Provider'));
+        $product3->setProvider($this->getReference('Provider'));
         $product3->setComposition($description3);
         $product3->setDescription($description3);
         $product3->addAllergene($this->getReference($listAllergene[2]));
@@ -112,7 +112,7 @@ public Function load(ObjectManager $manager){
         $product4->setName("Verrines de crabe à l'avocat");
         $product4->setActive(True);
         $product4->setPrix($prix+4);
-        $product4->setProviders($this->getReference('Provider'));
+        $product4->setProvider($this->getReference('Provider'));
         $product4->setComposition($description4);
         $product4->setDescription($description4);
         $product4->addAllergene($this->getReference($listAllergene[1]));
@@ -125,7 +125,7 @@ public Function load(ObjectManager $manager){
         $product5->setName("Risotto de homard");
         $product5->setActive(True);
         $product5->setPrix($prix+5);
-        $product5->setProviders($this->getReference('Provider'));
+        $product5->setProvider($this->getReference('Provider'));
         $product5->setComposition($description5);
         $product5->setDescription($description5);
         $product5->addAllergene($this->getReference($listAllergene[7]));
@@ -138,7 +138,7 @@ public Function load(ObjectManager $manager){
         $product6->setName("Salade césar au poulet");
         $product6->setActive(True);
         $product6->setPrix($prix+6);
-        $product6->setProviders($this->getReference('Provider'));
+        $product6->setProvider($this->getReference('Provider'));
         $product6->setComposition($description6);
         $product6->setDescription($description6);
         $product6->addAllergene($this->getReference($listAllergene[2]));
@@ -151,7 +151,7 @@ public Function load(ObjectManager $manager){
         $product7->setName("Suprême de chapon aux épices");
         $product7->setActive(True);
         $product7->setPrix($prix+7);
-        $product7->setProviders($this->getReference('Provider'));
+        $product7->setProvider($this->getReference('Provider'));
         $product7->setComposition($description7);
         $product7->setDescription($description7);
         $product7->addAllergene($this->getReference($listAllergene[0]));
@@ -164,7 +164,7 @@ public Function load(ObjectManager $manager){
         $product8->setName("Salade de pâtes aux poivrons et au thon");
         $product8->setActive(True);
         $product8->setPrix($prix+8);
-        $product8->setProviders($this->getReference('Provider'));
+        $product8->setProvider($this->getReference('Provider'));
         $product8->setComposition($description8);
         $product8->setDescription($description8);
         $product8->addAllergene($this->getReference($listAllergene[0]));
@@ -177,7 +177,7 @@ public Function load(ObjectManager $manager){
         $product9->setName("Tajine d'agneau aux pruneaux");
         $product9->setActive(True);
         $product9->setPrix($prix+9);
-        $product9->setProviders($this->getReference('Provider'));
+        $product9->setProvider($this->getReference('Provider'));
         $product9->setComposition($description9);
         $product9->setDescription($description9);
         $product9->addAllergene($this->getReference($listAllergene[10]));
@@ -190,7 +190,7 @@ public Function load(ObjectManager $manager){
         $product10->setName("Gratin dauphinois aux lardons");
         $product10->setActive(True);
         $product10->setPrix($prix+10);
-        $product10->setProviders($this->getReference('Provider'));
+        $product10->setProvider($this->getReference('Provider'));
         $product10->setComposition($description10);
         $product10->setDescription($description10);
         $product10->addAllergene($this->getReference($listAllergene[5]));

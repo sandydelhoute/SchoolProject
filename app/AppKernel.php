@@ -21,6 +21,7 @@ class AppKernel extends Kernel
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
             new WhiteOctober\BreadcrumbsBundle\WhiteOctoberBreadcrumbsBundle(),
             new Knp\Bundle\SnappyBundle\KnpSnappyBundle(),
+            new JMS\SerializerBundle\JMSSerializerBundle(),
 
         ];
 

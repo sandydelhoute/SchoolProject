@@ -21,7 +21,8 @@ framework:
     form:            ~
     csrf_protection: ~
     validation:      { enable_annotations: true }
-    serializer:      { enable_annotations: true }
+    # serializer:      { enable_annotations: true }
+    serializer: true 
     templating:
         engines: ['twig']
     default_locale:  "%locale%"
@@ -75,7 +76,6 @@ swiftmailer:
     host:      '%mailer_host%'
     username:  '%mailer_user%'
     password:  '%mailer_password%'
-    #port:       '%mailer_port%'
     spool:     { type: memory }
 # app/config/config.yml
 # hwi_oauth:
@@ -108,3 +108,9 @@ knp_snappy:
         options:
             - { name: 'viewport-size', value: ‘1024x768’ }
             - { name: 'page-size', value: 'A4' }
+jms_serializer:
+    handlers:
+        datetime:
+            default_format: "Y-m-d\\TH:i:sP"
+            default_timezone: "UTC"
+

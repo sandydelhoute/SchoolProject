@@ -21,6 +21,22 @@ class Images
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+    /**
+     * @ORM\ManyToMany(targetEntity="Posts", mappedBy="images")
+     * @ORM\JoinTable(name="posts_image")
+     */
+    private $posts;
+    /**
+     * @ORM\ManyToMany(targetEntity="Menu", mappedBy="images")
+     * @ORM\JoinTable(name="menu_images")
+     */
+    private $menu;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Product", mappedBy="images")
+     * @ORM\JoinTable(name="product_image")
+     */
+    private $product;
 
     /**
      * @var string
@@ -129,5 +145,117 @@ class Images
     public function getFile()
     {
         return $this->file;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->posts = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->menu = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+
+
+    /**
+     * Add menu
+     *
+     * @param \Core\CoreBundle\Entity\Menu $menu
+     *
+     * @return Images
+     */
+    public function addMenu(\Core\CoreBundle\Entity\Menu $menu)
+    {
+        $this->menu[] = $menu;
+
+        return $this;
+    }
+
+    /**
+     * Remove menu
+     *
+     * @param \Core\CoreBundle\Entity\Menu $menu
+     */
+    public function removeMenu(\Core\CoreBundle\Entity\Menu $menu)
+    {
+        $this->menu->removeElement($menu);
+    }
+
+    /**
+     * Get menu
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getMenu()
+    {
+        return $this->menu;
+    }
+
+    /**
+     * Add product
+     *
+     * @param \Core\CoreBundle\Entity\Product $product
+     *
+     * @return Images
+     */
+    public function addProduct(\Core\CoreBundle\Entity\Product $product)
+    {
+        $this->product[] = $product;
+
+        return $this;
+    }
+
+    /**
+     * Remove product
+     *
+     * @param \Core\CoreBundle\Entity\Product $product
+     */
+    public function removeProduct(\Core\CoreBundle\Entity\Product $product)
+    {
+        $this->product->removeElement($product);
+    }
+
+    /**
+     * Get product
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getProduct()
+    {
+        return $this->product;
+    }
+
+    /**
+     * Add post
+     *
+     * @param \Core\CoreBundle\Entity\Posts $post
+     *
+     * @return Images
+     */
+    public function addPost(\Core\CoreBundle\Entity\Posts $post)
+    {
+        $this->posts[] = $post;
+
+        return $this;
+    }
+
+    /**
+     * Remove post
+     *
+     * @param \Core\CoreBundle\Entity\Posts $post
+     */
+    public function removePost(\Core\CoreBundle\Entity\Posts $post)
+    {
+        $this->posts->removeElement($post);
+    }
+
+    /**
+     * Get posts
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPosts()
+    {
+        return $this->posts;
     }
 }

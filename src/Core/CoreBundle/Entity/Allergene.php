@@ -40,7 +40,11 @@ public function __toString() {
      */
     private $description;
 
-
+    /**
+     * @ORM\ManyToMany(targetEntity="Product", mappedBy="allergenes")
+     * @ORM\JoinTable(name="product_allergene")
+     */
+    private $product;
     /**
      * Get id
      *
@@ -97,5 +101,46 @@ public function __toString() {
     public function getDescription()
     {
         return $this->description;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->product = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add product
+     *
+     * @param \Core\CoreBundle\Entity\Product $product
+     *
+     * @return Allergene
+     */
+    public function addProduct(\Core\CoreBundle\Entity\Product $product)
+    {
+        $this->product[] = $product;
+
+        return $this;
+    }
+
+    /**
+     * Remove product
+     *
+     * @param \Core\CoreBundle\Entity\Product $product
+     */
+    public function removeProduct(\Core\CoreBundle\Entity\Product $product)
+    {
+        $this->product->removeElement($product);
+    }
+
+    /**
+     * Get product
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getProduct()
+    {
+        return $this->product;
     }
 }

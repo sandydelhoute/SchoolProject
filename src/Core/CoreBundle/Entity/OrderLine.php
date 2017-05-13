@@ -44,13 +44,15 @@ class OrderLine
     private $prix;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Menu", inversedBy="id")
+     * @ORM\ManyToOne(targetEntity="Menu")
+     * @ORM\JoinColumn(name="menu_id", referencedColumnName="id")
      * @ORM\JoinColumn(nullable=true)
      */
     private $menu;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Product", inversedBy="id")
+     * @ORM\ManyToOne(targetEntity="Product")
+     * @ORM\JoinColumn(name="product_id", referencedColumnName="id")
      * @ORM\JoinColumn(nullable=true)
      */
     private $product;
@@ -138,30 +140,6 @@ class OrderLine
     }
 
     /**
-     * Set product
-     *
-     * @param \Core\CoreBundle\Entity\Product $product
-     *
-     * @return OrderLine
-     */
-    public function setProduct(\Core\CoreBundle\Entity\Product $product = null)
-    {
-        $this->product = $product;
-
-        return $this;
-    }
-
-    /**
-     * Get product
-     *
-     * @return \Core\CoreBundle\Entity\Product
-     */
-    public function getProduct()
-    {
-        return $this->product;
-    }
-
-    /**
      * Set orderClient
      *
      * @param \Core\CoreBundle\Entity\OrderCLient $orderClient
@@ -183,5 +161,29 @@ class OrderLine
     public function getOrderClient()
     {
         return $this->orderClient;
+    }
+
+    /**
+     * Set product
+     *
+     * @param \Core\CoreBundle\Entity\Product $product
+     *
+     * @return OrderLine
+     */
+    public function setProduct(\Core\CoreBundle\Entity\Product $product = null)
+    {
+        $this->product = $product;
+
+        return $this;
+    }
+
+    /**
+     * Get product
+     *
+     * @return \Core\CoreBundle\Entity\Product
+     */
+    public function getProduct()
+    {
+        return $this->product;
     }
 }

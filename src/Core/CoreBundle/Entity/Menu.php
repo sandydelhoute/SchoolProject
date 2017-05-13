@@ -12,6 +12,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class Menu
 {
+
     /**
      * Constructor
      */
@@ -19,32 +20,18 @@ class Menu
     {
         $this->images = new ArrayCollection();
         $this->categories = new ArrayCollection();
-        $this->products = new ArrayCollection();
-
+        $this->product = new ArrayCollection();
     }
 
 
     /**
-     * @var ArrayCollection product $products
-     * Owning Side
-     *
-     * @ORM\ManyToMany(targetEntity="product", inversedBy="menu", cascade={"persist", "merge"})
-     * @ORM\JoinTable(name="menu_produit",
-     *   joinColumns={@ORM\JoinColumn(name="id_menu", referencedColumnName="id")},
-     *   inverseJoinColumns={@ORM\JoinColumn(name="id_produit", referencedColumnName="id")}
-     * )
+     * @ORM\ManyToMany(targetEntity="Product", inversedBy="menu")
+     * @ORM\JoinTable(name="menu_product")
      */
-    private $products;
+    private $product;
 
     /**
-     * @var ArrayCollection images $images
-     * Owning Side
-     *
-     * @ORM\ManyToMany(targetEntity="Images", inversedBy="menu", cascade={"persist", "merge"})
-     * @ORM\JoinTable(name="images_menu",
-     *   joinColumns={@ORM\JoinColumn(name="id_menu", referencedColumnName="id")},
-     *   inverseJoinColumns={@ORM\JoinColumn(name="id_images", referencedColumnName="id")}
-     * )
+     * @ORM\ManyToMany(targetEntity="Images", inversedBy="menu")
      */
     private $images;
 
@@ -55,9 +42,10 @@ class Menu
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
-     * @ORM\OneToMany(targetEntity="LineOrder", mappedBy="menu")
      */
     private $id;
+
+
 
     /**
      * @var string
@@ -224,51 +212,16 @@ class Menu
     {
         return $this->composition;
     }
-    
-    
-    /**
-     * Add product
-     *
-     * @param \Core\CoreBundle\Entity\product $product
-     *
-     * @return Menu
-     */
-    public function addProduct(\Core\CoreBundle\Entity\product $product)
-    {
-        $this->products[] = $product;
-
-        return $this;
-    }
-
-    /**
-     * Remove product
-     *
-     * @param \Core\CoreBundle\Entity\product $product
-     */
-    public function removeProduct(\Core\CoreBundle\Entity\product $product)
-    {
-        $this->products->removeElement($product);
-    }
-
-    /**
-     * Get products
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getProducts()
-    {
-        return $this->products;
-    }
-
     /**
      * Add image
      *
-     * @param \Core\CoreBundle\Entity\images $image
+     * @param \Core\CoreBundle\Entity\Images $image
      *
      * @return Menu
      */
-    public function addImage(\Core\CoreBundle\Entity\images $image)
+    public function addImage(\Core\CoreBundle\Entity\Images $image)
     {
+        $image->addMenu($this); // synchronously updating inverse side
         $this->images[] = $image;
 
         return $this;
@@ -277,9 +230,9 @@ class Menu
     /**
      * Remove image
      *
-     * @param \Core\CoreBundle\Entity\images $image
+     * @param \Core\CoreBundle\Entity\Images $image
      */
-    public function removeImage(\Core\CoreBundle\Entity\images $image)
+    public function removeImage(\Core\CoreBundle\Entity\Images $image)
     {
         $this->images->removeElement($image);
     }
@@ -292,5 +245,40 @@ class Menu
     public function getImages()
     {
         return $this->images;
+    }
+
+    /**
+     * Add product
+     *
+     * @param \Core\CoreBundle\Entity\Product $product
+     *
+     * @return Menu
+     */
+    public function addProduct(\Core\CoreBundle\Entity\Product $product)
+    {
+        $product->addMenu($this);
+        $this->product[] = $product;
+
+        return $this;
+    }
+
+    /**
+     * Remove product
+     *
+     * @param \Core\CoreBundle\Entity\Product $product
+     */
+    public function removeProduct(\Core\CoreBundle\Entity\Product $product)
+    {
+        $this->product->removeElement($product);
+    }
+
+    /**
+     * Get product
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getProduct()
+    {
+        return $this->product;
     }
 }
