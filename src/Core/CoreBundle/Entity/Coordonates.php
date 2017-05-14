@@ -26,14 +26,22 @@ class Coordonates
     /**
      * @var string
      *
-     * @ORM\Column(name="complement", type="string", length=255)
+     * @ORM\Column(name="longitude", type="float")
      */
-    private $complement;
+    private $longitude;
+
 
     /**
      * @var string
      *
-     * @ORM\Column(name="phone", type="string", length=255)
+     * @ORM\Column(name="latitude", type="float")
+     */
+    private $latitude;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="phone", type="string", length=255,nullable=true)
      */
     private $phone;
 
@@ -48,29 +56,7 @@ class Coordonates
         return $this->id;
     }
 
-    /**
-     * Set complement
-     *
-     * @param string $complement
-     *
-     * @return Coordonee
-     */
-    public function setComplement($complement)
-    {
-        $this->complement = $complement;
-
-        return $this;
-    }
-
-    /**
-     * Get complement
-     *
-     * @return string
-     */
-    public function getComplement()
-    {
-        return $this->complement;
-    }
+   
 
     /**
      * Set phone
@@ -94,5 +80,53 @@ class Coordonates
     public function getPhone()
     {
         return $this->phone;
+    }
+
+    /**
+     * Set longitude
+     *
+     * @param string $longitude
+     *
+     * @return Coordonates
+     */
+    public function setLongitude($longitude)
+    {
+        $this->longitude = $longitude;
+
+        return $this;
+    }
+
+    /**
+     * Get longitude
+     *
+     * @return string
+     */
+    public function getLongitude()
+    {
+        return $this->longitude;
+    }
+
+    /**
+     * Set latitude
+     *
+     * @param string $latitude
+     *
+     * @return Coordonates
+     */
+    public function setLatitude($latitude)
+    {
+        $this->latitude = $latitude;
+
+        return $this;
+    }
+
+    /**
+     * Get latitude
+     *
+     * @return string
+     */
+    public function getLatitude()
+    {
+        return $this->latitude;
     }
 }

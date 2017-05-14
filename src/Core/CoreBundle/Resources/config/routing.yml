@@ -16,6 +16,16 @@ resetpasswordpage:
     path:     /resetpassword/{token}
     defaults: { _controller: CoreCoreBundle:Core:resetPassword }
 
+#relais
+relaispage:
+    path:     /relais
+    defaults: { _controller: CoreCoreBundle:Relais:index }
+
+allrelais:
+    path: /relais/all
+    defaults: { _controller: CoreCoreBundle:Relais:all}
+    options:
+            expose: true
 
 #contact
 contactpage:

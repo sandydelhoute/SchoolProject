@@ -31,9 +31,9 @@ class ProductController extends Controller
    ->filterProduct($categorie,$allergene,$priceMin,$priceMax,$offsetMin,$offsetMax);
        
   $serializer = $this->get('jms_serializer');
-  $seri=$serializer->serialize($listProduct,'json');
+  $listProductSerialize=$serializer->serialize($listProduct,'json');
    $response = new JsonResponse(
-    array('data'=>$seri)
+    array('data'=>$listProductSerialize)
     );
    return $response ;
 

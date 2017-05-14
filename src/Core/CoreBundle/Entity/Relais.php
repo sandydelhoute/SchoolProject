@@ -24,18 +24,20 @@ public function __toString() {
      */
     private $id;
 
+
+    /**
+     * Many Features have One Product.
+     * @ORM\ManyToOne(targetEntity="Coordonates",cascade={"persist"}))
+     * @ORM\JoinColumn(name="Coordonates_id",referencedColumnName="id")
+     */
+    private $coordonates;
+
     /**
      * @ORM\ManyToOne(targetEntity="Opening", inversedBy="relais")
      * @ORM\JoinColumn(name="opening_id", referencedColumnName="id")
      */     
     private $opening;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="phone", type="string", length=255)
-     */
-    private $phone;
 
     /**
      * @var string
@@ -53,30 +55,6 @@ public function __toString() {
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set phone
-     *
-     * @param string $phone
-     *
-     * @return Relais
-     */
-    public function setPhone($phone)
-    {
-        $this->phone = $phone;
-
-        return $this;
-    }
-
-    /**
-     * Get phone
-     *
-     * @return string
-     */
-    public function getPhone()
-    {
-        return $this->phone;
     }
 
     /**
@@ -104,13 +82,37 @@ public function __toString() {
     }
 
     /**
-     * Set opening
+     * Set coordonates
      *
-     * @param \Core\CoreBundle\Entity\Relais $opening
+     * @param \Core\CoreBundle\Entity\Coordonates $coordonates
      *
      * @return Relais
      */
-    public function setOpening(\Core\CoreBundle\Entity\Relais $opening = null)
+    public function setCoordonates(\Core\CoreBundle\Entity\Coordonates $coordonates = null)
+    {
+        $this->coordonates = $coordonates;
+
+        return $this;
+    }
+
+    /**
+     * Get coordonates
+     *
+     * @return \Core\CoreBundle\Entity\Coordonates
+     */
+    public function getCoordonates()
+    {
+        return $this->coordonates;
+    }
+
+    /**
+     * Set opening
+     *
+     * @param \Core\CoreBundle\Entity\Opening $opening
+     *
+     * @return Relais
+     */
+    public function setOpening(\Core\CoreBundle\Entity\Opening $opening = null)
     {
         $this->opening = $opening;
 
@@ -120,7 +122,7 @@ public function __toString() {
     /**
      * Get opening
      *
-     * @return \Core\CoreBundle\Entity\Relais
+     * @return \Core\CoreBundle\Entity\Opening
      */
     public function getOpening()
     {

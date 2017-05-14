@@ -45,12 +45,12 @@
       <ul class="navmenu nav navbar-nav navbar-left">
         {% if  is_granted('ROLE_USER') %}
 
-          <div class="btn btn-green">
+          <a href="{{ path('relaispage') }}" class="btn btn-green">
             <i class="fa fa-map-marker fa-2x" aria-hidden="true"></i>
             <div class="containertext">
               Villeneuve d'Ascq
             </div>
-          </div>
+          </a>
           <div class="btn btn-blackborder">
             <p class="txtborder">Points de fidélité</p>
             <div class="containertext">
@@ -59,12 +59,12 @@
             </div>
           </div>
         {% else %}
-         <div class="btn btn-green">
+         <a href="{{ path('relaispage') }}" class="btn btn-green">
           <i class="fa fa-map-marker fa-2x" aria-hidden="true"></i>
           <div class="containertext">
             Choisissez votre</br> point relais
-          </div>
         </div>
+      </a>
       {% endif %}
       <li>
         <a {% if 'homepage' in app.request.attributes.get('_route') %}class="active"{% endif %} href="{{ path('homepage') }}">Accueil</a>

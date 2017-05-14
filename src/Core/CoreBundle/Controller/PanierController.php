@@ -64,7 +64,7 @@ class PanierController extends Controller
 
 
 			$response = new JsonResponse(
-				array('response'=>true)
+				array('response'=>true,'paniercount'=>count($listOrderLine))
 				);
 			return $response ;
 

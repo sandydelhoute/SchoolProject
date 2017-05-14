@@ -1,7 +1,7 @@
 
 function InfiniteScroll(route,selector,render,offset){
   var _this=this;
-  var objAjax=new CallAjax();
+  var objAjax=new CallAjax(selector);
   this.param={offsetmin:0,offsetmax:offset};
   this.render=render;
   this.route=route;

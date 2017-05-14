@@ -22,7 +22,6 @@ function Filter(routeFilter,routeAdd,selector,render,offset){
     priceParams();
     addPanier();
     render(objAjax.callAjax(Routing.generate(_this.routeFilter,dataFilter)));
-    console.log(ajaxready);
     scroll();
   }
   var render=function(data){
@@ -125,15 +124,13 @@ var scroll=function(){
   $(window).scroll(function() {
     if ( ajaxready == false)
       return;
-    if($(window).scrollTop() > ($(document).height()-$(window).height()-200)){
+    if($(window).scrollTop() > ($(document).height()-$(window).height()-10)){
      ajaxready=false;
      console.log("je suis dans le id du scroll");
      dataFilter.offsetMin = dataFilter.offsetMin + _this.offset;
      dataFilter.offsetMax = dataFilter.offsetMax + _this.offset + 1 ;
      ajaxready=render(objAjax.callAjax(Routing.generate(_this.routeFilter,dataFilter)));
-     // render(objAjax.callAjax(Routing.generate(_this.routeFilter,dataFilter)));
-     // ajaxready = true;
-     console.log(ajaxready);
+
    }
  });
 }
