@@ -92,6 +92,7 @@ public Function load(ObjectManager $manager){
         $product2->addAllergene($this->getReference($listAllergene[0]));
         $product2->addCategory($this->getReference('categorieProcduct'));
         $product2->addImage($this->getReference('image2'));
+        $this->addReference('product',$product2);
         $manager->persist($product2);
         $manager->flush();
 

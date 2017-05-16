@@ -23,7 +23,7 @@ function Panier(routeDelete,routeChangeQuantity,selector=null){
 			console.log(_this.routeChangeQuantity)
 			var idProduct=$(this).data('product');
 			var quantity=$(this).val();
-			render(objAjax.callAjax(Routing.generate(_this.routeChangeQuantity,{id:idProduct,quantity:quantity})))
+			objAjax.callAjax(Routing.generate(_this.routeChangeQuantity,{id:idProduct,quantity:quantity}));
 		})
 	}
 
@@ -37,12 +37,13 @@ function Panier(routeDelete,routeChangeQuantity,selector=null){
 			{
 				$('.command-list').html('Votre panier est vide.');
 				$('.price').html('0');
+				$('#countpanier').text(0);
 			}
 			else
 			{
 			$('.total-price .price').html((data.total.toString()).replace('.','€'));
-				$('.fidelite-gain .fidelite-pts').html(data.ptsfidelite);
-
+			$('.fidelite-gain .fidelite-pts').html(data.ptsfidelite);
+			$('#panniercount').text(data.paniercount);
 			}
 		});
 

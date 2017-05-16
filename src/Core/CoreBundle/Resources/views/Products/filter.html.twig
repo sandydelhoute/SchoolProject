@@ -4,6 +4,20 @@
       <h3>Filtres</h3>
     </div>
     <div class="panel-body panel-group">
+       <div class="panel panel-default">
+           <a data-toggle="collapse" data-parent="#tunnel" href="#type_content" class="collapsed" aria-expanded="false">
+        <div class="title-filter panel-heading">
+        <strong>Type de produis</strong>
+        <i class="fa fa-angle-down arrow" aria-hidden="true"></i>
+        </div>
+      </a>
+        <div class="panel-body collapse" id="type_content">
+          <label for="menu_select">Menu</label>
+          <input type="radio" value="menu" id="menu_select" name='selecttype'></input>
+          <label for="produit_select">Produits</label>
+          <input type="radio" value="product" id="produit_select" name='selecttype' checked="checked"></input>
+        </div>
+      </div>
       <div class="panel panel-default">
         <a data-toggle="collapse" data-parent="#tunnel" href="#allergene_content" class="collapsed" aria-expanded="false">
         <div class="title-filter panel-heading">

@@ -46,19 +46,23 @@ class ProductRepository extends \Doctrine\ORM\EntityRepository
 
         return $paginator;
     }
-public function filterProduct($categorie,$allergene,$priceMin,$priceMax,$offsetMin,$offsetMax){
+public function filterProduct($categorie,$allergene,$priceMin,$priceMax,$offsetMin,$offsetMax,$relais){
 
     $qb = $this->createQueryBuilder('p')
      ->join('p.categories', 'c')
      ->addSelect('c')
      ->innerjoin('p.allergenes', 'a')
      ->addSelect('a')
-     ->having('c.name IN (:categorie) and a.name NOT IN (:allergene) and p.prix > :prixentiermin and p.prix < :prixentiermax' )
-    //or cp.name IN (:categorie)
+     ->innerjoin('p.stock', 's')
+     ->addSelect('s')
+     ->innerjoin('s.relais','r')
+     ->addSelect('r')
+     ->having('c.name IN (:categorie) and a.name NOT IN (:allergene) and p.prix > :prixentiermin and p.prix < :prixentiermax and r.id = :relais and s.quantity > 0')
     ->setParameter('allergene', $allergene)
     ->setParameter('categorie',$categorie)
     ->setParameter('prixentiermin',$priceMin)
     ->setParameter('prixentiermax', $priceMax)
+    ->setParameter('relais', $relais->getId())
     ->setFirstResult($offsetMin)
     ->setMaxResults($offsetMax);
 

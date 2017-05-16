@@ -10,6 +10,7 @@ use Core\CoreBundle\Form\ProductType;
 
 class ProductController extends Controller
 {
+    
     public function indexAction(Request $request)
     { 
         return $this->render('AdminAdminBundle:Product:listproduct.html.twig');

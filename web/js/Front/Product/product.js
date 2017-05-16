@@ -57,6 +57,10 @@ $(document).ready(function(){
                  html += '<button class="btn btn-success btn-block addpanier" data-product="'+obj.id+'">';
                  html += '<i class="fa fa-shopping-cart fa-2x" aria-hidden="true"></i> | Ajouter</button>'
                  html += '</div>';
+                 html += '<div class="col-xs-12 text-center">';
+                 console.log(obj);
+                 html += '<label>stock:'+obj.stock[0].quantity+'<label>';
+                 html += '</div>';
                  html += '</div>';
                  html += '</div>';
 

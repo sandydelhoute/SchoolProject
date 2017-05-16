@@ -40,7 +40,7 @@ security:
             anonymous: true
             provider:  core
             form_login:
-               login_path: /compte/connexionweb
+               login_path: /login
                check_path: /compte/login_check
                default_target_path: /
                failure_path: /login
@@ -59,10 +59,11 @@ security:
             anonymous: true
             provider:  admin
             form_login:
-               login_path: /compte/connexionadmin
+               login_path: /
                check_path: /compte/login_check
                default_target_path: /
                failure_path: /
+               
             logout:
                 path:   /compte/deconnexion
                 target: /

@@ -6,11 +6,20 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+
 class ProductController extends Controller
 {
-
+  //"has_role('ROLE_USER')"
+    /**
+     * @Security("has_role('ROLE_USER')")
+     */
   public function productsAction()
   {
+    if($this->getUser()->getRelais() == null )
+    {
+          return $this->redirectToRoute('relaispage');
+    }
    $breadcrumbs = $this->get("white_october_breadcrumbs");
    $breadcrumbs->addItem("Nos produits");
    $breadcrumbs->prependRouteItem("Accueil", "homepage");   
@@ -28,7 +37,7 @@ class ProductController extends Controller
    $allergene=explode(",", $allergene);
 
    $listProduct = $em->getRepository('CoreCoreBundle:Product')
-   ->filterProduct($categorie,$allergene,$priceMin,$priceMax,$offsetMin,$offsetMax);
+   ->filterProduct($categorie,$allergene,$priceMin,$priceMax,$offsetMin,$offsetMax,$this->getUser()->getRelais());
        
   $serializer = $this->get('jms_serializer');
   $listProductSerialize=$serializer->serialize($listProduct,'json');

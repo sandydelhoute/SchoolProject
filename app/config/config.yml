@@ -32,7 +32,8 @@ framework:
         # http://symfony.com/doc/current/reference/configuration/framework.html#handler-id
         handler_id:  session.handler.native_file
         save_path:   "%kernel.root_dir%/../var/sessions/%kernel.environment%"
-        cookie_lifetime: 600
+        cookie_lifetime: 5400
+        gc_maxlifetime: 20
         cookie_domain: 'www.mealandbox.fr'
     fragments:       ~
     http_method_override: true
@@ -104,7 +105,7 @@ white_october_breadcrumbs:
 knp_snappy:  
     pdf:
         enabled:    true
-        binary:     %kernel.root_dir%/../vendor/h4cc/wkhtmltopdf-amd64/bin/wkhtmltopdf-amd64
+        binary:     '%kernel.root_dir%/../vendor/h4cc/wkhtmltopdf-amd64/bin/wkhtmltopdf-amd64'
         options:
             - { name: 'viewport-size', value: ‘1024x768’ }
             - { name: 'page-size', value: 'A4' }

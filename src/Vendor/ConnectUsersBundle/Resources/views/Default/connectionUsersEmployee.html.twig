@@ -7,7 +7,7 @@
           {{ error.message| replace({"Bad credentials." : "Invalid username or password."}) }}
     </div>
   {% endif %}
-  <form action="{{ path("login_check", {}) }}" method="post">
+  <form action="{{ path('login_check') }}" method="post">
 
 
 

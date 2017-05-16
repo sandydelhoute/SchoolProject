@@ -48,7 +48,7 @@
           <a href="{{ path('relaispage') }}" class="btn btn-green">
             <i class="fa fa-map-marker fa-2x" aria-hidden="true"></i>
             <div class="containertext">
-              Villeneuve d'Ascq
+              {{ app.user.relais.name}}
             </div>
           </a>
           <div class="btn btn-blackborder">
@@ -118,5 +118,7 @@
 </header>
 </div>
 <div class="container">
+  <div class="col-xs-12">
   {{ wo_render_breadcrumbs() }}
+</div>
 </div>

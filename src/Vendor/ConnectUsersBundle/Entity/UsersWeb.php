@@ -31,6 +31,15 @@ class UsersWeb extends Users
      */
     protected $id;
 
+
+
+    /**
+     * Many Features have One Product.
+     * @ORM\ManyToOne(targetEntity="Core\CoreBundle\Entity\Relais")
+     * @ORM\JoinColumn(name="relais_id",referencedColumnName="id",nullable=true)
+     */
+    private $relais;
+
     /**
      * @var float
      *
@@ -111,4 +120,28 @@ class UsersWeb extends Users
         return "UsersWeb";
     }
 
+
+    /**
+     * Set relais
+     *
+     * @param \Core\CoreBundle\Entity\Relais $relais
+     *
+     * @return UsersWeb
+     */
+    public function setRelais(\Core\CoreBundle\Entity\Relais $relais = null)
+    {
+        $this->relais = $relais;
+
+        return $this;
+    }
+
+    /**
+     * Get relais
+     *
+     * @return \Core\CoreBundle\Entity\Relais
+     */
+    public function getRelais()
+    {
+        return $this->relais;
+    }
 }

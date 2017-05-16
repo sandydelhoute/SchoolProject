@@ -18,13 +18,17 @@ class Product
         $this->images = new ArrayCollection();
         $this->categories = new ArrayCollection();
         $this->allergenes = new ArrayCollection();
-    }
+        $this->stock  = new ArrayCollection();
+        }
     /**
      * @ORM\ManyToMany(targetEntity="Categorie", inversedBy="product")
      */
     private $categories;
 
-
+    /**
+     * @ORM\OneToMany(targetEntity="Stock", mappedBy="product")
+     */
+    private $stock;
 
     /**
      * @ORM\ManyToMany(targetEntity="Allergene", inversedBy="product")
@@ -386,5 +390,39 @@ class Product
     public function getProvider()
     {
         return $this->provider;
+    }
+
+    /**
+     * Add stock
+     *
+     * @param \Core\CoreBundle\Entity\Stock $stock
+     *
+     * @return Product
+     */
+    public function addStock(\Core\CoreBundle\Entity\Stock $stock)
+    {
+        $this->stock[] = $stock;
+
+        return $this;
+    }
+
+    /**
+     * Remove stock
+     *
+     * @param \Core\CoreBundle\Entity\Stock $stock
+     */
+    public function removeStock(\Core\CoreBundle\Entity\Stock $stock)
+    {
+        $this->stock->removeElement($stock);
+    }
+
+    /**
+     * Get stock
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getStock()
+    {
+        return $this->stock;
     }
 }

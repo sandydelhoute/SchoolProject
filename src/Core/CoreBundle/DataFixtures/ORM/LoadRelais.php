@@ -19,11 +19,14 @@ $relais=new Relais();
 $relais->setName("Café du coin");
 $relais->setCoordonates($this->getReference('coordonates'));
 $relais->setOpening($this->getReference('opening'));
+$this->addReference('relais',$relais);
 
 $relais1=new Relais();
 $relais1->setName("Technopôle");
 $relais1->setCoordonates($this->getReference('coordonates1'));
 $relais1->setOpening($this->getReference('opening'));
+$this->addReference('relais1',$relais1);
+
 
 $manager->persist($relais1);
 $manager->persist($relais);

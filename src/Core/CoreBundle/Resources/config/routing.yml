@@ -77,7 +77,7 @@ productdetailpage:
 
 #filter
 productfilterpage:
-    path:     /produits/filter/{offsetMin}/{offsetMax}/{priceMin}/{priceMax}/{categorie}/{allergene}
+    path:     /produits/filter/{type}/{offsetMin}/{offsetMax}/{priceMin}/{priceMax}/{categorie}/{allergene}
     defaults: { _controller: CoreCoreBundle:Product:productsFilter,allergene:null}
     options:
         expose: true

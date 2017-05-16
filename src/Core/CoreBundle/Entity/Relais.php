@@ -26,6 +26,11 @@ public function __toString() {
 
 
     /**
+     * @ORM\OneToMany(targetEntity="Stock", mappedBy="relais")
+     */
+    private $stock;
+
+    /**
      * Many Features have One Product.
      * @ORM\ManyToOne(targetEntity="Coordonates",cascade={"persist"}))
      * @ORM\JoinColumn(name="Coordonates_id",referencedColumnName="id")

@@ -10,7 +10,7 @@ function Filter(routeFilter,routeAdd,selector,render,offset){
 
   var _this = this;
   var objAjax=new CallAjax(selector);
-  var dataFilter={priceMin:0,priceMax:100,offsetMin:0,offsetMax:this.offset};
+  var dataFilter={type:'product',priceMin:0,priceMax:100,offsetMin:0,offsetMax:this.offset};
 
   
 
@@ -29,9 +29,11 @@ function Filter(routeFilter,routeAdd,selector,render,offset){
  }
  var clickApply=function(){
   $('#applyfilter').click(function(){
+        objAjax.selector=_this.selector;
     filterAllergene();
     filterCategorie();
     filterPrice();
+    typesearch();
     if(dataFilter.categorie.length > 0)
     {
      ajaxready = true;
@@ -47,6 +49,11 @@ function Filter(routeFilter,routeAdd,selector,render,offset){
 });
 }
 
+var typesearch=function(){
+
+  dataFilter.type=$('#filter input[name=selecttype]:checked').val();
+
+}
 var filterAllergene=function(){
   var listAllergene=[];
   $('.allergenes-filter').each(function(){
@@ -111,17 +118,18 @@ var resetfilter=function(){
 
 var addPanier=function(){
   $('#listProduct').on('click','.addpanier',function(e){
-    var countPanier=parseInt($('#countpanier').text());
+    objAjax.selector=null;
     var idProduct=$(this).data('product');
     var quantity=$(this).parents('.produits').find('.quantity').val();
-    $('#countpanier').text(countPanier + 1 );
-    objAjax.callAjax(Routing.generate(_this.routeAdd,{id:idProduct,quantity:quantity}));
+    var data=objAjax.callAjax(Routing.generate(_this.routeAdd,{id:idProduct,quantity:quantity}));
+    $('#countpanier').text(data.paniercount);
   })
 }
 
 
 var scroll=function(){
   $(window).scroll(function() {
+    objAjax.selector=null;
     if ( ajaxready == false)
       return;
     if($(window).scrollTop() > ($(document).height()-$(window).height()-10)){

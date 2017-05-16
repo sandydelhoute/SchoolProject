@@ -6,11 +6,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Core\CoreBundle\Entity\OrderLine;
 
 class PanierController extends Controller
 {
-
+    /**
+     * @Security("has_role('ROLE_USER')")
+     */
 	public function panierAction(Request $request)
 	{
 		$em = $this->getDoctrine()->getManager();
@@ -23,6 +26,7 @@ class PanierController extends Controller
 			}
 			return $this->render('CoreCoreBundle:Commande:panierlayout.html.twig',array('listOrderLine'=>$listOrderLine));
 		}
+
 		public function addProductsAction($id,$quantity,Request $request)
 		{
 			$session = $request->getSession();
@@ -90,7 +94,7 @@ class PanierController extends Controller
 			$ptsfidelite=round($total/10, 2);
 			$session->set('panier',$listOrderLine);
 			$response = new JsonResponse(
-				array('total'=>$total,'ptsfidelite'=>$ptsfidelite)
+				array('total'=>$total,'ptsfidelite'=>$ptsfidelite,'panniercount'=>count($listOrderLine))
 				);
 			return $response ;
 
