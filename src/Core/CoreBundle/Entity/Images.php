@@ -4,6 +4,7 @@ namespace Core\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use JMS\Serializer\Annotation\Groups;
 
 /**
  * Images
@@ -19,6 +20,7 @@ class Images
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @Groups({"product"})
      */
     private $id;
     /**
@@ -42,6 +44,7 @@ class Images
      * @var string
      *
      * @ORM\Column(name="path", type="string", length=255,unique=true)
+     * @Groups({"product"})
      */
     private $path;
 
@@ -57,6 +60,7 @@ class Images
     /**
      * @var string
      *
+     * @Groups({"product"})
      * @ORM\Column(name="alt", type="string", length=255, unique=true)
      */
     private $alt;

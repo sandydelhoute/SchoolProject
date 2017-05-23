@@ -13,12 +13,6 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 class UsersController extends Controller
 {
 
-
-
-
-
-
-
   public function requestResetPasswordAction($email){
 
     $em = $this->getDoctrine()->getManager();

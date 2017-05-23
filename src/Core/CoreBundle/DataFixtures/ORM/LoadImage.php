@@ -81,10 +81,22 @@ $image10->setAlt('Gratin dauphinois');
 $this->addReference('image10',$image10);
 $manager->persist($image10);
 
+$image11=new Images();
+$image11->setPath("/img/fixtures/desserts/fondant-chocolat.jpg");
+$image11->setAlt('Fondant au chocolat');
+$this->addReference('image11',$image);
+$manager->persist($image);
+
+$image12=new Images();
+$image12->setPath("/img/fixtures/desserts/fondant-chocolat.jpg");
+$image12->setAlt('Fondant au chocolat');
+$this->addReference('image12',$image);
+$manager->persist($image);
+
 $manager->flush();
 }
     public function getOrder()
     {
-        return 5;
+        return 6;
     }
 }

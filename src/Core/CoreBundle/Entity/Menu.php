@@ -4,6 +4,8 @@ namespace Core\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use JMS\Serializer\Annotation\Groups;
+
 /**
  * Menu
  *
@@ -21,16 +23,29 @@ class Menu
         $this->images = new ArrayCollection();
         $this->categories = new ArrayCollection();
         $this->product = new ArrayCollection();
+        $this->stock = new ArrayCollection();
     }
 
+    /**
+     * @Groups({"menu"})
+     * @ORM\OneToMany(targetEntity="Stock", mappedBy="menu")
+     */
+    private $stock;
+
+    /**
+     * @Groups({"menu"})
+     */
+    private $total;
 
     /**
      * @ORM\ManyToMany(targetEntity="Product", inversedBy="menu")
      * @ORM\JoinTable(name="menu_product")
+     * @Groups({"menu"})
      */
     private $product;
 
     /**
+     * @Groups({"menu"})
      * @ORM\ManyToMany(targetEntity="Images", inversedBy="menu")
      */
     private $images;
@@ -42,6 +57,7 @@ class Menu
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @Groups({"menu"})
      */
     private $id;
 
@@ -51,6 +67,7 @@ class Menu
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
+     * @Groups({"menu"})
      */
     private $name;
 
@@ -58,6 +75,7 @@ class Menu
      * @var float
      *
      * @ORM\Column(name="prix", type="float")
+     * @Groups({"menu"})
      */
     private $prix;
 
@@ -72,6 +90,7 @@ class Menu
      * @var string
      *
      * @ORM\Column(name="description", type="text")
+     * @Groups({"menu"})
      */
     private $description;
 
@@ -79,6 +98,7 @@ class Menu
      * @var string
      *
      * @ORM\Column(name="composition", type="text")
+     * @Groups({"menu"})
      */
     private $composition;
 
@@ -280,5 +300,57 @@ class Menu
     public function getProduct()
     {
         return $this->product;
+    }
+
+    /**
+     * Add stock
+     *
+     * @param \Core\CoreBundle\Entity\Stock $stock
+     *
+     * @return Menu
+     */
+    public function addStock(\Core\CoreBundle\Entity\Stock $stock)
+    {
+        $this->stock[] = $stock;
+
+        return $this;
+    }
+
+    /**
+     * Remove stock
+     *
+     * @param \Core\CoreBundle\Entity\Stock $stock
+     */
+    public function removeStock(\Core\CoreBundle\Entity\Stock $stock)
+    {
+        $this->stock->removeElement($stock);
+    }
+
+    /**
+     * Get stock
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getStock()
+    {
+        return $this->stock;
+    }
+
+    public function getTotal()
+    {
+        return $this->total;
+    }
+    
+    public function setTotal($total)
+    {
+        return $this->total=$total;
+    }
+
+    public function totalPriceProduct(){
+        $total=0;
+        foreach ($product as $key => $value) {
+         $total += $value->getPrix();   
+        }
+         $this->setTotal($total);
     }
 }

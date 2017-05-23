@@ -4,6 +4,8 @@ namespace Core\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use JMS\Serializer\Annotation\Groups;
+
 /**
  * Product
  *
@@ -18,14 +20,14 @@ class Product
         $this->images = new ArrayCollection();
         $this->categories = new ArrayCollection();
         $this->allergenes = new ArrayCollection();
-        $this->stock  = new ArrayCollection();
+        $this->stock = new ArrayCollection();
         }
     /**
      * @ORM\ManyToMany(targetEntity="Categorie", inversedBy="product")
      */
     private $categories;
-
     /**
+     * @Groups({"product"})
      * @ORM\OneToMany(targetEntity="Stock", mappedBy="product")
      */
     private $stock;
@@ -36,6 +38,7 @@ class Product
     private $allergenes;
 
     /**
+     * @Groups({"product"})
      * @ORM\ManyToMany(targetEntity="Images", inversedBy="product")
      */
     private $images;
@@ -59,12 +62,14 @@ class Product
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      * @ORM\OneToMany(targetEntity="LineOrder", mappedBy="product")
+     * @Groups({"product"})
      */
     private $id;
 
     /**
      * @var string
-     *
+     *     
+     * @Groups({"product"})
      * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
@@ -72,6 +77,7 @@ class Product
     /**
      * @var string
      *
+     * @Groups({"product"})
      * @ORM\Column(name="description", type="text")
      */
     private $description;
@@ -79,6 +85,7 @@ class Product
     /**
      * @var float
      *
+     * @Groups({"product"})
      * @ORM\Column(name="prix", type="float")
      */
     private $prix;
@@ -391,6 +398,7 @@ class Product
     {
         return $this->provider;
     }
+
 
     /**
      * Add stock

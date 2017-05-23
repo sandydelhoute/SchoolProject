@@ -43,14 +43,22 @@
 
     <div class="collapse navbar-collapse color-black" id="header">
       <ul class="navmenu nav navbar-nav navbar-left">
-        {% if  is_granted('ROLE_USER') %}
-
+        {% if  is_granted('ROLE_USER') and app.user.relais != null %} 
           <a href="{{ path('relaispage') }}" class="btn btn-green">
             <i class="fa fa-map-marker fa-2x" aria-hidden="true"></i>
             <div class="containertext">
               {{ app.user.relais.name}}
             </div>
           </a>
+          {% else %}
+         <a href="{{ path('relaispage') }}" class="btn btn-green">
+          <i class="fa fa-map-marker fa-2x" aria-hidden="true"></i>
+          <div class="containertext">
+            Choisissez votre</br> point relais
+          </div>
+          </a>
+          {% endif %}
+          {% if  is_granted('ROLE_USER') %}
           <div class="btn btn-blackborder">
             <p class="txtborder">Points de fidélité</p>
             <div class="containertext">
@@ -58,13 +66,6 @@
               <span class="abreviation">Pts</span>
             </div>
           </div>
-        {% else %}
-         <a href="{{ path('relaispage') }}" class="btn btn-green">
-          <i class="fa fa-map-marker fa-2x" aria-hidden="true"></i>
-          <div class="containertext">
-            Choisissez votre</br> point relais
-        </div>
-      </a>
       {% endif %}
       <li>
         <a {% if 'homepage' in app.request.attributes.get('_route') %}class="active"{% endif %} href="{{ path('homepage') }}">Accueil</a>

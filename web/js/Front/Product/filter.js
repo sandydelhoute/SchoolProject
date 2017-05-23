@@ -24,9 +24,20 @@ function Filter(routeFilter,routeAdd,selector,render,offset){
     render(objAjax.callAjax(Routing.generate(_this.routeFilter,dataFilter)));
     scroll();
   }
+  var select=function(){
+    if(dataFilter.type == 'product')
+    {
+      return true
+    }
+    else
+    {
+      return false;
+    }
+  }
   var render=function(data){
-   return _this.render(data);
+   return _this.render(data,select());
  }
+
  var clickApply=function(){
   $('#applyfilter').click(function(){
         objAjax.selector=_this.selector;
@@ -37,7 +48,7 @@ function Filter(routeFilter,routeAdd,selector,render,offset){
     if(dataFilter.categorie.length > 0)
     {
      ajaxready = true;
-     _this.selector.html('');
+     _this.selector.innerHTML='';
      dataFilter.offsetMin=0;
      dataFilter.offsetMax=_this.offset;
      render(objAjax.callAjax(Routing.generate(_this.routeFilter,dataFilter)));

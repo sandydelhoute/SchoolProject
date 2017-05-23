@@ -28,12 +28,28 @@ $relais1->setOpening($this->getReference('opening'));
 $this->addReference('relais1',$relais1);
 
 
-$manager->persist($relais1);
+$relais2=new Relais("mairie wattrelos");
+$relais2->setName("");
+$relais2->setCoordonates($this->getReference('coordonates2'));
+$relais2->setOpening($this->getReference('opening'));
+$this->addReference('relais2',$relais2);
+
+$relais3=new Relais();
+$relais3->setName("Technopôle");
+$relais3->setCoordonates($this->getReference('coordonates3'));
+$relais3->setOpening($this->getReference('opening'));
+$this->addReference('relais3',$relais3);
+
+
+
 $manager->persist($relais);
+$manager->persist($relais1);
+$manager->persist($relais2);
+$manager->persist($relais3);
 $manager->flush();
 }
     public function getOrder()
     {
-        return 11;
+        return 3;
     }
 }

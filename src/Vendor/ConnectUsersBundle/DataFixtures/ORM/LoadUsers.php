@@ -33,7 +33,7 @@ public Function load(ObjectManager $manager){
 $encoder = $this->container->get('security.password_encoder');
 
 
-for($i=0;$i<20;$i++)
+for($i=0;$i<5;$i++)
 {
 $users = new Usersweb();
 $usersemployee = new usersemployee();
@@ -43,6 +43,7 @@ $users->setName('sandy');
 $users->setFirstname('delhoute');
 $users->setEmail('mail'.$i.'@mail.com');
 $users->setPassword($password);
+$users->setRelais($this->getReference('relais'));
 $usersemployee->setName('fabien');
 $usersemployee->setFirstname('coo');
 $usersemployee->setEmail("mail".$i."@mealandbox.fr");
@@ -61,6 +62,6 @@ $manager->flush();
 }
  public function getOrder()
     {
-        return 2;
+        return 14;
     }
 }

@@ -34,6 +34,6 @@ $manager->flush();
 }
     public function getOrder()
     {
-        return 10;
+        return 2;
     }
 }

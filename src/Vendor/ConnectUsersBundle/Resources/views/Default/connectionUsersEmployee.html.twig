@@ -1,15 +1,12 @@
 
 {% block connection %}
   {# S'il y a une erreur, on l'affiche dans un joli cadre #}
-  {% if error %}
-    <div class="alert alert-danger">
-      <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-          {{ error.message| replace({"Bad credentials." : "Invalid username or password."}) }}
-    </div>
+{% if error %}
+  <div class="alert alert-danger"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+    {{ error.message| replace({"Bad credentials." : "Email ou mot de passe invalide."}) }}</div>
   {% endif %}
-  <form action="{{ path('login_check') }}" method="post">
-
-
+  {{ dump(error) }}
+  <form action="{{ path('page_moncompte_connexionemployee') }}" method="post">
 
   <div class="form-group">
   <label for="email" class="cols-sm-2 control-label">Your Email</label>

@@ -1,6 +1,9 @@
 admin_homepage:
     path:    /
     defaults: { _controller: AdminAdminBundle:Core:index }
+loginpageemployee:
+    path:    /login
+    defaults: { _controller: AdminAdminBundle:Core:login }
 
 admin_comptecurrentusers:
     path:    /profile

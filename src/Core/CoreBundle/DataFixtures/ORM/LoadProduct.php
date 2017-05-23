@@ -67,7 +67,6 @@ public Function load(ObjectManager $manager){
         $product->addCategory($this->getReference('categorieProcduct'));
         $product->addImage($this->getReference('image'));
         $manager->persist($product);
-        $manager->flush();
 
         $product1=new Product();
         $product1->setName("Mafé");
@@ -79,8 +78,8 @@ public Function load(ObjectManager $manager){
         $product1->addAllergene($this->getReference($listAllergene[4]));
         $product1->addCategory($this->getReference('categorieProcduct'));
         $product1->addImage($this->getReference('image1'));
+        $this->addReference('product1',$product1);
         $manager->persist($product1);
-        $manager->flush();
 
         $product2=new Product();
         $product2->setName("Poulet braisé");
@@ -92,9 +91,8 @@ public Function load(ObjectManager $manager){
         $product2->addAllergene($this->getReference($listAllergene[0]));
         $product2->addCategory($this->getReference('categorieProcduct'));
         $product2->addImage($this->getReference('image2'));
-        $this->addReference('product',$product2);
+        $this->addReference('product2',$product2);
         $manager->persist($product2);
-        $manager->flush();
 
         $product3=new Product();
         $product3->setName("Tiramisu");
@@ -106,8 +104,8 @@ public Function load(ObjectManager $manager){
         $product3->addAllergene($this->getReference($listAllergene[2]));
         $product3->addCategory($this->getReference('categorieProcduct'));
         $product3->addImage($this->getReference('image3'));
+        $this->addReference('product3',$product3);
         $manager->persist($product3);
-        $manager->flush();
 
         $product4=new Product();
         $product4->setName("Verrines de crabe à l'avocat");
@@ -119,8 +117,8 @@ public Function load(ObjectManager $manager){
         $product4->addAllergene($this->getReference($listAllergene[1]));
         $product4->addCategory($this->getReference('categorieProcduct'));
         $product4->addImage($this->getReference('image4'));
+        $this->addReference('product4',$product4);
         $manager->persist($product4);
-        $manager->flush();
 
         $product5=new Product();
         $product5->setName("Risotto de homard");
@@ -132,8 +130,8 @@ public Function load(ObjectManager $manager){
         $product5->addAllergene($this->getReference($listAllergene[7]));
         $product5->addCategory($this->getReference('categorieProcduct'));
         $product5->addImage($this->getReference('image5'));
+        $this->addReference('product5',$product5);
         $manager->persist($product5);
-        $manager->flush();
 
         $product6=new Product();
         $product6->setName("Salade césar au poulet");
@@ -145,8 +143,8 @@ public Function load(ObjectManager $manager){
         $product6->addAllergene($this->getReference($listAllergene[2]));
         $product6->addCategory($this->getReference('categorieProcduct'));
         $product6->addImage($this->getReference('image6'));
+        $this->addReference('product6',$product6);
         $manager->persist($product6);
-        $manager->flush();
 
         $product7=new Product();
         $product7->setName("Suprême de chapon aux épices");
@@ -158,8 +156,8 @@ public Function load(ObjectManager $manager){
         $product7->addAllergene($this->getReference($listAllergene[0]));
         $product7->addCategory($this->getReference('categorieProcduct'));
         $product7->addImage($this->getReference('image7'));
+        $this->addReference('product7',$product7);
         $manager->persist($product7);
-        $manager->flush();
 
         $product8=new Product();
         $product8->setName("Salade de pâtes aux poivrons et au thon");
@@ -171,8 +169,8 @@ public Function load(ObjectManager $manager){
         $product8->addAllergene($this->getReference($listAllergene[0]));
         $product8->addCategory($this->getReference('categorieProcduct'));
         $product8->addImage($this->getReference('image8'));
+        $this->addReference('product8',$product8);
         $manager->persist($product8);
-        $manager->flush();
 
         $product9=new Product();
         $product9->setName("Tajine d'agneau aux pruneaux");
@@ -185,7 +183,7 @@ public Function load(ObjectManager $manager){
         $product9->addCategory($this->getReference('categorieProcduct'));
         $product9->addImage($this->getReference('image9'));
         $manager->persist($product9);
-        $manager->flush();
+
 
         $product10=new Product();
         $product10->setName("Gratin dauphinois aux lardons");
@@ -203,6 +201,6 @@ public Function load(ObjectManager $manager){
 
     public function getOrder()
     {
-        return 7;
+        return 9;
     }
 }

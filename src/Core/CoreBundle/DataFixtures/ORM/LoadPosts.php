@@ -55,6 +55,6 @@ class LoadPosts extends AbstractFixture implements OrderedFixtureInterface
     }
     public function getOrder()
     {
-        return 8;
+        return 12;
     }
 }

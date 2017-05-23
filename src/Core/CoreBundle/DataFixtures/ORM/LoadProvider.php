@@ -23,6 +23,6 @@ $manager->flush();
 }
     public function getOrder()
     {
-        return 6;
+        return 7;
     }
 }

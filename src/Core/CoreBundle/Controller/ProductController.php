@@ -7,6 +7,8 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use JMS\Serializer\SerializationContext;
+
 
 class ProductController extends Controller
 {
@@ -30,22 +32,36 @@ class ProductController extends Controller
    return $this->render('CoreCoreBundle:Products:productslayout.html.twig',array('listAllergene'=>$listAllergene,'listCategorie'=>$listCategorie));
 
  }
- public function productsFilterAction($allergene=null,$categorie,$priceMin,$priceMax,$offsetMin,$offsetMax)
+ public function productsFilterAction($type,$allergene=null,$categorie,$priceMin,$priceMax,$offsetMin,$offsetMax)
  {
-   $em = $this->getDoctrine()->getManager();
-   $categorie=explode(",", $categorie);
-   $allergene=explode(",", $allergene);
 
-   $listProduct = $em->getRepository('CoreCoreBundle:Product')
-   ->filterProduct($categorie,$allergene,$priceMin,$priceMax,$offsetMin,$offsetMax,$this->getUser()->getRelais());
-       
+  $em = $this->getDoctrine()->getManager();
+  $categorie=explode(",", $categorie);
+  $allergene=explode(",", $allergene);
   $serializer = $this->get('jms_serializer');
-  $listProductSerialize=$serializer->serialize($listProduct,'json');
-   $response = new JsonResponse(
-    array('data'=>$listProductSerialize)
-    );
-   return $response ;
+  if($type === 'product')
+  {
+ 
+    $listProduct = $em->getRepository('CoreCoreBundle:Product')
+    ->filter($categorie,$allergene,$priceMin,$priceMax,$offsetMin,$offsetMax,$this->getUser()->getRelais());
 
+    $listProductSerialize=$serializer->serialize($listProduct,'json', SerializationContext::create()->setGroups(array('product')));
+    $response = new JsonResponse(
+      array('data'=>$listProductSerialize)
+      );
+  }
+  else
+  {
+    $listMenu = $em->getRepository('CoreCoreBundle:Menu')
+    ->filter($categorie,$allergene,$priceMin,$priceMax,$offsetMin,$offsetMax,$this->getUser()->getRelais());
+    //, SerializationContext::create()->setGroups(array('menu'))
+    $listMenuSerialize=$serializer->serialize($listMenu,'json');
+    $response = new JsonResponse(
+      array('data'=>$listMenuSerialize)
+      );
+
+  }   
+   return $response ;
  }
 
 

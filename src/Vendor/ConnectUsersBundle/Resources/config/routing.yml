@@ -34,6 +34,7 @@ page_moncompte_request_reset_password:
     defaults: { _controller: VendorConnectUsersBundle:Users:requestResetPassword }
     options:
         expose: true
+        
 page_moncompte_reset_password:
     path:     /resetpassword/{token}
     defaults: { _controller: VendorConnectUsersBundle:Users:resetPassword}

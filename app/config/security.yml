@@ -8,11 +8,11 @@ security:
             algorithm: sha512
             iterations: 6666
             encode_as_base64: true
-        Vendor\ConnectUsersBundle\Entity\UsersEmployee:
+        Vendor\ConnectUsersBundle\Entity\Users:
             algorithm: sha512
             iterations: 6666
             encode_as_base64: true
-        
+                    
     role_hierarchy:
             ROLE_USER: [ROLE_USER]
             ROLE_LIVREUR: [ROLE_LIVREUR]
@@ -25,14 +25,15 @@ security:
                     property: email
         admin:
             entity:
-                    class:    Vendor\ConnectUsersBundle\Entity\UsersEmployee
+                    class:    Vendor\ConnectUsersBundle\Entity\UsersWeb
                     property: email
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         login:
-            pattern: ^/compte/$
+            pattern: ^/compte/login_check
+            pattern: ^/compte/employee/login_check
             security: false   
         core:
             host: ^www\.mealandbox\.fr$
@@ -41,7 +42,7 @@ security:
             provider:  core
             form_login:
                login_path: /login
-               check_path: /compte/login_check
+               check_path: /compte/connexionweb
                default_target_path: /
                failure_path: /login
             logout:
@@ -57,19 +58,19 @@ security:
             host: ^admin\.mealandbox\.fr$
             pattern: ^/
             anonymous: true
-            provider:  admin
+            http_basic:
+                provider:  admin
             form_login:
-               login_path: /
-               check_path: /compte/login_check
+               login_path: /login
+               check_path: /compte/connexionadmin
                default_target_path: /
-               failure_path: /
-               
+               failure_path: /login
             logout:
                 path:   /compte/deconnexion
                 target: /
     access_control:
-               - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY, host: ^admin\.mealandbox\.fr$  }            
-               - { path: ^/, roles: ROLE_ADMIN, host: ^admin\.mealandbox\.fr$ }
+               - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, host: ^admin\.mealandbox\.fr$  }            
+               - { path: ^/*, roles: ROLE_ADMIN, host: ^admin\.mealandbox\.fr$ }
             # activate different ways to authenticate
 
             # http_basic: ~

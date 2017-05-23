@@ -133,4 +133,45 @@ public function __toString() {
     {
         return $this->opening;
     }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->stock = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add stock
+     *
+     * @param \Core\CoreBundle\Entity\Stock $stock
+     *
+     * @return Relais
+     */
+    public function addStock(\Core\CoreBundle\Entity\Stock $stock)
+    {
+        $this->stock[] = $stock;
+
+        return $this;
+    }
+
+    /**
+     * Remove stock
+     *
+     * @param \Core\CoreBundle\Entity\Stock $stock
+     */
+    public function removeStock(\Core\CoreBundle\Entity\Stock $stock)
+    {
+        $this->stock->removeElement($stock);
+    }
+
+    /**
+     * Get stock
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getStock()
+    {
+        return $this->stock;
+    }
 }

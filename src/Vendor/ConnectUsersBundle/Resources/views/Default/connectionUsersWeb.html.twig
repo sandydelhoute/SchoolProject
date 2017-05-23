@@ -10,7 +10,7 @@
   <div class="alert alert-danger"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
     {{ error.message| replace({"Bad credentials." : "Email ou mot de passe invalide."}) }}</div>
   {% endif %}
-      <form  action="{{ path('login_check') }}" method="post" class="nopad">
+      <form  action="{{ path('page_moncompte_connexionweb') }}" method="post" class="nopad">
         <div class="form-group">
           <label for="mail-connexion">E-mail</label>
           <div class="input-group">

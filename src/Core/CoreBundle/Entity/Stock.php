@@ -3,6 +3,7 @@
 namespace Core\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation\Groups;
 
 /**
  * Stock
@@ -24,14 +25,15 @@ class Stock
     /**
      * @var int
      *
+     * @Groups({"product"})
      * @ORM\Column(name="quantity", type="integer")
      */
     private $quantity;
 
     /**
-     * Many Features have One Product.
      * @ORM\ManyToOne(targetEntity="Product",inversedBy="stock")
      * @ORM\JoinColumn(name="product_id",referencedColumnName="id")
+     * @ORM\joinColumn(nullable=true)
      */
     private $product;
     
@@ -42,6 +44,15 @@ class Stock
      * @ORM\JoinColumn(name="relais_id",referencedColumnName="id")
      */
     private $relais;
+
+
+    /**
+     * Many Features have One Product.
+     * @ORM\ManyToOne(targetEntity="Menu",inversedBy="stock")
+     * @ORM\JoinColumn(name="menu_id",referencedColumnName="id")
+     * @ORM\joinColumn(nullable=true)
+     */
+    private $menu;
     /**
      * Get id
      *
@@ -122,5 +133,29 @@ class Stock
     public function getRelais()
     {
         return $this->relais;
+    }
+
+    /**
+     * Set menu
+     *
+     * @param \Core\CoreBundle\Entity\Menu $menu
+     *
+     * @return Stock
+     */
+    public function setMenu(\Core\CoreBundle\Entity\Menu $menu = null)
+    {
+        $this->menu = $menu;
+
+        return $this;
+    }
+
+    /**
+     * Get menu
+     *
+     * @return \Core\CoreBundle\Entity\Menu
+     */
+    public function getMenu()
+    {
+        return $this->menu;
     }
 }

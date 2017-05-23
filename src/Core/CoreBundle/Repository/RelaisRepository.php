@@ -10,4 +10,6 @@ namespace Core\CoreBundle\Repository;
  */
 class RelaisRepository extends \Doctrine\ORM\EntityRepository
 {
+
+
 }
