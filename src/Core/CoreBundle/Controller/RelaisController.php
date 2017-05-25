@@ -4,6 +4,7 @@ namespace Core\CoreBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use JMS\Serializer\SerializationContext;
 
 class RelaisController extends Controller
 {
@@ -24,9 +25,9 @@ class RelaisController extends Controller
 		$listRelais = $em->getRepository('CoreCoreBundle:Relais')
 		->findAll();
 		$serializer = $this->get('jms_serializer');
-		$listRelaisSerialize=$serializer->serialize($listRelais,'json');
+		$listRelaisSerialize=$serializer->serialize($listRelais,'json',SerializationContext::create()->setGroups(array('relais')));
 		$response = new JsonResponse(
-			array('data'=>$listRelaisSerialize)
+			array($listRelaisSerialize)
 			);
 		return $response ;
    }

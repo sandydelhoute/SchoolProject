@@ -3,6 +3,7 @@
 namespace Core\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation\Groups;
 
 /**
  * Relais
@@ -21,6 +22,7 @@ public function __toString() {
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @Groups({"relais"})
      */
     private $id;
 
@@ -34,6 +36,7 @@ public function __toString() {
      * Many Features have One Product.
      * @ORM\ManyToOne(targetEntity="Coordonates",cascade={"persist"}))
      * @ORM\JoinColumn(name="Coordonates_id",referencedColumnName="id")
+     * @Groups({"relais"})
      */
     private $coordonates;
 
@@ -48,6 +51,7 @@ public function __toString() {
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
+     * @Groups({"relais"})
      */
     private $name;
 

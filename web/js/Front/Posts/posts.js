@@ -1,5 +1,5 @@
 $(document).ready(function(){
-	var selector=$("#grid");
+	var selector=document.getElementById("grid");
 	var routePosts='actualityscrollpage';
 	var routeDetailPosts='actualitydetailpage';
 	var render=function(data){

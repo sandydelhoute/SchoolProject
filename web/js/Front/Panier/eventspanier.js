@@ -22,10 +22,11 @@ function Panier(routeDelete,routeChangeQuantity,selector=null){
 			}
 			else
 			{
-			$('.total-price .price').html((data.total.toString()).replace('.','€'));
-			$('.fidelite-gain .fidelite-pts').html(data.ptsfidelite);
-			$('#panniercount').text(data.paniercount);
-			}
+				$('.total-price .price').html((data.total.toString()).replace('.','€'));
+				$('.fidelite-gain .fidelite-pts').text(data.ptsfidelite);
+				console.log('je suis dans le else')
+ 				$('#countpanier').text(data.panniercount);		
+ 			}
 		});
 
 	}

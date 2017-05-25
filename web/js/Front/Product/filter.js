@@ -131,8 +131,9 @@ var addPanier=function(){
       var idProduct=$(this).data('product');
       var quantity=$(this).parents('.produits').find('.quantity').val();
       var data=objAjax.callAjax(Routing.generate(_this.routeAddPanier,{id:idProduct,quantity:quantity,type:dataFilter.type}));
-        console.log(data);
-      $('#countpanier').text(data.paniercount);
+        data.done(function(data){
+                $('#countpanier').text(data.paniercount);
+        });
   })
 }
 

@@ -41,6 +41,12 @@ class PanierController extends Controller
 			$session = $request->getSession();
 			$serializer=$this->get('serializer');
 			$em = $this->getDoctrine()->getManager();
+			$relaisId=$this->getUser()->getRelais()->getId();
+			//$relais=$em->getRepository('CoreCoreBundle:Relais')->findOneById($relaisId);
+			// $date=new \Date();
+			// var_dump($date);
+			//var_dump($this->getUser()->getRelais()->getId());
+			//exit;
 			$lineorder=new OrderLine();
 			$lineorder->setQuantity($quantity);
 			if($type == 'product')
@@ -86,7 +92,6 @@ class PanierController extends Controller
 						}
 					}
 				}
-					var_dump($productexit);
 				if($productexit)
 				{
 					array_push($listOrderLine,$lineorder);
@@ -100,8 +105,7 @@ class PanierController extends Controller
 			}
 
 
-			$response = new JsonResponse(
-				array('response'=>true,'paniercount'=>count($listOrderLine))
+			$response = new JsonResponse(array('response'=>true,'paniercount'=>count($listOrderLine))
 				);
 			return $response ;
 

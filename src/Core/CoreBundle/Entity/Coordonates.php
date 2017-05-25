@@ -3,6 +3,7 @@
 namespace Core\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation\Groups;
 
 /**
  * Coordonee
@@ -27,6 +28,7 @@ class Coordonates
      * @var string
      *
      * @ORM\Column(name="longitude", type="float")
+     * @Groups({"relais"})
      */
     private $longitude;
 
@@ -35,6 +37,7 @@ class Coordonates
      * @var string
      *
      * @ORM\Column(name="latitude", type="float")
+     * @Groups({"relais"})
      */
     private $latitude;
 
