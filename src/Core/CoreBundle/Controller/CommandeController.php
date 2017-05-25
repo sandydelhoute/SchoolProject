@@ -25,8 +25,16 @@ class CommandeController extends Controller
 		$listOrderLine=$session->get('panier');
 		if($listOrderLine != null)
 		foreach ($listOrderLine as $orderline) {
-					$product= $em->getRepository('CoreCoreBundle:Product')->findOneById($orderline->getProduct()->getId());
+            if(!is_null($orderline->getProduct()))
+            {
+				$product= $em->getRepository('CoreCoreBundle:Product')->findOneById($orderline->getProduct()->getId());
 				$orderline->setProduct($product);
+            }
+            else
+            {
+                $menu= $em->getRepository('CoreCoreBundle:Menu')->findOneById($orderline->getMenu()->getId());
+                $orderline->setMenu($menu);         
+            }
 		}
         $payCards= new PayCards();
         $form = $this->createForm(PayCardsType::class,$payCards);

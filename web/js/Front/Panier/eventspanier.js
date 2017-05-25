@@ -10,25 +10,6 @@ function Panier(routeDelete,routeChangeQuantity,selector=null){
 		changeQuantity();
 		deletePanier();
 	}
-
-	var deletePanier=function(){
-		$('.delete-product').click(function(){
-			var idProduct=$(this).data('product');
-			$(this).parents('.command-list-item').remove();
-			render(objAjax.callAjax(Routing.generate(_this.routeDelete,{id:idProduct})));
-		})
-	}
-	var changeQuantity=function(){
-		$('.quantity').bind('change',function(){
-			console.log(_this.routeChangeQuantity)
-			var idProduct=$(this).data('product');
-			var quantity=$(this).val();
-			objAjax.callAjax(Routing.generate(_this.routeChangeQuantity,{id:idProduct,quantity:quantity}));
-		})
-	}
-
-
-
 	var render=function(data){
 
 		data.done(function(data){
@@ -48,4 +29,27 @@ function Panier(routeDelete,routeChangeQuantity,selector=null){
 		});
 
 	}
+	var deletePanier=function(){
+		$('.delete-product').click(function(){
+			var type = 'product';
+			var idDelete=$(this).data('product');
+			if(typeof idDelete == 'undefined')
+			{
+			 idDelete=$(this).data('menu');
+			 type='menu';
+			}
+			$(this).parents('.command-list-item').remove();
+			render(objAjax.callAjax(Routing.generate(_this.routeDelete,{id:idDelete,type:type})));
+		})
+	}
+	var changeQuantity=function(){
+		$('.quantity').bind('change',function(){
+			console.log(_this.routeChangeQuantity)
+			var idProduct=$(this).data('product');
+			var quantity=$(this).val();
+			objAjax.callAjax(Routing.generate(_this.routeChangeQuantity,{id:idProduct,quantity:quantity}));
+		})
+	}
+
+
 }

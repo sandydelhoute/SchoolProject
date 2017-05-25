@@ -1,6 +1,10 @@
 {% set total = 0%}
 {% for orderLine in listOrderLine %}
+  {% if orderLine.product is not null %}
   {% set total = total + (orderLine.quantity * orderLine.product.prix) %}
+  {% else %}
+  {% set total = total + (orderLine.quantity * orderLine.menu.prix) %}
+  {% endif %}
 {% endfor %}
   <div {% if totalCommande == 0 %}class="col-xs-12 col-md-8"{% else %}class="col-xs-12"{% endif %}>
     <div class="panel-group" id="tunnel">

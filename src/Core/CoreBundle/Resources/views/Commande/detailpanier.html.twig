@@ -14,23 +14,46 @@
         <div class="panel-body">
           <div class="col-md-6">
             {% set count = 0 %}
-            {% for image in orderLine.product.images %}
-              {% if count == 0 %}
-              <img src="{{ asset(image.path) }}" alt="{{ image.alt }}" class="img-responsive">
-              {% set count = 1 %}
-              {% endif %}
-            {% endfor %}
+            {% if orderLine.product is not null %}
+              {% for image in orderLine.product.images %}
+                {% if count == 0 %}
+                  <img src="{{ asset(image.path) }}" alt="{{ image.alt }}" class="img-responsive">
+                {% set count = 1 %}
+                {% endif %}
+              {% endfor %}
+            {% else %}
+              {% for image in orderLine.menu.images %}
+                {% if count == 0 %}
+                  <img src="{{ asset(image.path) }}" alt="{{ image.alt }}" class="img-responsive">
+                {% set count = 1 %}
+                {% endif %}
+              {% endfor %}
+            {% endif %}
           </div>
           <div class="col-md-6">
             <div class="bold">
-            {{ orderLine.product.name }}
-              </div>
+            {% if orderLine.product is not null %}
+              {{ orderLine.product.name }}
+            {% else %}
+              {{ orderLine.menu.name }}
+            {% endif %}
+              </div>  
             Quantité : {{ orderLine.quantity }}
              <br />
-            <p class="product-price"> Prix : {{ orderLine.product.prix}}</p>
+            <p class="product-price"> Prix :
+            {% if orderLine.product is not null %}
+              {{ orderLine.product.prix}}
+            {% else %}
+              {{ orderLine.menu.prix}}
+            {% endif %}
+            </p>
           </div>
         </div>
+        {% if orderLine.product is not null %}
         {% set total = total + (orderLine.quantity * orderLine.product.prix) %}
+        {% else %}
+            {% set total = total + (orderLine.quantity * orderLine.menu.prix) %}
+        {% endif %}
       {% endfor %}
       </div>
     </div>

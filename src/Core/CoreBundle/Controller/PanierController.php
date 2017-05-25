@@ -21,49 +21,82 @@ class PanierController extends Controller
 		$listOrderLine=$session->get('panier');
 		if($listOrderLine != null)
 			foreach ($listOrderLine as $orderline) {
+	
+				if(!is_null($orderline->getProduct()))
+				{
 				$product= $em->getRepository('CoreCoreBundle:Product')->findOneById($orderline->getProduct()->getId());
 				$orderline->setProduct($product);
+				}
+				else
+				{
+					$menu= $em->getRepository('CoreCoreBundle:Menu')->findOneById($orderline->getMenu()->getId());
+					$orderline->setMenu($menu);
+				}
 			}
 			return $this->render('CoreCoreBundle:Commande:panierlayout.html.twig',array('listOrderLine'=>$listOrderLine));
 		}
 
-		public function addProductsAction($id,$quantity,Request $request)
+		public function addProductsAction($id,$quantity,$type,Request $request)
 		{
 			$session = $request->getSession();
 			$serializer=$this->get('serializer');
 			$em = $this->getDoctrine()->getManager();
-			$product= $em->getRepository('CoreCoreBundle:Product')->findOneById($id);
-
 			$lineorder=new OrderLine();
 			$lineorder->setQuantity($quantity);
-			$lineorder->setProduct($product);
-			$lineorder->setPrix($product->getPrix());
+			if($type == 'product')
+			{
+				$product= $em->getRepository('CoreCoreBundle:Product')->findOneById($id);
+				$lineorder->setProduct($product);
+				$lineorder->setPrix($product->getPrix());
+			}
+			else
+			{
+				$menu= $em->getRepository('CoreCoreBundle:Menu')->findOneById($id);
+				$lineorder->setMenu($menu);
+				$lineorder->setPrix($menu->getPrix());
+			}
+
 
 			$listOrderLine=$session->get('panier');
 			if($listOrderLine != null)
 			{ 
 				$productexit=true;
 				foreach ($listOrderLine as $key => $value) {
-					if($value->getProduct()->getName() == $lineorder->getProduct()->getName())
+
+					if($type ==='product')
 					{
-						$value->setQuantity($value->getQuantity()+$quantity);
-						$session->set('panier',$listOrderLine);
-						$productexit=false;
-						break;
+						if(!is_null($value->getProduct()))
+						if($value->getProduct()->getId() == $lineorder->getProduct()->getId())
+						{
+								$value->setQuantity($value->getQuantity()+$quantity);
+								$session->set('panier',$listOrderLine);
+								$productexit=false;
+								break;
+						}
+					}
+					else
+					{
+						if(!is_null($value->getMenu()))
+						if($value->getMenu()->getId() == $lineorder->getMenu()->getId())
+						{
+							$value->setQuantity($value->getQuantity()+$quantity);
+							$session->set('panier',$listOrderLine);
+							$productexit=false;
+							break;
+						}
 					}
 				}
+					var_dump($productexit);
 				if($productexit)
 				{
 					array_push($listOrderLine,$lineorder);
 					$session->set('panier',$listOrderLine);
-
 				}
+				
 			}
 			else
 			{
 				$session->set('panier',array($lineorder));
-
-
 			}
 
 
@@ -73,24 +106,56 @@ class PanierController extends Controller
 			return $response ;
 
 		}
-
-		public function deleteProductsAction($id,Request $request){
+		public function deleteProductsAction($id,$type,Request $request){
 			$session = $request->getSession();
 			$em = $this->getDoctrine()->getManager();
+			if($type === 'product')
+			{
 			$product= $em->getRepository('CoreCoreBundle:Product')->findOneById($id);
+			}
+			else
+			{
+				$menu= $em->getRepository('CoreCoreBundle:Menu')->findOneById($id);
+			}
 			$listOrderLine=$session->get('panier');
-			$total=0;
 			foreach ($listOrderLine as $key => $value) {
-				if($value->getProduct()->getId() == $product->getId())
+				if($type === 'product')
 				{
-					
-					unset($listOrderLine[$key]);
+					if(!is_null($value->getProduct()))
+					{
+						if($value->getProduct()->getId() == $product->getId())
+						{
+							unset($listOrderLine[$key]);
+						}
+					}
 				}
 				else
 				{
+					if(!is_null($value->getMenu()))
+					{
+						if($value->getMenu()->getId() == $menu->getId())
+						{
+							unset($listOrderLine[$key]);
+						}
+					}
+					
+
+				}
+			
+			}
+			$total=0;
+			foreach ($listOrderLine as $key => $value) {
+				if(!is_null($value->getProduct()))
+				{
 					$total += $value->getQuantity()*$value->getProduct()->getPrix();
 				}
+				else
+				{
+					$total += $value->getQuantity()*$value->getMenu()->getPrix();
+				}
 			}
+
+
 			$ptsfidelite=round($total/10, 2);
 			$session->set('panier',$listOrderLine);
 			$response = new JsonResponse(

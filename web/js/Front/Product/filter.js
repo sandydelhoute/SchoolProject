@@ -1,13 +1,11 @@
-function Filter(routeFilter,routeAdd,selector,render,offset){
+function Filter(routeFilter,routeAddPanier,selector,render,offset){
 
-  this.routeAdd=routeAdd;
+  this.routeAddPanier=routeAddPanier;
   this.render=render;
   this.routeFilter=routeFilter;
   this.selector=selector;
-  var ajaxready=true;
-
   this.offset=offset;
-
+  var ajaxready=true;
   var _this = this;
   var objAjax=new CallAjax(selector);
   var dataFilter={type:'product',priceMin:0,priceMax:100,offsetMin:0,offsetMax:this.offset};
@@ -130,10 +128,11 @@ var resetfilter=function(){
 var addPanier=function(){
   $('#listProduct').on('click','.addpanier',function(e){
     objAjax.selector=null;
-    var idProduct=$(this).data('product');
-    var quantity=$(this).parents('.produits').find('.quantity').val();
-    var data=objAjax.callAjax(Routing.generate(_this.routeAdd,{id:idProduct,quantity:quantity}));
-    $('#countpanier').text(data.paniercount);
+      var idProduct=$(this).data('product');
+      var quantity=$(this).parents('.produits').find('.quantity').val();
+      var data=objAjax.callAjax(Routing.generate(_this.routeAddPanier,{id:idProduct,quantity:quantity,type:dataFilter.type}));
+        console.log(data);
+      $('#countpanier').text(data.paniercount);
   })
 }
 

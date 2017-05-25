@@ -44,7 +44,7 @@ panierpage:
     path:     /panier
     defaults: { _controller: CoreCoreBundle:Panier:panier }
 addproductpage:
-    path:     /produits/add/{id}/{quantity}
+    path:     /produits/add/{id}/{quantity}/{type}
     defaults: { _controller: CoreCoreBundle:Panier:addProducts }
     options:
         expose: true
@@ -53,7 +53,7 @@ historyCommande:
     defaults: { _controller: CoreCoreBundle:Commande:history }
 
 deleteproductpage:
-    path:     /produits/delete/{id}
+    path:     /produits/delete/{id}/{type}
     defaults: { _controller: CoreCoreBundle:Panier:deleteProducts }
     options:
         expose: true
