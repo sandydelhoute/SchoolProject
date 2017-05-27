@@ -47,7 +47,14 @@ class CommandeController extends Controller
             foreach ($listOrderLine as $key => $orderline  ) {
                 $orderclient->addOrderLine($orderline);
                 $orderline->setOrderClient($orderclient);
+                if(!is_null($orderline->getProduct()))
+                {
                 $total += $total + $orderline->getQuantity() * $orderline->getProduct()->getPrix();
+                }
+                else
+                {
+                     $total += $total + $orderline->getQuantity() * $orderline->getMenu()->getPrix();
+                }
             }
         $ptsFideleCommande=round($total/10, 2);
         $valideCommande=true;

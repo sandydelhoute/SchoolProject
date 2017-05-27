@@ -63,7 +63,36 @@ var Map=function(){
       });
   });
   }
+  var render=function(obj){
+    var adresseRelais = InverseAdresse(obj.coordonates.latitude,obj.coordonates.longitude);
+    console.log(adresseRelais);
+    var panel=document.createElement('div');
+    panel.className = 'panel default-panel';
+    panel.id = 'iw-container';
+    var panelHead = document.createElement('div');
+    panelHead.className = 'panel-heading iw-title';
+    var panelBody = document.createElement('div');
+    panelBody.className = 'panel-body';
+    panelBody.id = 'iw-content';
+    var buttonSelect = document.createElement('button');
+    buttonSelect.className = 'btn btn-green';
+    var iconSelect = document.createElement('i');
+    iconSelect.className = 'fa fa-check';
+    var buttonCancel=document.createElement('button');
+    buttonCancel.className = 'btn btn-warning';
+    var iconCancel = document.createElement('i');
+    iconCancel.className = 'fa fa-ban' ;
 
+    buttonSelect.appendChild(iconSelect)
+    buttonCancel.appendChild(iconCancel)
+    panelBody.appendChild(buttonSelect);
+    panelBody.appendChild(buttonCancel);
+    panelHead.appendChild(document.createTextNode(obj.name));
+    panel.appendChild(panelHead);
+    panel.appendChild(panelBody);
+
+    return panel;
+  }
 
   var init_map=function() {
      var options = {
@@ -78,10 +107,10 @@ var Map=function(){
       for(var key in listMarkers)
       {
           marker = new google.maps.Marker({
-          position: new google.maps.LatLng(listMarkers[key].coordonates.longitude,listMarkers[key].coordonates.latitude),
+          position: new google.maps.LatLng(listMarkers[key].coordonates.latitude,listMarkers[key].coordonates.longitude),
           map: map
         });
-          attachSecretMessage(marker,listMarkers[key].name);
+          attachSecretMessage(marker,render(listMarkers[key]));
       }
         var autocomplete = new google.maps.places.Autocomplete(address,options);
         autocomplete.bindTo('bounds', map);
@@ -127,14 +156,77 @@ var Map=function(){
         });
       }
 
-  var attachSecretMessage=function(marker, secretMessage) {
+  /* Fonction de géocodage inversé  */
+  var InverseAdresse=function(latitude,longitude){
+    latitude = parseFloat(latitude);
+    longitude = parseFloat(longitude);
+    var geocoder = new google.maps.Geocoder();
+    var latlng = new google.maps.LatLng(latitude,longitude);
+    geocoder.geocode({'latLng': latlng}, function(results, status) {
+    /* Si le géocodage inversé a réussi */
+    console.log(results);
+    if (status == google.maps.GeocoderStatus.OK) {
+       if (results[1]) {
+        return results[1];
+       }
+    }
+    });
+  }
+        /* Fonction infoWindow  */
+  var attachSecretMessage=function(marker, render) {
           var infowindow = new google.maps.InfoWindow({
-            content: secretMessage
+            content: render
           });
+    google.maps.event.addListener(infowindow, 'domready', function() {
 
+    // Reference to the DIV that wraps the bottom of infowindow
+    var iwOuter = $('.gm-style-iw');
+
+    /* Since this div is in a position prior to .gm-div style-iw.
+     * We use jQuery and create a iwBackground variable,
+     * and took advantage of the existing reference .gm-style-iw for the previous div with .prev().
+    */
+    var iwBackground = iwOuter.prev();
+
+    iwOuter.children(':nth-child(1)').css({display:'block'})
+    // Removes background shadow DIV
+    iwBackground.children(':nth-child(2)').css({'display' : 'none'});
+
+    // Removes white background DIV
+    iwBackground.children(':nth-child(4)').css({'display' : 'none'});
+
+    // Moves the infowindow 115px to the right.
+    iwOuter.parent().parent().css({left: '115px'});
+
+    // Moves the shadow of the arrow 76px to the left margin.
+    iwBackground.children(':nth-child(1)').attr('style', function(i,s){ return s + 'left: 76px !important;'});
+
+    // Moves the arrow 76px to the left margin.
+    iwBackground.children(':nth-child(3)').attr('style', function(i,s){ return s + 'left: 76px !important;'});
+
+    // Changes the desired tail shadow color.
+    iwBackground.children(':nth-child(3)').find('div').children().css({'box-shadow': 'rgba(72, 181, 233, 0.6) 0px 1px 6px', 'z-index' : '1'});
+
+    // Reference to the div that groups the close button elements.
+    var iwCloseBtn = iwOuter.next();
+
+    // Apply the desired effect to the close button
+    iwCloseBtn.css({opacity: '1', right: '38px', top: '3px', border: '7px solid #48b5e9', 'border-radius': '13px', 'box-shadow': '0 0 5px #3990B9'});
+
+    // If the content of infowindow not exceed the set maximum height, then the gradient is removed.
+    if($('.iw-content').height() < 140){
+      $('.iw-bottom-gradient').css({display: 'none'});
+    }
+
+    // The API automatically applies 0.7 opacity to the button after the mouseout event. This function reverses this event to the desired value.
+    iwCloseBtn.mouseout(function(){
+      $(this).css({opacity: '1'});
+    });
+  });
           marker.addListener('click', function() {
             infowindow.open(marker.get('map'), marker);
           });
+
    }
 
 

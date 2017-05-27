@@ -1,46 +1,66 @@
-
-            <div class="row">
-                <div class="col-xs-12">
-                    <div class="panel panel-default detail-commande">
-                        <div class="panel-heading">
-                            <h3 class="panel-title"><strong>Commande du {{ order.datePurchase|date("d/m/Y") }}</strong></h3>
-                        </div>
-                        <div class="panel-body">
-                            <div class="table-responsive">
-                                <table class="table table-condensed">
-                                    <thead>
-                                        <tr>
-                                            <td class="text-center"><strong>Produit</strong></td>
-                                            <td class="text-center"><strong>Prix</strong></td>
-                                            <td class="text-center"><strong>Quantit&eacute;</strong></td>
-                                            <td class="text-center"><strong>Sous-Total</strong></td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <!-- foreach ($order->lineItems as $line) or some such thing here -->
-                                        {% set total = 0 %}
-                                        {% set totalCommande = 0 %}
-                                        {% for orderline in order.orderLine %}
-                                        	{% set total = orderline.quantity * orderline.product.prix %}
-                                        	{% set totalCommande = totalCommande + total %}
-
-
-                                        <tr>
-                                            <td class="col-md-4 text-center">
-                                                <div class="media">
-                                                    <div class="media-body description-commande">
-                                                        {{ orderline.product.name }}
-                                                    </div>
-                                                    {% set count = 0 %}
-                                                    {% for image in orderline.product.images %}
-                                                        {% if count == 0 %}
-                                                    <img class="media-object" src="{{ absolute_url(asset(image.path)) }}" style="margin:auto;width: 72px; height: 72px;">
-                                                        {% endif %}
-                                                    {% set count = 1 %}
-                                                    {% endfor %}
+<div class="row">
+    <div class="col-xs-12">
+        <div class="panel panel-default detail-commande">
+            <div class="panel-heading">
+                <h3 class="panel-title"><strong>Commande du {{ order.datePurchase|date("d/m/Y") }}</strong></h3>
+            </div>
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table class="table table-condensed">
+                        <thead>
+                            <tr>
+                                <td class="text-center"><strong>Produit</strong></td>
+                                <td class="text-center"><strong>Prix</strong></td>
+                                <td class="text-center"><strong>Quantit&eacute;</strong></td>
+                                <td class="text-center"><strong>Sous-Total</strong></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <!-- foreach ($order->lineItems as $line) or some such thing here -->
+                        {% set total = 0 %}
+                        {% set totalCommande = 0 %}
+                        {% for orderline in order.orderLine %}
+                            {% if orderline.product is not null %}
+                            {% set total = orderline.quantity * orderline.product.prix %}
+                            {% else %}
+                                {% set total = orderline.quantity * orderline.menu.prix %}
+                            {% endif %}
+                            {% set totalCommande = totalCommande + total %}
+                            <tr>
+                                <td class="col-md-4 text-center">
+                                    <div class="media">
+                                        <div class="media-body description-commande">
+                                            {% if orderline.product is not null %}
+                                            {{ orderline.product.name }}
+                                            {% else %}
+                                            {{ orderline.menu.name }}                   
+                                            {% endif %}
+                                        </div>
+                                        {% set count = 0 %}
+                                        {% if orderline.product is not null %}
+                                            {% for image in orderline.product.images %}
+                                                {% if count == 0 %}
+                                                <img class="media-object" src="{{ absolute_url(asset(image.path)) }}" style="margin:auto;width: 72px; height: 72px;">
+                                                {% endif %}
+                                            {% set count = 1 %}
+                                            {% endfor %}
+                                        {% else %}
+                                            {% for image in orderline.menu.images %}
+                                                {% if count == 0 %}
+                                                <img class="media-object" src="{{ absolute_url(asset(image.path)) }}" style="margin:auto;width: 72px; height: 72px;">
+                                                {% endif %}
+                                                {% set count = 1 %}
+                                            {% endfor %}
+                                        {% endif %}
                                                 </div>
                                             </td>
-                                            <td class="text-center">{{ orderline.product.prix }}</td>
+                                            <td class="text-center">
+                                                {% if orderline.product is not null %}
+                                                    {{ orderline.product.prix }}
+                                                {% else %}
+                                                    {{ orderline.menu.prix }}
+                                                {% endif %}
+                                            </td>
                                             <td class="text-center">{{ orderline.quantity }}</td>
                                             <td class="text-center">{{ total }}</td>
                                         </tr>

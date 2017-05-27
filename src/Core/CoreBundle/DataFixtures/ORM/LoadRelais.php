@@ -28,7 +28,7 @@ $relais1->setOpening($this->getReference('opening'));
 $this->addReference('relais1',$relais1);
 
 
-$relais2=new Relais("mairie wattrelos");
+$relais2=new Relais("Euratech");
 $relais2->setName("");
 $relais2->setCoordonates($this->getReference('coordonates2'));
 $relais2->setOpening($this->getReference('opening'));

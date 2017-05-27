@@ -16,15 +16,21 @@
                 {% for order in listOrder %}
                   {% set total = 0 %}
                   {% for orderline in order.orderLine %}
+                    {% if orderline.product is not null %}
                     {% set total = (orderline.quantity * orderline.product.prix) %}
-                  {% endfor %} 
+                    {% else %}
+                      {% set total = (orderline.quantity * orderline.menu.prix) %}
+                    {% endif %}
+                  {% endfor %}
+                <a href={{ path('historyCommande',{id : order.id }) }}>
                 <div class="bold">
-                  Commande du {{ order.datePurchase|date("m/d/Y H:i") }}
+                   Commande du {{ order.datePurchase|date("m/d/Y H:i") }}
                   <div class="prix-historique-commande">
                     {{ total }}
                   </div>
-                  <a href={{path('historyCommande',{id : order.id }) }}
+                 
                 </div>
+                </a>
               {% endfor %}
             </div>
             <div class="page-nation pagination">
