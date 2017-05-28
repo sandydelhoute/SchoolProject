@@ -1,14 +1,14 @@
 $(document).ready(function(){
 
-var map=new Map();
-map.init();
+  var map=new Map();
+  map.init();
 
 });
 
 
 
 var Map=function(){
-  
+
   var i = 0;
   var map;
   var listMarkers;
@@ -16,52 +16,46 @@ var Map=function(){
   var address=document.getElementById('adress');
   var geocoder=new google.maps.Geocoder();
   var objAjax=new CallAjax();
+  var cityCircle;
+  var infowindow;
 
-    var allRelais=function(){
-      data=objAjax.callAjax(Routing.generate('allrelais'));
-      data.done(function(data){
-        listMarkers=JSON.parse(data);
-      });
-    }
+  var allRelais=function(){
+    data=objAjax.callAjax(Routing.generate('allrelais'));
+    data.done(function(data){
+      listMarkers=JSON.parse(data);
+    });
+  }
 
   this.init=function(){
     allRelais();
-    //geolocalisation();
+    geolocalisation();
     searchCP();
     google.maps.event.addDomListener(window, 'load', init_map);
-
   }
 
   var searchCP=function(){
     $('#RechercheGEo').on('click',function(){
       if(typeof cityCircle != 'undefined')
       {
-            cityCircle.setMap(null);
+        cityCircle.setMap(null);
       }
 
 
       var addressValue=address.value;
       var components={country :'fr'};
       geocoder.geocode( { 'address': addressValue}, function(results, status) {
-      /* Si l'adresse a pu être géolocalisée */
-      if (status == google.maps.GeocoderStatus.OK) {
+        /* Si l'adresse a pu être géolocalisée */
+        if (status == google.maps.GeocoderStatus.OK) {
       /* Récupération de sa latitude et de sa longitude */
       // document.getElementById('lat').value = results[0].geometry.location.lat();
-      map.setCenter(results[0].geometry.location);
-      map.setZoom(13);
-      var cityCircle =new google.maps.Circle({
-              strokeColor: '#02b253',
-              strokeOpacity: 0.8,
-              strokeWeight: 2,
-              fillColor: '#FFBE3B',
-              fillOpacity: 0.35,
-              map: map,
-              center: map.center,
-              radius: 5000
-            });
-       }
+      console.log(results);
+          map.setCenter(results[0].geometry.location);
+          map.setZoom(11);
+          circle();
+          distanceRelais(results[0].geometry.location)
+        }
       });
-  });
+    });
   }
   var render=function(obj){
     var adresseRelais = InverseAdresse(obj.coordonates.latitude,obj.coordonates.longitude);
@@ -74,51 +68,66 @@ var Map=function(){
     var panelBody = document.createElement('div');
     panelBody.className = 'panel-body';
     panelBody.id = 'iw-content';
+    var columnAdressRelais = document.createElement('div');
+    columnAdressRelais.className = 'col-xs-12';
+    var columnText = document.createElement('div');
+    columnText.className = 'col-xs-12';
+    var containText = document.createTextNode('Voulez-vous selectionner ce point relais ?')
+    var columnButton = document.createElement('div');
+    columnButton.className = 'col-xs-12';
+    var groupButton = document.createElement('div');
+    groupButton.className = 'btn-group'
     var buttonSelect = document.createElement('button');
-    buttonSelect.className = 'btn btn-green';
+    buttonSelect.className = 'btn btn-green selectRelais';
+    buttonSelect.dataset.relais = obj.id;
     var iconSelect = document.createElement('i');
     iconSelect.className = 'fa fa-check';
-    var buttonCancel=document.createElement('button');
-    buttonCancel.className = 'btn btn-warning';
+    var buttonCancel = document.createElement('button');
+    buttonCancel.className = 'btn btn-danger';
     var iconCancel = document.createElement('i');
     iconCancel.className = 'fa fa-ban' ;
 
-    buttonSelect.appendChild(iconSelect)
-    buttonCancel.appendChild(iconCancel)
-    panelBody.appendChild(buttonSelect);
-    panelBody.appendChild(buttonCancel);
+    buttonSelect.appendChild(iconSelect);
+    buttonCancel.appendChild(iconCancel);
+    groupButton.appendChild(buttonSelect);
+    groupButton.appendChild(buttonCancel);
+    columnText.appendChild(containText);
+    columnButton.appendChild(groupButton);
+    columnAdressRelais.appendChild(document.createTextNode(adresseRelais))
+    panelBody.appendChild(columnAdressRelais);
+    panelBody.appendChild(columnText);
+    panelBody.appendChild(columnButton);
     panelHead.appendChild(document.createTextNode(obj.name));
     panel.appendChild(panelHead);
     panel.appendChild(panelBody);
-
     return panel;
   }
 
   var init_map=function() {
-     var options = {
-      types: ['address'],
-      componentRestrictions: {country: "fr"}
-    };
-      map = new google.maps.Map(mapSelector, {
-        zoom: 5,
-        center: new google.maps.LatLng(50.8632264,-6.7670346),
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-      });
-      for(var key in listMarkers)
-      {
-          marker = new google.maps.Marker({
-          position: new google.maps.LatLng(listMarkers[key].coordonates.latitude,listMarkers[key].coordonates.longitude),
-          map: map
-        });
-          attachSecretMessage(marker,render(listMarkers[key]));
-      }
-        var autocomplete = new google.maps.places.Autocomplete(address,options);
-        autocomplete.bindTo('bounds', map);
-        autocomplete.addListener('place_changed', function() {
-          infowindow.close();
-          marker.setVisible(false);
-          var place = autocomplete.getPlace();
-          if (!place.geometry) {
+   var options = {
+    types: ['address'],
+    componentRestrictions: {country: "fr"}
+  };
+  map = new google.maps.Map(mapSelector, {
+    zoom: 5,
+    center: new google.maps.LatLng(50.8632264,-6.7670346),
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  });
+  for(var key in listMarkers)
+  {
+    marker = new google.maps.Marker({
+      position: new google.maps.LatLng(listMarkers[key].coordonates.latitude,listMarkers[key].coordonates.longitude),
+      map: map
+    });
+    attachSecretMessage(marker,render(listMarkers[key]));
+  }
+  var autocomplete = new google.maps.places.Autocomplete(address,options);
+  autocomplete.bindTo('bounds', map);
+  autocomplete.addListener('place_changed', function() {
+    infowindow.close();
+    marker.setVisible(false);
+    var place = autocomplete.getPlace();
+    if (!place.geometry) {
             // User entered the name of a Place that was not suggested and
             // pressed the Enter key, or the Place Details request failed.
             window.alert("No details available for input: '" + place.name + "'");
@@ -145,39 +154,40 @@ var Map=function(){
           var addressReturn = '';
           if (place.address_components) {
             addressReturn = [
-              (place.address_components[0] && place.address_components[0].short_name || ''),
-              (place.address_components[1] && place.address_components[1].short_name || ''),
-              (place.address_components[2] && place.address_components[2].short_name || '')
+            (place.address_components[0] && place.address_components[0].short_name || ''),
+            (place.address_components[1] && place.address_components[1].short_name || ''),
+            (place.address_components[2] && place.address_components[2].short_name || '')
             ].join(' ');
           }
 
           infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
           infowindow.open(map, marker);
         });
-      }
+}
 
-  /* Fonction de géocodage inversé  */
-  var InverseAdresse=function(latitude,longitude){
-    latitude = parseFloat(latitude);
-    longitude = parseFloat(longitude);
-    var geocoder = new google.maps.Geocoder();
-    var latlng = new google.maps.LatLng(latitude,longitude);
-    geocoder.geocode({'latLng': latlng}, function(results, status) {
+/* Fonction de géocodage inversé  */
+var InverseAdresse=function(latitude,longitude){
+  latitude = parseFloat(latitude);
+  longitude = parseFloat(longitude);
+  var geocoder = new google.maps.Geocoder();
+  var latlng = new google.maps.LatLng(latitude,longitude);
+  var resultGeocoder;
+  geocoder.geocode({'latLng': latlng}, function(results, status) {
     /* Si le géocodage inversé a réussi */
-    console.log(results);
     if (status == google.maps.GeocoderStatus.OK) {
-       if (results[1]) {
-        return results[1];
-       }
+      resultGeocoder = (results[0].formatted_address);
     }
-    });
-  }
-        /* Fonction infoWindow  */
-  var attachSecretMessage=function(marker, render) {
-          var infowindow = new google.maps.InfoWindow({
-            content: render
-          });
-    google.maps.event.addListener(infowindow, 'domready', function() {
+  });
+  console.log(resultGeocoder)
+  return resultGeocoder;
+}
+
+/* Fonction infoWindow  */
+var attachSecretMessage=function(marker, render) {
+  infowindow = new google.maps.InfoWindow({
+    content: render
+  });
+  google.maps.event.addListener(infowindow, 'domready', function() {
 
     // Reference to the DIV that wraps the bottom of infowindow
     var iwOuter = $('.gm-style-iw');
@@ -185,10 +195,10 @@ var Map=function(){
     /* Since this div is in a position prior to .gm-div style-iw.
      * We use jQuery and create a iwBackground variable,
      * and took advantage of the existing reference .gm-style-iw for the previous div with .prev().
-    */
-    var iwBackground = iwOuter.prev();
+     */
+     var iwBackground = iwOuter.prev();
 
-    iwOuter.children(':nth-child(1)').css({display:'block'})
+     iwOuter.children(':nth-child(1)').css({display:'block'})
     // Removes background shadow DIV
     iwBackground.children(':nth-child(2)').css({'display' : 'none'});
 
@@ -222,40 +232,85 @@ var Map=function(){
     iwCloseBtn.mouseout(function(){
       $(this).css({opacity: '1'});
     });
+
+    var selectRelais = document.getElementsByClassName('selectRelais');
+    selectRelais.addEventListener('click',function(){
+      objAjax.callAjax(Routing.generate('selectRelais',{id:id}));
+    },false);
+
   });
-          marker.addListener('click', function() {
-            infowindow.open(marker.get('map'), marker);
-          });
+  marker.addListener('click', function() {
+    infowindow.open(marker.get('map'), marker);
+  });
 
-   }
+}
 
 
-   var geolocalisation=function(){
-    $('#RechercheGeo').on('click',function(){
-      console.log('je suis dnas la geolocalisation');
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function(position) {
-          var pos = {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude
-          };
 
-          infoWindow.setPosition(pos);
-          infoWindow.setContent('Location found.');
-          map.setCenter(pos);
-        }, function() {
-          handleLocationError(true, infoWindow, map.getCenter());
-        });
-      } else {
+var circle=function(){
+ cityCircle =new google.maps.Circle({
+  strokeColor: '#02b253',
+  strokeOpacity: 0.8,
+  strokeWeight: 2,
+  fillColor: '#FFBE3B',
+  fillOpacity: 0.35,
+  map: map,
+  center: map.center,
+  radius: 5000
+});
+}
+
+
+var geolocalisation=function(){
+  $('#RechercheGeo').on('click',function(){
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function(position) {
+        var pos = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        };
+        map.setCenter(pos);
+        map.setZoom(13);
+        circle();
+      }, function() {
+        handleLocationError(true, infoWindow, map.getCenter());
+      });
+    } else {
             // Browser doesn't support Geolocation
             handleLocationError(false, infoWindow, map.getCenter());
           }
-      });
+        });
+}
+var handleLocationError=function(browserHasGeolocation, infoWindow, pos) {
+  infoWindow.setPosition(pos);
+  infoWindow.setContent(browserHasGeolocation ?
+    'Error: The Geolocation service failed.' : 
+    'Error: Your browser doesn\'t support geolocation.');
+}
+
+
+var distanceRelais=function(location){
+  var service = new google.maps.DistanceMatrixService();
+  for(var key in listMarkers)
+  {  
+    var destination=new google.maps.LatLng(listMarkers[key].coordonates.latitude,listMarkers[key].coordonates.longitude);
+    service.getDistanceMatrix(
+    {
+    origins: [location],
+    destinations: [destination],
+    travelMode: google.maps.TravelMode.DRIVING,
+    unitSystem: google.maps.UnitSystem.METRIC,
+    avoidHighways: false,
+    avoidTolls: false
+    },
+  function(response,status){
+    if(response.rows[0].elements[0].distance.value<5000)
+    {
+      console.log(listMarkers[key])
+    }
+  
+  });
   }
-  var handleLocationError=function(browserHasGeolocation, infoWindow, pos) {
-      infoWindow.setPosition(pos);
-      infoWindow.setContent(browserHasGeolocation ?
-      'Error: The Geolocation service failed.' : 
-      'Error: Your browser doesn\'t support geolocation.');
-  }
+}
+
 }

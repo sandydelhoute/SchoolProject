@@ -2,6 +2,7 @@ core_core:
     host:  "www.mealandbox.fr"
     resource: "@CoreCoreBundle/Resources/config/routing.yml"
     prefix:   /
+    schemes:  [https]
 
 
 vendor_connect_users:
@@ -11,6 +12,7 @@ admin_admin:
   host:  "admin.mealandbox.fr"
   resource: "@AdminAdminBundle/Resources/config/routing.yml"
   prefix:   /
+  schemes:  [https]
 
 fos_js_routing:
     resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
