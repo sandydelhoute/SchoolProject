@@ -10,6 +10,8 @@ use \DateTime;
 use \DateInterval;
 use Vendor\ConnectUsersBundle\Form\RegistrationUsersWebType;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+
 class UsersController extends Controller
 {
 
@@ -30,20 +32,24 @@ class UsersController extends Controller
     $usersexist->setTokenResetPass($token);
     $usersexist->setLimiteDateResetPass($limiteDate);
 
-    $url = $this->container->get('router')->generate(
-    'homepage'/*,
+    $contact = $this->container->get('router')->generate(
+    'contactpage'/*,
     array('slug' => 'homepage')*/
     );
    
+    $urlpassword = $this->container->get('router')->generate(
+    'resetpasswordpage',
+    array('token' => $token), UrlGeneratorInterface::ABSOLUTE_URL
+    );
 
     $message = \Swift_Message::newInstance()
-        ->setSubject('Hello Email')
-        ->setFrom('s.delhoute@sfr.fr')
-        ->setTo('s.delhoute@sfr.fr')
+        ->setSubject('Demande reinitialisation password')
+        ->setFrom($container->getParameter('mailer.user'))
+        ->setTo($usersexist->getEmail())
         ->setBody(
           $this->renderView(
             ':Email:resetpassword.html.twig',
-            array('email' => "toto",'name' => "totos",'action_url'=>"tot",'operating_system'=>"mealandbox",'browser_name'=>"tttt",'support_url'=>$url)
+            array('email' => "toto",'name' => "totos",'action_url'=>$urlpassword,'operating_system'=>"mealandbox",'browser_name'=>"tttt",'support_url'=>$contact)
             ),
         'text/html'
         );  

@@ -2,7 +2,6 @@
 function CallAjax(selector=null)
 {
 	this.selector=selector;
-	console.log(selector);
 	var div=document.createElement('div');
 	div.className="progress progress-striped active page-progress-bar";
 	div.id="loading";

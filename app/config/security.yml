@@ -3,12 +3,11 @@
 security:
 
     encoders:
-        Symfony\Component\Security\Core\User\User: sha1
         Vendor\ConnectUsersBundle\Entity\UsersWeb:
             algorithm: sha512
             iterations: 6666
             encode_as_base64: true
-        Vendor\ConnectUsersBundle\Entity\Users:
+        Vendor\ConnectUsersBundle\Entity\UsersEmployee:
             algorithm: sha512
             iterations: 6666
             encode_as_base64: true
@@ -25,15 +24,14 @@ security:
                     property: email
         admin:
             entity:
-                    class:    Vendor\ConnectUsersBundle\Entity\UsersWeb
+                    class:    Vendor\ConnectUsersBundle\Entity\UsersEmployee
                     property: email
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         login:
-            pattern: ^/compte/login_check
-            pattern: ^/compte/employee/login_check
+            pattern: ^/compte/connexion/$
             security: false   
         core:
             host: ^www\.mealandbox\.fr$
@@ -42,7 +40,7 @@ security:
             provider:  core
             form_login:
                login_path: /login
-               check_path: /compte/connexionweb
+               check_path: /compte/connexion/connexionweb
                default_target_path: /
                failure_path: /login
             logout:
@@ -58,11 +56,10 @@ security:
             host: ^admin\.mealandbox\.fr$
             pattern: ^/
             anonymous: true
-            http_basic:
-                provider:  admin
+            provider:  admin
             form_login:
                login_path: /login
-               check_path: /compte/connexionadmin
+               check_path: /compte/connexion/connexionadmin
                default_target_path: /
                failure_path: /login
             logout:
@@ -70,7 +67,7 @@ security:
                 target: /
     access_control:
                - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, host: ^admin\.mealandbox\.fr$  }            
-               - { path: ^/*, roles: ROLE_ADMIN, host: ^admin\.mealandbox\.fr$ }
+              # - { path: ^/*, roles: ROLE_ADMIN, host: ^admin\.mealandbox\.fr$ }
             # activate different ways to authenticate
 
             # http_basic: ~

@@ -10,6 +10,12 @@ cgvpage:
 mentionspage:
     path:     /mentions-legales
     defaults: { _controller: CoreCoreBundle:Core:mentions }
+#sitemap
+sitemap:
+    path:     //sitemap_{name}.{_format}
+    defaults: { _controller: CoreCoreBundle:Sitemap:siteMap }
+    requirements:
+        _format: "xml"
 
 #passwordreset
 resetpasswordpage:
@@ -69,11 +75,16 @@ productpage:
     defaults: { _controller: CoreCoreBundle:Product:products }
 
 productdetailpage:
-    path:     /produits/{id}
+    path:     /produit/{id}
     defaults: { _controller: CoreCoreBundle:Product:productsDetail }
     options:
         expose: true
         
+menudetailpage:
+    path:     /menu/{id}
+    defaults: { _controller: CoreCoreBundle:Product:productsDetail }
+    options:
+        expose: true
 
 #filter
 productfilterpage:
@@ -95,7 +106,7 @@ actualityscrollpage:
         expose: true
 
 actualitydetailpage:
-    path:     /actualites/{id}
+    path:     /actualite/{id}
     defaults: { _controller: CoreCoreBundle:Posts:detail }
     options:
         expose: true

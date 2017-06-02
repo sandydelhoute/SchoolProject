@@ -9,12 +9,12 @@ page_moncompte_users:
     defaults: { _controller: VendorConnectUsersBundle:Users:index }
 
 page_moncompte_connexionweb:
-    path:     /connexionweb
+    path:     /connexion/connexionweb
     defaults: { _controller: VendorConnectUsersBundle:Users:connection }
 
 # --------------------Users Employee-------------------- #
 page_moncompte_connexionemployee:
-    path:     /connexionadmin
+    path:     /connexion/connexionadmin
     defaults: { _controller: VendorConnectUsersBundle:Employee:connection }
 
 page_moncompte_employee:

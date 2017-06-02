@@ -28,8 +28,8 @@ $relais1->setOpening($this->getReference('opening'));
 $this->addReference('relais1',$relais1);
 
 
-$relais2=new Relais("Euratech");
-$relais2->setName("");
+$relais2=new Relais();
+$relais2->setName("Euratech");
 $relais2->setCoordonates($this->getReference('coordonates2'));
 $relais2->setOpening($this->getReference('opening'));
 $this->addReference('relais2',$relais2);
