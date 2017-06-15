@@ -53,6 +53,7 @@ class Coordonates
      * @var string
      *
      * @ORM\Column(name="address", type="string", length=255,nullable=true)
+     * @Groups({"relais"})
      */
     private $address;
 

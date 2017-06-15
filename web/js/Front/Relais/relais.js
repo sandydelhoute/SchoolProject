@@ -20,34 +20,34 @@ var Map=function(){
   var cityCircle;
   var infowindow;
 
-this.init=function()
-{
-  allRelais();
-  geolocalisation();
-  searchCP();
-  google.maps.event.addDomListener(window, 'load', init_map);
-}
-var init_map=function() {
-  map = new google.maps.Map(mapSelector, {
-    zoom:6,
-    center: new google.maps.LatLng(46.8782397,3.7608114),
-    mapTypeId: google.maps.MapTypeId.ROADMAP
-  });
-  markerShow(map,true);
+  this.init=function()
+  {
+    allRelais();
+    geolocalisation();
+    searchCP();
+    google.maps.event.addDomListener(window, 'load', init_map);
+  }
+  var init_map=function() {
+    map = new google.maps.Map(mapSelector, {
+      zoom:6,
+      center: new google.maps.LatLng(46.8782397,3.7608114),
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    });
+    markerShow(map,true);
     autoComplete();
 
-}
+  }
   var allRelais=function(){
     data=objAjax.callAjax(Routing.generate('allrelais'));
     data.done(function(data){
       listRelais=JSON.parse(data);
       for(var key in listRelais)
       {
-      marker = new google.maps.Marker({
-        position: new google.maps.LatLng(listRelais[key].coordonates.latitude,listRelais[key].coordonates.longitude),
-        animation: google.maps.Animation.DROP
+        marker = new google.maps.Marker({
+          position: new google.maps.LatLng(listRelais[key].coordonates.latitude,listRelais[key].coordonates.longitude),
+          animation: google.maps.Animation.DROP
         });
-      listMarker.push(marker);
+        listMarker.push(marker);
       }
     });
   }
@@ -82,13 +82,11 @@ var init_map=function() {
     panelHead.className = 'panel-heading iw-title';
     var panelBody = document.createElement('div');
     panelBody.className = 'panel-body iw-content';
-    //panelBody.id = 'iw-content';
-    var adresseRelais = InverseAdresse(listRelais[index].coordonates.latitude,listRelais[index].coordonates.longitude);
     var columnAdressRelais = document.createElement('div');
     columnAdressRelais.className = 'col-xs-12';
     var columnText = document.createElement('div');
     columnText.className = 'col-xs-12';
-    columnAdressRelais.appendChild(document.createTextNode('adresse'))
+    columnAdressRelais.appendChild(document.createTextNode(listRelais[index].coordonates.address));
     panelBody.appendChild(columnAdressRelais);
     if(boolSearch)
     {
@@ -101,12 +99,10 @@ var init_map=function() {
       buttonSelect.className = 'btn btn-green selectRelais';
       buttonSelect.dataset.relais = listRelais[index].id;
       var selectRelais = document.getElementsByClassName('selectRelais');
-
-        console.log('yyy')
       google.maps.event.addDomListener(selectRelais,'click',function () {
-                          console.log('id');
+        console.log('id');
           //objAjax.callAjax(Routing.generate('selectRelais',{id:id}));
-                      })
+        })
       var iconSelect = document.createElement('i');
       iconSelect.className = 'fa fa-check';
       var buttonCancel = document.createElement('button');
@@ -124,41 +120,41 @@ var init_map=function() {
       panelBody.appendChild(columnButton);
     }
 
-      panelHead.appendChild(document.createTextNode(listRelais[index].name));
-      panel.appendChild(panelHead);
-      panel.appendChild(panelBody);
-      return panel;
+    panelHead.appendChild(document.createTextNode(listRelais[index].name));
+    panel.appendChild(panelHead);
+    panel.appendChild(panelBody);
+    return panel;
   }
 
 
-var autoComplete=function(){
+  var autoComplete=function(){
     var options = {
-    types: ['address'],
-    componentRestrictions: {country: "fr"}
-  };
-   var autocomplete = new google.maps.places.Autocomplete(address,options);
-  autocomplete.bindTo('bounds', map);
-}
+      types: ['address'],
+      componentRestrictions: {country: "fr"}
+    };
+    var autocomplete = new google.maps.places.Autocomplete(address,options);
+    autocomplete.bindTo('bounds', map);
+  }
 
 
-/* Fonction de géocodage inversé  */
-var InverseAdresse=function(latitude,longitude){
-  latitude = parseFloat(latitude);
-  longitude = parseFloat(longitude);
-  var geocoder = new google.maps.Geocoder();
-  var latlng = new google.maps.LatLng(latitude,longitude);
-  var resultGeocoder;
-  geocoder.geocode({'latLng': latlng}, function(results, status) {
-    /* Si le géocodage inversé a réussi */
-    if (status == google.maps.GeocoderStatus.OK) {
-      resultGeocoder = (results[0].formatted_address);
-    }
-  });
-  return resultGeocoder;
-}
+  /* Fonction de géocodage inversé  */
+  var InverseAdresse=function(latitude,longitude){
+    latitude = parseFloat(latitude);
+    longitude = parseFloat(longitude);
+    var geocoder = new google.maps.Geocoder();
+    var latlng = new google.maps.LatLng(latitude,longitude);
+    var resultGeocoder;
+    geocoder.geocode({'latLng': latlng}, function(results, status) {
+      /* Si le géocodage inversé a réussi */
+      if (status == google.maps.GeocoderStatus.OK) {
+        resultGeocoder = (results[0].formatted_address);
+      }
+    });
+    return resultGeocoder;
+  }
 
-/* Fonction infoWindow  */
-var attachSecretMessage=function(infowindow) {
+  /* Fonction infoWindow  */
+  var attachSecretMessage=function(infowindow) {
     google.maps.event.addListener(infowindow, 'domready', function() {
 
 
@@ -174,8 +170,9 @@ var attachSecretMessage=function(infowindow) {
      * and took advantage of the existing reference .gm-style-iw for the previous div with .prev().
      */
      var iwBackground = iwOuter.prev();
-      iwBackground.children(':nth-child(3)').css({display:'none'});
-      console.log(iwBackground.children(':nth-child(1)').children(':nth-child(1)'));
+     iwBackground.children(':nth-child(3)').css({display:'none'});
+
+     iwBackground.children(':nth-child(3)').css({display:'none'});
      iwOuter.children(':nth-child(1)').css({display:'block'})
     // Removes background shadow DIV
     iwBackground.children(':nth-child(2)').css({'display' : 'none'});
@@ -210,121 +207,54 @@ var attachSecretMessage=function(infowindow) {
     iwCloseBtn.mouseout(function(){
       $(this).css({opacity: '1'});
     });
-   
+
   });
-}
+  }
 
 
-var markerShow=function(map,boolSearch = null)
-{ 
-  var infowindow = new google.maps.InfoWindow()
-  for(var i = 0; i < listMarker.length; i++)
-  {
-    (function (id) {
-    var marker = listMarker[i];
-    marker.setMap(map);
-
-     var panel=document.createElement('div');
-    panel.className = 'panel default-panel iw-container';
-    //panel.id = 'iw-container';
-    var panelHead = document.createElement('div');
-    panelHead.className = 'panel-heading iw-title';
-    var panelBody = document.createElement('div');
-    panelBody.className = 'panel-body iw-content';
-    //panelBody.id = 'iw-content';
-    var adresseRelais = InverseAdresse(listRelais[i].coordonates.latitude,listRelais[i].coordonates.longitude);
-    var columnAdressRelais = document.createElement('div');
-    columnAdressRelais.className = 'col-xs-12';
-    var columnText = document.createElement('div');
-    columnText.className = 'col-xs-12';
-    columnAdressRelais.appendChild(document.createTextNode('adresse'))
-    panelBody.appendChild(columnAdressRelais);
-    if(boolSearch)
+  var markerShow=function(map,boolSearch = null)
+  { 
+    var infowindow = new google.maps.InfoWindow()
+    for(var i = 0; i < listMarker.length; i++)
     {
-      var containText = document.createTextNode('Voulez-vous selectionner ce point relais ?')
-      var columnButton = document.createElement('div');
-      columnButton.className = 'col-xs-12';
-      var groupButton = document.createElement('div');
-      groupButton.className = 'btn-group'
-      var buttonSelect = document.createElement('button');
-      buttonSelect.className = 'btn btn-green selectRelais';
-      buttonSelect.dataset.relais = listRelais[i].id;
-      var selectRelais = document.getElementsByClassName('selectRelais');
-
-
-
-
-      // google.maps.event.addDomListener(selectRelais,'click',function () {
-      //                     console.log('id');
-      //     //objAjax.callAjax(Routing.generate('selectRelais',{id:id}));
-      //                 })
-
-
-
-
-      var iconSelect = document.createElement('i');
-      iconSelect.className = 'fa fa-check';
-      var buttonCancel = document.createElement('button');
-      buttonCancel.className = 'btn btn-danger';
-      var iconCancel = document.createElement('i');
-      iconCancel.className = 'fa fa-ban' ;
-
-      buttonSelect.appendChild(iconSelect);
-      buttonCancel.appendChild(iconCancel);
-      groupButton.appendChild(buttonSelect);
-      groupButton.appendChild(buttonCancel);
-      columnText.appendChild(containText);
-      columnButton.appendChild(groupButton);
-      panelBody.appendChild(columnText);
-      panelBody.appendChild(columnButton);
-    }
-
-      panelHead.appendChild(document.createTextNode(listRelais[i].name));
-      panel.appendChild(panelHead);
-      panel.appendChild(panelBody)
-
-
-
-
-
-
-
-
-    var contentRender=panel;
-    google.maps.event.addListener(marker, 'click', function () {
+      (function (id) {
+        var marker = listMarker[i];
+        marker.setMap(map);
+        var contentRender=render(i,true);
+        google.maps.event.addListener(marker, 'click', function () {
         infowindow.setOptions({
         content: contentRender,
         map: map,
         position:marker.latLng
       });
     });
-        }(i));
-    attachSecretMessage(infowindow);
+  }(i));
+      attachSecretMessage(infowindow);
+    }
   }
-}
 
-var clearMarkers = function()
-{
-  for (var i = 0; i < listMarker.length; i++) {
-    listMarker[i].setMap(null);
+  var clearMarkers = function()
+  {
+    for (var i = 0; i < listMarker.length; i++) {
+      listMarker[i].setMap(null);
+    }
   }
-}
 
-var circle=function(){
- cityCircle =new google.maps.Circle({
-  strokeColor: '#02b253',
-  strokeOpacity: 0.8,
-  strokeWeight: 2,
-  fillColor: '#FFBE3B',
-  fillOpacity: 0.35,
-  map: map,
-  center: map.center,
-  radius: 5000
-});
-}
+  var circle=function(){
+   cityCircle =new google.maps.Circle({
+    strokeColor: '#02b253',
+    strokeOpacity: 0.8,
+    strokeWeight: 2,
+    fillColor: '#FFBE3B',
+    fillOpacity: 0.35,
+    map: map,
+    center: map.center,
+    radius: 5000
+  });
+ }
 
 
-var geolocalisation=function(){
+ var geolocalisation=function(){
   $('#RechercheGeo').on('click',function(){
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(function(position) {
@@ -375,7 +305,7 @@ var distanceRelais=function(location){
   //   });
   // }
   google.maps.Circle.prototype.contains = function(latLng) {
-  return this.getBounds().contains(latLng) && google.maps.geometry.spherical.computeDistanceBetween(this.getCenter(), latLng) <= this.getRadius();
-}
+    return this.getBounds().contains(latLng) && google.maps.geometry.spherical.computeDistanceBetween(this.getCenter(), latLng) <= this.getRadius();
+  }
 }
 }
