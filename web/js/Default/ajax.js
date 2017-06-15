@@ -36,11 +36,7 @@ function CallAjax(selector=null)
 	    	}
 	    },
 	    success:function(data,statut){
-		    	if(_this.selector != null)
-	    		{
 
-
-	    		}
   		},
 	    error : function(erreur){
 	    },

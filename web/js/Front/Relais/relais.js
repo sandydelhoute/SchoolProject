@@ -13,7 +13,7 @@ var Map=function(){
   var map;
   var listRelais;
   var listMarker =[];
-  var mapSelector=document.getElementById('map');
+  var mapSelector=document.getElementById('mapRelais');
   var address=document.getElementById('adress');
   var geocoder=new google.maps.Geocoder();
   var objAjax=new CallAjax();
@@ -29,8 +29,8 @@ this.init=function()
 }
 var init_map=function() {
   map = new google.maps.Map(mapSelector, {
-    zoom: 5,
-    center: new google.maps.LatLng(50.8632264,-6.7670346),
+    zoom:6,
+    center: new google.maps.LatLng(46.8782397,3.7608114),
     mapTypeId: google.maps.MapTypeId.ROADMAP
   });
   markerShow(map,true);
@@ -161,6 +161,11 @@ var InverseAdresse=function(latitude,longitude){
 var attachSecretMessage=function(infowindow) {
     google.maps.event.addListener(infowindow, 'domready', function() {
 
+
+
+
+
+
     // Reference to the DIV that wraps the bottom of infowindow
     var iwOuter = $('.gm-style-iw');
 
@@ -169,7 +174,8 @@ var attachSecretMessage=function(infowindow) {
      * and took advantage of the existing reference .gm-style-iw for the previous div with .prev().
      */
      var iwBackground = iwOuter.prev();
-
+      iwBackground.children(':nth-child(3)').css({display:'none'});
+      console.log(iwBackground.children(':nth-child(1)').children(':nth-child(1)'));
      iwOuter.children(':nth-child(1)').css({display:'block'})
     // Removes background shadow DIV
     iwBackground.children(':nth-child(2)').css({'display' : 'none'});
@@ -218,13 +224,6 @@ var markerShow=function(map,boolSearch = null)
     var marker = listMarker[i];
     marker.setMap(map);
 
-
-
-
-
-
-
-
      var panel=document.createElement('div');
     panel.className = 'panel default-panel iw-container';
     //panel.id = 'iw-container';
@@ -252,11 +251,17 @@ var markerShow=function(map,boolSearch = null)
       buttonSelect.dataset.relais = listRelais[i].id;
       var selectRelais = document.getElementsByClassName('selectRelais');
 
-        console.log('yyy')
-      google.maps.event.addDomListener(selectRelais,'click',function () {
-                          console.log('id');
-          //objAjax.callAjax(Routing.generate('selectRelais',{id:id}));
-                      })
+
+
+
+      // google.maps.event.addDomListener(selectRelais,'click',function () {
+      //                     console.log('id');
+      //     //objAjax.callAjax(Routing.generate('selectRelais',{id:id}));
+      //                 })
+
+
+
+
       var iconSelect = document.createElement('i');
       iconSelect.className = 'fa fa-check';
       var buttonCancel = document.createElement('button');

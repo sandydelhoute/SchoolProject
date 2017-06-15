@@ -11,18 +11,25 @@ use Core\CoreBundle\Form\PayCardsType;
 use Core\CoreBundle\Entity\OrderClient;
 use Core\CoreBundle\Entity\OrderLine;
 use Symfony\Component\Validator\Constraints\DateTime;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+
 class CommandeController extends Controller
 {
+     
+    /**
+     * @Security("has_role('ROLE_USER')")
+     */
      public function commandeAction(Request $request)
     {
+        $session = $request->getSession();
+        $listOrderLine=$session->get('panier');
+
         $valideCommande=false;
         $total=0;
         $ptsFideleCommande=0;
         $currentuser= $this->getUser();
         $orderclient = new OrderClient();
-    	$session = $request->getSession();
     	$em = $this->getDoctrine()->getManager();
-		$listOrderLine=$session->get('panier');
 		if($listOrderLine != null)
 		foreach ($listOrderLine as $orderline) {
             if(!is_null($orderline->getProduct()))
@@ -43,6 +50,7 @@ class CommandeController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $orderclient->setUsers($currentuser);
             $orderclient ->setDatePurchase(new \DateTime('NOW'));
+
 
             foreach ($listOrderLine as $key => $orderline  ) {
                 $orderclient->addOrderLine($orderline);
@@ -67,8 +75,8 @@ class CommandeController extends Controller
 
         $message = \Swift_Message::newInstance()
         ->setSubject('Récapitulatif de commande Meal & Box')
-        ->setFrom('mealandbox@sfr.fr')
-        ->setTo('s.delhoute@sfr.fr')
+        ->setFrom($this->container->getParameter('mailer.user'))
+        ->setTo($this->getUser()->getEmail())
         ->setBody(
           $this->renderView(
             ':Email:confirmcommande.html.twig',
@@ -77,6 +85,8 @@ class CommandeController extends Controller
         'text/html'
         );  
         $this->get('mailer')->send($message);
+
+        return $this->redirectToRoute('historyCommande',array('id'=>$orderclient->getId()));
         }
         return $this->render('CoreCoreBundle:Commande:commandelayout.html.twig',array('listOrderLine'=>$listOrderLine,'form'=>$form->createView(),'valideCommande'=>$valideCommande ,'totalCommande'=>$total,'ptsFideleCommande'=>$ptsFideleCommande,'orderclient'=>$orderclient));
     }

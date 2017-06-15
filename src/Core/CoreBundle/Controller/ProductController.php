@@ -12,7 +12,6 @@ use JMS\Serializer\SerializationContext;
 
 class ProductController extends Controller
 {
-  //"has_role('ROLE_USER')"
     /**
      * @Security("has_role('ROLE_USER')")
      */

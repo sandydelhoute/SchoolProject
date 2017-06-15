@@ -33,6 +33,16 @@ class UsersWeb extends Users
 
 
 
+
+
+    /**
+     * Many Features have One Product.
+     * @ORM\ManyToOne(targetEntity="Core\CoreBundle\Entity\Coordonates")
+     * @ORM\JoinColumn(name="coordonates_id",referencedColumnName="id",nullable=true)
+     */
+    private $address;
+
+
     /**
      * Many Features have One Product.
      * @ORM\ManyToOne(targetEntity="Core\CoreBundle\Entity\Relais")
@@ -143,5 +153,30 @@ class UsersWeb extends Users
     public function getRelais()
     {
         return $this->relais;
+    }
+
+
+    /**
+     * Set address
+     *
+     * @param \Core\CoreBundle\Entity\Coordonates $address
+     *
+     * @return UsersWeb
+     */
+    public function setAddress(\Core\CoreBundle\Entity\Coordonates $address = null)
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
+    /**
+     * Get address
+     *
+     * @return \Core\CoreBundle\Entity\Coordonates
+     */
+    public function getAddress()
+    {
+        return $this->address;
     }
 }

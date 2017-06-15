@@ -31,3 +31,9 @@
 
 
 {% endblock body %}
+{% block javascripts %}
+    {{ parent() }}
+    <script defer src="https://www.paypalobjects.com/api/checkout.js"></script>
+    <script defer src="{{ asset('js/Payement/paypal.js') }}"></script>
+
+{% endblock javascripts %}

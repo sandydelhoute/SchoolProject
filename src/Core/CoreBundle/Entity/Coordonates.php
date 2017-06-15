@@ -50,6 +50,13 @@ class Coordonates
 
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="address", type="string", length=255,nullable=true)
+     */
+    private $address;
+
+    /**
      * Get id
      *
      * @return int
@@ -131,5 +138,29 @@ class Coordonates
     public function getLatitude()
     {
         return $this->latitude;
+    }
+
+    /**
+     * Set address
+     *
+     * @param string $address
+     *
+     * @return Coordonates
+     */
+    public function setAddress($address)
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
+    /**
+     * Get address
+     *
+     * @return string
+     */
+    public function getAddress()
+    {
+        return $this->address;
     }
 }

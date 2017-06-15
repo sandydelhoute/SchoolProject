@@ -1,75 +1,75 @@
 {% extends '::base.html.twig' %}
 
 {% block stylesheets %}
-    {{ parent() }}
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/main.css') }}"/>
+  {{ parent() }}
+  <link rel="stylesheet" type="text/css" href="{{ asset('css/main.css') }}"/>
 
 {% endblock stylesheets %}
 {% block javascripts %}
 	{{ parent() }}
  {#<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAE6dCPBTnGEsKzpyim81lzA7cYanfqP8U" charset="utf-8"></script>#}
-<script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyAE6dCPBTnGEsKzpyim81lzA7cYanfqP8U"
-        async defer></script> 
- <script src="{{ asset('js/Front/Relais/relais.js') }}"></script>
- <script type="text/javascript" src="{{ asset('js/Default/ajax.js') }}"></script>
+ <script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyAE6dCPBTnGEsKzpyim81lzA7cYanfqP8U"
+ async ></script> 
+ <script defer src="{{ asset('js/Front/Relais/relais.js') }}"></script>
+ <script defer type="text/javascript" src="{{ asset('js/Default/ajax.js') }}"></script>
 {#  <script type="text/javascript"
   src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=geometry">
  </script>
  #}
-{% endblock javascripts%}
-{% block body %}
+ {% endblock javascripts%}
+ {% block body %}
 
-<style>
-.gm-style-iw {
-  width: 350px !important;
-  top: 15px !important;
-  left: 0px !important;
-  background-color: #fff;
-  box-shadow: 0 1px 6px rgba(178, 178, 178, 0.6);
-  border: 1px solid rgba(72, 181, 233, 0.6);
-  border-radius: 2px 2px 10px 10px;
-}
-.iw-container {
-  margin-bottom: 10px;
-}
-.iw-container .iw-title {
-  font-family: 'Open Sans Condensed', sans-serif;
-  font-size: 22px;
-  font-weight: 400;
-  padding: 10px;
-  background-color: #48b5e9;
-  color: white;
-  margin: 0;
-  border-radius: 2px 2px 0 0;
-}
-.iw-container .iw-content {
-  font-size: 13px;
-  line-height: 18px;
-  font-weight: 400;
-  margin-right: 1px;
-  padding: 15px 5px 20px 15px;
-  max-height: 140px;
-  overflow-y: auto;
-  overflow-x: hidden;
-}
-</style>
+  <style>
+    .gm-style-iw {
+      width: 350px !important;
+      top: 15px !important;
+      left: 0px !important;
+      background-color: #fff;
+      box-shadow: 0 1px 6px rgba(178, 178, 178, 0.6);
+      border: 1px solid rgba(72, 181, 233, 0.6);
+      border-radius: 2px 2px 10px 10px;
+    }
+    .iw-container {
+      margin-bottom: 10px;
+    }
+    .iw-container .iw-title {
+      font-family: 'Open Sans Condensed', sans-serif;
+      font-size: 22px;
+      font-weight: 400;
+      padding: 10px;
+      background-color: #48b5e9;
+      color: white;
+      margin: 0;
+      border-radius: 2px 2px 0 0;
+    }
+    .iw-container .iw-content {
+      font-size: 13px;
+      line-height: 18px;
+      font-weight: 400;
+      margin-right: 1px;
+      padding: 15px 5px 20px 15px;
+      max-height: 140px;
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+  </style>
 
 
-    <div class="container-fluid">
-        {% block header %}
-            {% include 'CoreCoreBundle:Default:header.html.twig' %}
-        {% endblock header %}
-    </div>
-    <div class="container">
-        {% block actualitydetail %}
-          {% include 'CoreCoreBundle:Relais:relaissearch.html.twig' %}
-        {% endblock actualitydetail %}
-           		<div id="map"></div>
-        </div>
+  <div class="container-fluid">
+    {% block header %}
+      {% include 'CoreCoreBundle:Default:header.html.twig' %}
+    {% endblock header %}
+  </div>
+  <div class="container">
+    {% block actualitydetail %}
+      {% include 'CoreCoreBundle:Relais:relaissearch.html.twig' %}
+    {% endblock actualitydetail %}
+    <div id="mapRelais"></div>
+  </div>
 </div>
 <div class="container-fluid">
-   {% block footer %}
-    {% include 'CoreCoreBundle:Default:footer.html.twig' %}
+ {% block footer %}
+  {% include 'CoreCoreBundle:Default:footer.html.twig' %}
 {% endblock footer %}
 </div>
 

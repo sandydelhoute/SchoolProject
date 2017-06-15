@@ -1,4 +1,5 @@
 {% set total = 0%}
+{% if listOrderLine is not null %}
 {% for orderLine in listOrderLine %}
   {% if orderLine.product is not null %}
   {% set total = total + (orderLine.quantity * orderLine.product.prix) %}
@@ -6,6 +7,7 @@
   {% set total = total + (orderLine.quantity * orderLine.menu.prix) %}
   {% endif %}
 {% endfor %}
+{% endif %}
   <div {% if totalCommande == 0 %}class="col-xs-12 col-md-8"{% else %}class="col-xs-12"{% endif %}>
     <div class="panel-group" id="tunnel">
       <div class="panel panel-default">
@@ -25,26 +27,26 @@
               <div class="bold">
                 Adresse de livraison
               </div>
-              GROSBILL Lille<br />
-              Avenue Clément Alder <br />
-              59118 Wambrechies <br /><br />
-              <a href="#">Modifier</a>
+              {{ app.user.relais.coordonates.address }}
+              <a href="{{ path('relaispage') }}">Modifier</a>
             </div>
             <div class="col-xs-12 col-md-6">
               <div class="bold">
                 Adresse de facturation
               </div>
-              Efficom<br />
-              146 Rue nationale <br />
-              59000 Lille <br /><br />
+              {% if app.user.address is not null %}
+                {{ app.user.address }}
+              {% else %}
+                Aucune adresse de facturation renseigné
+              {% endif %}
               <a href="#">Modifier</a>
             </div>
             <div class="col-xs-12 commanderetrait">
               <div class="bold">
                 Heure de retrait de commande
               </div>
-              26/01/2017 - 12H30<br /><br />
-              <a href="#">Modifier</a>
+              {{ app.user.relais.opening.timedelivry|date("H:i") }}
+              <br /><br />
             </div>
           </div>
         </div>
@@ -130,7 +132,8 @@
                     Pour consulter les Conditions générales d'utilisation et les modalités d'annulation, <a href="#">cliquez ici</a>.
                   </div>
                   <div class="col-lg-12 paypal-bouton">
-                    <button type="button" class="btn btn-green bouton-paypal">Continuer</button>
+                    <div id="bouton-paypal"></div>
+
                   </div>
                 </div>
 

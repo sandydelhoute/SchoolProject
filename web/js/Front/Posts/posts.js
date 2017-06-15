@@ -7,10 +7,15 @@ $(document).ready(function(){
 
 		console.log('je suis dans le render')
 		data.done(function(data){
+  //       var loading=document.getElementById("loading");
+		// setTimeout(function(){
+  //         selector.removeChild(document.getElementById("loading"));
+  //       },1000);
+
 			if($.parseJSON(data.data).length>0){
 				$.each($.parseJSON(data.data), function(key,obj){
 					var date = new Date(obj.datepublish).toISOString().substr(0, 19).replace('T', ' ').replace('-','/').replace('-','/');
-					// var month = date.getMonth() + 1;
+			// var month = date.getMonth() + 1;
 		   //  		var day = date.getDate();
 		   //  		var year = date.getFullYear();
 					var html='<article>';
@@ -25,7 +30,7 @@ $(document).ready(function(){
 			        var count = 0;
 			        var description=obj.content.split(reg).filter(function(word) {
 			            count += word.length;
-			            return count <= Math.random() * (obj.content.length - 50) + 50;
+			            return count <= Math.random() * (obj.content.length - 0) + obj.content.length;
 			        }).join('')+'...';
 			        html += description;
 			        html += '</p>';
@@ -46,7 +51,7 @@ $(document).ready(function(){
     return stopAjax;
 
 	}
-	var objInfiniteScroll = new InfiniteScroll(routePosts,selector,render,3);
+	var objInfiniteScroll = new InfiniteScroll(routePosts,selector,render,6);
 	objInfiniteScroll.init();
 
 
