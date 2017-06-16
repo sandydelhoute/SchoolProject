@@ -18,7 +18,6 @@ var Map=function(){
   var geocoder=new google.maps.Geocoder();
   var objAjax=new CallAjax();
   var cityCircle;
-  var infowindow;
 
   this.init=function()
   {
@@ -68,8 +67,8 @@ var Map=function(){
           /* Récupération de sa latitude et de sa longitude */
           map.setCenter(results[0].geometry.location);
           map.setZoom(11);
-          circle();
-          console.log(distanceRelais(results[0].geometry.location));
+          var circlecity = circle();
+          distanceRelais(circlecity);
         }
       });
     });
@@ -98,11 +97,6 @@ var Map=function(){
       var buttonSelect = document.createElement('button');
       buttonSelect.className = 'btn btn-green selectRelais';
       buttonSelect.dataset.relais = listRelais[index].id;
-      var selectRelais = document.getElementsByClassName('selectRelais');
-      google.maps.event.addDomListener(selectRelais,'click',function () {
-        console.log('id');
-          //objAjax.callAjax(Routing.generate('selectRelais',{id:id}));
-        })
       var iconSelect = document.createElement('i');
       iconSelect.className = 'fa fa-check';
       var buttonCancel = document.createElement('button');
@@ -137,29 +131,10 @@ var Map=function(){
   }
 
 
-  /* Fonction de géocodage inversé  */
-  var InverseAdresse=function(latitude,longitude){
-    latitude = parseFloat(latitude);
-    longitude = parseFloat(longitude);
-    var geocoder = new google.maps.Geocoder();
-    var latlng = new google.maps.LatLng(latitude,longitude);
-    var resultGeocoder;
-    geocoder.geocode({'latLng': latlng}, function(results, status) {
-      /* Si le géocodage inversé a réussi */
-      if (status == google.maps.GeocoderStatus.OK) {
-        resultGeocoder = (results[0].formatted_address);
-      }
-    });
-    return resultGeocoder;
-  }
 
   /* Fonction infoWindow  */
   var attachSecretMessage=function(infowindow) {
     google.maps.event.addListener(infowindow, 'domready', function() {
-
-
-
-
 
 
     // Reference to the DIV that wraps the bottom of infowindow
@@ -220,15 +195,15 @@ var Map=function(){
       (function (id) {
         var marker = listMarker[i];
         marker.setMap(map);
-        var contentRender=render(i,true);
-        google.maps.event.addListener(marker, 'click', function () {
-        infowindow.setOptions({
-        content: contentRender,
-        map: map,
-        position:marker.latLng
-      });
-    });
-  }(i));
+        var contentRender=render(i,false);
+        listener1 = google.maps.event.addListener(marker, 'click', function () {
+          infowindow.setOptions({
+            content: contentRender,
+            map: map,
+            position:marker.latLng
+          });
+        });
+      }(i));
       attachSecretMessage(infowindow);
     }
   }
@@ -251,6 +226,7 @@ var Map=function(){
     center: map.center,
     radius: 5000
   });
+   return cityCircle;
  }
 
 
@@ -274,6 +250,7 @@ var Map=function(){
           }
         });
 }
+
 var handleLocationError=function(browserHasGeolocation, infoWindow, pos) {
   infoWindow.setPosition(pos);
   infoWindow.setContent(browserHasGeolocation ?
@@ -282,30 +259,28 @@ var handleLocationError=function(browserHasGeolocation, infoWindow, pos) {
 }
 
 
-var distanceRelais=function(location){
-  // var service = new google.maps.DistanceMatrixService();
-  // for(var key in listRelais)
-  // {  
-  //   var destination=new google.maps.LatLng(listRelais[key].coordonates.latitude,listRelais[key].coordonates.longitude);
-  //   service.getDistanceMatrix(
-  //   {
-  //     origins: [location],
-  //     destinations: [destination],
-  //     travelMode: google.maps.TravelMode.DRIVING,
-  //     unitSystem: google.maps.UnitSystem.METRIC,
-  //     avoidHighways: false,
-  //     avoidTolls: false
-  //   },
-  //   function(response,status){
-  //     if(response.rows[0].elements[0].distance.value<5000)
-  //     {
-  //       marker(listRelais,true);
-  //     }
+var distanceRelais=function(circle){
+   for( var i=0 ;i<listRelais.length;i++){
+       var bounds = circle.getBounds()
+        var inCircle = bounds.contains(listMarker[i].position);
+        if(inCircle)
+        {
+          var contentRender=render(i,true);
+          var infoWindow = new google.maps.InfoWindow();
+          google.maps.event.clearInstanceListeners(listMarker[i]);
+          google.maps.event.addListener(listMarker[i], 'click', function() {
+          infoWindow.setContent(contentRender);
+          infoWindow.open(map, marker);
+          attachSecretMessage(infoWindow);
 
-  //   });
-  // }
-  google.maps.Circle.prototype.contains = function(latLng) {
-    return this.getBounds().contains(latLng) && google.maps.geometry.spherical.computeDistanceBetween(this.getCenter(), latLng) <= this.getRadius();
+          });
+        }
+        else
+        {  
+          listMarker[i].setMap(null);   
+        }      
+    }
+
   }
-}
+
 }
