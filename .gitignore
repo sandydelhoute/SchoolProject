@@ -13,3 +13,4 @@
 var/
 app/config/parameters.yml.rej
 /web/bundles/*
+.sass-cache/*
