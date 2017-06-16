@@ -100,8 +100,10 @@ class PanierController extends Controller
 				
 			}
 			else
-			{
-				$session->set('panier',array($lineorder));
+			{	
+				$listOrderLine=array($lineorder);
+
+				$session->set('panier',$listOrderLine);
 			}
 
 
