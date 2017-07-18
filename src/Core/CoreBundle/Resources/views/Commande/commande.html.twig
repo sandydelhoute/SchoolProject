@@ -119,10 +119,10 @@
                         {{ form_errors(form.dateExpiration) }}
                         {{ form_widget(form.dateExpiration) }}
                   </div>
-                  
+
                   {#  div-bouton-validation #}
                     {{ form_end(form) }}
-                  
+
                 </div>
                 <!--PAYPAL-->
                 <div class="tab-pane fade" id="paypal">
@@ -132,8 +132,7 @@
                     Pour consulter les Conditions générales d'utilisation et les modalités d'annulation, <a href="#">cliquez ici</a>.
                   </div>
                   <div class="col-lg-12 paypal-bouton">
-                    <div id="bouton-paypal"></div>
-
+                    <div id="bouton-paypal-container"></div>
                   </div>
                 </div>
 
@@ -150,7 +149,7 @@
                   <div class="">
                     <br />
                     Solde avant commande : {{ app.user.cashBalance }}€ <br /> <br />
-                    Solde aprés commande : 4€
+                    Solde après commande : 4€
                   </div>
                   <div class="col-lg-12">
                     <button type="button" class="btn btn-green btn-perso" {% if app.user.cashBalance < total %} disabled {% endif %}>Continuer</button>
@@ -183,7 +182,7 @@
          Merci d'avoir commandé chez Meal & Box, nous vous souhaitons un bon appétit
          <div class="col-lg-12 paypal-bouton">
           <a href="{{ path('downloadorder',{id:orderclient.id}) }}"><button type="button" class="btn btn-green btn-fin-validation">Telecharger ma facture</button></a>
-        </div> 
+        </div>
       </div>
     </div>
   </div>
