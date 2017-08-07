@@ -31,35 +31,20 @@ class ProductController extends Controller
    return $this->render('CoreCoreBundle:Products:productslayout.html.twig',array('listAllergene'=>$listAllergene,'listCategorie'=>$listCategorie));
 
  }
- public function productsFilterAction($type,$allergene=null,$categorie,$priceMin,$priceMax,$offsetMin,$offsetMax)
+ public function productsFilterAction($allergene=null,$categorie,$priceMin,$priceMax,$offsetMin,$offsetMax)
  {
 
   $em = $this->getDoctrine()->getManager();
   $categorie=explode(",", $categorie);
   $allergene=explode(",", $allergene);
   $serializer = $this->get('jms_serializer');
-  if($type === 'product')
-  {
- 
-    $listProduct = $em->getRepository('CoreCoreBundle:Product')
-    ->filter($categorie,$allergene,$priceMin,$priceMax,$offsetMin,$offsetMax,$this->getUser()->getRelais());
-
-    $listProductSerialize=$serializer->serialize($listProduct,'json', SerializationContext::create()->setGroups(array('product')));
-    $response = new JsonResponse(
+  $listProduct = $em->getRepository('CoreCoreBundle:Product')->filter($categorie,$allergene,$priceMin,$priceMax,$offsetMin,$offsetMax,$this->getUser()->getRelais());
+  $listProductSerialize=$serializer->serialize($listProduct,'json', SerializationContext::create()->setGroups(array('product')));
+  $response = new JsonResponse(
       array('data'=>$listProductSerialize)
       );
-  }
-  else
-  {
-    $listMenu = $em->getRepository('CoreCoreBundle:Menu')
-    ->filter($categorie,$allergene,$priceMin,$priceMax,$offsetMin,$offsetMax,$this->getUser()->getRelais());
-    //, SerializationContext::create()->setGroups(array('menu'))
-    $listMenuSerialize=$serializer->serialize($listMenu,'json');
-    $response = new JsonResponse(
-      array('data'=>$listMenuSerialize)
-      );
-
-  }   
+  
+  
    return $response ;
  }
 

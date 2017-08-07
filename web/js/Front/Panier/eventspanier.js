@@ -32,15 +32,9 @@ function Panier(routeDelete,routeChangeQuantity,selector=null){
 	}
 	var deletePanier=function(){
 		$('.delete-product').click(function(){
-			var type = 'product';
 			var idDelete=$(this).data('product');
-			if(typeof idDelete == 'undefined')
-			{
-			 idDelete=$(this).data('menu');
-			 type='menu';
-			}
 			$(this).parents('.command-list-item').remove();
-			render(objAjax.callAjax(Routing.generate(_this.routeDelete,{id:idDelete,type:type})));
+			render(objAjax.callAjax(Routing.generate(_this.routeDelete,{id:idDelete})));
 		})
 	}
 	var changeQuantity=function(){

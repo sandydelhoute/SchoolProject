@@ -47,13 +47,6 @@ class Stock
 
 
     /**
-     * Many Features have One Product.
-     * @ORM\ManyToOne(targetEntity="Menu",inversedBy="stock")
-     * @ORM\JoinColumn(name="menu_id",referencedColumnName="id")
-     * @ORM\joinColumn(nullable=true)
-     */
-    private $menu;
-    /**
      * Get id
      *
      * @return int
@@ -135,27 +128,4 @@ class Stock
         return $this->relais;
     }
 
-    /**
-     * Set menu
-     *
-     * @param \Core\CoreBundle\Entity\Menu $menu
-     *
-     * @return Stock
-     */
-    public function setMenu(\Core\CoreBundle\Entity\Menu $menu = null)
-    {
-        $this->menu = $menu;
-
-        return $this;
-    }
-
-    /**
-     * Get menu
-     *
-     * @return \Core\CoreBundle\Entity\Menu
-     */
-    public function getMenu()
-    {
-        return $this->menu;
-    }
 }

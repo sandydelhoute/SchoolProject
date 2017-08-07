@@ -31,5 +31,20 @@ class RelaisController extends Controller
 			);
 		return $response ;
    }
+   public function selectrelaisAction($id){
+    $em = $this->getDoctrine()->getManager();
+    $relais = $em->getRepository('CoreCoreBundle:Relais')
+    ->findOneById($id);
+    if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+
+    return $this->redirectToRoute('homepage');
+    //return $this->redirectToRoute('blog_show', array('slug' => 'my-page'));
+    }
+    $this->getUser()->setRelais($relais);
+    $em->persist($this->getUser());
+    $em->flush();
+    $response = new JsonResponse(array('response'=>true,'relaisName'=>$relais->getName()));
+    return $response ;
+   }
 
 }

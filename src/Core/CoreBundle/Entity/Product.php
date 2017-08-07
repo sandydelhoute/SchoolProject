@@ -39,15 +39,12 @@ class Product
 
     /**
      * @Groups({"product"})
-     * @ORM\ManyToMany(targetEntity="Images", inversedBy="product")
+     * @ORM\ManyToMany(targetEntity="Images", inversedBy="product",cascade={"persist"})
      */
     private $images;
 
 
-    /**
-     * @ORM\ManyToMany(targetEntity="Menu", mappedBy="product")
-     */
-    private $menu;
+
 
     /**
      * @ORM\ManyToOne(targetEntity="Provider")
@@ -270,39 +267,7 @@ class Product
         return $this->allergenes;
     }
 
-    /**
-     * Add menu
-     *
-     * @param \Core\CoreBundle\Entity\Menu $menu
-     *
-     * @return Product
-     */
-    public function addMenu(\Core\CoreBundle\Entity\Menu $menu)
-    {
-        $this->menu[] = $menu;
-
-        return $this;
-    }
-
-    /**
-     * Remove menu
-     *
-     * @param \Core\CoreBundle\Entity\Menu $menu
-     */
-    public function removeMenu(\Core\CoreBundle\Entity\Menu $menu)
-    {
-        $this->menu->removeElement($menu);
-    }
-
-    /**
-     * Get menu
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getMenu()
-    {
-        return $this->menu;
-    }
+    
 
     /**
      * Add image

@@ -44,13 +44,6 @@ class OrderLine
     private $prix;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Menu")
-     * @ORM\JoinColumn(name="menu_id", referencedColumnName="id")
-     * @ORM\JoinColumn(nullable=true)
-     */
-    private $menu;
-
-    /**
      * @ORM\ManyToOne(targetEntity="Product")
      * @ORM\JoinColumn(name="product_id", referencedColumnName="id")
      * @ORM\JoinColumn(nullable=true)
@@ -113,30 +106,6 @@ class OrderLine
     public function getPrix()
     {
         return $this->prix;
-    }
-
-    /**
-     * Set menu
-     *
-     * @param \Core\CoreBundle\Entity\Menu $menu
-     *
-     * @return OrderLine
-     */
-    public function setMenu(\Core\CoreBundle\Entity\Menu $menu = null)
-    {
-        $this->menu = $menu;
-
-        return $this;
-    }
-
-    /**
-     * Get menu
-     *
-     * @return \Core\CoreBundle\Entity\Menu
-     */
-    public function getMenu()
-    {
-        return $this->menu;
     }
 
     /**

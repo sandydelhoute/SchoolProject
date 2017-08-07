@@ -31,6 +31,6 @@ $this->addReference('status', $status1);
 }
     public function getOrder()
     {
-        return 13;
+        return 12;
     }
 }

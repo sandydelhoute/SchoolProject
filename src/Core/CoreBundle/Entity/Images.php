@@ -28,14 +28,9 @@ class Images
      * @ORM\JoinTable(name="posts_image")
      */
     private $posts;
-    /**
-     * @ORM\ManyToMany(targetEntity="Menu", mappedBy="images")
-     * @ORM\JoinTable(name="menu_images")
-     */
-    private $menu;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Product", mappedBy="images")
+     * @ORM\ManyToMany(targetEntity="Product", mappedBy="images",cascade={"persist"})
      * @ORM\JoinTable(name="product_image")
      */
     private $product;
@@ -156,43 +151,6 @@ class Images
     public function __construct()
     {
         $this->posts = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->menu = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-
-
-    /**
-     * Add menu
-     *
-     * @param \Core\CoreBundle\Entity\Menu $menu
-     *
-     * @return Images
-     */
-    public function addMenu(\Core\CoreBundle\Entity\Menu $menu)
-    {
-        $this->menu[] = $menu;
-
-        return $this;
-    }
-
-    /**
-     * Remove menu
-     *
-     * @param \Core\CoreBundle\Entity\Menu $menu
-     */
-    public function removeMenu(\Core\CoreBundle\Entity\Menu $menu)
-    {
-        $this->menu->removeElement($menu);
-    }
-
-    /**
-     * Get menu
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getMenu()
-    {
-        return $this->menu;
     }
 
     /**

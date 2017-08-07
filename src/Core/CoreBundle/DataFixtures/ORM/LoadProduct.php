@@ -64,7 +64,7 @@ public Function load(ObjectManager $manager){
         $product->setComposition($description);
         $product->setDescription($description);
         $product->addAllergene($this->getReference($listAllergene[2]));
-        $product->addCategory($this->getReference('categorieProcduct'));
+        $product->addCategory($this->getReference('Plat'));
         $product->addImage($this->getReference('image'));
         $manager->persist($product);
 
@@ -76,7 +76,7 @@ public Function load(ObjectManager $manager){
         $product1->setComposition($description1);
         $product1->setDescription($description1);
         $product1->addAllergene($this->getReference($listAllergene[4]));
-        $product1->addCategory($this->getReference('categorieProcduct'));
+        $product1->addCategory($this->getReference('Plat'));
         $product1->addImage($this->getReference('image1'));
         $this->addReference('product1',$product1);
         $manager->persist($product1);
@@ -89,7 +89,7 @@ public Function load(ObjectManager $manager){
         $product2->setComposition($description2);
         $product2->setDescription($description2);
         $product2->addAllergene($this->getReference($listAllergene[0]));
-        $product2->addCategory($this->getReference('categorieProcduct'));
+        $product2->addCategory($this->getReference('Plat'));
         $product2->addImage($this->getReference('image2'));
         $this->addReference('product2',$product2);
         $manager->persist($product2);
@@ -102,7 +102,7 @@ public Function load(ObjectManager $manager){
         $product3->setComposition($description3);
         $product3->setDescription($description3);
         $product3->addAllergene($this->getReference($listAllergene[2]));
-        $product3->addCategory($this->getReference('categorieProcduct'));
+        $product3->addCategory($this->getReference('Dessert'));
         $product3->addImage($this->getReference('image3'));
         $this->addReference('product3',$product3);
         $manager->persist($product3);
@@ -115,7 +115,7 @@ public Function load(ObjectManager $manager){
         $product4->setComposition($description4);
         $product4->setDescription($description4);
         $product4->addAllergene($this->getReference($listAllergene[1]));
-        $product4->addCategory($this->getReference('categorieProcduct'));
+        $product4->addCategory($this->getReference('Entrée'));
         $product4->addImage($this->getReference('image4'));
         $this->addReference('product4',$product4);
         $manager->persist($product4);
@@ -128,7 +128,7 @@ public Function load(ObjectManager $manager){
         $product5->setComposition($description5);
         $product5->setDescription($description5);
         $product5->addAllergene($this->getReference($listAllergene[7]));
-        $product5->addCategory($this->getReference('categorieProcduct'));
+        $product5->addCategory($this->getReference('Plat'));
         $product5->addImage($this->getReference('image5'));
         $this->addReference('product5',$product5);
         $manager->persist($product5);
@@ -141,7 +141,7 @@ public Function load(ObjectManager $manager){
         $product6->setComposition($description6);
         $product6->setDescription($description6);
         $product6->addAllergene($this->getReference($listAllergene[2]));
-        $product6->addCategory($this->getReference('categorieProcduct'));
+        $product6->addCategory($this->getReference('Entrée'));
         $product6->addImage($this->getReference('image6'));
         $this->addReference('product6',$product6);
         $manager->persist($product6);
@@ -154,7 +154,7 @@ public Function load(ObjectManager $manager){
         $product7->setComposition($description7);
         $product7->setDescription($description7);
         $product7->addAllergene($this->getReference($listAllergene[0]));
-        $product7->addCategory($this->getReference('categorieProcduct'));
+        $product7->addCategory($this->getReference('Plat'));
         $product7->addImage($this->getReference('image7'));
         $this->addReference('product7',$product7);
         $manager->persist($product7);
@@ -167,7 +167,7 @@ public Function load(ObjectManager $manager){
         $product8->setComposition($description8);
         $product8->setDescription($description8);
         $product8->addAllergene($this->getReference($listAllergene[0]));
-        $product8->addCategory($this->getReference('categorieProcduct'));
+        $product8->addCategory($this->getReference('Plat'));
         $product8->addImage($this->getReference('image8'));
         $this->addReference('product8',$product8);
         $manager->persist($product8);
@@ -180,7 +180,7 @@ public Function load(ObjectManager $manager){
         $product9->setComposition($description9);
         $product9->setDescription($description9);
         $product9->addAllergene($this->getReference($listAllergene[10]));
-        $product9->addCategory($this->getReference('categorieProcduct'));
+        $product9->addCategory($this->getReference('Plat'));
         $product9->addImage($this->getReference('image9'));
         $manager->persist($product9);
 
@@ -193,9 +193,42 @@ public Function load(ObjectManager $manager){
         $product10->setComposition($description10);
         $product10->setDescription($description10);
         $product10->addAllergene($this->getReference($listAllergene[5]));
-        $product10->addCategory($this->getReference('categorieProcduct'));
+        $product10->addCategory($this->getReference('Plat'));
         $product10->addImage($this->getReference('image10'));
         $manager->persist($product10);
+
+
+
+        $product11=new Product();
+        $product11->setName("Grand cru");
+        $product11->setActive(True);
+        $product11->setPrix($prix+1);
+        $product11->setProvider($this->getReference('Provider'));
+        $product11->setComposition($description10);
+        $product11->setDescription($description10);
+        $product11->addAllergene($this->getReference($listAllergene[5]));
+        $product11->addCategory($this->getReference('Boisson'));
+        $product11->addImage($this->getReference('image13'));
+        $this->addReference('product11',$product11);
+        $manager->persist($product11);
+
+
+
+
+        $product12=new Product();
+        $product12->setName("Biere left");
+        $product12->setActive(True);
+        $product12->setPrix($prix+2);
+        $product12->setProvider($this->getReference('Provider'));
+        $product12->setComposition($description10);
+        $product12->setDescription($description10);
+        $product12->addAllergene($this->getReference($listAllergene[5]));
+        $product12->addCategory($this->getReference('Boisson'));
+        $product12->addImage($this->getReference('image14'));
+        $this->addReference('product12',$product12);
+        $manager->persist($product12);
+
+
         $manager->flush();
     }
 

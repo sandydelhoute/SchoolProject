@@ -10,4 +10,8 @@ namespace Vendor\ConnectUsersBundle\Repository;
  */
 class UsersWebRepository extends \Doctrine\ORM\EntityRepository
 {
+
+
+
+	
 }

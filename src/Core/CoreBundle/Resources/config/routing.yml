@@ -32,6 +32,11 @@ allrelais:
     defaults: { _controller: CoreCoreBundle:Relais:all}
     options:
             expose: true
+selectrelais:
+    path: /relais/select/{id}
+    defaults: { _controller: CoreCoreBundle:Relais:selectrelais}
+    options:
+            expose: true
 
 #contact
 contactpage:
@@ -46,20 +51,23 @@ downloadorder:
     path:     /commande/download/{id}
     defaults: { _controller: CoreCoreBundle:Commande:downloadResumeOrder }
 # panier
+
 panierpage:
     path:     /panier
     defaults: { _controller: CoreCoreBundle:Panier:panier }
+
 addproductpage:
-    path:     /produits/add/{id}/{quantity}/{type}
+    path:     /produits/add/{id}/{quantity}
     defaults: { _controller: CoreCoreBundle:Panier:addProducts }
     options:
         expose: true
+
 historyCommande:
     path:     /commande/historique/{id}
     defaults: { _controller: CoreCoreBundle:Commande:history }
 
 deleteproductpage:
-    path:     /produits/delete/{id}/{type}
+    path:     /produits/delete/{id}
     defaults: { _controller: CoreCoreBundle:Panier:deleteProducts }
     options:
         expose: true
@@ -88,7 +96,7 @@ menudetailpage:
 
 #filter
 productfilterpage:
-    path:     /produits/filter/{type}/{offsetMin}/{offsetMax}/{priceMin}/{priceMax}/{categorie}/{allergene}
+    path:     /produits/filter/{offsetMin}/{offsetMax}/{priceMin}/{priceMax}/{categorie}/{allergene}
     defaults: { _controller: CoreCoreBundle:Product:productsFilter,allergene:null}
     options:
         expose: true

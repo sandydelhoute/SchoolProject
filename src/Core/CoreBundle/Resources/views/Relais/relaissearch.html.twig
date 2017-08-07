@@ -5,24 +5,32 @@
 				</h1>
 		</div>
 	<div class="panel-body">
-	<div class="col-xs-12 col-md-6">
-	<label for="adress">Adresse</label>
-    <input id="adress" type="text" class="form-control" ></input> 
-    	<em>Saisissez un code postal, une ville et un pays.</em>
-    </div>     
-	<div class='col-xs-12 col-md-3 text-center'>
-	<button id="RechercheGEo" class="btn btn-green">
-		Rechercher
-	</button>
-	</div>
-	<div class="col-xs-12 col-md-3 text-center">
-		<button id="RechercheGeo" class="btn btn-green">
-			Utiliser ma position
+		<div class="col-xs-12 col-md-6">
+		<label for="adress">Adresse</label>
+	    <input id="adress" type="text" class="form-control" ></input> 
+	    	<em>Saisissez un code postal, une ville et un pays.</em>
+	    </div>     
+		<div class='col-xs-12 col-md-2 text-center'>
+		<button id="RechercheGEo" class="btn btn-green">
+			Rechercher
 		</button>
-	</div>
+		</div>
+		<div class="col-xs-12 col-md-2 text-center">
+			<button id="RechercheGeo" class="btn btn-green">
+				Utiliser ma position
+			</button>
+		</div>
 		<div id="GeoLoc" style="display:none">
-			<input class="GeoLocLatitude" id="GeoLocLatitude" name="Latitude" type="hidden" value="">
-			<input class="GeoLocLongitude" id="GeoLocLongitude" name="Longitude" type="hidden" value="">
-		</div>	
+				<input class="GeoLocLatitude" id="GeoLocLatitude" name="Latitude" type="hidden" value="">
+				<input class="GeoLocLongitude" id="GeoLocLongitude" name="Longitude" type="hidden" value="">
+			</div>
+			<div class="col-xs-12 col-md-2 text-center">
+				<button id="allMarker" class="btn btn-green">
+					Afficher tout
+				</button>
+			</div>	
 	</div>
 </div>
+ <div class="alert alert-success collapse" id="validateUpdateRelais">
+        Votre modification de point relais a été prise en compte .
+ </div>

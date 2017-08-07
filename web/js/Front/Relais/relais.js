@@ -1,13 +1,13 @@
 $(document).ready(function(){
-
-  var map=new Map();
+  var routeUpdateRelais="selectrelais";
+  var map=new Map(routeUpdateRelais);
   map.init();
 
 });
 
 
-
-var Map=function(){
+//icon_geoloc
+var Map=function(routeUpdateRelais){
 
   var i = 0;
   var map;
@@ -15,21 +15,26 @@ var Map=function(){
   var listMarker =[];
   var mapSelector=document.getElementById('mapRelais');
   var address=document.getElementById('adress');
-  var geocoder=new google.maps.Geocoder();
+  var geocoder;
   var objAjax=new CallAjax();
   var cityCircle;
+  var countRequest=0;
+  this.routeUpdateRelais=routeUpdateRelais;
+  var _that=this;
 
   this.init=function()
   {
     allRelais();
+    google.maps.event.addDomListener(window, 'load', init_map);
+    geocoder=new google.maps.Geocoder();
     geolocalisation();
     searchCP();
-    google.maps.event.addDomListener(window, 'load', init_map);
+    showAll();
   }
   var init_map=function() {
     map = new google.maps.Map(mapSelector, {
-      zoom:6,
-      center: new google.maps.LatLng(46.8782397,3.7608114),
+      zoom:5,
+      center: new google.maps.LatLng(46.9199018,3.2377911),
       mapTypeId: google.maps.MapTypeId.ROADMAP
     });
     markerShow(map,true);
@@ -42,9 +47,10 @@ var Map=function(){
       listRelais=JSON.parse(data);
       for(var key in listRelais)
       {
-        marker = new google.maps.Marker({
+          marker = new google.maps.Marker({
           position: new google.maps.LatLng(listRelais[key].coordonates.latitude,listRelais[key].coordonates.longitude),
-          animation: google.maps.Animation.DROP
+          animation: google.maps.Animation.DROP,
+          icon : "/img/logo/icon_geoloc.png"
         });
         listMarker.push(marker);
       }
@@ -52,8 +58,15 @@ var Map=function(){
   }
 
   var searchCP=function(){
-    markerShow(null);
+
     $('#RechercheGEo').on('click',function(){
+        console.log(countRequest);
+
+      if(countRequest>=1)
+      {
+        console.log("je suis dans le if cunt");
+        markerShow(map,true);
+      }
       if(typeof cityCircle != 'undefined')
       {
         cityCircle.setMap(null);
@@ -69,8 +82,10 @@ var Map=function(){
           map.setZoom(11);
           var circlecity = circle();
           distanceRelais(circlecity);
+          countRequest += 1;
         }
       });
+
     });
   }
   var render=function(index,boolSearch){
@@ -99,15 +114,10 @@ var Map=function(){
       buttonSelect.dataset.relais = listRelais[index].id;
       var iconSelect = document.createElement('i');
       iconSelect.className = 'fa fa-check';
-      var buttonCancel = document.createElement('button');
-      buttonCancel.className = 'btn btn-danger';
-      var iconCancel = document.createElement('i');
-      iconCancel.className = 'fa fa-ban' ;
+  
 
       buttonSelect.appendChild(iconSelect);
-      buttonCancel.appendChild(iconCancel);
       groupButton.appendChild(buttonSelect);
-      groupButton.appendChild(buttonCancel);
       columnText.appendChild(containText);
       columnButton.appendChild(groupButton);
       panelBody.appendChild(columnText);
@@ -136,7 +146,20 @@ var Map=function(){
   var attachSecretMessage=function(infowindow) {
     google.maps.event.addListener(infowindow, 'domready', function() {
 
+    $('.selectRelais').click(function() {
+      var idRelais=this.getAttribute('data-relais');
+      var route = Routing.generate(_that.routeUpdateRelais,{ id : idRelais });
+      var objAjax=new CallAjax();
+      var data=objAjax.callAjax(route);
+      data.done(function(data){
+        if(data.response)
+        {
+          $('#header a .containertext').text(data.relaisName);
+          $('#validateUpdateRelais').addClass("in");
+        }
+      });
 
+    });
     // Reference to the DIV that wraps the bottom of infowindow
     var iwOuter = $('.gm-style-iw');
 
@@ -208,13 +231,6 @@ var Map=function(){
     }
   }
 
-  var clearMarkers = function()
-  {
-    for (var i = 0; i < listMarker.length; i++) {
-      listMarker[i].setMap(null);
-    }
-  }
-
   var circle=function(){
    cityCircle =new google.maps.Circle({
     strokeColor: '#02b253',
@@ -240,7 +256,13 @@ var Map=function(){
         };
         map.setCenter(pos);
         map.setZoom(13);
-        circle();
+        if(typeof cityCircle != 'undefined')
+        {
+          cityCircle.setMap(null);
+        }
+        cityCircle = circle();
+        distanceRelais(cityCircle);
+
       }, function() {
         handleLocationError(true, infoWindow, map.getCenter());
       });
@@ -280,6 +302,17 @@ var distanceRelais=function(circle){
           listMarker[i].setMap(null);   
         }      
     }
+  }
+  var showAll = function(){
+    $('#allMarker').click(function(){
+        if(typeof cityCircle != 'undefined')
+        {
+          cityCircle.setMap(null);
+        }
+      markerShow(map);
+      map.setCenter(new google.maps.LatLng(46.9199018,3.2377911));
+      map.setZoom(5);
+    });
 
   }
 

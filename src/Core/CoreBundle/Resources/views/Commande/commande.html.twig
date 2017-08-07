@@ -1,14 +1,17 @@
 {% set total = 0%}
 {% if listOrderLine is not null %}
-{% for orderLine in listOrderLine %}
-  {% if orderLine.product is not null %}
-  {% set total = total + (orderLine.quantity * orderLine.product.prix) %}
+  {% for orderLine in listOrderLine %}
+    {% if orderLine.product is not null %}
+      {% set total = total + (orderLine.quantity * orderLine.product.prix) %}
+      {% else %}
+        {% set total = total + (orderLine.quantity * orderLine.menu.prix) %}
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+    <div {% if totalCommande == 0 %}
+    class="col-xs-12 col-md-8"
   {% else %}
-  {% set total = total + (orderLine.quantity * orderLine.menu.prix) %}
-  {% endif %}
-{% endfor %}
-{% endif %}
-  <div {% if totalCommande == 0 %}class="col-xs-12 col-md-8"{% else %}class="col-xs-12"{% endif %}>
+    class="col-xs-12"{% endif %}>
     <div class="panel-group" id="tunnel">
       <div class="panel panel-default">
         <a data-toggle="collapse" data-parent="#tunnel" href="#livraison">
@@ -21,14 +24,34 @@
             </h4>
           </div>
         </a>
-        <div id="livraison" class="panel-collapse collapse">
+        <div id="livraison" class="panel-collapse collapse in">
           <div class="panel-body">
             <div class="col-xs-12 col-md-6">
               <div class="bold">
                 Adresse de livraison
               </div>
               {{ app.user.relais.coordonates.address }}
-              <a href="{{ path('relaispage') }}">Modifier</a>
+            </br>
+            <a href="#selectRelais" data-toggle="collapse">Modifier</a>
+            <div id="selectRelais" class="form-group collapse">
+              <div class="alert alert-success">
+                Adresse de facturation prise en compte
+              </div>
+              <div class="alert alert-danger">
+                Erreur de traitement; impossible de prendre en compte
+              </div>
+                              <label for="sel1">Relais:</label>
+
+              <div class="form-group">
+                <select class="form-control" style="width:auto;float:left;" id="sel1">
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                </select>
+                <button class="btn btn-green" >Ok</button>
+                </div>
+              </div>
             </div>
             <div class="col-xs-12 col-md-6">
               <div class="bold">
@@ -39,20 +62,35 @@
               {% else %}
                 Aucune adresse de facturation renseigné
               {% endif %}
-              <a href="#">Modifier</a>
-            </div>
-            <div class="col-xs-12 commanderetrait">
-              <div class="bold">
-                Heure de retrait de commande
+              <a href="#Adressmodifer" data-toggle="collapse">Modifier</a>
+              <div id="Adressmodifer" class="form-group collapse">
+                <div class="alert alert-success">
+                  <strong>Success!</strong>Adresse de facturation prise en compte
+                </div>
+                <div class="alert alert-danger">
+                  <strong>Warning!</strong>Erreur de traitement; impossible de prendre en compte
+                </div>
+                <label for="validate-optional">Adresse</label>
+                <div class="input-group">  
+                  <input type="text" class="form-control" id="inputAdressmodifer" name="inputAdressmodifer"/>
+                  <span class="input-group-addon danger">
+                    OK</span>
+
+                  </div>
+                </div>
               </div>
-              {{ app.user.relais.opening.timedelivry|date("H:i") }}
-              <br /><br />
+              <div class="col-xs-12 commanderetrait">
+                <div class="bold">
+                  Heure de retrait de commande
+                </div>
+                {{ app.user.relais.opening.timedelivry|date("H:i") }}
+                <br /><br />
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <div class="panel panel-default">
+        <div class="panel panel-default">
         <a data-toggle="collapse" data-parent="#tunnel" href="#paiement">
           <div class="panel-heading">
             <h4 class="panel-title">
@@ -187,8 +225,7 @@
     </div>
   </div>
   {% endif %}
+    </div>
 
-</div>
 
-
-</div>
+  </div>

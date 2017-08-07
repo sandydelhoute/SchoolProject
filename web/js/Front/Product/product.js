@@ -2,7 +2,7 @@ $(document).ready(function(){
 	var selector=document.getElementById("listProduct");
 	var routeFilter='productfilterpage';
 	var routeAddPanier='addproductpage';
-	var render=function(data,type){
+	var render=function(data){
         var loading=document.getElementById("loading");
         var stopAjax = false;
         var html=function(obj){
@@ -122,7 +122,6 @@ $(document).ready(function(){
             divProduit.appendChild(htmlStock(obj));
             container.appendChild(divProduit);
             selector.appendChild(container);
-            console.log(type);
         }
 
 
@@ -142,6 +141,6 @@ $(document).ready(function(){
         });
     return stopAjax;
 	}
-	var objFilter = new Filter(routeFilter,routeAddPanier,selector,render,4);
+	var objFilter = new Filter(routeFilter,routeAddPanier,selector,render,100);
 	objFilter.init();
 });

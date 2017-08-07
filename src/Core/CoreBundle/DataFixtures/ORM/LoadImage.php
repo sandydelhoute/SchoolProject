@@ -91,9 +91,18 @@ $image12=new Images();
 $image12->setPath("/img/fixtures/desserts/fondant-chocolat.jpg");
 $image12->setAlt('Fondant au chocolat');
 $this->addReference('image12',$image);
-$manager->persist($image);
 
-$manager->flush();
+
+$image13=new Images();
+$image13->setPath("/img/fixtures/boisson/image.jpg");
+$image13->setAlt('Grand cru');
+$this->addReference('image13',$image);
+
+$image14=new Images();
+$image14->setPath("/img/fixtures/boisson/image1.jpg");
+$image14->setAlt('left');
+$this->addReference('image14',$image);
+
 }
     public function getOrder()
     {

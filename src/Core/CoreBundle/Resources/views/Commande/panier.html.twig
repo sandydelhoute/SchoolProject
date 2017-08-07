@@ -8,10 +8,8 @@
       <div class="panel-body">
         <div class="command-list">
           <!-- PRODUIT -->        
-            {% set total = 0 %}
             {% if listOrderLine|length > 0 %}
                 {% for orderline in listOrderLine %}
-                    {% set total = total + (orderline.quantity * orderline.prix) %}
                     <div class="command-list-item">
                         <div class="command-list-item-desc col-lg-9 col-md-9">
                             <figure class="command-list-item col-lg-3 col-md-3 col-sm-6">
@@ -23,56 +21,28 @@
                                 {% endif %} 
                                 {% set count = 1 %}
                               {% endfor %}
-                            {% else %}
-                               {% for image in orderline.menu.images %}
-                                  {% if count == 0 %}
-                                    <img src="{{ asset(image.path) }}" alt="{{ image.alt }}" class="img-responsive">
-                                  {% endif %} 
-                                {% set count = 1 %}
-                                {% endfor %}
                             {% endif %}
                             </figure>
                             <div class="panel panel-default col-lg-9 col-md-9 col-sm-6">
                                 <div class="panel-heading">
-                                    {% if orderline.product is not null  %}
-                                      <h3 class="panel-title">{{ orderline.product.name }}</h3>
-                                    {% else %}
-                                      <h3 class="panel-title">{{ orderline.menu.name }}</h3>
-                                    {% endif %}
+                                      <h3 class="panel-title">{{ orderline.product.name }}</h3>    
                                 </div>
                                 <div class="panel-body">
-                                      {% if orderline.product is not null  %}
                                         {{ orderline.product.description }}
-                                      {% else %}
-                                        {{ orderline.menu.description }}
-                                      {% endif %}
                                 </div>
                             </div>
                         </div>
                         <div class="command-list-item-price col-lg-3 col-md-3 col-sm-12 col-xs-12">
                             <div class="item-price-col col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                 <p class="product-price">
-                                  {% if orderline.product is not null  %}
                                     {% set prix = orderline.product.prix|split('.') %}
-                                      {{ prix[0] }}€{{ prix[1] }}
-                                  {% else %}
-                                      {% set prix = orderline.menu.prix|split('.') %}
-                                      {{ prix[0] }}€{{ prix[1] }}
-                                  {% endif %}                                  
+                                      {{ prix[0] }}€{{ prix[1] }}               
                                 </p>
                             </div>
                             <div class="item-price-col col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                {% if orderline.product is not null  %}
-                                <input type="number"  class="form-control quantity" value="{{ orderline.quantity }}" min="1"  step="1" required="required" data-product="{{ orderline.product.id }}">
-                                {% else %}
-                                  <input type="number"  class="form-control quantity" value="{{ orderline.quantity }}" min="1"  step="1" required="required" data-product="{{ orderline.menu.id }}">
-                                {% endif %}
+                                <input type="number"  class="form-control quantity" value="{{ orderline.quantity }}" min="1"  step="1" required="required" data-product="{{ orderline.product.id }}">     
                             </div>
-                            {% if orderline.product is not null  %}
                               <div data-product="{{ orderline.product.id }}" class="item-price-col delete-product col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                            {% else %}
-                            <div data-menu="{{ orderline.menu.id }}" class="item-price-col delete-product col-lg-4 col-md-4 col-sm-4 col-xs-4">  
-                            {% endif %}
                                    <i class="fa fa-trash"></i>
                             </div>
                         </div>
