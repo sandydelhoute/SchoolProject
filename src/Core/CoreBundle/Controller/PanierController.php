@@ -34,17 +34,30 @@ class PanierController extends Controller
 
 		public function addProductsAction($id,$quantity,Request $request)
 		{
+			    
+			 if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+        		throw $this->createAccessDeniedException();
+    		}
+    		$newStock;
 			$session = $request->getSession();
 			$serializer=$this->get('serializer');
-			$em = $this->getDoctrine()->getManager();
-			$relaisId=$this->getUser()->getRelais()->getId();
-
+			$em = $this->getDoctrine()->getManager();	
 			$lineorder=new OrderLine();
 			$lineorder->setQuantity($quantity);
 			$product= $em->getRepository('CoreCoreBundle:Product')->findOneById($id);
 			$lineorder->setProduct($product);
 			$lineorder->setPrix($product->getPrix());
-			
+			$listStock=$this->getUser()->getRelais()->getStock();
+			foreach ($listStock as $key => $stockliner) {
+				if($stockliner->getProduct()->getId() == $product->getId())
+				{
+					$newStock =$stockliner->setQuantity($stockliner->getQuantity()-$quantity);
+					$em->persist($newStock);
+
+				}
+
+			}
+			$em->flush();			
 			$listOrderLine=$session->get('panier');
 			if($listOrderLine != null)
 			{ 
@@ -83,31 +96,40 @@ class PanierController extends Controller
 			}
 
 
-			$response = new JsonResponse(array('response'=>true,'paniercount'=>count($listOrderLine))
+			$response = new JsonResponse(array('response'=>true,'paniercount'=>count($listOrderLine),'stock'=>$newStock->getQuantity())
 				);
 			return $response ;
 
 		}
 		public function deleteProductsAction($id,Request $request){
 			$session = $request->getSession();
+			$quantity=0;
 			$em = $this->getDoctrine()->getManager();
 			$product= $em->getRepository('CoreCoreBundle:Product')->findOneById($id);
 			$listOrderLine=$session->get('panier');
-			foreach ($listOrderLine as $key => $value) {
-				
-					
-						if($value->getProduct()->getId() == $product->getId())
-						{
-							unset($listOrderLine[$key]);
-						}
+			foreach ($listOrderLine as $key => $value)
+			{	
+					if($value->getProduct()->getId() == $product->getId())
+					{
+						$quantity=$value->getQuantity();
+						unset($listOrderLine[$key]);
+						$session->set('panier',$listOrderLine);
+						break;
+					}
 
 				}
-			
+				$listStock=$this->getUser()->getRelais()->getStock();
+				foreach ($listStock as $key => $stockliner) {
+					if($stockliner->getProduct()->getId() == $product->getId())
+					{
+						$newStock =$stockliner->setQuantity($stockliner->getQuantity()+$quantity);
+						$em->persist($newStock);
+						$em->flush();
+					}
+
+				}
 			$total=$this->container->get('panier')->total($listOrderLine);
-
-
 			$ptsfidelite=round($total/10, 2);
-			$session->set('panier',$listOrderLine);
 			$response = new JsonResponse(
 				array('total'=>$total,'ptsfidelite'=>$ptsfidelite,'panniercount'=>count($listOrderLine))
 				);
@@ -119,15 +141,36 @@ class PanierController extends Controller
 			$em = $this->getDoctrine()->getManager();
 			$product= $em->getRepository('CoreCoreBundle:Product')->findOneById($id);
 			$listOrderLine=$session->get('panier');
-			$total=0;
+			$quantityBefore= 0 ;
 			foreach ($listOrderLine as $key => $value) {
 				if($value->getProduct()->getId() == $product->getId())
 				{
+					$quantityBefore=$value->getQuantity();
 					$value->setQuantity($quantity);
 				}
-			
-					$total += $value->getQuantity()*$value->getProduct()->getPrix();
 			}
+			$listStock=$this->getUser()->getRelais()->getStock();
+			foreach ($listStock as $key => $stockliner) {
+				if($stockliner->getProduct()->getId() == $product->getId())
+				{
+					if($quantityBefore<$quantity)
+					{
+						$currentQuantity=$quantity-$quantityBefore;
+						$newStock =$stockliner->setQuantity($stockliner->getQuantity()-$currentQuantity);
+					}
+					else
+					{
+						$currentQuantity=$quantityBefore-$quantity;
+						$newStock =$stockliner->setQuantity($stockliner->getQuantity()+$currentQuantity);
+					}
+
+					$em->persist($newStock);
+					$em->flush();
+					break;
+				}
+
+			}
+			$total=$this->container->get('panier')->total($listOrderLine);
 			$ptsfidelite=round($total/10, 2);
 			$session->set('panier',$listOrderLine);
 			$response = new JsonResponse(

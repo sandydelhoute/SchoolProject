@@ -104,6 +104,7 @@ $(document).ready(function(){
                 var column = document.createElement('div');
                 column.className = 'col-xs-12 text-center';
                 var label = document.createElement('label');
+                label.className='stock';
                 label.appendChild(document.createTextNode('stock:'+obj.stock[0].quantity));
                 column.appendChild(label);
                 return column; 
@@ -130,9 +131,9 @@ $(document).ready(function(){
                 $.each($.parseJSON(data.data), function(key,obj){
                     html(obj);
                 });
-                setTimeout(function(){
+              
                     selector.removeChild(document.getElementById("loading"));
-                },1000);
+                
             }
             else
             {

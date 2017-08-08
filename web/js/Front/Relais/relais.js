@@ -9,7 +9,6 @@ $(document).ready(function(){
 //icon_geoloc
 var Map=function(routeUpdateRelais){
 
-  var i = 0;
   var map;
   var listRelais;
   var listMarker =[];

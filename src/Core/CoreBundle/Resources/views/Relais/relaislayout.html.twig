@@ -9,9 +9,10 @@
 	{{ parent() }}
  {#<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAE6dCPBTnGEsKzpyim81lzA7cYanfqP8U" charset="utf-8"></script>#}
  <script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyAE6dCPBTnGEsKzpyim81lzA7cYanfqP8U"
- async ></script> 
+  ></script> 
+  <script defer type="text/javascript" src="{{ asset('js/Default/ajax.js') }}"></script>
+
  <script defer src="{{ asset('js/Front/Relais/relais.js') }}"></script>
- <script defer type="text/javascript" src="{{ asset('js/Default/ajax.js') }}"></script>
  {% endblock javascripts%}
  {% block body %}
 

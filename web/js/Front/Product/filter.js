@@ -113,12 +113,17 @@ var resetfilter=function(){
 
 var addPanier=function(){
   $('#listProduct').on('click','.addpanier',function(e){
+    var produitadd=$(this);
     objAjax.selector=null;
       var idProduct=$(this).data('product');
       var quantity=$(this).parents('.produits').find('.quantity').val();
       var data=objAjax.callAjax(Routing.generate(_this.routeAddPanier,{id:idProduct,quantity:quantity}));
         data.done(function(data){
                 $('#countpanier').text(data.paniercount);
+                if(data.stock>1)
+                $(produitadd).parents('.produits').find('.stock').text("stock:"+data.stock);
+                else
+                   $(produitadd).parents('.produits').parent().hide();
         });
   })
 }
