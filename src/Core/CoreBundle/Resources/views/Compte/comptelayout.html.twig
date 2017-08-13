@@ -27,9 +27,11 @@
     {% block compte %}
         {% include 'CoreCoreBundle:Compte:compte.html.twig' %}
     {% endblock compte %}
-    {% block history %}
-        {% include 'CoreCoreBundle:Commande:historycommande.html.twig' %}
-    {% endblock history %}
+    {% if listOrder |length > 0 %}
+        {% block history %}
+            {% include 'CoreCoreBundle:Commande:historycommande.html.twig' %}
+        {% endblock history %}
+    {% endif %}
     </div>
     <div class="container-fluid">
       	{% block footer %}

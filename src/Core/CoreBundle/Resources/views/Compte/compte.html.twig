@@ -18,9 +18,24 @@
 							</div>
 							<div class="margin-information">
 								{{ app.user.firstname }}
-								<a href="#"  class="bouton-modifié-moncompte">Modifier</a>
+								<br>
+								<a href="#prenomModfier"  data-toggle="collapse" class="bouton-modifié-moncompte">Modifier</a>
 							</div>
+							<div id="prenomModfier" class="form-group collapse" aria-expanded="true">
+								<div class="alert alert-success hide">
+									votre Prénom a été prise en compte
+								</div>
+								<div class="alert alert-danger hide">
+									Erreur de traitement; impossible de prendre en compte votre demande
+								</div>
+								<label for="validate-optional">Prénom</label>
+								<div class="input-group">  
+									<input type="text" class="form-control" id="inputAdressmodifer" name="inputAdressmodifer" placeholder="Prénom" autocomplete="off">
+									<span class="input-group-addon danger background-green color-white">
+										OK</span>
 
+								</div>
+							</div>
 						</div>
 						<div class="">
 							<div class="bold">
@@ -28,26 +43,51 @@
 							</div>
 							<div class="margin-information">
 								{{ app.user.name }}
-								<a href="#" class="bouton-modifié-moncompte">Modifier</a>
+								<br>
+								<a href="#nomModifier" class="bouton-modifié-moncompte" data-toggle="collapse">Modifier</a>
 							</div>
-
+							<div id="nomModifier" class="form-group collapse" aria-expanded="true">
+								<div class="alert alert-success hide">
+									votre Nom a été prise en compte
+								</div>
+								<div class="alert alert-danger hide">
+									Erreur de traitement; impossible de prendre en compte votre demande
+								</div>
+								<label for="validate-optional">Nom</label>
+								<div class="input-group">  
+									<input type="text" class="form-control" id="inputAdressmodifer" name="inputAdressmodifer" placeholder="Nom" autocomplete="off">
+									<span class="input-group-addon danger background-green color-white">
+										OK</span>
+								</div>
+							</div>
 						</div>
 						<div class="">
 							<div class="bold">
 								Addrese de facturation
 							</div>
 							<div class="margin-information">
-								GROSBILL Lille<br>
-								Avenue Clément Alder<br>
-								59118 Wambrechies<br>
-								<div id="locationField">
-								</div>
-								<a href="#" class="bouton-modifié-moncompte">Modifier</a>
+								{{ app.user.address.address }}
+								<br>
+								<a href="#Adressmodifer" class="bouton-modifié-moncompte"
+									data-toggle="collapse">Modifier</a>
 							</div>
+							<div id="Adressmodifer" class="form-group collapse" aria-expanded="true">
+								<div class="alert alert-success hide">
+									votre Adresse de facturation a été prise en compte
+								</div>
+								<div class="alert alert-danger hide">
+									Erreur de traitement; impossible de prendre en compte votre demande
+								</div>
+								<label for="validate-optional">Adresse</label>
+								<div class="input-group">  
+									<input type="text" class="form-control" id="inputAdressmodifer" name="inputAdressmodifer" placeholder="Indiquez un lieu" autocomplete="off">
+									<span class="input-group-addon danger background-green color-white">
+										OK</span>
 
+									</div>
+							</div>
 						</div>
 					</div>
-
 					<div class="col-lg-6 col-xs-12">
 						<div class="">
 							<div class="bold">
@@ -55,8 +95,24 @@
 							</div>
 							<div class="margin-information">
 								{{ app.user.email }}
-								<a href="#" class="bouton-modifié-moncompte">Modifier</a>
+								<br>
+								<a href="#emailModifier" class="bouton-modifié-moncompte" data-toggle="collapse">Modifier</a>
 							</div>
+									<div id="emailModifier" class="form-group collapse" aria-expanded="true">
+										<div class="alert alert-success hide">
+											votre Email a été prise en compte
+										</div>
+										<div class="alert alert-danger hide">
+											Erreur de traitement; impossible de prendre en compte votre demande
+										</div>
+										<label for="validate-optional">E-mail</label>
+										<div class="input-group">  
+											<input type="text" class="form-control" id="inputAdressmodifer" name="inputAdressmodifer" placeholder="Email" autocomplete="off">
+											<span class="input-group-addon danger background-green color-white">
+											OK</span>
+
+										</div>
+									</div>
 						</div>
 						<div class="">
 							<div class="bold">
@@ -64,156 +120,167 @@
 							</div>
 							<div class="margin-information">
 								************
-								<a href="#" class="bouton-modifié-moncompte">Modifier</a>
+								<br>
+							<a href="#passwordModifer" data-toggle="collapse" class="bouton-modifié-moncompte">Modifier</a>
 							</div>
-							<div class="bold">
-								Votre solde
-							</div>
-							<div class="margin-information">
-								{{ app.user.cashBalance }}
-							</div>
-
-
+							<div id="passwordModifer" class="form-group collapse" aria-expanded="true">
+								<div class="alert alert-success hide">
+									votre mot de passe a été prise en compte
+								</div>
+								<div class="alert alert-danger hide">
+									Erreur de traitement; impossible de prendre en compte votre demande
+								</div>
+								<label for="validate-optional">Mot de passe</label>
+									<div class="input-group">  
+										<input type="text" class="form-control" id="inputAdressmodifer" name="inputAdressmodifer" placeholder="*********" autocomplete="off">
+										<span class="input-group-addon danger background-green color-white">
+										OK</span>
+									</div>
+								</div>
+						</div>
+						<div class="bold">
+							Votre solde
+						</div>
+						<div class="margin-information">
+							{{ app.user.cashBalance }}
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-
-		<div class="panel panel-default">
-			<a data-toggle="collapse" href="#solde-compte">
-				<div class="panel-heading">
-					<h4 class="panel-title">
-						<div class="etapes">
-							Ajouter au solde
-							<i class="fa fa-angle-down arrow" aria-hidden="true"></i>
-						</div>
-					</h4>
-				</div>
-			</a>
-			<div id="solde-compte" class="panel-collapse collapse">
-				<div class="panel-body">
-
-					<div class="panel with-nav-tabs panel-default">
-						<div class="panel-heading">
-							<ul class="nav nav-tabs">
-								<li class="active col-lg-4 col-xs-12 tab">
-									<a href="#cartecb" data-toggle="tab">
-										<img src="{{ asset('img/tunnelCommande/cartecb.png') }}" alt="">
-									</a>
-								</li>
-								<li class="col-lg-4 col-xs-12 tab">
-									<a href="#paypal" data-toggle="tab">
-										<img src="{{ asset('img/tunnelCommande/paypal.png') }}" alt="">
-									</a>
-								</li>
-								<li class="col-lg-4 col-xs-12 tab">
-									<a href="#applepay" data-toggle="tab">
-										<img src="
-										{{ asset ('img/tunnelCommande/applepay.png') }}" alt="">
-									</a>
-								</li>
-							</ul>
-						</div>
-						<div class="panel-body">
-							<div class="tab-content">
-								<div class="tab-pane fade in active" id="cartecb">
-									<div class="bold col-lg-6 margin-cb">
-										Nom du titulaire de la carte
-										<input type="nomcb" class="form-control paiement" id="nomcb" placeholder="Nom Prénom">
-									</div>
-									<div class="bold col-lg-6 margin-cb ">
-										Numéro Carte
-										<input type="numerocb" class="form-control paiement" id="numerocb" placeholder="Numéro de la carte">
-									</div>
-									<div class="clear-both"></div>
-									<div class="bold">
-										<div class="col-lg-12">
-											Date d'expiration
-										</div>
-										<div class="col-lg-6 moiscb">
-											<select class="form-control">
-												<option>Mois</option>
-												<option>1</option>
-												<option>2</option>
-												<option>3</option>
-												<option>4</option>
-												<option>5</option>
-												<option>6</option>
-												<option>7</option>
-												<option>8</option>
-												<option>9</option>
-												<option>10</option>
-												<option>11</option>
-												<option>12</option>
-											</select>
-										</div>
-										<div class="col-lg-6 moiscb">
-											<select class="form-control">
-												<option>Année</option>
-												<option>2017</option>
-												<option>2018</option>
-												<option>2019</option>
-												<option>2020</option>
-												<option>2021</option>
-												<option>2022</option>
-											</select>
-										</div>
-									</div>
-									<div class="clear-both"></div>
-									<div class="bold col-lg-6">
-										Code de Sécurité
-										<input type="cryptogramme" class="form-control paiement" id="cryptogramme" placeholder="">
-									</div>
-									<div class="bold col-lg-3">
-										Solde a créditer
-										<input type="number" step="1" value="0" min="0" max="50"  class="form-control paiement">
-									</div>
-
-									<div class="col-lg-3 div-bouton-validation">
-										<button type="button" class="btn btn-green bouton-paiement">Valider</button>
-									</div>
-
-
-
+	</div>
+	<div class="panel panel-default">
+		<a data-toggle="collapse" href="#solde-compte">
+			<div class="panel-heading">
+				<h4 class="panel-title">
+					<div class="etapes">
+						Ajouter au solde
+						<i class="fa fa-angle-down arrow" aria-hidden="true"></i>
+					</div>
+				</h4>
+			</div>
+		</a>
+		<div id="solde-compte" class="panel-collapse collapse">
+			<div class="panel-body">
+				<div class="panel with-nav-tabs panel-default">
+					<div class="panel-heading">
+						<ul class="nav nav-tabs">
+							<li class="active col-lg-4 col-xs-12 tab">
+								<a href="#cartecb" data-toggle="tab">
+									<img src="{{ asset('img/tunnelCommande/cartecb.png') }}" alt="">
+								</a>
+							</li>
+							<li class="col-lg-4 col-xs-12 tab">
+								<a href="#paypal" data-toggle="tab">
+									<img src="{{ asset('img/tunnelCommande/paypal.png') }}" alt="">
+								</a>
+							</li>
+							<li class="col-lg-4 col-xs-12 tab">
+								<a href="#applepay" data-toggle="tab">
+									<img src="
+									{{ asset ('img/tunnelCommande/applepay.png') }}" alt="">
+								</a>
+							</li>
+						</ul>
+					</div>
+					<div class="panel-body">
+						<div class="tab-content">
+							<div class="tab-pane fade in active" id="cartecb">
+								<div class="bold col-lg-6 margin-cb">
+									Nom du titulaire de la carte
+									<input type="nomcb" class="form-control paiement" id="nomcb" placeholder="Nom Prénom">
 								</div>
-								<!--PAYPAL-->
-								<div class="tab-pane fade" id="paypal">
-									<div class="">
-										Vous autorisez Meal and Box à vous débiter automatiquement lors de votre commande. <br />
-										Cliquez sur le bouton ci-dessous pour vous connecter et payer avec votre compte Paypal. <br />
-										Pour consulter les Conditions générales d'utilisation et les modalités d'annulation, <a href="#">cliquez ici</a>.
+								<div class="bold col-lg-6 margin-cb ">
+									Numéro Carte
+									<input type="numerocb" class="form-control paiement" id="numerocb" placeholder="Numéro de la carte">
+								</div>
+								<div class="clear-both"></div>
+								<div class="bold">
+									<div class="col-lg-12">
+										Date d'expiration
 									</div>
-
-									<div class="bold col-lg-4 padding-top-credit">
-										Solde a créditer
-										<input type="number" step="1" value="0" min="0" max="50"  class="form-control paiement">
+									<div class="col-lg-6 moiscb">
+										<select class="form-control">
+											<option>Mois</option>
+											<option>1</option>
+											<option>2</option>
+											<option>3</option>
+											<option>4</option>
+											<option>5</option>
+											<option>6</option>
+											<option>7</option>
+											<option>8</option>
+											<option>9</option>
+											<option>10</option>
+											<option>11</option>
+											<option>12</option>
+										</select>
 									</div>
-									<div class="col-lg-8 paypal-bouton padding-top-credit">
-										<button type="button" class="btn btn-green bouton-paypal">Continuer</button>
+									<div class="col-lg-6 moiscb">
+										<select class="form-control">
+											<option>Année</option>
+											<option>2017</option>
+											<option>2018</option>
+											<option>2019</option>
+											<option>2020</option>
+											<option>2021</option>
+											<option>2022</option>
+										</select>
 									</div>
 								</div>
+								<div class="clear-both"></div>
+								<div class="bold col-lg-6">
+									Code de Sécurité
+									<input type="cryptogramme" class="form-control paiement" id="cryptogramme" placeholder="">
+								</div>
+								<div class="bold col-lg-3">
+									Solde a créditer
+									<input type="number" step="1" value="0" min="0" max="50"  class="form-control paiement">
+								</div>
 
-								<!--ApplePay-->
-								<div class="tab-pane fade" id="applepay">
-									<div class="">
-										Si vous êtes équipés d'un appareil compatible avec la fonctionnalité "Apple Pay"
-										cliquez sur le bouton ci-dessous.
-									</div>
+								<div class="col-lg-3 div-bouton-validation">
+									<button type="button" class="btn btn-green bouton-paiement">Valider</button>
+								</div>
 
-									<div class="bold col-md-4 padding-top-credit">
-										Solde a créditer
-										<input type="number" step="1" value="0" min="0" max="50"  class="form-control paiement">
-									</div>
-									<div class="col-md-8 paypal-bouton padding-top-credit">
-										<button type="button" class="btn btn-green bouton-paypal">Continuer</button>
-									</div>
+
+
+							</div>
+							<!--PAYPAL-->
+							<div class="tab-pane fade" id="paypal">
+								<div class="">
+									Vous autorisez Meal and Box à vous débiter automatiquement lors de votre commande. <br />
+									Cliquez sur le bouton ci-dessous pour vous connecter et payer avec votre compte Paypal. <br />
+									Pour consulter les Conditions générales d'utilisation et les modalités d'annulation, <a href="#">cliquez ici</a>.
+								</div>
+
+								<div class="bold col-lg-4 padding-top-credit">
+									Solde a créditer
+									<input type="number" step="1" value="0" min="0" max="50"  class="form-control paiement">
+								</div>
+								<div class="col-lg-8 paypal-bouton padding-top-credit">
+									<button type="button" class="btn btn-green bouton-paypal">Continuer</button>
+								</div>
+							</div>
+
+							<!--ApplePay-->
+							<div class="tab-pane fade" id="applepay">
+								<div class="">
+									Si vous êtes équipés d'un appareil compatible avec la fonctionnalité "Apple Pay"
+									cliquez sur le bouton ci-dessous.
+								</div>
+
+								<div class="bold col-md-4 padding-top-credit">
+									Solde a créditer
+									<input type="number" step="1" value="0" min="0" max="50"  class="form-control paiement">
+								</div>
+								<div class="col-md-8 paypal-bouton padding-top-credit">
+									<button type="button" class="btn btn-green bouton-paypal">Continuer</button>
 								</div>
 							</div>
 						</div>
 					</div>
-
 				</div>
+
 			</div>
 		</div>
 	</div>
