@@ -164,4 +164,8 @@ class Coordonates
     {
         return $this->address;
     }
+    public function __toString()
+    {
+        return "coordonates";
+    }
 }

@@ -84,24 +84,24 @@ $manager->persist($image10);
 $image11=new Images();
 $image11->setPath("/img/fixtures/desserts/fondant-chocolat.jpg");
 $image11->setAlt('Fondant au chocolat');
-$this->addReference('image11',$image);
+$this->addReference('image11',$image11);
 $manager->persist($image);
 
 $image12=new Images();
 $image12->setPath("/img/fixtures/desserts/fondant-chocolat.jpg");
 $image12->setAlt('Fondant au chocolat');
-$this->addReference('image12',$image);
+$this->addReference('image12',$image12);
 
 
 $image13=new Images();
-$image13->setPath("/img/fixtures/boisson/image.jpg");
+$image13->setPath("/img/fixtures/boisson/images.jpg");
 $image13->setAlt('Grand cru');
-$this->addReference('image13',$image);
+$this->addReference('image13',$image13);
 
 $image14=new Images();
-$image14->setPath("/img/fixtures/boisson/image1.jpg");
-$image14->setAlt('left');
-$this->addReference('image14',$image);
+$image14->setPath("/img/fixtures/boisson/images1.jpg");
+$image14->setAlt('leffe');
+$this->addReference('image14',$image14);
 
 }
     public function getOrder()

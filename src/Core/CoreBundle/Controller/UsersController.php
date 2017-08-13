@@ -7,7 +7,8 @@ use Vendor\ConnectUsersBundle\Entity\UsersWeb;
 use Vendor\ConnectUsersBundle\Form\RegistrationUsersWebType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
-
+use Core\CoreBundle\Entity\Coordonates;
+use Symfony\Component\HttpFoundation\JsonResponse;
 class UsersController extends Controller
 {
 
@@ -59,6 +60,24 @@ class UsersController extends Controller
 		$currentUsers=$this->getUser();
 		$listOrder=$em->getRepository('CoreCoreBundle:OrderClient')->findByUsers($currentUsers);
 		return $this->render('CoreCoreBundle:Compte:comptelayout.html.twig',array('listOrder'=>$listOrder));
+	}
+	public function addressModifyAction($address,$longitude,$latitude){
+
+		$em = $this->getDoctrine()->getManager();
+		$currentUsers=$this->getUser();
+		$coordonates = new Coordonates();
+		$coordonates->setLongitude($longitude);
+		$coordonates->setLatitude($latitude);
+		$coordonates->setAddress($address);
+		$currentUsers->setAddress($coordonates);
+		$em->persist($coordonates);
+		$em->persist($currentUsers);
+		$em->flush();
+		$response = new JsonResponse(
+	      array('response'=>true)
+	      );
+   		return $response ;
+
 	}
 
 }

@@ -43,8 +43,6 @@ class ProductController extends Controller
   $response = new JsonResponse(
       array('data'=>$listProductSerialize)
       );
-  
-  
    return $response ;
  }
 

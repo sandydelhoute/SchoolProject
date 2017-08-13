@@ -216,7 +216,7 @@ public Function load(ObjectManager $manager){
 
 
         $product12=new Product();
-        $product12->setName("Biere left");
+        $product12->setName("Biere leffe");
         $product12->setActive(True);
         $product12->setPrix($prix+2);
         $product12->setProvider($this->getReference('Provider'));

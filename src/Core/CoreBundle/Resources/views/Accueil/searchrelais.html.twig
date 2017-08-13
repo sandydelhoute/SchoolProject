@@ -4,11 +4,13 @@
 			<h2>Où souhaitez vous être livré(e) ?</h2><hr>
 			<div class="text-center relais">
 				<div class="row">
+					{{ form_start(form) }}
 					<div class="input-group">
-						<input type="text" class="form-control" placeholder="Entrez votre ville ou code postal">
+						{{ form_widget(form.address) }}
 						<div class="input-group-addon">
-							Valider
+						{{ form_widget(form.save) }}
 						</div>
+					{{ form_end(form) }}
 					</div>
 				</div>
 			</div>

@@ -19,7 +19,9 @@ class PanierController extends Controller
 		$em = $this->getDoctrine()->getManager();
 		$session = $request->getSession();
 		$listOrderLine=$session->get('panier');
-		if($listOrderLine != null)
+
+		if(!is_null($listOrderLine))
+		{
 			foreach ($listOrderLine as $orderline) {
 	
 				{
@@ -28,8 +30,9 @@ class PanierController extends Controller
 				}
 			
 			}
+		}
 		$total=$this->container->get('panier')->total($listOrderLine);
-			return $this->render('CoreCoreBundle:Commande:panierlayout.html.twig',array('listOrderLine'=>$listOrderLine,'total'=>$total));
+		return $this->render('CoreCoreBundle:Commande:panierlayout.html.twig',array('listOrderLine'=>$listOrderLine,'total'=>$total));
 		}
 
 		public function addProductsAction($id,$quantity,Request $request)
@@ -142,6 +145,8 @@ class PanierController extends Controller
 			$product= $em->getRepository('CoreCoreBundle:Product')->findOneById($id);
 			$listOrderLine=$session->get('panier');
 			$quantityBefore= 0 ;
+			$listStock=$this->getUser()->getRelais()->getStock();
+			
 			foreach ($listOrderLine as $key => $value) {
 				if($value->getProduct()->getId() == $product->getId())
 				{
@@ -149,7 +154,6 @@ class PanierController extends Controller
 					$value->setQuantity($quantity);
 				}
 			}
-			$listStock=$this->getUser()->getRelais()->getStock();
 			foreach ($listStock as $key => $stockliner) {
 				if($stockliner->getProduct()->getId() == $product->getId())
 				{

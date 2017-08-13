@@ -31,7 +31,7 @@ class Stock
     private $quantity;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Product",inversedBy="stock")
+     * @ORM\ManyToOne(targetEntity="Product",inversedBy="stock",cascade={"persist"})
      * @ORM\JoinColumn(name="product_id",referencedColumnName="id")
      * @ORM\joinColumn(nullable=true)
      */
@@ -40,8 +40,9 @@ class Stock
 
     /**
      * Many Features have One Product.
-     * @ORM\ManyToOne(targetEntity="Relais",inversedBy="stock")
+     * @ORM\ManyToOne(targetEntity="Relais",inversedBy="stock",cascade={"persist"})
      * @ORM\JoinColumn(name="relais_id",referencedColumnName="id")
+     * @Groups({"product"})
      */
     private $relais;
 

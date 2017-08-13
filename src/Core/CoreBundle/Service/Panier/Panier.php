@@ -2,18 +2,8 @@
 
 namespace Core\CoreBundle\Service\Panier;
 
-use Doctrine\ORM\EntityManager;
-use Symfony\Component\Routing\RouterInterface;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 class Panier
 {
-  
-  public function __construct()
-    {
-
-    }
-
-
     public function total(Array $listOrderLine = null)
     {
 
@@ -21,103 +11,118 @@ class Panier
     		return 0 ; 
 
     	$total = 0;
-    	$plat;
-    	$boisson;
-    	$dessert;
-    	$entre;
     	$countBoisson=0;
     	$countPlat=0;
     	$countEntree=0;
     	$countDessert=0;
-    	$arrayMenu1 = [];
-    	$arrayMenu2 = [];
-    	$arrayMenu3 = [];
-    	$arrayMenu4 = [];
+    	$arrayPlat=array();
+    	$arrayDessert=array();
+    	$arrayBoisson=array();
+    	$arrayEntree=array();
+    	$origineTotal = 0 ; 
+ 
 
         foreach ($listOrderLine as $orderLine) {
-        
+        	$origineTotal += $orderLine->getPrix() * $orderLine->getQuantity();
         	foreach ($orderLine->getProduct()->getCategories() as $categorie) {
         	
 	        	if($categorie->getName()=="Boisson")
 	        	{
 	        		$boisson=$orderLine->getProduct();
-	    			$countBoisson += 1;
+	    			$countBoisson += $orderLine->getQuantity();
+	    			for($i=0;$i<$orderLine->getQuantity();$i++)
+	    			{
+	    				array_push($arrayBoisson,$orderLine->getProduct()->getPrix());
+	    			}
 	        	}
 	        		if($categorie->getName()=="Plat")
 	        	{
     			    $plat=$orderLine->getProduct();
-	        		$countPlat +=1;
+	        		$countPlat += $orderLine->getQuantity();
+	        		for($i=0;$i<$orderLine->getQuantity();$i++)
+	    			{
+	    				array_push($arrayPlat,$orderLine->getProduct()->getPrix());
+	    			}
 	        	}
-	        		if($categorie->getName()=="Entree")
+	        		if($categorie->getName()=="Entrée")
 	        	{
+	        		for($i=0;$i<$orderLine->getQuantity();$i++)
+	    			{
+	    				array_push($arrayEntree,$orderLine->getProduct()->getPrix());
+	    			}
 	        		$entre=$orderLine->getProduct();
-	        		$countEntree += 1;
+	        		$countEntree += $orderLine->getQuantity();
 	        	}
 	        		if($categorie->getName()=="Dessert")
 	        	{
 	        		$dessert=$orderLine->getProduct();
-	        		$countDessert += 1;
+	        		$countDessert += $orderLine->getQuantity();
+	        		for($i=0;$i<$orderLine->getQuantity();$i++)
+	    			{
+	    				array_push($arrayDessert,$orderLine->getProduct()->getPrix());
+	    			}
 	        	}
-	
         	}
-	        if($countBoisson == 1 & $countPlat == 1 & $countDessert == 1 & $countEntree == 1)
-	        {
-		    	$countBoisson = 0 ;
-		    	$countPlat = 0;
-		    	$countDessert = 0;	
-		    	$countEntree=0;
-		    	$total+=15;
-		    	$this->deletteArray($boisson,$listOrderLine);
-		    	$this->deletteArray($plat,$listOrderLine);
-		    	$this->deletteArray($dessert,$listOrderLine);
-		    	$this->deletteArray($entre,$listOrderLine);
-	        }
-	        else if($countBoisson == 1 & $countPlat == 1 & $countDessert == 1)
-	        {
-		    	$countBoisson = 0 ;
-		    	$countPlat = 0;
-		    	$countDessert = 0;
-		    	$this->deletteArray($boisson,$listOrderLine);
-		    	$this->deletteArray($plat,$listOrderLine);
-		    	$this->deletteArray($dessert,$listOrderLine);
-		    	$total+=13;
+	        
+        }
+        asort($arrayBoisson);
+        asort($arrayEntree);
+        asort($arrayPlat);
+        asort($arrayDessert);
+        if($countEntree >= 1 & $countDessert >= 1 & $countBoisson >= 1 & $countPlat >= 1)
+	    {
+        	$minCount=min($countPlat,$countEntree,$countBoisson);
+	    	$total= 16 * $minCount;
+	    	$arrayBoisson=$this->deletteArray($arrayBoisson,$minCount);
+	    	$arrayEntree=$this->deletteArray($arrayEntree,$minCount);
+	    	$arrayPlat=$this->deletteArray($arrayPlat,$minCount);
+	    	$arrayDessert=$this->deletteArray($arrayDessert,$minCount);
+	    	$total += $this->subTotal($arrayEntree)+$this->subTotal($arrayPlat)+$this->subTotal($arrayBoisson)+$this->subTotal($arrayDessert);
+	    }
+	    else if($countEntree >= 1 & $countBoisson >=1 & $countPlat >= 1)
+	    {
+        	$minCount=min($countPlat,$countEntree,$countBoisson);
+	    	$total= 14 * $minCount;
+	    	$arrayBoisson=$this->deletteArray($arrayBoisson,$minCount);
+	    	$arrayEntree=$this->deletteArray($arrayEntree,$minCount);
+	    	$arrayPlat=$this->deletteArray($arrayPlat,$minCount);
+	    	$total += $this->subTotal($arrayEntree)+$this->subTotal($arrayPlat)+$this->subTotal($arrayBoisson);
 
-	        }
-	        else if($countBoisson == 1 & $countPlat == 1 & $countEntree == 1){
-		    	$countBoisson = 0 ;
-		    	$countPlat = 0;
-		    	$countEntree = 0;
-		    	$this->deletteArray($boisson,$listOrderLine);
-		    	$this->deletteArray($plat,$listOrderLine);
-		    	$this->deletteArray($entre,$listOrderLine);
-		    	$total+=12;
-	        }
-	        else
-	        {
-	        	//push_array($orderLine,$arrayProduct);
-	        }
-        }
-        foreach ($listOrderLine as $orderLine) {
-        	//$total += $orderLine->getProduct()->getPrix();
-        }
-        
-       return $total;
+	    }
+	    else if($countDessert >= 1 & $countBoisson >= 1 & $countPlat >= 1 )
+	    {
+        	$minCount=min($countPlat,$countEntree,$countBoisson);
+	    	$total= 12 * $minCount;
+	    	$arrayBoisson=$this->deletteArray($arrayBoisson,$minCount);
+	    	$arrayDessert=$this->deletteArray($arrayDessert,$minCount);
+	    	$arrayPlat=$this->deletteArray($arrayPlat,$minCount);
+	    	$total += $this->subTotal($arrayDessert)+$this->subTotal($arrayPlat)+$this->subTotal($arrayBoisson);	    }
+	    else
+	    {
+	    	foreach ($listOrderLine as $key => $orderLine) {	
+	    		$total+=$orderLine->getQuantity()*$orderLine->getPrix();
+	    	}
+	    }
+	    if($total<$origineTotal)
+       		return $total;
+   		else
+   			return $origineTotal;
     }
 
-    private function deletteArray($product,$listOrderLine){
-    	foreach ($listOrderLine as $orderLine) {    			
-    		if($orderLine->getProduct()->getId()==$product->getId())
-    		{
-    		// 	var_dump($orderLine->getQuantity());    			
-    		// 		$orderLine->setQuantity()=1;
-    		// 		//$orderLine->getQuantity()-
-    			
-    		// 	else
-    		// 	{
-    		// 		unset($orderLine);
-    		// 	}
-    		}
+    private function deletteArray($array,$count){
+    	for($i = 0 ;$i < $count ; $i ++)
+    	{
+    		unset($array[$i]);
     	}
+    	return $array;
     }
- 
+
+ 	private function subTotal($array){
+ 		$subTotal = 0;
+ 		foreach ($array as $key=>$price) {
+ 			$subTotal +=$price;
+ 		}
+ 		return $subTotal;
+
+ 	}
 } 

@@ -64,6 +64,7 @@ $(document).ready(function(){
                 var inputQuantity = document.createElement("INPUT");
                 inputQuantity.className = 'form-control quantity';
                 inputQuantity.min = 1;
+                inputQuantity.max= obj.stock[0].quantity;
                 inputQuantity.step = 1;
                 inputQuantity.type = 'number';
                 inputQuantity.required = 'required';

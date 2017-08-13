@@ -25,70 +25,43 @@ class CommandeController extends Controller
         $listOrderLine=$session->get('panier');
 
         $valideCommande=false;
-        $total=0;
         $ptsFideleCommande=0;
         $currentuser= $this->getUser();
         $orderclient = new OrderClient();
     	$em = $this->getDoctrine()->getManager();
-		if($listOrderLine != null)
-		foreach ($listOrderLine as $orderline) {
-            if(!is_null($orderline->getProduct()))
-            {
-				$product= $em->getRepository('CoreCoreBundle:Product')->findOneById($orderline->getProduct()->getId());
-				$orderline->setProduct($product);
-            }
-            else
-            {
-                $menu= $em->getRepository('CoreCoreBundle:Menu')->findOneById($orderline->getMenu()->getId());
-                $orderline->setMenu($menu);         
-            }
-		}
+	    $total=$this->container->get('panier')->total($listOrderLine);
         $payCards= new PayCards();
         $form = $this->createForm(PayCardsType::class,$payCards);
-
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $orderclient->setUsers($currentuser);
             $orderclient ->setDatePurchase(new \DateTime('NOW'));
+            $total=$this->container->get('panier')->total($listOrderLine);
+            $ptsFideleCommande=round($total/10, 2);
+            $valideCommande=true;
+            $listOrderLine=array();
+            $session->set('panier',null);
+            $currentuser->setRewardPoints($currentuser->getRewardPoints()+$ptsFideleCommande);
+            $em->persist($orderclient);
+            $em->persist($currentuser);
+            $em->flush();
 
+            $message = \Swift_Message::newInstance()
+            ->setSubject('Récapitulatif de commande Meal & Box')
+            ->setFrom($this->container->getParameter('mailer.user'))
+            ->setTo($this->getUser()->getEmail())
+            ->setBody(
+              $this->renderView(
+                ':Email:confirmcommande.html.twig',
+                array('order' => $orderclient)
+                ),
+            'text/html'
+            );  
+            $this->get('mailer')->send($message);
 
-            foreach ($listOrderLine as $key => $orderline  ) {
-                $orderclient->addOrderLine($orderline);
-                $orderline->setOrderClient($orderclient);
-                if(!is_null($orderline->getProduct()))
-                {
-                $total += $total + $orderline->getQuantity() * $orderline->getProduct()->getPrix();
-                }
-                else
-                {
-                     $total += $total + $orderline->getQuantity() * $orderline->getMenu()->getPrix();
-                }
-            }
-        $ptsFideleCommande=round($total/10, 2);
-        $valideCommande=true;
-        $listOrderLine=array();
-        $session->set('panier',null);
-        $currentuser->setRewardPoints($currentuser->getRewardPoints()+$ptsFideleCommande);
-        $em->persist($orderclient);
-        $em->persist($currentuser);
-        $em->flush();
-
-        $message = \Swift_Message::newInstance()
-        ->setSubject('Récapitulatif de commande Meal & Box')
-        ->setFrom($this->container->getParameter('mailer.user'))
-        ->setTo($this->getUser()->getEmail())
-        ->setBody(
-          $this->renderView(
-            ':Email:confirmcommande.html.twig',
-            array('order' => $orderclient)
-            ),
-        'text/html'
-        );  
-        $this->get('mailer')->send($message);
-
-        return $this->redirectToRoute('historyCommande',array('id'=>$orderclient->getId()));
+            return $this->redirectToRoute('historyCommande',array('id'=>$orderclient->getId()));
         }
-        return $this->render('CoreCoreBundle:Commande:commandelayout.html.twig',array('listOrderLine'=>$listOrderLine,'form'=>$form->createView(),'valideCommande'=>$valideCommande ,'totalCommande'=>$total,'ptsFideleCommande'=>$ptsFideleCommande,'orderclient'=>$orderclient));
+        return $this->render('CoreCoreBundle:Commande:commandelayout.html.twig',array('listOrderLine'=>$listOrderLine,'form'=>$form->createView(),'valideCommande'=>$valideCommande ,'totalCommande'=>$total,'ptsFideleCommande'=>$ptsFideleCommande,'orderclient'=>$orderclient,'total'=>$total));
     }
 
     public function downloadResumeOrderAction($id)

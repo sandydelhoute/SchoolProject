@@ -7,12 +7,36 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Vendor\ConnectUsersBundle\form\ResetPasswordType;
 use Symfony\Component\HttpFoundation\Request;
 use \DateTime;
+use Core\CoreBundle\Entity\SearchAddress;
+use Core\CoreBundle\Form\SearchAddressType;
 class CoreController extends Controller
 {
-     public function accueilAction()
+     public function accueilAction(Request $request)
     {
+        $searchAddress = new SearchAddress();
+        $form = $this->createForm(SearchAddressType::class,$searchAddress);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            return $this->redirectToRoute('relaispageparams', array('address' => $searchAddress->getAddress()));
+        }
+        $response = $this->render('CoreCoreBundle:Accueil:accueillayout.html.twig',array('form'=>$form->createView()));
+        $response = $this->container->get('meta')->metaDonnees($response,
+            array('title'=>"tototo",
+                  'description'=>'dfsdfsdfsdfsd',
+                  'openGraph'=>array(
+                    'title'=>"",
+                    'type'=>"",
+                    'url'=>""),
+                  'twitter'=>array(
+                    ''=>"",
+                    ''=>""),
+                  'googlePlus'=>array(
+                    ''=>"")
 
-        return $this->render('CoreCoreBundle:Accueil:accueillayout.html.twig');
+                  ));
+
+        //return $this->render('CoreCoreBundle:Accueil:accueillayout.html.twig');
+        return $response;
     }
      public function cgvAction()
     {

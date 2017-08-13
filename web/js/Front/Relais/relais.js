@@ -29,6 +29,7 @@ var Map=function(routeUpdateRelais){
     geolocalisation();
     searchCP();
     showAll();
+  
   }
   var init_map=function() {
     map = new google.maps.Map(mapSelector, {
@@ -38,7 +39,11 @@ var Map=function(routeUpdateRelais){
     });
     markerShow(map,true);
     autoComplete();
-
+    var uri = location.pathname.split('/');
+    if(typeof uri[3] != 'undefined')
+    {
+      search(uri[3]);
+    }
   }
   var allRelais=function(){
     data=objAjax.callAjax(Routing.generate('allrelais'));
@@ -59,20 +64,21 @@ var Map=function(routeUpdateRelais){
   var searchCP=function(){
 
     $('#RechercheGEo').on('click',function(){
-        console.log(countRequest);
-
+      var addressValue=address.value;
+      search(addressValue);
+    });
+  }
+  var search=function(addressSearch = null){
       if(countRequest>=1)
       {
-        console.log("je suis dans le if cunt");
         markerShow(map,true);
       }
       if(typeof cityCircle != 'undefined')
       {
         cityCircle.setMap(null);
       }
-      var addressValue=address.value;
       var components={country :'fr'};
-      geocoder.geocode( { 'address': addressValue}, function(results, status) {
+      geocoder.geocode( { 'address': addressSearch}, function(results, status) {
         /* Si l'adresse a pu être géolocalisée */
         if (status == google.maps.GeocoderStatus.OK)
         {
@@ -84,8 +90,6 @@ var Map=function(routeUpdateRelais){
           countRequest += 1;
         }
       });
-
-    });
   }
   var render=function(index,boolSearch){
     var panel=document.createElement('div');
@@ -155,6 +159,17 @@ var Map=function(routeUpdateRelais){
         {
           $('#header a .containertext').text(data.relaisName);
           $('#validateUpdateRelais').addClass("in");
+          setTimeout(function(){
+            $('#validateUpdateRelais').removeClass("in");
+          },3000);
+        }
+        else
+        {
+          $('#errorUpdateRelais').addClass("in");
+          setTimeout(function(){
+            $('#errorUpdateRelais').removeClass("in");
+          },3000);
+
         }
       });
 

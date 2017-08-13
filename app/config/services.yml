@@ -12,7 +12,3 @@ services:
          properties:
            birthdate:
             - NotBlank: ~
-
-    Sitemap:
-        class : Core\CoreBundle\Service\Sitemap\SiteMap
-        arguments: ["@router","@doctrine.orm.entity_manager"]

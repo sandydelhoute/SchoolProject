@@ -28,7 +28,8 @@ public function __toString() {
 
 
     /**
-     * @ORM\OneToMany(targetEntity="Stock", mappedBy="relais")
+     * @ORM\OneToMany(targetEntity="Stock", mappedBy="relais",cascade={"persist"})
+     * @Groups({"product"})
      */
     private $stock;
 
@@ -36,6 +37,7 @@ public function __toString() {
      * Many Features have One Product.
      * @ORM\ManyToOne(targetEntity="Coordonates",cascade={"persist"}))
      * @ORM\JoinColumn(name="Coordonates_id",referencedColumnName="id")
+     * @Groups({"product"})
      * @Groups({"relais"})
      */
     private $coordonates;

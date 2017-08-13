@@ -46,6 +46,8 @@ security:
             logout:
                 path:   /compte/deconnexion
                 target: /
+                success_handler: timeout
+
             remember_me:
                 secret:   '%secret%'
                 lifetime: 604800 # 1 week in seconds
@@ -54,7 +56,7 @@ security:
         
         admin:
             host: ^admin\.mealandbox\.fr$
-            pattern: ^/
+            pattern: ^/*
             anonymous: true
             provider:  admin
             form_login:

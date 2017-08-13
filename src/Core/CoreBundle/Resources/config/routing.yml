@@ -6,7 +6,7 @@ homepage:
 cgvpage:
     path:     /conditions-generales-de-vente
     defaults: { _controller: CoreCoreBundle:Core:cgv }
-#mension
+#mentions
 mentionspage:
     path:     /mentions-legales
     defaults: { _controller: CoreCoreBundle:Core:mentions }
@@ -37,6 +37,10 @@ selectrelais:
     defaults: { _controller: CoreCoreBundle:Relais:selectrelais}
     options:
             expose: true
+#relais
+relaispageparams:
+    path:     /relais/{address}
+    defaults: { _controller: CoreCoreBundle:Relais:index }
 
 #contact
 contactpage:
@@ -88,12 +92,6 @@ productdetailpage:
     options:
         expose: true
         
-menudetailpage:
-    path:     /menu/{id}
-    defaults: { _controller: CoreCoreBundle:Product:productsDetail }
-    options:
-        expose: true
-
 #filter
 productfilterpage:
     path:     /produits/filter/{offsetMin}/{offsetMax}/{priceMin}/{priceMax}/{categorie}/{allergene}
@@ -127,3 +125,11 @@ loginpage:
 comptepage:
     path: /compte/user
     defaults: {_controller:CoreCoreBundle:Users:compte}
+
+
+#data modify
+adressmodify:
+    path: /compte/address/modify/{address}/{longitude}/{latitude}
+    defaults: {_controller:CoreCoreBundle:Users:addressModify}
+    options:
+        expose: true

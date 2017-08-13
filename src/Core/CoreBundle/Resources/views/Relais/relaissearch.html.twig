@@ -7,7 +7,8 @@
 	<div class="panel-body">
 		<div class="col-xs-12 col-md-6">
 		<label for="adress">Adresse</label>
-	    <input id="adress" type="text" class="form-control" ></input> 
+	    <input id="adress" type="text" class="form-control" 
+	    {% if address is not null %} value='{{ address }}' {% endif %}></input> 
 	    	<em>Saisissez un code postal, une ville et un pays.</em>
 	    </div>     
 		<div class='col-xs-12 col-md-2 text-center'>
@@ -33,4 +34,9 @@
 </div>
  <div class="alert alert-success collapse" id="validateUpdateRelais">
         Votre modification de point relais a été prise en compte .
+ </div>
+  <div class="alert alert-danger collapse" id="errorUpdateRelais">
+      Votre demande n'as pas été prise en compte.
+      Verifier que vous êtes bien identifié et reessayer .
+
  </div>

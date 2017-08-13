@@ -711,6 +711,9 @@ header {
   margin-left: -15px;
   margin-top: 15px; }
 
+#Adressmodifer .input-group-addon {
+  cursor: pointer; }
+
 /* import inscription */
 .legende-input {
   display: block;
@@ -897,5 +900,33 @@ header {
 #mapRelais {
   height: 500px;
   margin-bottom: 30px; }
+  #mapRelais .gm-style-iw {
+    width: 350px !important;
+    top: 15px !important;
+    left: 0px !important;
+    background-color: #fff;
+    box-shadow: 0 1px 6px rgba(178, 178, 178, 0.6);
+    border: 1px solid rgba(72, 181, 233, 0.6);
+    border-radius: 2px 2px 10px 10px; }
+  #mapRelais .iw-container {
+    margin-bottom: 10px; }
+  #mapRelais .iw-container .iw-title {
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 22px;
+    font-weight: 400;
+    padding: 10px;
+    background-color: #48b5e9;
+    color: white;
+    margin: 0;
+    border-radius: 2px 2px 0 0; }
+  #mapRelais .iw-container .iw-content {
+    font-size: 13px;
+    line-height: 18px;
+    font-weight: 400;
+    margin-right: 1px;
+    padding: 15px 5px 20px 15px;
+    max-height: 140px;
+    overflow-y: auto;
+    overflow-x: hidden; }
 
 /*# sourceMappingURL=main.css.map */

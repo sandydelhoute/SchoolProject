@@ -23,16 +23,17 @@ class Product
         $this->stock = new ArrayCollection();
         }
     /**
-     * @ORM\ManyToMany(targetEntity="Categorie", inversedBy="product")
+     * @ORM\ManyToMany(targetEntity="Categorie", inversedBy="product",cascade={"persist"})
      */
     private $categories;
     /**
      * @Groups({"product"})
-     * @ORM\OneToMany(targetEntity="Stock", mappedBy="product")
+     * @ORM\OneToMany(targetEntity="Stock", mappedBy="product",cascade={"persist"})
      */
     private $stock;
 
     /**
+     * @Groups({"product"})
      * @ORM\ManyToMany(targetEntity="Allergene", inversedBy="product")
      */
     private $allergenes;
@@ -397,5 +398,8 @@ class Product
     public function getStock()
     {
         return $this->stock;
+    }
+    public function __toString(){
+        return "product";
     }
 }

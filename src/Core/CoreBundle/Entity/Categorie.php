@@ -44,7 +44,7 @@ class Categorie
 
     /**
      * @ORM\ManyToOne(targetEntity="Categorie")
-     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id",onDelete="CASCADE")
      */
     private $parents;
 

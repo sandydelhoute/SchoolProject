@@ -117,6 +117,11 @@ var addPanier=function(){
     objAjax.selector=null;
       var idProduct=$(this).data('product');
       var quantity=$(this).parents('.produits').find('.quantity').val();
+      var stock = $(produitadd).parents('.produits').find('.stock').text().split(":");
+      if(quantity>stock[1])
+      {
+        quantity=stock[1];
+      }
       var data=objAjax.callAjax(Routing.generate(_this.routeAddPanier,{id:idProduct,quantity:quantity}));
         data.done(function(data){
                 $('#countpanier').text(data.paniercount);

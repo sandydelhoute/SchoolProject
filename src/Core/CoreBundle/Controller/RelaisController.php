@@ -10,14 +10,12 @@ class RelaisController extends Controller
 {
 
 
-    public function IndexAction(){  
+    public function IndexAction($address = null){  
    $em = $this->getDoctrine()->getManager();
-   //$posts = $em->getRepository('CoreCoreBundle:Posts')
-   //->findOneById($id);
     $breadcrumbs = $this->get("white_october_breadcrumbs");
     $breadcrumbs->addItem("Relais", $this->get("router")->generate("actualitypage"));
     $breadcrumbs->prependRouteItem("Accueil", "homepage");
-    return $this->render('CoreCoreBundle:Relais:relaislayout.html.twig');
+    return $this->render('CoreCoreBundle:Relais:relaislayout.html.twig',array('address'=>$address));
 
    }
    public function allAction(){
@@ -37,8 +35,8 @@ class RelaisController extends Controller
     ->findOneById($id);
     if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
 
-    return $this->redirectToRoute('homepage');
-    //return $this->redirectToRoute('blog_show', array('slug' => 'my-page'));
+   $response = new JsonResponse(array('response'=>false,'relaisName'=>$relais->getName()));
+    return $response ;
     }
     $this->getUser()->setRelais($relais);
     $em->persist($this->getUser());
