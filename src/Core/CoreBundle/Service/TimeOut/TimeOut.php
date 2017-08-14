@@ -40,17 +40,16 @@ class TimeOut extends DefaultLogoutSuccessHandler
   					
   					$newStock=$stock->setQuantity($stock->getQuantity()+$orderLine->getQuantity());
 
-  					$this->em->persist($newStock);
+  					$this->em->merge($newStock);
 
   					}
 
   				}
   			}
   		}
-  	//$this->em->flush();
-  	exit;
+  	$this->em->flush();
     $response = parent::onLogoutSuccess($Request);
-    //return $response;
+    return $response;
     }
 
 }

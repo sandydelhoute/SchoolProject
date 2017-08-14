@@ -64,6 +64,8 @@ class ProductRepository extends \Doctrine\ORM\EntityRepository
         ->setParameter('prixentiermin',$priceMin)
         ->setParameter('prixentiermax', $priceMax)
         ->setParameter('relais', $relais->getId())
+
+
         ->setFirstResult($offsetMin)
         ->setMaxResults($offsetMax);
 

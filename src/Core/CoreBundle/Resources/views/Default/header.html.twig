@@ -46,7 +46,7 @@
         {% if  is_granted('ROLE_USER') and app.user.relais != null %} 
           <a href="{{ path('relaispage') }}" class="btn btn-green">
             <i class="fa fa-map-marker fa-2x" aria-hidden="true"></i>
-            <div class="containertext">
+            <div class="containertext" id="relais">
               {{ app.user.relais.name}}
             </div>
           </a>

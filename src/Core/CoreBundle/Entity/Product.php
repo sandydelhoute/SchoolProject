@@ -39,14 +39,10 @@ class Product
     private $allergenes;
 
     /**
-     * @Groups({"product"})
      * @ORM\ManyToMany(targetEntity="Images", inversedBy="product",cascade={"persist"})
+     * @Groups({"product"})
      */
     private $images;
-
-
-
-
     /**
      * @ORM\ManyToOne(targetEntity="Provider")
      * @ORM\JoinColumn(name="provider_id", referencedColumnName="id")

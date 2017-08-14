@@ -157,7 +157,7 @@ var Map=function(routeUpdateRelais){
       data.done(function(data){
         if(data.response)
         {
-          $('#header a .containertext').text(data.relaisName);
+          $('#header #relais').text(data.relaisName);
           $('#validateUpdateRelais').addClass("in");
           setTimeout(function(){
             $('#validateUpdateRelais').removeClass("in");

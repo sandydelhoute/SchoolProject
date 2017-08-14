@@ -133,12 +133,15 @@ $(document).ready(function(){
                     html(obj);
                 });
               
-                    selector.removeChild(document.getElementById("loading"));
+                selector.removeChild(document.getElementById("loading"));
                 
             }
             else
             {
+                selector.removeChild(document.getElementById("loading"));
                 stopAjax = true;
+                selector.appendChild(document.createTextNode("Aucun stock présent sur ce points relais"));
+
             }
         });
     return stopAjax;

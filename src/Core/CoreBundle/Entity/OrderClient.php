@@ -32,11 +32,6 @@ class OrderClient
      */
     private $users;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="Relais")
-     * @ORM\JoinColumn(name="relais_id",referencedColumnName="id")
-     */
-    private $relais;
 
     /**
      * @ORM\ManyToOne(targetEntity="Payement")
@@ -57,7 +52,11 @@ class OrderClient
      */
     private $orderLine;
 
-
+    /**
+     *
+     * @ORM\Column(name="total", type="float")
+     */
+    private $total;
 
     public function __construct() {
         $this->orderLine = new ArrayCollection();
@@ -180,27 +179,28 @@ class OrderClient
         return $this->payement;
     }
 
+
     /**
-     * Set relais
+     * Set total
      *
-     * @param \Core\CoreBundle\Entity\Relais $relais
+     * @param float $total
      *
      * @return OrderClient
      */
-    public function setRelais(\Core\CoreBundle\Entity\Relais $relais = null)
+    public function setTotal($total)
     {
-        $this->relais = $relais;
+        $this->total = $total;
 
         return $this;
     }
 
     /**
-     * Get relais
+     * Get total
      *
-     * @return \Core\CoreBundle\Entity\Relais
+     * @return float
      */
-    public function getRelais()
+    public function getTotal()
     {
-        return $this->relais;
+        return $this->total;
     }
 }

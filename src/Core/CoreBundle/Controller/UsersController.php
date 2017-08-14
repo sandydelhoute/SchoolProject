@@ -35,12 +35,12 @@ class UsersController extends Controller
 
 			 $message = \Swift_Message::newInstance()
 		        ->setSubject('Récapitulatif Inscription Meal & Box')
-		        ->setFrom($this->container->getParameter('mailer.user'))
-		        ->setTo($this->getUser()->getEmail())
+		        ->setFrom($this->container->getParameter('mailer_user'))
+		        ->setTo($usersWeb->getEmail())
 		        ->setBody(
 		          $this->renderView(
-		            ':Email:confirmcommande.html.twig',
-		            array('order' => $orderclient)
+		            ':Email:registration.html.twig' /* ,
+		            array('order' => $orderclient)*/
 		            ),
 		        'text/html'
 		        );  

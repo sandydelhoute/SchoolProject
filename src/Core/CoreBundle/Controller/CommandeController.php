@@ -36,20 +36,25 @@ class CommandeController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $orderclient->setUsers($currentuser);
             $orderclient ->setDatePurchase(new \DateTime('NOW'));
-            $total=$this->container->get('panier')->total($listOrderLine);
+            $orderclient->setTotal($total);
             $ptsFideleCommande=round($total/10, 2);
             $valideCommande=true;
-            $listOrderLine=array();
-            $session->set('panier',null);
             $currentuser->setRewardPoints($currentuser->getRewardPoints()+$ptsFideleCommande);
-            $em->persist($orderclient);
-            $em->persist($currentuser);
+            $em->merge($currentuser);
+            $em->merge($orderclient);
             $em->flush();
 
+            foreach ($listOrderLine as $key=>$orderLine) {
+                $orderclient->addOrderLine($orderLine);
+                $orderLine->getOrderClient($orderclient->getId());
+                $em->merge($orderLine);
+            }
+
+            //email
             $message = \Swift_Message::newInstance()
             ->setSubject('Récapitulatif de commande Meal & Box')
-            ->setFrom($this->container->getParameter('mailer.user'))
-            ->setTo($this->getUser()->getEmail())
+            ->setFrom($this->container->getParameter('mailer_user'))
+            ->setTo($currentuser->getEmail())
             ->setBody(
               $this->renderView(
                 ':Email:confirmcommande.html.twig',
@@ -58,7 +63,6 @@ class CommandeController extends Controller
             'text/html'
             );  
             $this->get('mailer')->send($message);
-
             return $this->redirectToRoute('historyCommande',array('id'=>$orderclient->getId()));
         }
         return $this->render('CoreCoreBundle:Commande:commandelayout.html.twig',array('listOrderLine'=>$listOrderLine,'form'=>$form->createView(),'valideCommande'=>$valideCommande ,'totalCommande'=>$total,'ptsFideleCommande'=>$ptsFideleCommande,'orderclient'=>$orderclient,'total'=>$total));

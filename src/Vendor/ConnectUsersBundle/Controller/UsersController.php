@@ -44,7 +44,7 @@ class UsersController extends Controller
 
     $message = \Swift_Message::newInstance()
         ->setSubject('Demande reinitialisation password')
-        ->setFrom($container->getParameter('mailer.user'))
+        ->setFrom($container->getParameter('mailer_user'))
         ->setTo($usersexist->getEmail())
         ->setBody(
           $this->renderView(
