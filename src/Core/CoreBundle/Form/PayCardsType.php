@@ -25,7 +25,7 @@ class PayCardsType extends AbstractType
     'label'=>'Nom'
     ))
         		->add('numberCards',NumberType::class,array(
-    'attr'=>array('placeholder'=>'1111-2222-3333-4444-5555'),
+    'attr'=>array('placeholder'=>'1111222233334444'),
     'label'=>'Numero de carte'
     ))
         		->add('dateExpiration',DateType::class,array(
