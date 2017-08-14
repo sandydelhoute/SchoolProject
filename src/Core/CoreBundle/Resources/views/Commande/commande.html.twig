@@ -24,6 +24,7 @@ class="col-xs-12"
             </div>
             {{ app.user.relais.coordonates.address }}
           </br>
+          {% if not valideCommande %}
           <a href="#selectRelais" data-toggle="collapse">Modifier</a>
           <div id="selectRelais" class="form-group collapse">
             <div class="alert alert-success hide">
@@ -36,14 +37,14 @@ class="col-xs-12"
 
             <div class="form-group">
               <select class="form-control" style="width:auto;float:left;" id="sel1">
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
+                {% for relais in listeRelais %}
+                <option>{{ relais.coordonates.address }}</option>
+              {% endfor %}
               </select>
               <button class="btn btn-green" >Ok</button>
             </div>
           </div>
+        {% endif %}
         </div>
         <div class="col-xs-12 col-md-6">
           <div class="bold">
@@ -55,6 +56,7 @@ class="col-xs-12"
           {% else %}
             Aucune adresse de facturation renseigné
           {% endif %}
+          {% if not valideCommande %}
           <a href="#Adressmodifer" data-toggle="collapse">Modifier</a>
           <div id="Adressmodifer" class="form-group collapse">
             <div class="alert alert-success hide">
@@ -71,6 +73,7 @@ class="col-xs-12"
 
               </div>
             </div>
+          {% endif %}
           </div>
           <div class="col-xs-12 commanderetrait">
             <div class="bold">
@@ -82,7 +85,6 @@ class="col-xs-12"
         </div>
       </div>
     </div>
-
     <div class="panel panel-default">
       <a data-toggle="collapse" data-parent="#tunnel" href="#paiement">
         <div class="panel-heading">
@@ -96,6 +98,7 @@ class="col-xs-12"
       </a>
       <div id="paiement" class="panel-collapse collapse">
         <div class="panel-body">
+          {% if not valideCommande %}
           <div class="panel with-nav-tabs panel-default">
             <div class="panel-heading">
               <ul class="nav nav-tabs">
@@ -190,6 +193,9 @@ class="col-xs-12"
               </div>
             </div>
           </div>
+        {% else %}
+          votre payement a bien été accepté.
+        {% endif %}
         </div>
       </div>
     </div>
@@ -207,7 +213,7 @@ class="col-xs-12"
         </a>
         <div id="resume" class="panel-collapse collapse">
          <div class="panel-body">
-           Votre commande n°<b>{{ orderclient.id }}</b> d'une valeur de <b>{{ totalCommande }}</b> a bien été prise en compte. <br/>
+           Votre commande n°<b>{{ orderclient.id }}</b> d'une valeur de <b>{{ total }}</b> a bien été prise en compte. <br/>
            Vous recevrez dans les 5 minutes qui suivent un mail de confirmation.<br/>
            Grâce à votre commande, vous avez accumulé <b>{{ ptsFideleCommande }}</b> points de fidélité pour un total de <b>{{ app.user.rewardPoints }} </b>.<br/>
            Merci d'avoir commandé chez Meal & Box, nous vous souhaitons un bon appétit

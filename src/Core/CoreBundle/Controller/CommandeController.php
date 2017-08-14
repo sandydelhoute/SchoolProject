@@ -21,13 +21,17 @@ class CommandeController extends Controller
      */
      public function commandeAction(Request $request)
     {
+      
         $session = $request->getSession();
         $listOrderLine=$session->get('panier');
-        $valideCommande=false;
-        $ptsFideleCommande=0;
+        if(is_null($listOrderLine))
+            return $this->redirectToRoute('homepage');
+        $valideCommande = false;
+        $ptsFideleCommande = 0;
         $currentuser= $this->getUser();
         $orderclient = new OrderClient();
     	$em = $this->getDoctrine()->getManager();
+        $listeRelais=$em->getRepository('CoreCoreBundle:Relais')->findAll();
 	    $total=$this->container->get('panier')->total($listOrderLine);
         $payCards= new PayCards();
         $form = $this->createForm(PayCardsType::class,$payCards);
@@ -63,9 +67,10 @@ class CommandeController extends Controller
             'text/html'
             );  
             $this->get('mailer')->send($message);
-            return $this->redirectToRoute('historyCommande',array('id'=>$orderclient->getId()));
+            //return $this->redirectToRoute('historyCommande',array('id'=>$orderclient->getId()));
+             return $this->render('CoreCoreBundle:Commande:commandelayout.html.twig',array('listOrderLine'=>$listOrderLine,'form'=>$form->createView(),'valideCommande'=>$valideCommande ,'ptsFideleCommande'=>$ptsFideleCommande,'orderclient'=>$orderclient,'total'=>$total,'listeRelais'=>$listeRelais));
         }
-        return $this->render('CoreCoreBundle:Commande:commandelayout.html.twig',array('listOrderLine'=>$listOrderLine,'form'=>$form->createView(),'valideCommande'=>$valideCommande ,'totalCommande'=>$total,'ptsFideleCommande'=>$ptsFideleCommande,'orderclient'=>$orderclient,'total'=>$total));
+        return $this->render('CoreCoreBundle:Commande:commandelayout.html.twig',array('listOrderLine'=>$listOrderLine,'form'=>$form->createView(),'valideCommande'=>$valideCommande ,'ptsFideleCommande'=>$ptsFideleCommande,'orderclient'=>$orderclient,'total'=>$total,'listeRelais'=>$listeRelais));
     }
 
     public function downloadResumeOrderAction($id)
