@@ -37,6 +37,7 @@ class CommandeController extends Controller
             $orderclient->setUsers($currentuser);
             $orderclient ->setDatePurchase(new \DateTime('NOW'));
             $orderclient->setTotal($total);
+            $orderclient->setRelais($currentuser->getRelais());
             $ptsFideleCommande=round($total/10, 2);
             $valideCommande=true;
             $currentuser->setRewardPoints($currentuser->getRewardPoints()+$ptsFideleCommande);
@@ -47,6 +48,9 @@ class CommandeController extends Controller
                 $em->merge($orderLine);
             }
             $em->flush();
+            //suppresion du panier
+            $this->container->get('session')->set('panier',null);
+
             //email
             $message = \Swift_Message::newInstance()
             ->setSubject('Récapitulatif de commande Meal & Box')

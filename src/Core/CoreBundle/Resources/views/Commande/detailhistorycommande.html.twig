@@ -17,7 +17,9 @@
                         </thead>
                         <tbody>
                         <!-- foreach ($order->lineItems as $line) or some such thing here -->
+                        {% set subtotal = 0 %}
                         {% for orderline in order.orderLine %}
+                            {% set subtotal = orderline.product.prix * orderline.quantity %}
                             <tr>
                                 <td class="col-md-4 text-center">
                                     <div class="media">
@@ -37,7 +39,7 @@
                                                     {{ orderline.product.prix }}
                                             </td>
                                             <td class="text-center">{{ orderline.quantity }}</td>
-                                            <td class="text-center">{{ orderline.prix }}</td>
+                                            <td class="text-center">{{ subtotal }}</td>
                                         </tr>
                                     	{% endfor %}
                                     </tbody>

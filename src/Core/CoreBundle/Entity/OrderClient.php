@@ -53,6 +53,12 @@ class OrderClient
     private $orderLine;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Relais")
+     * @ORM\JoinColumn(name="relais_id",referencedColumnName="id")
+     */
+   private $relais;
+
+    /**
      *
      * @ORM\Column(name="total", type="float")
      */
@@ -202,5 +208,31 @@ class OrderClient
     public function getTotal()
     {
         return $this->total;
+    }
+
+    
+
+    /**
+     * Set relais
+     *
+     * @param \Core\CoreBundle\Entity\Relais $relais
+     *
+     * @return OrderClient
+     */
+    public function setRelais(\Core\CoreBundle\Entity\Relais $relais = null)
+    {
+        $this->relais = $relais;
+
+        return $this;
+    }
+
+    /**
+     * Get relais
+     *
+     * @return \Core\CoreBundle\Entity\Relais
+     */
+    public function getRelais()
+    {
+        return $this->relais;
     }
 }
