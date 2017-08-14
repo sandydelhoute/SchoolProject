@@ -17,6 +17,7 @@ class PanierController extends Controller
 	public function panierAction(Request $request)
 	{
 		$em = $this->getDoctrine()->getManager();
+		$listeStock=$em->getRepository('CoreCoreBundle:Stock')->findByRelais($this->getUser()->getRelais()->getId());
 		$session = $request->getSession();
 		$listOrderLine=$session->get('panier');
 
@@ -32,7 +33,7 @@ class PanierController extends Controller
 			}
 		}
 		$total=$this->container->get('panier')->total($listOrderLine);
-		return $this->render('CoreCoreBundle:Commande:panierlayout.html.twig',array('listOrderLine'=>$listOrderLine,'total'=>$total));
+		return $this->render('CoreCoreBundle:Commande:panierlayout.html.twig',array('listOrderLine'=>$listOrderLine,'total'=>$total,'listeStock'=>$listeStock));
 		}
 
 		public function addProductsAction($id,$quantity,Request $request)
@@ -41,7 +42,6 @@ class PanierController extends Controller
 			 if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
         		throw $this->createAccessDeniedException();
     		}
-    		$newStock;
 			$session = $request->getSession();
 			$serializer=$this->get('serializer');
 			$em = $this->getDoctrine()->getManager();	
@@ -51,11 +51,11 @@ class PanierController extends Controller
 			$lineorder->setProduct($product);
 			$lineorder->setPrix($product->getPrix());
 			$listStock=$this->getUser()->getRelais()->getStock();
-			foreach ($listStock as $key => $stockliner) {
-				if($stockliner->getProduct()->getId() == $product->getId())
+			foreach ($listStock as $key => $stock) {
+				if($stock->getProduct()->getId() == $product->getId())
 				{
-					$newStock =$stockliner->setQuantity($stockliner->getQuantity()-$quantity);
-					$em->persist($newStock);
+					$newStock =$stock->setQuantity($stock->getQuantity()-$quantity);
+					$em->merge($newStock);
 
 				}
 
@@ -126,7 +126,7 @@ class PanierController extends Controller
 					if($stockliner->getProduct()->getId() == $product->getId())
 					{
 						$newStock =$stockliner->setQuantity($stockliner->getQuantity()+$quantity);
-						$em->persist($newStock);
+						$em->merge($newStock);
 						$em->flush();
 					}
 
@@ -168,7 +168,7 @@ class PanierController extends Controller
 						$newStock =$stockliner->setQuantity($stockliner->getQuantity()+$currentQuantity);
 					}
 
-					$em->persist($newStock);
+					$em->merge($newStock);
 					$em->flush();
 					break;
 				}

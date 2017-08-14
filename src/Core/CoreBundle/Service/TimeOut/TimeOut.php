@@ -25,26 +25,28 @@ class TimeOut extends DefaultLogoutSuccessHandler
 
   	public function onLogoutSuccess(Request $Request)
   	{
-  		$relaisId= $this->tokenStorage->getToken()->getUser()->getRelais()->getId();
+  		$relais= $this->tokenStorage->getToken()->getUser()->getRelais();
   		$listOrderLiner=$Request->getSession()->get('panier');
+      $listeStock=$this->em->getRepository('CoreCoreBundle:Stock')->findByRelais($relais);
+     
 
-  		if(!is_null($listOrderLiner))
+    	if(!is_null($listOrderLiner))
   		{
 
+
   			foreach ($listOrderLiner as $key => $orderLine) {
+          foreach ($listeStock as $key => $stock) {
 
+            if($stock->getProduct()->getId() == $orderLine->getProduct()->getId())
+            {
+            $newStock=$stock->setQuantity($stock->getQuantity()+$orderLine->getQuantity());
 
-  				foreach ($orderLine->getProduct()->getStock() as $key => $stock) {
-  					if($stock->getRelais()->getId() == $relaisId)
-  					{
-  					
-  					$newStock=$stock->setQuantity($stock->getQuantity()+$orderLine->getQuantity());
+            $this->em->merge($newStock);
 
-  					$this->em->merge($newStock);
+            }
 
-  					}
+          }    
 
-  				}
   			}
   		}
   	$this->em->flush();

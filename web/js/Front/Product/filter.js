@@ -117,10 +117,18 @@ var addPanier=function(){
     objAjax.selector=null;
       var idProduct=$(this).data('product');
       var quantity=$(this).parents('.produits').find('.quantity').val();
-      var stock = $(produitadd).parents('.produits').find('.stock').text().split(":");
-      if(quantity>stock[1])
+      //var stock = $(produitadd).parents('.produits').find('.stock').text().split(":");
+      var stock =$(produitadd).parents('.produits').find('.quantity').attr('max');
+      if(quantity>parseInt(stock))
       {
-        quantity=stock[1];
+        quantity=parseInt(stock);
+        $(this).parents('.produits').find('.quantity').val(quantity);
+      }
+      if(quantity<1)
+      {
+        quantity=1;
+        $(this).parents('.produits').find('.quantity').val(1);
+
       }
       var data=objAjax.callAjax(Routing.generate(_this.routeAddPanier,{id:idProduct,quantity:quantity}));
         data.done(function(data){

@@ -23,7 +23,6 @@ class CommandeController extends Controller
     {
         $session = $request->getSession();
         $listOrderLine=$session->get('panier');
-
         $valideCommande=false;
         $ptsFideleCommande=0;
         $currentuser= $this->getUser();
