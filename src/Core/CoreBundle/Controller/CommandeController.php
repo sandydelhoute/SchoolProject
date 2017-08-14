@@ -40,16 +40,13 @@ class CommandeController extends Controller
             $ptsFideleCommande=round($total/10, 2);
             $valideCommande=true;
             $currentuser->setRewardPoints($currentuser->getRewardPoints()+$ptsFideleCommande);
-            $em->merge($currentuser);
-            $em->merge($orderclient);
-            $em->flush();
-
+            $em->persist($currentuser);
+            $em->persist($orderclient);
             foreach ($listOrderLine as $key=>$orderLine) {
-                $orderclient->addOrderLine($orderLine);
-                $orderLine->getOrderClient($orderclient->getId());
+                $orderLine->setOrderClient($orderclient);
                 $em->merge($orderLine);
             }
-
+            $em->flush();
             //email
             $message = \Swift_Message::newInstance()
             ->setSubject('Récapitulatif de commande Meal & Box')
@@ -72,7 +69,7 @@ class CommandeController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $order= $em->getRepository('CoreCoreBundle:OrderClient')->findOneById($id);
-        $html = $this->renderView(':pdf:invoice.html.twig',array('order'=>$order));
+        $html = $this->renderView(':pdf:invoice.html.twig',array('order'=>$order,'users'=>$this->getUser()));
         $date=$order->getDatePurchase();
         $filename = sprintf('Commande-%s.pdf',$date->format('Y-m-d'));
 
