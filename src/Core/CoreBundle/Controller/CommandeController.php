@@ -41,6 +41,8 @@ class CommandeController extends Controller
             $orderclient ->setDatePurchase(new \DateTime('NOW'));
             $orderclient->setTotal($total);
             $orderclient->setRelais($currentuser->getRelais());
+            $payement=$em->getRepository('CoreCoreBundle:Payement')->findOneByType("carte bleu");
+            $orderclient->setPayement($payement);
             $ptsFideleCommande=round($total/10, 2);
             $valideCommande=true;
             $currentuser->setRewardPoints($currentuser->getRewardPoints()+$ptsFideleCommande);

@@ -14,12 +14,14 @@ class CoreController extends Controller
      public function accueilAction(Request $request)
     {
         $searchAddress = new SearchAddress();
+        $em = $this->getDoctrine()->getManager();
+        $listePosts = $em->getRepository("CoreCoreBundle:Posts")->findByHomePage(true);
         $form = $this->createForm(SearchAddressType::class,$searchAddress);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             return $this->redirectToRoute('relaispageparams', array('address' => $searchAddress->getAddress()));
         }
-        $response = $this->render('CoreCoreBundle:Accueil:accueillayout.html.twig',array('form'=>$form->createView()));
+        $response = $this->render('CoreCoreBundle:Accueil:accueillayout.html.twig',array('form'=>$form->createView(),'listeposts'=>$listePosts));
         $response = $this->container->get('meta')->metaDonnees($response,
             array('title'=>"tototo",
                   'description'=>'dfsdfsdfsdfsd',
@@ -35,7 +37,6 @@ class CoreController extends Controller
 
                   ));
 
-        //return $this->render('CoreCoreBundle:Accueil:accueillayout.html.twig');
         return $response;
     }
      public function cgvAction()

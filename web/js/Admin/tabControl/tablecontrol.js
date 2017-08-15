@@ -1,24 +1,21 @@
-function TableControl(routeOrder,routeSearch,defaultOrder,selector,render){
+function TableControl(routeFilter,defaultOrder,render,selector = null ){
 
 	this.defaultOrder=defaultOrder;
-	this.routeOrder=routeOrder;
-	this.routeSearch=routeSearch;
+	this.routeFilter=routeFilter;
 	this.render=render;
 	this.selector=selector;
 	this.nbMaxParPage=10;
 	this.currentPage=1;
-	var objAjax= new CallAjax(selector);
+	var objAjax= new CallAjax();
 
 
 
 	var callAjax=function(data){
-			render(objAjax.callAjax(Routing.generate(routeOrder,data)));		
+			render(objAjax.callAjax(Routing.generate(routeFilter,data)));		
 		}
 
 		this.init = function(){
-			this.defaultOrder.nbMaxParPage=this.nbMaxParPage;
-			this.defaultOrder.page=this.currentPage;
-			this.render(objAjax.callAjax(Routing.generate(routeOrder,defaultOrder)));
+			this.render(objAjax.callAjax(Routing.generate(routeFilter,defaultOrder)));
 			this.eventClickDesc();
 			this.eventClickAsc();
 			this.eventClickSearch();
@@ -29,27 +26,27 @@ function TableControl(routeOrder,routeSearch,defaultOrder,selector,render){
 
 		this.eventClickDesc = function(){	
 			$('.table').on('click','.fa-sort-desc',function(){
-				var champ = $(this).parent().find('label').html();
+				var orderSelect = $(this).parent().find('label').html();
 				var order = "desc";
 				$(this).removeClass('fa-sort-desc').addClass('fa-sort-asc');
-				var data={page:this.currentPage,champ:champ,order:order};
+				var data={orderSelect:orderSelect,order:order};
 				callAjax(data);
 			});
 		}
 
 		this.eventClickAsc = function(){
 			$('.table').on('click','.fa-sort-asc',function(){
-				champ = $(this).parent().find('label').html();
+				orderSelect = $(this).parent().find('label').html();
 				order = "asc";
 				$(this).removeClass('fa-sort-asc').addClass('fa-sort-desc');
-				var data={page:this.currentPage,nbMaxParPage:this.nbMaxParPage,champ:champ,order:order};
+				var data={orderSelect:orderSelect,order:order};
 				callAjax(data);
 			});
 		}
 		this.eventClickSearch = function(){
 			$('.search-btn').on('click',function(){
 				var search = $('.search-input').val();
-				var data={search:search};
+				var data={orderSelect:camp ,order:champ,champ:search};
 				callAjax(data);
 			});
 		}

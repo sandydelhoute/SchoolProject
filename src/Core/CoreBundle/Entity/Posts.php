@@ -32,6 +32,13 @@ class Posts
     private $id;
 
     /**
+     * @var boolean
+     * @orm\Column(name="homepage" , type="boolean",nullable=true)
+     */
+    private $homePage;
+    
+
+    /**
      * @var string
      *
      * @ORM\Column(name="title", type="string", length=255)
@@ -177,5 +184,29 @@ class Posts
     public function getImages()
     {
         return $this->images;
+    }
+
+    /**
+     * Set homePage
+     *
+     * @param boolean $homePage
+     *
+     * @return Posts
+     */
+    public function setHomePage($homePage)
+    {
+        $this->homePage = $homePage;
+
+        return $this;
+    }
+
+    /**
+     * Get homePage
+     *
+     * @return boolean
+     */
+    public function getHomePage()
+    {
+        return $this->homePage;
     }
 }

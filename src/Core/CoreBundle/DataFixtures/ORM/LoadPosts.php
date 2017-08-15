@@ -21,8 +21,8 @@ class LoadPosts extends AbstractFixture implements OrderedFixtureInterface
         $posts->setDatePublish(new DateTime('Now'));
         $posts->setContent($content0);
         $posts->addImage($this->getReference('image'));
+        $posts->setHomePage(true);
         $manager->persist($posts);
-        $manager->flush();
 
         $content1 = "Profitez dès à présent de nouveaux plats confectionnés par nos partenaires, dans une alliance parfaite entre gastronomie et simplicité.";
         $posts1=new Posts();
@@ -30,8 +30,8 @@ class LoadPosts extends AbstractFixture implements OrderedFixtureInterface
         $posts1->setDatePublish(new DateTime('Now'));
         $posts1->setContent($content1);
         $posts1->addImage($this->getReference('image'));
+        $posts1->setHomePage(true);
         $manager->persist($posts1);
-        $manager->flush();
 
         $content2 = "Meal & Box recrute de nouveaux partenaires pour continuer à agrandir et enrichir notre aventurre ! Si vous avez un profil commercial, ou si vous souhaiter créer de nouveaux menus pour nous, n'hésitez pas à nous contacter via le formulaire du site.";
         $posts2=new Posts();
@@ -39,8 +39,9 @@ class LoadPosts extends AbstractFixture implements OrderedFixtureInterface
         $posts2->setDatePublish(new DateTime('Now'));
         $posts2->setContent($content2);
         $posts2->addImage($this->getReference('image'));
+        $posts2->setHomePage(true);
         $manager->persist($posts2);
-        $manager->flush();
+        
 
 
         for ($i=0; $i < 10; $i++) {
@@ -50,8 +51,9 @@ class LoadPosts extends AbstractFixture implements OrderedFixtureInterface
             $posts->setContent($content);
             $posts->addImage($this->getReference('image'));
             $manager->persist($posts);
-            $manager->flush();
         }
+        $manager->flush();
+
     }
     public function getOrder()
     {

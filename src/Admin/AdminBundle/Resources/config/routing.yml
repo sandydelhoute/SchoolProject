@@ -31,16 +31,13 @@ admin_utilisateurs_delete:
         expose: true
 
 admin_utilisateurs_filter:
-    path:    /users/{page}/{nbMaxParPage}/{champ}/{order}
-    defaults: { _controller: AdminAdminBundle:UsersEmployee:orderBy}
+    path:    /users/{orderSelect}/{order}/{champ}
+    defaults: { _controller: AdminAdminBundle:UsersEmployee:orderBy, champ = null}
     options:
         expose: true
 
-admin_utilisateurs_search:
-    path:    /users/search
-    defaults: { _controller: AdminAdminBundle:UsersEmployee:search}
-    options:
-        expose: true
+
+
 
 # --------------------Produit-------------------- #
 admin_produits:
