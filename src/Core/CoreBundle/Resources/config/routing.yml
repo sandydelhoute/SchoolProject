@@ -51,6 +51,11 @@ commandepage:
     path:     /commande
     defaults: { _controller: CoreCoreBundle:Commande:commande }
 
+commandepageCompte:
+    path:     /commande/compte
+    defaults: { _controller: CoreCoreBundle:Commande:commandeCompte }
+
+
 downloadorder:
     path:     /commande/download/{id}
     defaults: { _controller: CoreCoreBundle:Commande:downloadResumeOrder }
@@ -123,8 +128,8 @@ loginpage:
 
 #compte 
 comptepage:
-    path: /compte/user
-    defaults: {_controller:CoreCoreBundle:Users:compte}
+    path: /compte/user/{page}
+    defaults: {_controller:CoreCoreBundle:Users:compte, page:1 }
 
 
 #data modify

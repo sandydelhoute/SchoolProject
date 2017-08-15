@@ -150,8 +150,11 @@ class="col-xs-12"
                   <div class="clear-both"></div>
                   <div class="bold col-xs-12 col-md-6">
                     {{ form_label(form.dateExpiration) }}
-                    {{ form_errors(form.dateExpiration) }}
-                    {{ form_widget(form.dateExpiration) }}
+                        {{ form_widget(form.dateExpiration.day,{ 'attr': { 'style': 'display:none' } } ) }}
+                        {{ form_errors(form.dateExpiration.month) }}
+                        {{ form_widget(form.dateExpiration.month) }}
+                        {{ form_errors(form.dateExpiration.year) }}
+                        {{ form_widget(form.dateExpiration.year) }}
                   </div>
 
                   {#  div-bouton-validation #}
@@ -182,12 +185,26 @@ class="col-xs-12"
                 <div class="tab-pane fade" id="porte-feuille">
                   <div class="">
                     <br />
-                    Solde avant commande : {{ app.user.cashBalance }}€ <br /> <br />
-                    Solde après commande : 4€
+                    {% if afterCompte < 0 %}
+                      Votre compte est insuffisant .
+                      Veuillez recharger votre compte . 
+                    {% else %}                   
+                        {% if app.user.cashBalance != 0 %}
+                          Solde avant commande : {{ app.user.cashBalance }}€ <br /> <br />
+                          Solde après commande : {{ afterCompte }}
+                        {% else %}
+                          votre compte est null .
+                          Veuillez recharger votre compte . 
+                        {% endif %}
+                      {% endif %}
                   </div>
                   <div class="col-lg-12">
-                    <button type="button" class="btn btn-green btn-perso" {% if app.user.cashBalance < total %} disabled {% endif %}>Continuer</button>
+
+                    {% if app.user.cashBalance == 0 or afterCompte < 0 %}
                     <a href="{{ path('comptepage')}}"><button type="button" class="btn btn-primary btn-perso">Reapprovisionnement</button></a>
+                  {% else %}
+                      <a href="{{ path('commandepageCompte')}}"><button type="button" class="btn btn-green btn-perso" {% if app.user.cashBalance < total %} disabled {% endif %}>Continuer</button></a>
+                  {% endif %}
                   </div>
                 </div>
               </div>

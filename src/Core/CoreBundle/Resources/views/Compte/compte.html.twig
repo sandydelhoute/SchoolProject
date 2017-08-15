@@ -190,13 +190,22 @@
 					<div class="panel-body">
 						<div class="tab-content">
 							<div class="tab-pane fade in active" id="cartecb">
-								<div class="bold col-lg-6 margin-cb">
-									Nom du titulaire de la carte
-									<input type="nomcb" class="form-control paiement" id="nomcb" placeholder="Nom Prénom">
-								</div>
+
+								{{ form_start(form) }}
+    							{{ form_errors(form) }}
+    								<div class="bold col-lg-6 margin-cb">
+{# 									Nom du titulaire de la carte
+										<input type="nomcb" class="form-control paiement" id="nomcb" placeholder="Nom Prénom"> #}
+                    					{{ form_label(form.name) }}
+                    					{{ form_errors(form.name) }}
+                    					{{ form_widget(form.name) }}
+ 									</div>
 								<div class="bold col-lg-6 margin-cb ">
-									Numéro Carte
-									<input type="numerocb" class="form-control paiement" id="numerocb" placeholder="Numéro de la carte">
+{# 									Numéro Carte
+									<input type="numerocb" class="form-control paiement" id="numerocb" placeholder="Numéro de la carte"> #}
+                    				{{ form_label(form.numberCards) }}
+                    				{{ form_errors(form.numberCards) }}
+                    				{{ form_widget(form.numberCards) }}
 								</div>
 								<div class="clear-both"></div>
 								<div class="bold">
@@ -204,49 +213,37 @@
 										Date d'expiration
 									</div>
 									<div class="col-lg-6 moiscb">
-										<select class="form-control">
-											<option>Mois</option>
-											<option>1</option>
-											<option>2</option>
-											<option>3</option>
-											<option>4</option>
-											<option>5</option>
-											<option>6</option>
-											<option>7</option>
-											<option>8</option>
-											<option>9</option>
-											<option>10</option>
-											<option>11</option>
-											<option>12</option>
-										</select>
+                    					{{ form_widget(form.dateExpiration.day,{ 'attr': { 'style': 'display:none' } } ) }}
+
+										{{ form_label(form.dateExpiration.month,'Mois') }}
+                    					{{ form_errors(form.dateExpiration.month) }}
+                    					{{ form_widget(form.dateExpiration.month) }}
 									</div>
 									<div class="col-lg-6 moiscb">
-										<select class="form-control">
-											<option>Année</option>
-											<option>2017</option>
-											<option>2018</option>
-											<option>2019</option>
-											<option>2020</option>
-											<option>2021</option>
-											<option>2022</option>
-										</select>
+										{{ form_label(form.dateExpiration.year,'Année') }}
+                    					{{ form_errors(form.dateExpiration.year) }}
+                    					{{ form_widget(form.dateExpiration.year) }}
 									</div>
 								</div>
 								<div class="clear-both"></div>
 								<div class="bold col-lg-6">
 									Code de Sécurité
-									<input type="cryptogramme" class="form-control paiement" id="cryptogramme" placeholder="">
+								{{ form_errors(form.securityCode) }}
+								{{ form_widget(form.securityCode, {'attr': {'class':'paiement','id':'cryptogramme'}}) }}
 								</div>
 								<div class="bold col-lg-3">
 									Solde a créditer
-									<input type="number" step="1" value="0" min="0" max="50"  class="form-control paiement">
-								</div>
+								{{ form_errors(form.solde) }}
+ 								{{ form_widget(form.solde, {'attr': {'step':1,'min':1 ,'class':'paiement'}}) }}
+
+ 								</div>
 
 								<div class="col-lg-3 div-bouton-validation">
-									<button type="button" class="btn btn-green bouton-paiement">Valider</button>
+									 {{ form_row(form.save, { 'label': 'Valider','attr':{'class':'btn btn-green bouton-paiement'} }) }}
+
 								</div>
-
-
+								{{ form_errors(form) }}
+								{{ form_end(form) }}
 
 							</div>
 							<!--PAYPAL-->

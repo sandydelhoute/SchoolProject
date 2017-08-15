@@ -36,6 +36,7 @@ class CommandeController extends Controller
     	$em = $this->getDoctrine()->getManager();
         $listeRelais=$em->getRepository('CoreCoreBundle:Relais')->findAll();
 	    $total=$this->container->get('panier')->total($listOrderLine);
+        $afterCompte=round($currentuser->getCashBalance() - $total,2);
         $payCards= new PayCards();
         $form = $this->createForm(PayCardsType::class,$payCards);
         $form->handleRequest($request);
@@ -72,12 +73,52 @@ class CommandeController extends Controller
             'text/html'
             );  
             $this->get('mailer')->send($message);
-            //return $this->redirectToRoute('historyCommande',array('id'=>$orderclient->getId()));
              return $this->render('CoreCoreBundle:Commande:commandelayout.html.twig',array('listOrderLine'=>$listOrderLine,'form'=>$form->createView(),'valideCommande'=>$valideCommande ,'ptsFideleCommande'=>$ptsFideleCommande,'orderclient'=>$orderclient,'total'=>$total,'listeRelais'=>$listeRelais));
         }
-        return $this->render('CoreCoreBundle:Commande:commandelayout.html.twig',array('listOrderLine'=>$listOrderLine,'form'=>$form->createView(),'valideCommande'=>$valideCommande ,'ptsFideleCommande'=>$ptsFideleCommande,'orderclient'=>$orderclient,'total'=>$total,'listeRelais'=>$listeRelais));
+        return $this->render('CoreCoreBundle:Commande:commandelayout.html.twig',array('listOrderLine'=>$listOrderLine,'form'=>$form->createView(),'valideCommande'=>$valideCommande ,'ptsFideleCommande'=>$ptsFideleCommande,'orderclient'=>$orderclient,'total'=>$total,'listeRelais'=>$listeRelais,'afterCompte'=>$afterCompte));
     }
-
+    /**
+     * @Security("has_role('ROLE_USER')")
+     */
+    public function commandeCompteAction(Request $request){
+        if($this->getUser()->getRelais() == null )
+        {
+          return $this->redirectToRoute('relaispage');
+        }
+        $valideCommande=true;
+        $em = $this->getDoctrine()->getManager();
+        $listeRelais=$em->getRepository('CoreCoreBundle:Relais')->findAll();
+        $currentuser= $this->getUser();
+        $session = $request->getSession();
+        $listOrderLine=$session->get('panier');
+        if(is_null($listOrderLine))
+            return $this->redirectToRoute('homepage');
+        $total=$this->container->get('panier')->total($listOrderLine);
+        $ptsFideleCommande=round($total/10, 2);
+        $afterCompte=round($currentuser->getCashBalance() - $total,2);
+        $currentuser->setRewardPoints($currentuser->getRewardPoints()+$ptsFideleCommande);
+        $currentuser->setCashBalance($afterCompte);
+        $orderclient = new OrderClient();
+        $orderclient->setUsers($currentuser);
+        $orderclient ->setDatePurchase(new \DateTime('NOW'));
+        $orderclient->setTotal($total);
+        $orderclient->setRelais($currentuser->getRelais());
+        $payement=$em->getRepository('CoreCoreBundle:Payement')->findOneByType("mon compte");
+        $orderclient->setPayement($payement);
+        $em->persist($currentuser);
+        $em->persist($orderclient);
+        foreach($listOrderLine as $key=>$orderLine) {
+            $orderLine->setOrderClient($orderclient);
+            $em->merge($orderLine);
+        }
+        $em->flush();
+        $this->container->get('session')->set('panier',null);
+        $total=$this->container->get('panier')->total($listOrderLine);
+        return $this->render('CoreCoreBundle:Commande:commandelayout.html.twig',array('listOrderLine'=>$listOrderLine,'valideCommande'=>$valideCommande ,'ptsFideleCommande'=>$ptsFideleCommande,'orderclient'=>$orderclient,'total'=>$total,'listeRelais'=>$listeRelais));
+    }
+    /**
+     * @Security("has_role('ROLE_USER')")
+     */
     public function downloadResumeOrderAction($id)
     {
         $em = $this->getDoctrine()->getManager();
@@ -95,6 +136,9 @@ class CommandeController extends Controller
             ]
         );
     }
+    /**
+     * @Security("has_role('ROLE_USER')")
+     */
     public function historyAction($id){
 
         $em = $this->getDoctrine()->getManager();

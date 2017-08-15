@@ -14,35 +14,61 @@
           <div id="panier" class="panel-collapse collapse in">
             <div class="panel-body">
                 {% for order in listOrder %}
-                  {% set total = 0 %}
-                  {% for orderline in order.orderLine %}
-                    {% if orderline.product is not null %}
-                    {% set total = (orderline.quantity * orderline.product.prix) %}
-                    {% else %}
-                      {% set total = (orderline.quantity * orderline.menu.prix) %}
-                    {% endif %}
-                  {% endfor %}
                 <a href={{ path('historyCommande',{id : order.id }) }}>
                 <div class="bold">
                    Commande du {{ order.datePurchase|date("m/d/Y H:i") }}
                   <div class="prix-historique-commande">
-                    {{ total }}
+                    {{ order.total }}
                   </div>
                  
                 </div>
                 </a>
               {% endfor %}
             </div>
-            <div class="page-nation pagination">
-              <ul class="pagination pagination-large">
-                <li class="disabled"><span>&laquo;</span></li>
-                <li class="active"><span>1</span></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li class="disabled"><span>...</span></li>
-                <li class="disabled"><span>&raquo;</span></li>
-              </ul>
-            </div>
+            {% if pagination.nbPages > 0 %}
+
+                <ul class="pagination">
+                        {% if pagination.page > 1 %}
+                            <li>
+                                <a href="{{ path(pagination.nomRoute, pagination.paramsRoute|merge({'page': 1})) }}">
+                                    <<
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ path(pagination.nomRoute,
+                                pagination.paramsRoute|merge({'page': pagination.page-1})) }}">
+                                    <
+                                </a>
+                            </li>
+                        {% endif %}
+
+                        {# Affichage de toutes les pages entre p-4 et p+4 sauf si < 1 ou > nbPages #}
+                        {% for p in range(max(pagination.page-4, 1), min(pagination.page+4, pagination.nbPages)) %}
+                            <li {% if p == pagination.page %}class="active"{% endif %}>
+                                <a href="{{ path(pagination.nomRoute, pagination.paramsRoute|merge({'page': p})) }}">
+                                    {{ p }}
+                                </a>
+                            </li>
+                        {% endfor %}
+
+                        {% if pagination.page < pagination.nbPages %}
+                            <li>
+                                <a href="{{ path(pagination.nomRoute,
+                                pagination.paramsRoute|merge({'page': pagination.page+1})) }}">
+                                    >
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ path(pagination.nomRoute,
+                                pagination.paramsRoute|merge({'page': pagination.nbPages})) }}">
+                                    >>
+                                </a>
+                            </li>
+                        {% endif %}
+                </ul>
+
+            {% endif %}
+
           </div>
         </div>
       </div>

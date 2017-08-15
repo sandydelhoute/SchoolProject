@@ -8,6 +8,8 @@ use Vendor\ConnectUsersBundle\Form\RegistrationUsersWebType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Core\CoreBundle\Entity\Coordonates;
+use Core\CoreBundle\Entity\PayCardsCompte;
+use Core\CoreBundle\Form\PayCardsCompteType;
 use Symfony\Component\HttpFoundation\JsonResponse;
 class UsersController extends Controller
 {
@@ -55,11 +57,28 @@ class UsersController extends Controller
 	}
 
 
-	public function compteAction(){
+	public function compteAction($page,Request $request){
 		$em = $this->getDoctrine()->getManager();
 		$currentUsers=$this->getUser();
-		$listOrder=$em->getRepository('CoreCoreBundle:OrderClient')->findByUsers($currentUsers);
-		return $this->render('CoreCoreBundle:Compte:comptelayout.html.twig',array('listOrder'=>$listOrder));
+		$listOrder=$em->getRepository('CoreCoreBundle:OrderClient')->historyorder($page,$currentUsers);
+
+		$pagination = array(
+            'page' => $page,
+            'nbPages' => ceil(count($listOrder) / 10),
+            'nomRoute' => 'comptepage',
+            'paramsRoute' => array()
+        );
+        $payCardsCompte= new PayCardsCompte();
+        $form = $this->createForm(PayCardsCompteType::class,$payCardsCompte);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()) {
+        $currentUsers = $this->getUser();
+        $currentUsers->setCashBalance($payCardsCompte->getSolde());
+        $em->merge($currentUsers);
+        $em->flush();
+			return $this->render('CoreCoreBundle:Compte:comptelayout.html.twig',array('listOrder'=>$listOrder,'pagination'=>$pagination,'form'=>$form->createView()));
+        }
+		return $this->render('CoreCoreBundle:Compte:comptelayout.html.twig',array('listOrder'=>$listOrder,'pagination'=>$pagination,'form'=>$form->createView()));
 	}
 	public function addressModifyAction($address,$longitude,$latitude){
 
