@@ -39,7 +39,7 @@ class RelaisController extends Controller
     return $response ;
     }
     $this->getUser()->setRelais($relais);
-    $em->persist($this->getUser());
+    $em->merge($this->getUser());
     $em->flush();
     $response = new JsonResponse(array('response'=>true,'relaisName'=>$relais->getName()));
     return $response ;

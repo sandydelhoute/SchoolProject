@@ -4,6 +4,7 @@ namespace Core\CoreBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use JMS\Serializer\SerializationContext;
 
 class PostsController extends Controller
 {
@@ -19,20 +20,22 @@ class PostsController extends Controller
    }
    public function ScrollAction($offsetmin,$offsetmax)
    {
+
    $em = $this->getDoctrine()->getManager();
    $listPosts = $em->getRepository('CoreCoreBundle:Posts')
    ->scrollPosts($offsetmin,$offsetmax);
+ 
+   $serializer = $this->get('jms_serializer');
+   $test="toto";
+   $json = $serializer->serialize($listPosts,'json',SerializationContext::create()->setGroups(array('posts')));
 
-   $serializer = $this->get('serializer');
-   $json = $serializer->serialize(
-    $listPosts,
-    'json'
-    );
 
    $response = new JsonResponse(
     array('data'=>$json)
     );
-   return $response ;
+
+ 
+      return $response ;
    }
 
 

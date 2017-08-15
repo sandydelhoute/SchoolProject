@@ -21,7 +21,10 @@ class CommandeController extends Controller
      */
      public function commandeAction(Request $request)
     {
-      
+    if($this->getUser()->getRelais() == null )
+        {
+          return $this->redirectToRoute('relaispage');
+        }
         $session = $request->getSession();
         $listOrderLine=$session->get('panier');
         if(is_null($listOrderLine))

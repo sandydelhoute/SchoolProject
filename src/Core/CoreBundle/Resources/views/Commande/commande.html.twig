@@ -38,10 +38,10 @@ class="col-xs-12"
             <div class="form-group">
               <select class="form-control" style="width:auto;float:left;" id="sel1">
                 {% for relais in listeRelais %}
-                <option>{{ relais.coordonates.address }}</option>
+                <option data-id="{{ relais.id }}">{{ relais.coordonates.address }}</option>
               {% endfor %}
               </select>
-              <button class="btn btn-green" >Ok</button>
+              <button id="updateRelais" class="btn btn-green" >Ok</button>
             </div>
           </div>
         {% endif %}

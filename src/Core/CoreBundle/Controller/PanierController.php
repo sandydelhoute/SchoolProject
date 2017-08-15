@@ -16,6 +16,10 @@ class PanierController extends Controller
      */
 	public function panierAction(Request $request)
 	{
+		if($this->getUser()->getRelais() == null )
+    	{
+          	return $this->redirectToRoute('relaispage');
+    	}
 		$em = $this->getDoctrine()->getManager();
 		$listeStock=$em->getRepository('CoreCoreBundle:Stock')->findByRelais($this->getUser()->getRelais()->getId());
 		$session = $request->getSession();

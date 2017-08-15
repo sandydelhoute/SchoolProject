@@ -5,6 +5,7 @@ namespace Core\CoreBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
+use JMS\Serializer\Annotation\Groups;
 
 
 /**
@@ -28,6 +29,8 @@ class Posts
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @Groups({"posts"})
+
      */
     private $id;
 
@@ -42,6 +45,7 @@ class Posts
      * @var string
      *
      * @ORM\Column(name="title", type="string", length=255)
+     * @Groups({"posts"})
      */
     private $title;
 
@@ -51,6 +55,7 @@ class Posts
      * @var text
      *
      * @ORM\Column(name="content", type="text")
+     * @Groups({"posts"})
      */
     private $content;
 
@@ -59,11 +64,13 @@ class Posts
      * @Assert\DateTime()
      *
      * @ORM\Column(name="datetime",type="datetime")
+     * @Groups({"posts"})
      */
     private $datepublish;
 
    /**
      * @ORM\ManyToMany(targetEntity="Images", inversedBy="posts")
+     * @Groups({"posts"})
      */
   private $images;
 
