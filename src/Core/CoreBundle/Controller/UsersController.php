@@ -10,6 +10,7 @@ use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Core\CoreBundle\Entity\Coordonates;
 use Core\CoreBundle\Entity\PayCardsCompte;
 use Core\CoreBundle\Form\PayCardsCompteType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\JsonResponse;
 class UsersController extends Controller
 {
@@ -55,8 +56,9 @@ class UsersController extends Controller
 		return $this->render('CoreCoreBundle:Login:loginlayout.html.twig',array('form' => $form->createView()));
 		
 	}
-
-
+    /**
+     * @Security("has_role('ROLE_USER')")
+     */
 	public function compteAction($page,Request $request){
 		$em = $this->getDoctrine()->getManager();
 		$currentUsers=$this->getUser();
@@ -80,6 +82,8 @@ class UsersController extends Controller
         }
 		return $this->render('CoreCoreBundle:Compte:comptelayout.html.twig',array('listOrder'=>$listOrder,'pagination'=>$pagination,'form'=>$form->createView()));
 	}
+	
+	
 	public function addressModifyAction($address,$longitude,$latitude){
 
 		$em = $this->getDoctrine()->getManager();

@@ -33,8 +33,7 @@ framework:
         handler_id:  session.handler.native_file
         save_path:   "%kernel.root_dir%/../var/sessions/%kernel.environment%"
         cookie_lifetime: 5400
-        gc_maxlifetime: 20
-        cookie_domain: 'www.mealandbox.fr'
+        gc_maxlifetime: 2000
     fragments:       ~
     http_method_override: true
     assets: ~
@@ -114,6 +113,3 @@ jms_serializer:
         datetime:
             default_format: "Y-m-d\\TH:i:sP"
             default_timezone: "UTC"
-
-# timeout:
-#     timeout:    1800 # 30 minutes

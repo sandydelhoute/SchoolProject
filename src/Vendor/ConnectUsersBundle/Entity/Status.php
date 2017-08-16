@@ -3,6 +3,8 @@
 namespace Vendor\ConnectUsersBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation\Groups;
+
 
 /**
  * Status
@@ -26,6 +28,7 @@ class Status
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255, unique=true)
+     * @Groups({"userEmployee"})
      */
     private $name;
 

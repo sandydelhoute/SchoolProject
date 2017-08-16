@@ -10,6 +10,8 @@ use Vendor\ConnectUsersBundle\Form\UsersEmployeeType;
 use Symfony\Component\Security\Core\Util\SecureRandom;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use JMS\Serializer\SerializationContext;
+
 class UsersEmployeeController extends Controller
 {
 
@@ -20,22 +22,25 @@ public function indexAction(Request $request)
 }
 
 
-public function orderByAction($order,$orderSelect,$champ = null)
+public function filterAction($page,$maxPage,$order,$orderSelect,$champ = null)
 {
 
  $em = $this->getDoctrine()->getManager();
 
-  $listusersemployee = $em->getRepository('VendorConnectUsersBundle:UsersEmployee')
-  ->findTableControl($orderSelect,$order);
-
+  $paginatorResult = $em->getRepository('VendorConnectUsersBundle:UsersEmployee')
+  ->findTableControl($page,$maxPage,$orderSelect,$order);
+  $pagination = array(
+    'page' => $page,
+    'nbPages' => ceil(count($paginatorResult) / $maxPage),
+    'nomRoute' => 'admin_utilisateurs_filter',
+    'paramsRoute' => array()
+  );
  $serializer = $this->get('serializer');
  $json = $serializer->serialize(
-    $listusersemployee,
-    'json'
-    );
+    $paginatorResult->getIterator()->getArrayCopy(),'json',SerializationContext::create()->setGroups(array('userEmployee')));
 
  $response = new JsonResponse(
-      array('data'=>$json,'page'=>$page,'nbMaxParPage'=>$nbMaxParPage,'nbPage'=>ceil(count($listusersemployee)/$nbMaxParPage),'champ'=>$champ,'order'=>$order)
+      array('data'=>$json,'page'=>$page,'maxPage'=>$maxPage,'nbPage'=>ceil(count($paginatorResult)/$maxPage),'champ'=>$champ,'order'=>$order)
      );
  return $response ;
 

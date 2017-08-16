@@ -31,8 +31,8 @@ admin_utilisateurs_delete:
         expose: true
 
 admin_utilisateurs_filter:
-    path:    /users/{orderSelect}/{order}/{champ}
-    defaults: { _controller: AdminAdminBundle:UsersEmployee:orderBy, champ = null}
+    path:    /users/{page}/{maxPage}/{orderSelect}/{order}
+    defaults: { _controller: AdminAdminBundle:UsersEmployee:filter, champ: null , page  : 1 , maxPage : 10}
     options:
         expose: true
 

@@ -21,32 +21,38 @@ use Symfony\Bridge\Doctrine\Security\User\UserLoaderInterface;
 class UsersEmployeeRepository extends \Doctrine\ORM\EntityRepository 
 {
 
-	 public function findTableControl($orderSelect,$order,$champ = null)
+	 public function findTableControl($page, $nbMaxParPage,$orderSelect,$order,$champ = null)
     {
        
+    if (!is_numeric($page)) {
+            throw new InvalidArgumentException(
+                'La valeur de l\'argument $page est incorrecte (valeur : ' . $page . ').'
+            );
+        }
+
+        if ($page < 1) {
+            throw new NotFoundHttpException('La page demandée n\'existe pas');
+        }
+
+        if (!is_numeric($nbMaxParPage)) {
+            throw new InvalidArgumentException(
+                'La valeur de l\'argument $nbMaxParPage est incorrecte (valeur : ' . $nbMaxParPage . ').'
+            );
+        }
     
-        if(!is_null($champ))
-        {
-        $qb = $this->createQueryBuilder('u')
-        ->leftjoin('u.status', 's')
-        ->addSelect('s')
-        ->having('u.email like "%(:$champ)%" order by (:orderSelect) (:order)') 
-        ->setParameter('champ',$champ)
-        ->setParameter('orderSelect', $orderSelect)
-        ->setParameter('order',$order);
+        $qb = $this->createQueryBuilder('u');
+        
+        $query = $qb->getQuery();
+
+        $premierResultat = ($page - 1) * $nbMaxParPage;
+        $query->setFirstResult($premierResultat)->setMaxResults($nbMaxParPage);
+        $paginator = new Paginator($query);
+
+        if ( ($paginator->count() <= $premierResultat) && $page != 1) {
+            throw new NotFoundHttpException('La page demandée n\'existe pas.'); // page 404, sauf pour la première page
         }
-        else
-        {$qb = $this->createQueryBuilder('u')
-        ->leftjoin('u.status', 's')
-        ->addSelect('s')
-        ->having('order by (:orderSelect) (:order)')
-        ->setParameter('orderSelect', $orderSelect)
-        ->setParameter('order',$order);
-        }
-  
-    $query = $qb->getQuery();
-    $results = $query->getResult();
-    return $results;
+
+        return $paginator;
     }
 
 

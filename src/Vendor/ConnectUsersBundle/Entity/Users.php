@@ -5,6 +5,9 @@ namespace Vendor\ConnectUsersBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
+use JMS\Serializer\Annotation\Groups;
+
+
 /** @ORM\MappedSuperclass */
 abstract class Users implements UserInterface,\Serializable
 {
@@ -45,6 +48,7 @@ abstract class Users implements UserInterface,\Serializable
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=80)
+     * @Groups({"userEmployee"})
      */
     private $name;
 
@@ -52,6 +56,7 @@ abstract class Users implements UserInterface,\Serializable
      * @var string
      *
      * @ORM\Column(name="firstname", type="string", length=80)
+     * @Groups({"userEmployee"})
      */
     private $firstname;
 
@@ -59,6 +64,7 @@ abstract class Users implements UserInterface,\Serializable
      * @var string
      *
      * @ORM\Column(name="email", type="string", length=255, unique=true)
+     * @Groups({"userEmployee"})
      */
     private $email;
 

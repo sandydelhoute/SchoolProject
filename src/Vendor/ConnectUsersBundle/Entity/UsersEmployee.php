@@ -5,6 +5,8 @@ namespace Vendor\ConnectUsersBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use JsonSerializable;
+use JMS\Serializer\Annotation\Groups;
+
 /**
  * 
  * @ORM\Table(name="users_employe")
@@ -20,6 +22,7 @@ class UsersEmployee extends Users
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @Groups({"userEmployee"})
      */
     protected $id;
 
@@ -32,6 +35,7 @@ class UsersEmployee extends Users
       *
       * @ORM\ManyToOne(targetEntity="Status")
       * @ORM\JoinColumn(name="status", referencedColumnName="id")
+      * @Groups({"userEmployee"})
       */
     private $status;
 
@@ -41,6 +45,7 @@ class UsersEmployee extends Users
      * @ORM\Column(name="birthdate", type="date")
      * @Assert\NotBlank()
      * @Assert\Date()
+     * @Groups({"userEmployee"})
      */
     private $birthdate;
 
@@ -50,6 +55,7 @@ class UsersEmployee extends Users
      * @ORM\Column(name="hiredate", type="date")
      * @Assert\NotBlank()
      * @Assert\Date()
+     * @Groups({"userEmployee"})
      */
     private $hiredate;
 
