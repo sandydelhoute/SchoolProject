@@ -69,9 +69,7 @@ security:
                 target: /
     access_control:
                - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, host: ^admin\.mealandbox\.fr$  }            
-               - { path: ^/*, roles: ROLE_ADMIN, host: ^admin\.mealandbox\.fr$ }
-               - { path: ^/*, roles: ROLE_LIVREUR, host: ^admin\.mealandbox\.fr$ }
-               - { path: ^/*, roles: ROLE_SUPER_ADMIN, host: ^admin\.mealandbox\.fr$ }
+               - { path: ^/*, roles: IS_AUTHENTICATED_FULLY, host: ^admin\.mealandbox\.fr$ }
 
             # activate different ways to authenticate
 

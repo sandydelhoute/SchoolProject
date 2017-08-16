@@ -14,7 +14,6 @@ function TableControl(routeFilter,defaultOrder,render,selector = null ){
 		data = objAjax.callAjax(Routing.generate(routeFilter,defaultOrder));
 		this.render(data)
 		data.done(function(data){
-			console.log("e suis dans data done du tab controle");
 			if(data.nbPage>1)
 				pagination(data.page,data.maxPage,data.nbPage);					
 		
@@ -28,18 +27,10 @@ function TableControl(routeFilter,defaultOrder,render,selector = null ){
 
 	var pagination=function(page,maxPage,nbPage){
 
-		var childPaginationContainer = paginationContainer.childNodes;
-		console.log(childPaginationContainer);
-		console.log(childPaginationContainer.length);
-		for(var i = 0 ; i <=childPaginationContainer.length ; i++)
-		{					
-			console.log("removechild");
-			console.log(childPaginationContainer[i]);
-
-			paginationContainer.removeChild(childPaginationContainer[i]);	
-
+		while (paginationContainer.hasChildNodes()) {   
+		    paginationContainer.removeChild(paginationContainer.firstChild);
 		}
-		
+				
 		if(page>1)
 		{
 			var liLeft = document.createElement('li');
@@ -78,8 +69,9 @@ function TableControl(routeFilter,defaultOrder,render,selector = null ){
 			var orderSelect = $(this).parent().find('label').html();
 			var order = "desc";
 			$(this).removeClass('fa-sort-desc').addClass('fa-sort-asc');
-			var urlParams={orderSelect:orderSelect,order:order};
-			data=objAjax.callAjax(Routing.generate(routeFilter,urlParams));
+			that.defaultOrder.order = order ;
+			that.defaultOrder.orderSelect = orderSelect; 
+			data=objAjax.callAjax(Routing.generate(routeFilter,that.defaultOrder));
 			render(data);
 			data.done(function(data){
 				$.each($.parseJSON(data.data), function(key,users){
@@ -95,8 +87,9 @@ function TableControl(routeFilter,defaultOrder,render,selector = null ){
 			orderSelect = $(this).parent().find('label').html();
 			order = "asc";
 			$(this).removeClass('fa-sort-asc').addClass('fa-sort-desc');
-			var urlParams={orderSelect:orderSelect,order:order};
-			data=objAjax.callAjax(Routing.generate(routeFilter,urlParams));
+			that.defaultOrder.order = order;
+			that.defaultOrder.orderSelect = orderSelect; 
+			data=objAjax.callAjax(Routing.generate(routeFilter,that.defaultOrder));
 			render(data);
 			data.done(function(data){
 					if(data.nbPage>1)
@@ -107,8 +100,8 @@ function TableControl(routeFilter,defaultOrder,render,selector = null ){
 	var eventClickSearch = function(){
 		$('.search-btn').on('click',function(){
 			var search = $('.search-input').val();
-			var urlParams={orderSelect:camp ,order:champ,champ:search};
-			data=objAjax.callAjax(Routing.generate(routeFilter,urlParams));
+			that.defaultOrder.champ = search ;
+			data=objAjax.callAjax(Routing.generate(routeFilter,that.defaultOrder));
 			render(data);
 			data.done(function(data){
 					if(data.nbPage>1)
@@ -122,13 +115,23 @@ function TableControl(routeFilter,defaultOrder,render,selector = null ){
 			$('.fa-sort-asc').removeClass('fa-sort-asc').addClass('fa-sort');
 			$('.fa-sort-desc').removeClass('fa-sort-desc').addClass('fa-sort');
 			$(this).removeClass('fa-sort').addClass('fa-sort-asc');
+			orderSelect = $(this).parent().find('label').html();
+			order = "asc";
+			that.defaultOrder.order = order;
+			that.defaultOrder.orderSelect = orderSelect; 
+			data=objAjax.callAjax(Routing.generate(routeFilter,that.defaultOrder));
+			render(data);
+			data.done(function(data){
+					if(data.nbPage>1)
+						pagination(data.page,data.maxPage,data.nbPage);		
+			});
+
 		});
 	}
 
 	var eventChangeNbrMax = function(){	  
 		$('.nbrForPage').change(function() {
-			this.nbMaxParPage=$(this).val();
-			var champ;
+			that.defaultOrder.maxPage=$(this).val();
 			var selectOrder=$('.fa-sort-asc')
 			var order='asc';
 			if(typeof order != 'undefined')
@@ -139,8 +142,8 @@ function TableControl(routeFilter,defaultOrder,render,selector = null ){
 			selectOrder.each(function(){
 				champ=$(this).parent().find('label').html();
 			});
-			var urlParams={page:1,nbMaxParPage:this.nbMaxParPage,champ:champ,order:order};
-			data=objAjax.callAjax(render(objAjax.callAjax(Routing.generate(routeFilter,urlParams))));
+			that.defaultOrder.nbPage = champ ; 
+			data=objAjax.callAjax(render(objAjax.callAjax(Routing.generate(routeFilter,that.defaultOrder))));
 			data.done(function(data){
 					if(data.nbPage>1)
 						pagination(data.page,data.maxPage,data.nbPage);

@@ -27,7 +27,9 @@ $manager->persist($status);
 $manager->persist($status1);
 $manager->persist($status2);
 $manager->flush();
-$this->addReference('status', $status1);
+$this->addReference('SUPERADMIN', $status);
+$this->addReference('ADMIN', $status1);
+$this->addReference('LIVREUR', $status2);
 }
     public function getOrder()
     {

@@ -21,7 +21,7 @@ use Symfony\Bridge\Doctrine\Security\User\UserLoaderInterface;
 class UsersEmployeeRepository extends \Doctrine\ORM\EntityRepository 
 {
 
-	 public function findTableControl($page, $nbMaxParPage,$orderSelect,$order,$champ = null)
+	 public function findTableControlFirstName($page, $nbMaxParPage,$order,$champ = null)
     {
        
     if (!is_numeric($page)) {
@@ -39,9 +39,69 @@ class UsersEmployeeRepository extends \Doctrine\ORM\EntityRepository
                 'La valeur de l\'argument $nbMaxParPage est incorrecte (valeur : ' . $nbMaxParPage . ').'
             );
         }
-    
-        $qb = $this->createQueryBuilder('u');
-        
+
+        if(is_null($champ))
+        {
+            $qb = $this->createQueryBuilder('u')
+                ->orderBy('u.firstname',$order);
+        }
+        else
+        {
+
+            $qb = $this->createQueryBuilder('u')
+                ->where("u.email LIKE :email or u.firstname LIKE :firstname or u.name LIKE :name ")
+                ->setParameter(':email','%'.$champ.'%')
+                ->setParameter(':firstname','%'.$champ.'%')
+                ->setParameter(':name','%'.$champ.'%')
+                ->orderBy('u.firstname',$order);
+        }
+
+        $query = $qb->getQuery();
+
+        $premierResultat = ($page - 1) * $nbMaxParPage;
+        $query->setFirstResult($premierResultat)->setMaxResults($nbMaxParPage);
+        $paginator = new Paginator($query);
+
+        if ( ($paginator->count() <= $premierResultat) && $page != 1) {
+            throw new NotFoundHttpException('La page demandée n\'existe pas.'); // page 404, sauf pour la première page
+        }
+
+        return $paginator;
+    }
+
+     public function findTableControlName($page, $nbMaxParPage,$order,$champ = null)
+    {
+       
+    if (!is_numeric($page)) {
+            throw new InvalidArgumentException(
+                'La valeur de l\'argument $page est incorrecte (valeur : ' . $page . ').'
+            );
+        }
+
+        if ($page < 1) {
+            throw new NotFoundHttpException('La page demandée n\'existe pas');
+        }
+
+        if (!is_numeric($nbMaxParPage)) {
+            throw new InvalidArgumentException(
+                'La valeur de l\'argument $nbMaxParPage est incorrecte (valeur : ' . $nbMaxParPage . ').'
+            );
+        }
+        if(is_null($champ))
+        {
+            $qb = $this->createQueryBuilder('u')
+                ->orderBy('u.name',$order);
+        }
+        else
+        {
+            $qb = $this->createQueryBuilder('u')
+                ->where("u.email LIKE :email or u.firstname LIKE :firstname or u.name LIKE :name ")
+                ->setParameter(':email','%'.$champ.'%')
+                ->setParameter(':firstname','%'.$champ.'%')
+                ->setParameter(':name','%'.$champ.'%')
+                ->orderBy('u.name',$order);
+        }
+
         $query = $qb->getQuery();
 
         $premierResultat = ($page - 1) * $nbMaxParPage;
@@ -56,6 +116,52 @@ class UsersEmployeeRepository extends \Doctrine\ORM\EntityRepository
     }
 
 
+
+     public function findTableControlEmail($page, $nbMaxParPage,$order,$champ = null)
+    {
+       
+    if (!is_numeric($page)) {
+            throw new InvalidArgumentException(
+                'La valeur de l\'argument $page est incorrecte (valeur : ' . $page . ').'
+            );
+        }
+
+        if ($page < 1) {
+            throw new NotFoundHttpException('La page demandée n\'existe pas');
+        }
+
+        if (!is_numeric($nbMaxParPage)) {
+            throw new InvalidArgumentException(
+                'La valeur de l\'argument $nbMaxParPage est incorrecte (valeur : ' . $nbMaxParPage . ').'
+            );
+        }
+        if(is_null($champ))
+        {   
+            $qb = $this->createQueryBuilder('u')
+                ->orderBy('u.email',$order);
+        }
+        else
+        {
+            $qb = $this->createQueryBuilder('u')
+                ->where("u.email LIKE :email or u.firstname LIKE :firstname or u.name LIKE :name ")
+                ->setParameter(':email','%'.$champ.'%')
+                ->setParameter(':firstname','%'.$champ.'%')
+                ->setParameter(':name','%'.$champ.'%')
+                ->orderBy('u.email',$order);
+        }
+
+        $query = $qb->getQuery();
+
+        $premierResultat = ($page - 1) * $nbMaxParPage;
+        $query->setFirstResult($premierResultat)->setMaxResults($nbMaxParPage);
+        $paginator = new Paginator($query);
+
+        if ( ($paginator->count() <= $premierResultat) && $page != 1) {
+            throw new NotFoundHttpException('La page demandée n\'existe pas.'); // page 404, sauf pour la première page
+        }
+
+        return $paginator;
+    }
 
 
 }

@@ -1,10 +1,15 @@
 $(document).ready(function(){
 	var selector = document.getElementById('listresponse');
-	var paginationContainer = document.getElementById('pagination');
 	var routeOrder='admin_utilisateurs_filter';
-	var defaultOrder={ page: 1 , maxPage : 10 ,orderSelect: "firstname", order: "asc"};
+	var defaultOrder={ page: 1 , maxPage : 10 ,orderSelect: "First name", order: "asc"};
 	var routeSearch='admin_utilisateurs_filter';
 	var render=function(data){
+
+
+		while (selector.hasChildNodes()) {   
+		    selector.removeChild(selector.firstChild);
+		}
+
 		stopAjax = false ; 
 		var html=function(users){
 			var liner = document.createElement('tr');
@@ -43,46 +48,11 @@ $(document).ready(function(){
 			liner.appendChild(columnAction);
 			selector.appendChild(liner);
 		}
-		var pagination=function(page,maxPage,nbPage){
-			console.log(paginationContainer);
-			if(page>1)
-			{
-				var liLeft = document.createElement('li');
-				var linkPrevious = document.createElement('a');
-				linkPrevious.href = Routing.generate(routeOrder,{page:page,maxPage:maxPage,orderSelect:'',order:data.order,champ:data.champ,});
-				linkPrevious.appendChild(document.createTextNode('<'));
-				liLeft.appendChild(linkPrevious);
-				paginationContainer.appendChild(liLeft);
-			}
-			for(var i=1;i<=nbPage;i++)
-			{
-				var liContainer = document.createElement('li')
-				var linkPage = document.createElement('a');
-				linkPage.href = Routing.generate(routeOrder,{page:page,maxPage:maxPage,orderSelect:'',order:data.order,champ:data.champ});
-				linkPage.appendChild(document.createTextNode(i));
-				liContainer.appendChild(linkPage);
-				paginationContainer.appendChild(liContainer);
-			}
-			if(page<nbPage)
-			{
-				var liRight = document.createElement('li');
-				var linkNext = document.createElement('a');
-				linkNext.href = Routing.generate(routeOrder,{page:page,maxPage:maxPage,orderSelect:'',order:data.order,champ:data.champ});
-				linkNext.appendChild(document.createTextNode('>'));
-				liRight.appendChild(linkNext);
-				var liDoubleRight = document.createElement('li');
-				var linkDoubleRight = document.createElement('a');
-				liDoubleRight.appendChild(linkDoubleRight);
-				linkDoubleRight.appendChild(document.createTextNode('>>'));
-				paginationContainer.appendChild(liRight);
-				paginationContainer.appendChild(liDoubleRight);
-			}
-		}
+		
 		data.done(function(data){
 			$.each($.parseJSON(data.data), function(key,users){
 				html(users);
 			});
-
 		})
 
 

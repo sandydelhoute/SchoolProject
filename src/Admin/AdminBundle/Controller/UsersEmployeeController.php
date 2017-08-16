@@ -27,8 +27,29 @@ public function filterAction($page,$maxPage,$order,$orderSelect,$champ = null)
 
  $em = $this->getDoctrine()->getManager();
 
-  $paginatorResult = $em->getRepository('VendorConnectUsersBundle:UsersEmployee')
-  ->findTableControl($page,$maxPage,$orderSelect,$order);
+  $repositoryUsers = $em->getRepository('VendorConnectUsersBundle:UsersEmployee');
+  switch ($orderSelect) {
+      case 'First name':
+          $paginatorResult=$repositoryUsers->findTableControlFirstName($page,$maxPage,$order,$champ);
+        break;
+        
+        case 'email':
+          $paginatorResult=$repositoryUsers->findTableControlEmail($page,$maxPage,$order,$champ);
+        break;
+  
+        case 'Last name':
+          $paginatorResult=$repositoryUsers->findTableControlName($page,$maxPage,$order,$champ);
+        break;
+        
+        case 'status':
+          $paginatorResult=$repositoryUsers->findTableControlStatus($page,$maxPage,$order,$champ);
+        break;
+
+      default:
+          $paginatorResult=$repositoryUsers->findTableControlFirstName($page,$maxPage,$order,$champ);
+        break;
+    }  
+
   $pagination = array(
     'page' => $page,
     'nbPages' => ceil(count($paginatorResult) / $maxPage),
