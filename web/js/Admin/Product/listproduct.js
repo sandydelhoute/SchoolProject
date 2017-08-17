@@ -35,6 +35,8 @@ $(document).ready(function(){
       columnAllergene.appendChild(containerUlAllergene);
       var columnDescription = document.createElement('td');
       columnDescription.appendChild(document.createTextNode(product.description));
+      var columnPrix= document.createElement('td');
+      columnPrix.appendChild(document.createTextNode(product.prix));
       var columnAction=document.createElement('td');
       var listeAction = document.createElement('ul');
       listeAction.className ='list-unstyled';
@@ -60,6 +62,7 @@ $(document).ready(function(){
       liner.appendChild(columnImage);
       liner.appendChild(columnAllergene);
       liner.appendChild(columnDescription);
+      liner.appendChild(columnPrix);
       liner.appendChild(columnAction);
       selector.appendChild(liner);
     }

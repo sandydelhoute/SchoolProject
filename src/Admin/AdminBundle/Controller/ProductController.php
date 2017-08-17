@@ -20,6 +20,17 @@ class ProductController extends Controller
         return $this->render('AdminAdminBundle:Product:listproduct.html.twig');
     }
 
+
+
+    public function editProductAction(Request $request){
+
+
+
+        
+    }
+
+
+
     public function addProductAction(Request $request){
 
         $product = new Product();

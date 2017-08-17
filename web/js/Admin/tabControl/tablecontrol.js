@@ -36,7 +36,8 @@ function TableControl(routeFilter,defaultOrder,render,selector = null ){
 		{
 			var liLeft = document.createElement('li');
 			var linkPrevious = document.createElement('a');
-			linkPrevious.href = Routing.generate(that.routeFilter,{page:page-1,maxPage:maxPage,orderSelect:that.defaultOrder.orderSelect,order:that.defaultOrder.order,champ:that.defaultOrder.champ,});
+			linkPrevious.href = Routing.generate(that.routeFilter,{page:parseInt(page)-1,maxPage:maxPage,orderSelect:that.defaultOrder.orderSelect,order:that.defaultOrder.order,champ:that.defaultOrder.champ,});
+			linkPrevious.dataset.page=parseInt(page)-1;
 			linkPrevious.appendChild(document.createTextNode('<'));
 			liLeft.appendChild(linkPrevious);
 			paginationContainer.appendChild(liLeft);
@@ -47,6 +48,7 @@ function TableControl(routeFilter,defaultOrder,render,selector = null ){
 			if(i == parseInt(page))
 				liContainer.className = 'active';
 			var linkPage = document.createElement('a');
+			linkPage.dataset.page= i ;
 			linkPage.href = Routing.generate(that.routeFilter,{page:page,maxPage:maxPage,orderSelect:that.defaultOrder.orderSelect,order:that.defaultOrder.order,champ:that.defaultOrder.champ});
 			linkPage.appendChild(document.createTextNode(i));
 			liContainer.appendChild(linkPage);
@@ -57,10 +59,12 @@ function TableControl(routeFilter,defaultOrder,render,selector = null ){
 			var liRight = document.createElement('li');
 			var linkNext = document.createElement('a');
 			linkNext.href = Routing.generate(that.routeFilter,{page:parseInt(page)+1,maxPage:maxPage,orderSelect:that.defaultOrder.orderSelect,order:that.defaultOrder.order,champ:that.defaultOrder.champ});
+			linkNext.dataset.page= parseInt(page)+1 ;
 			linkNext.appendChild(document.createTextNode('>'));
 			liRight.appendChild(linkNext);
 			var liDoubleRight = document.createElement('li');
 			var linkDoubleRight = document.createElement('a');
+			linkDoubleRight.dataset.page= nbPage ;
 			linkDoubleRight.href = Routing.generate(that.routeFilter,{page:nbPage,maxPage:maxPage,orderSelect:'',order:data.order,champ:data.champ});
 			liDoubleRight.appendChild(linkDoubleRight);
 			linkDoubleRight.appendChild(document.createTextNode('>>'));
@@ -117,7 +121,13 @@ function TableControl(routeFilter,defaultOrder,render,selector = null ){
 	var eventPaginationclick=function(){
 		$(document).on('click','.pagination  a',function(e) {
     		e.preventDefault();
-    		console.log('click');
+    		that.defaultOrder.page= $(this).attr('data-page');
+    		data=objAjax.callAjax(Routing.generate(routeFilter,that.defaultOrder));
+			render(data);
+			data.done(function(data){
+					if(data.nbPage>1)
+						pagination(data.page,data.maxPage,data.nbPage);
+			});
 		});
 	}
 	var eventClickSort = function(){	  
