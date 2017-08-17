@@ -48,8 +48,8 @@ $manager->persist($users);
 
 
 $usersemployee = new UsersEmployee();
-$usersemployee->setName('fabien');
-$usersemployee->setFirstname('coo');
+$usersemployee->setFirstname('fabien');
+$usersemployee->setName('coo');
 $usersemployee->setEmail("mail@mealandbox.fr");
 $password1 = $encoder->encodePassword($usersemployee, '123456');
 $usersemployee->setPassword($password1);
@@ -61,8 +61,8 @@ $manager->persist($usersemployee);
 
 
 $usersemployee1 = new UsersEmployee();
-$usersemployee1->setName('fabien1');
-$usersemployee1->setFirstname('coo');
+$usersemployee1->setFirstname('fabien1');
+$usersemployee1->setName('coo1');
 $usersemployee1->setEmail("mail0@mealandbox.fr");
 $password2 = $encoder->encodePassword($usersemployee1, '123456');
 $usersemployee1->setPassword($password2);
@@ -74,8 +74,8 @@ $manager->persist($usersemployee1);
 
 
 $usersemployee2 = new UsersEmployee();
-$usersemployee2->setName('admin');
-$usersemployee2->setFirstname('coo');
+$usersemployee2->setFirstname('admin');
+$usersemployee2->setName('coo2');
 $usersemployee2->setEmail("mail1@mealandbox.fr");
 $password3 = $encoder->encodePassword($usersemployee2, '123456');
 $usersemployee2->setPassword($password3);
@@ -87,8 +87,8 @@ $manager->persist($usersemployee2);
 
 
 $usersemployee3 = new UsersEmployee();
-$usersemployee3->setName('livreur');
-$usersemployee3->setFirstname('coo');
+$usersemployee3->setFirstname('livreur');
+$usersemployee3->setName('coo3');
 $usersemployee3->setEmail("mail2@mealandbox.fr");
 $password4 = $encoder->encodePassword($usersemployee3, '123456');
 $usersemployee3->setPassword($password4);

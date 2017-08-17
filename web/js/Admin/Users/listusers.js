@@ -14,15 +14,16 @@ $(document).ready(function(){
 		var html=function(users){
 			var liner = document.createElement('tr');
 			var columnName = document.createElement('td');
-			columnName.appendChild(document.createTextNode(users.name));
+			columnName.appendChild(document.createTextNode(users.firstname));
 			var columnUsersName = document.createElement('td');
-			columnUsersName.appendChild(document.createTextNode(users.firstname));
+			columnUsersName.appendChild(document.createTextNode(users.name));
 			var columnEmail = document.createElement('td');
 			columnEmail.appendChild(document.createTextNode(users.email));
 			var columnRole = document.createElement('td');
 			columnRole.appendChild(document.createTextNode(users.status.name));
 			var columnAction=document.createElement('td');
 			var listeAction = document.createElement('ul');
+			listeAction.className = 'list-unstyled';
 			var actionDelete = document.createElement('li');
 			var actionDeleteHref = document.createElement('a');
 			actionDeleteHref.href = Routing.generate('admin_utilisateurs_delete',{email: users.email});

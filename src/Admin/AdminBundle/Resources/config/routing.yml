@@ -51,10 +51,21 @@ admin_produits_add:
 admin_produits_edit:
     path:    /product/edit/{id}
     defaults: { _controller: AdminAdminBundle:Product:editProduct }
-
+    options:
+        expose: true
 admin_produits_delete:
     path:    /product/delete/{id}
     defaults: { _controller: AdminAdminBundle:Product:deleteProduct }
+    options:
+        expose: true
+
+admin_produit_filter:
+    path:    /product/{page}/{maxPage}/{orderSelect}/{order}/{champ}
+    defaults: { _controller: AdminAdminBundle:Product:filter, champ: null , page  : 1 , maxPage : 10}
+    options:
+        expose: true
+
+
 
 # --------------------Categorie-------------------- #
 admin_categorie:

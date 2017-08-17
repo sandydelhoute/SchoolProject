@@ -1,29 +1,51 @@
 $(document).ready(function(){
-var routeFilter="admin_utilisateurs_filter";
-var defaultOrder={"orderSelect":'firstname',"order":'asc'};
-var selector = document.getElementById('listresponse');
-var render=function(data){
-  stopAjax = false ; 
-  var html=function(users){
-    var liner = document.createElement('tr');
-    var columnName = document.createElement('td');
-        columnName.appendChild(document.createTextNode(users.name));
-        var columnUsersName = document.createElement('td');
-      columnUsersName.appendChild(document.createTextNode(users.firstname));
-      var columnEmail = document.createElement('td');
-      columnEmail.appendChild(document.createTextNode(users.email));
-      var columnRole = document.createElement('td');
-      columnRole.appendChild(document.createTextNode(users.status.name));
+  var routeFilter="admin_produit_filter";
+  var defaultOrder={ page: 1 , maxPage : 10 ,orderSelect: "Name", order: "asc"};
+  var selector = document.getElementById('listresponse');
+  var render=function(data){
+    var html=function(product){
+
+      var liner = document.createElement('tr');
+      var columnName = document.createElement('td');
+      columnName.appendChild(document.createTextNode(product.name));
+      var columnImage = document.createElement('td');
+      var imageContainer = document.createElement('img');
+      imageContainer.className = 'img-responsive';
+      imageContainer.width = 100;
+      var countImage = 0;
+      product.images.map(function(image){
+
+        if(countImage == 0)
+        {
+          imageContainer.src = image.path;
+          imageContainer.alt = image.alt;
+        }
+        countImage++ ;
+      })
+      columnImage.appendChild(imageContainer);
+      var columnAllergene = document.createElement('td');
+      var containerUlAllergene = document.createElement('ul');
+      containerUlAllergene.className ='list-unstyled';
+      product.allergenes.map(function(allergene){
+        var containerLiAllergene=document.createElement('li');
+        containerLiAllergene.appendChild(document.createTextNode(allergene.name));
+        containerUlAllergene.appendChild(containerLiAllergene);
+
+      })
+      columnAllergene.appendChild(containerUlAllergene);
+      var columnDescription = document.createElement('td');
+      columnDescription.appendChild(document.createTextNode(product.description));
       var columnAction=document.createElement('td');
       var listeAction = document.createElement('ul');
+      listeAction.className ='list-unstyled';
       var actionDelete = document.createElement('li');
       var actionDeleteHref = document.createElement('a');
-      actionDeleteHref.href = Routing.generate('admin_utilisateurs_delete',{email: users.email});
+      actionDeleteHref.href = Routing.generate('admin_produits_delete',{product: product.id});
       var actionDeleteIcon = document.createElement('i');
       actionDeleteIcon.className='fa fa-trash-o' ;
       var actionEdit = document.createElement('li');
       var actionEditHref = document.createElement('a');
-      actionEditHref.href = Routing.generate('admin_utilisateurs_edit',{email: users.email});
+      actionEditHref.href = Routing.generate('admin_produits_edit',{product: product.id});
       var actionEditIcon = document.createElement('i');
       actionEditIcon.className = 'fa fa-pencil';
 
@@ -35,34 +57,26 @@ var render=function(data){
       listeAction.appendChild(actionDelete);
       columnAction.appendChild(listeAction);
       liner.appendChild(columnName);
-      liner.appendChild(columnUsersName);
-      liner.appendChild(columnEmail);
-      liner.appendChild(columnRole);
+      liner.appendChild(columnImage);
+      liner.appendChild(columnAllergene);
+      liner.appendChild(columnDescription);
       liner.appendChild(columnAction);
-    selector.appendChild(liner);
-  }
-  data.done(function(data){
-        if($.parseJSON(data.data).length>0){
-              $.each($.parseJSON(data.data), function(key,obj){
-               html(obj);
-                
-                });
-              
-              // selector.removeChild(document.getElementById("loading"));
-                
-            }
-            else
-            {
-                selector.removeChild(document.getElementById("loading"));
-                stopAjax = true;
-                selector.appendChild(document.createTextNode("Aucun stock présent sur ce points relais"));
+      selector.appendChild(liner);
+    }
+    data.done(function(data){
+      if($.parseJSON(data.data).length>0){
+        while (selector.hasChildNodes()) {   
+          selector.removeChild(selector.firstChild);
+        }
+        $.each($.parseJSON(data.data), function(key,obj){
+         html(obj);
 
-            }
-        });
-    return stopAjax;
+       });
+      }
+    });
   }
 
-var tableControl= new TableControl(routeFilter,defaultOrder,render,selector);
-tableControl.init();
+  var tableControl= new TableControl(routeFilter,defaultOrder,render,selector);
+  tableControl.init();
 
 });

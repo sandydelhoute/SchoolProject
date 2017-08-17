@@ -50,10 +50,10 @@ class UsersEmployeeRepository extends \Doctrine\ORM\EntityRepository
 
             $qb = $this->createQueryBuilder('u')
                 ->where("u.email LIKE :email or u.firstname LIKE :firstname or u.name LIKE :name ")
+                ->orderBy('u.firstname',"DESC")
                 ->setParameter(':email','%'.$champ.'%')
                 ->setParameter(':firstname','%'.$champ.'%')
-                ->setParameter(':name','%'.$champ.'%')
-                ->orderBy('u.firstname',$order);
+                ->setParameter(':name','%'.$champ.'%');
         }
 
         $query = $qb->getQuery();

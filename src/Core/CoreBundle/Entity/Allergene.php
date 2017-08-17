@@ -3,6 +3,7 @@
 namespace Core\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation\Groups;
 
 /**
  * Allergene
@@ -23,6 +24,7 @@ public function __toString() {
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @Groups({"product","allergene"})
      */
     private $id;
 
@@ -30,6 +32,7 @@ public function __toString() {
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255, unique=true)
+     * @Groups({"product","allergene"})
      */
     private $name;
 
@@ -37,7 +40,8 @@ public function __toString() {
      * @var string
      *
      * @ORM\Column(name="description", type="text",nullable = true)
-     */
+     * @Groups({"allergene"})
+    */
     private $description;
 
     /**
